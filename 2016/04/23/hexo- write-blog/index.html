@@ -7,15 +7,15 @@
 
     
 
-    <title>Hexo+github 搭建个人博客 | 田星个人博客</title>
+    <title>hexo 编写发布博客 | 田星个人博客</title>
     <meta name="author" content="imtianx">
     
-    <meta name="description" content="最近，看见很多人在使用hexo+github搭建自己的博客，为了方便记录平时的学习内容。在此，我也学习搭建一个个人博客，记下自己的搭建过程，方便自己，也方便他人。">
+    <meta name="description" content="上一篇 :Hexo+github搭建个人博客我们介绍了博客的搭建过程，这里说明如何编写博客及发布.">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="Hexo+github 搭建个人博客"/>
+    <meta property="og:title" content="hexo 编写发布博客"/>
     <meta property="og:site_name" content="Imtianx `s Blog"/>
 
     
@@ -203,74 +203,43 @@
             <div class="article-title">
                 
     
-        <h1>Hexo+github 搭建个人博客</h1>
+        <h1>hexo 编写发布博客</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-04-20T08:45:08.620Z"><a href="/2016/04/20/Hexo+github 搭建个人博客/">2016-04-20</a></time>
+            <time class="pink-link-context" datetime="2016-04-23T01:27:03.000Z"><a href="/2016/04/23/hexo- write-blog/">2016-04-23</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/软件/" class="chip pink lighten-1">软件</a>
+            <a href="/tags/hexo/" class="chip pink lighten-1">hexo</a>
         
-            <a href="/tags/gihub/" class="chip pink lighten-1">gihub</a>
+            <a href="/tags/写博客/" class="chip pink lighten-1">写博客</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1、安装前准备"><span class="section table-of-contents-text">1、安装前准备</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2、安装hexo"><span class="section table-of-contents-text">2、安装hexo</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3、配置到github"><span class="section table-of-contents-text">3、配置到github</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#4、hexo-相关命令"><span class="section table-of-contents-text">4、hexo 相关命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#5、主题推荐"><span class="section table-of-contents-text">5、主题推荐</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1、编写博客"><span class="section table-of-contents-text">1、编写博客</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#a、使用hexo-命令"><span class="section table-of-contents-text">a、使用hexo 命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#b、直接用编辑器编写"><span class="section table-of-contents-text">b、直接用编辑器编写</span></a></li></ol></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2、发布博客"><span class="section table-of-contents-text">2、发布博客</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <p>最近，看见很多人在使用hexo+github搭建自己的博客，为了方便记录平时的学习内容。在此，我也学习搭建一个个人博客，记下自己的搭建过程，方便自己，也方便他人。<br><a id="more"></a></p>
-<h2 id="1、安装前准备"><a href="#1、安装前准备" class="headerlink" title="1、安装前准备"></a>1、安装前准备</h2><blockquote>
-<ul>
-<li>安装 <strong>Node.js</strong> ，(可以去 <a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a> 下载相应的版本，并安装。</li>
-<li>安装Git (或者安装github客户端)</li>
+                <p>上一篇 :<a href="http://imtianx.cn/2016/04/20/Hexo+github%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">Hexo+github搭建个人博客</a><br>我们介绍了博客的搭建过程，这里说明如何编写博客及发布.<br><a id="more"></a></p>
+<h2 id="1、编写博客"><a href="#1、编写博客" class="headerlink" title="1、编写博客"></a>1、编写博客</h2><ul>
+<li><h5 id="a、使用hexo-命令"><a href="#a、使用hexo-命令" class="headerlink" title="a、使用hexo 命令"></a>a、使用hexo 命令</h5>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] blogName</span><br></pre></td></tr></table></figure>
+<p>  这里layout默认的是 <strong>post</strong>,可以为文章指定标题，日期，分类，标签等，方便博客的管理。其中分类和标签若有多个，可放在“<strong>[ ]</strong>”中，用“<strong>，</strong>”。隔开具体如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">	title: &#123;&#123; title &#125;&#125;</span><br><span class="line">	date: &#123;&#123; date &#125;&#125;</span><br><span class="line">	categories: [分类1,子分类]</span><br><span class="line">	tags: [标签1,标签2,]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>需要注意的是是：“<strong>title：</strong>”标签<strong>冒号</strong>后有<strong>空格</strong>，其他的同样。<br>此外，为了界面美观，可以添加 显示”<strong>read more</strong>“,如：只显示第一段，则在第一段后添加：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="b、直接用编辑器编写"><a href="#b、直接用编辑器编写" class="headerlink" title="b、直接用编辑器编写"></a>b、直接用编辑器编写</h5><p>  博客的编写支持markdown 语法，个人使用的是<strong>作业部落</strong>的Cmd Markdown 编辑器，非常好用，语法简单，方便，具体用法参见<a href="https://www.zybuluo.com/mdeditor#345522" target="_blank" rel="external">这里</a>。<br>  这种方式需要在写好的文件开头添加<strong>post</strong>文件，方法同上。然后吧写好的文件放到“<strong>_posts</strong>” 文件夹下，如果没有准备发布，作为草稿可以放在“<strong>_data</strong>”文件夹下。</p>
+</li>
 </ul>
-</blockquote>
-<hr>
-<h2 id="2、安装hexo"><a href="#2、安装hexo" class="headerlink" title="2、安装hexo"></a>2、安装hexo</h2><p>windows下进入命令行，执行如下命令：</p>
-<pre><code>npm install-g hexo
-</code></pre><p>然后启动 git shell 初始化hexo。这里，我打算把hexo放在自己新建的 “myblog” 文件夹下，则需要先进入该文件夹下，然后进行初始化，如下命令：</p>
-<pre><code>E:\GitHub&gt; cd myblog            //进入目录
-E:\GitHub\myblog&gt; hexo init    //进行初始化
-</code></pre><p>注：我的git shell 的根目录为 E:\Github ,myblog 文件夹在它下面。<br>然后就是静静的等待它下载完成，可能需要几分钟。<br>最后就可以生成静态界面：</p>
-<pre><code>hexo g
-</code></pre><p>启动服务：</p>
-<pre><code>hexo s
-</code></pre><p>打开浏览器，输入 <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 即可成功打开。<br>到此，你已经成功的弄好博客页面了。</p>
-<hr>
-<h2 id="3、配置到github"><a href="#3、配置到github" class="headerlink" title="3、配置到github"></a>3、配置到github</h2><p>上面生成的 博客页面仅限本机使用，别人无法访问。有服务器的可以把它配置到服务器上。但这里采用的是提交到github，由它托管，就可以方便的访问了。<br>在github 上建立  <strong><em>用户名.github.io</em></strong> 的仓库。如我的github用户名为：txadf,仓库为：<strong>txadf.github.io</strong>  地址为 ：<a href="https://github.com/txadf/txadf.github.io.git" target="_blank" rel="external">https://github.com/txadf/txadf.github.io.git</a><br>然后打开blog 文件夹下的 _config.yml 文件，在最后修改为如下代码：</p>
-<pre><code>deploy:
-  type: git
-  repo: https://github.com/txadf/txadf.github.io.git
-  branch: master
-</code></pre><p>最后，提交博客文件到gtihub,执行如下命令：</p>
-<pre><code>hexo d
-</code></pre><p>如果不出错，那么就可以在浏览器用 txadf.github.进行访问了。</p>
-<hr>
-<h2 id="4、hexo-相关命令"><a href="#4、hexo-相关命令" class="headerlink" title="4、hexo 相关命令"></a>4、hexo 相关命令</h2><pre><code>cls             清屏
-hexo clean      清理项目
-hexo g          生成静态界面
-hexo s          启动服务器
-hexo d          提交到github
-hexo help       全部的命令
-</code></pre><p>新建文章：</p>
-<pre><code>hexo new &quot;blogname&quot;
-</code></pre><p>博客支持markdown语法，可以用相关的编辑器写好后放在<strong>_posts</strong>文件下。对于markdown语法，如有不懂课自行百度。</p>
-<hr>
-<h2 id="5、主题推荐"><a href="#5、主题推荐" class="headerlink" title="5、主题推荐"></a>5、主题推荐</h2><p>对于主题的修改，只需要修改 blog 文件夹下的 <strong>_config.yml</strong> 中的<strong>theme</strong>属性为指定的主题名，并将主题放到theme文件夹下。<br>然后 进行部署（hexo g） 和提交 （hexo d）<br>注：对于其他的属性，修改 方法类似，如网站标题，作者等。</p>
-<p>这里推荐几个个人比较喜欢的主题：</p>
-<ol>
-<li><a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="external">我的博客主题</a>  </li>
-<li><a href="https://github.com/txadf/hexo-theme-spfk" target="_blank" rel="external">hexo-theme-spfk</a></li>
-</ol>
-<p>更多主题，请访问<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">这里</a></p>
+<h2 id="2、发布博客"><a href="#2、发布博客" class="headerlink" title="2、发布博客"></a>2、发布博客</h2><p>打开gitshell 进入博客根目录，生成静态页面：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure></p>
+<p>然后起动服务就可以在网页上预览了。</p>
+<p>最后就是将页面提交github。</p>
 
             </div>
         </div>
