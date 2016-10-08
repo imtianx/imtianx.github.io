@@ -1,0 +1,679 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>数据绑定库DataBinding的使用 | Imtianx `s Blog</title>
+    <meta name="author" content="imtianx">
+    
+    <meta name="description" content="Data Binding 是谷歌提供的 android 数据绑定库，为了而方便开发者实现 MVVM 的架构模式，使用它可以避免我们写大量的findViewByID，降低代码的耦合性。官方介绍(需翻墙)
+一、使用环境要求通过查看官方文档，改数据绑定库的使用环境要求如下：
+
+下载 SDK Manager 中的支持库： Support repository；">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="数据绑定库DataBinding的使用"/>
+    <meta property="og:site_name" content="Imtianx `s Blog"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Imtianx `s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Imtianx `s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="/img/head.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">imtianx</p>
+                        <p class="desc">java/android/移动开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/android/">
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/SQLit/">
+                    SQLit <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具软件/">
+                    工具软件 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/hexo/">
+                    hexo <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/PL-SQL/">
+                    PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/android/">android</a><a class="breadcrumb" href="/categories/android/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>数据绑定库DataBinding的使用</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-09-10T08:06:25.000Z"><a href="/2016/09/10/using-DataBinding/">2016-09-10</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/DataBinding/" class="chip purple lighten-1">DataBinding</a>
+        
+            <a href="/tags/数据绑定/" class="chip purple lighten-1">数据绑定</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#一、使用环境要求"><span class="section table-of-contents-text">一、使用环境要求</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#二、具体的使用"><span class="section table-of-contents-text">二、具体的使用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-1、配置-data-binding"><span class="section table-of-contents-text">2.1、配置 data binding.</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-2、-建立数据对象"><span class="section table-of-contents-text">2.2、 建立数据对象</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-3、-修改布局文件"><span class="section table-of-contents-text">2.3、 修改布局文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-4、绑定变量数据"><span class="section table-of-contents-text">2.4、绑定变量数据</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#三、设置见监听事件"><span class="section table-of-contents-text">三、设置见监听事件</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-1-方法引用"><span class="section table-of-contents-text">3.1 方法引用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-2-监听器引用"><span class="section table-of-contents-text">3.2 监听器引用</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#四、在Fragment中的用法"><span class="section table-of-contents-text">四、在Fragment中的用法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#五-、高级用法"><span class="section table-of-contents-text">五 、高级用法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-1-使用类方法"><span class="section table-of-contents-text">5.1. 使用类方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-2-类型别名"><span class="section table-of-contents-text">5.2. 类型别名</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-3-Null-Coalescing-运算符"><span class="section table-of-contents-text">5.3. Null Coalescing 运算符</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-4-属性值"><span class="section table-of-contents-text">5.4. 属性值</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-5-使用资源数据"><span class="section table-of-contents-text">5.5. 使用资源数据</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-6-使用include"><span class="section table-of-contents-text">5.6. 使用include</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-7-使用表达式"><span class="section table-of-contents-text">5.7. 使用表达式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-8-集合"><span class="section table-of-contents-text">5.8. 集合</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-9-Data对象（数据绑定）"><span class="section table-of-contents-text">5.9.Data对象（数据绑定）</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p><code>Data Binding</code> 是谷歌提供的 android 数据绑定库，为了而方便开发者实现 MVVM 的架构模式，使用它可以避免我们写大量的<code>findViewByID</code>，降低代码的耦合性。<br><a href="https://developer.android.com/topic/libraries/data-binding/index.html" target="_blank" rel="external">官方介绍</a>(需翻墙)</p>
+<h3 id="一、使用环境要求"><a href="#一、使用环境要求" class="headerlink" title="一、使用环境要求"></a>一、使用环境要求</h3><p>通过查看官方文档，改数据绑定库的使用环境要求如下：</p>
+<ul>
+<li>下载 SDK Manager 中的支持库： Support repository；<a id="more"></a></li>
+<li>android studio 版本在1.3之后；</li>
+<li>gradle 版本在1.5.0-alpha1之后；</li>
+<li>android sdk在android 2.1（API level7 +）以后。</li>
+</ul>
+<h3 id="二、具体的使用"><a href="#二、具体的使用" class="headerlink" title="二、具体的使用"></a>二、具体的使用</h3><h4 id="2-1、配置-data-binding"><a href="#2-1、配置-data-binding" class="headerlink" title="2.1、配置 data binding."></a>2.1、配置 data binding.</h4><p>在 model 的gradle中的 <code>android</code> 节点下添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataBinding&#123;</span><br><span class="line">    enabled = true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-2、-建立数据对象"><a href="#2-2、-建立数据对象" class="headerlink" title="2.2、 建立数据对象"></a>2.2、 建立数据对象</h4><p>添加一个POJO类，这里定义的是 User类，添加3个变量（uname，usex，uage）及相应的get,set方法，方便接下来与布局文件惊醒绑定。</p>
+<h4 id="2-3、-修改布局文件"><a href="#2-3、-修改布局文件" class="headerlink" title="2.3、 修改布局文件"></a>2.3、 修改布局文件</h4><p>使用databinding后，布局文件根节点不在是简单的LinearLayout，RelativeLayout等ViewGroup,而是 <code>Layout</code>，同时还增加了 <code>data</code> 元素，来为ui控件提供数据。基本局如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;data&gt;</span><br><span class="line">    &lt;/data&gt;</span><br><span class="line">    &lt;!--原先的根节点--&gt;</span><br><span class="line">    &lt;LinearLayout&gt;</span><br><span class="line">    ....</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/layout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>下面简单举例说明，显示用户信息，包括用户名，性别和年龄，布局文件名为<code>activity_main</code>，使用 databinding 的布局代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layout</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;data&gt;</span><br><span class="line">        &lt;variable</span><br><span class="line">            name=&quot;user&quot;</span><br><span class="line">            type=&quot;cn.imtianx.databindingdemo.bean.User&quot;&gt;</span><br><span class="line">        &lt;/variable&gt;</span><br><span class="line">    &lt;/data&gt;</span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;user.uname&#125;&quot;/&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;user.usex&#125;&quot;/&gt;</span><br><span class="line">        &lt;TextView</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:text=&quot;@&#123;user.uage&#125;&quot;/&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/layout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>该布局主要是三个TextView，来显示信息，在<code>data</code>标签中添加了变量<code>variable</code>,其中<code>name</code>是变量名,<code>type</code>使我们定义的java类（注：需要写完整的包名），通过<code>@{}</code>来为 TextView设置显示的文本。<br>此外，这里的<code>data</code>也可以用<code>import</code>进行导入，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;data&gt;</span><br><span class="line">    &lt;import type=&quot;cn.imtianx.databindingdemo.bean.User&quot;/&gt;</span><br><span class="line">    &lt;variable</span><br><span class="line">        name=&quot;user&quot;</span><br><span class="line">        type=&quot;User&quot;/&gt;</span><br><span class="line">&lt;/data&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果要使用<code>String</code>等<code>java.lang.*</code>下的类，则可以直接使用。</p>
+<h4 id="2-4、绑定变量数据"><a href="#2-4、绑定变量数据" class="headerlink" title="2.4、绑定变量数据"></a>2.4、绑定变量数据</h4><p>编译项目即可根据布局文件名生成相关的Binding类，生成规则是按布局文件名，去掉’_‘，按驼峰法则，并在末尾添加<code>Binding</code>。如，这里的布局文件名为<code>activity_main</code>,则生成的数据绑定类为<code>ActivityMainBinding</code>，它存放在<code>包名.databinding</code>下，然后再 <strong>activity</strong>  的<strong>onCreate</strong>方法中设置变量，代码如如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    ActivityMainBinding mainBinding = DataBindingUtil</span><br><span class="line">            .setContentView(this, R.layout.activity_main);</span><br><span class="line">    User user = new User(&quot;imtianx&quot;, &quot;男&quot;, &quot;20&quot;);</span><br><span class="line">    mainBinding.setUser(user);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong> 这里的 ActivityMainBinding 类会根据布局文件中的 variable 生成相应的 <code>set</code>方法。<br>至此，一个简单的数据绑定就实现了，运行程序，会依次显示user中设置的三个字段的值。</p>
+<h3 id="三、设置见监听事件"><a href="#三、设置见监听事件" class="headerlink" title="三、设置见监听事件"></a>三、设置见监听事件</h3><p>这里可以通过两种方式进行绑定事件：<strong>方法引用</strong>和<strong>监听器引用</strong>。如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class Presenter &#123;</span><br><span class="line"></span><br><span class="line">    public void onTextChanged(CharSequence s, int start, int before, int count) &#123;</span><br><span class="line">        mUserBean.setName(s.toString());</span><br><span class="line">        mBinding.setUser(mUserBean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        Toast.makeText(MainActivity.this, &quot;点击了名字&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void onClickListenerBinding(UserBean bean) &#123;</span><br><span class="line">        Toast.makeText(MainActivity.this, bean.getSex(), Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用时首先在xml的data标签下添加变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;variable</span><br><span class="line">    name=&quot;presenter&quot;</span><br><span class="line">    type=&quot;cn.imtianx.databindingdemo.MainActivity.Presenter&quot;&gt;</span><br><span class="line">&lt;/variable&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-1-方法引用"><a href="#3-1-方法引用" class="headerlink" title="3.1 方法引用"></a>3.1 方法引用</h4><p>必须使用android 已有的监听的方法名及其参数，如上面的onTextChanged，onClick方法，具体的调用如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:onClick=&quot;@&#123;presenter.onClick&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-2-监听器引用"><a href="#3-2-监听器引用" class="headerlink" title="3.2 监听器引用"></a>3.2 监听器引用</h4><p>可以方便的丛xml中向java代码中传递数据，可使用lambda表达式,如onClickListenerBinding，具体调用如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:onClick=&quot;@&#123;()-&gt;presenter.onClickListenerBinding(user)&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>采用了lambda表达式的格式。</p>
+<h3 id="四、在Fragment中的用法"><a href="#四、在Fragment中的用法" class="headerlink" title="四、在Fragment中的用法"></a>四、在Fragment中的用法</h3><p>布局文件与上一个一样，在 Fragment 的 onCreateView 中设置相关的属性，具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private ActivityMainBinding mMainBinding;</span><br><span class="line">    private User user;</span><br><span class="line"></span><br><span class="line">    @Nullable</span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) &#123;</span><br><span class="line">        View view = inflater.inflate(R.layout.activity_main, container, false);</span><br><span class="line">        // 方式1,直接用默认生成的Binding类绑定</span><br><span class="line">        mMainBinding = ActivityMainBinding.bind(view);</span><br><span class="line"></span><br><span class="line">        // 方式2，向上转成ViewDataBinding类型</span><br><span class="line">//        ViewDataBinding viewDataBinding = ActivityMainBinding.bind(view);</span><br><span class="line">//        mMainBinding = (ActivityMainBinding) viewDataBinding;</span><br><span class="line"></span><br><span class="line">        //方式3，使用生成的Binding的inflater，</span><br><span class="line">//        mMainBinding = ActivityMainBinding.inflate(inflater);</span><br><span class="line"></span><br><span class="line">        //方式4，使用生成的Binding的inflater,类似Inflater api</span><br><span class="line">//        mMainBinding = ActivityMainBinding.inflate(inflater, container, false);</span><br><span class="line"></span><br><span class="line">        //方式5，某种情况无法生存默认Binding的情况下，并且把对应的layout传入</span><br><span class="line">//        ViewDataBinding viewDataBinding = DataBindingUtil.inflate(inflater, R.layout.activity_main, container, false);</span><br><span class="line">//        mMainBinding = (ActivityMainBinding) viewDataBinding;</span><br><span class="line"></span><br><span class="line">        //方式6，某种情况无法生存默认Binding的情况下</span><br><span class="line">//        ViewDataBinding viewDataBinding = DataBindingUtil.bind(view);</span><br><span class="line"></span><br><span class="line">        user = new User(&quot;imtianx&quot;, &quot;男&quot;, &quot;20&quot;);</span><br><span class="line">        mMainBinding.setUser(user);</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>总之，它都需要初始化Binding类，初始化model类和数据绑定。</p>
+<h3 id="五-、高级用法"><a href="#五-、高级用法" class="headerlink" title="五 、高级用法"></a>五 、高级用法</h3><h4 id="5-1-使用类方法"><a href="#5-1-使用类方法" class="headerlink" title="5.1. 使用类方法"></a>5.1. 使用类方法</h4><p>首先在布局文件的<code>data</code> 使用<code>import</code>导入方法所在的类的全路径，然后再选要的地方调用，具体使用和java一样。</p>
+<h4 id="5-2-类型别名"><a href="#5-2-类型别名" class="headerlink" title="5.2. 类型别名"></a>5.2. 类型别名</h4><p>在开发中可能会遇到两个用名的类，如果在<code>data</code>下同时导入他们，改如何解决？这里不用担心，可以在<code>import</code>节点下添加<code>alias</code>属性,来区别。如下示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> &lt;data&gt;</span><br><span class="line">    &lt;import type=&quot;cn.imtianx.databindingdemo.bean.User&quot; alias=&quot;User1&quot;/&gt;</span><br><span class="line">    &lt;import type=&quot;cn.imtianx.databindingdemo.model.User&quot; /&gt;</span><br><span class="line">    &lt;variable</span><br><span class="line">        name=&quot;user&quot;</span><br><span class="line">        type=&quot;User1&quot;/&gt;</span><br><span class="line">    &lt;variable</span><br><span class="line">        name=&quot;user2&quot;</span><br><span class="line">        type=&quot;User&quot;/&gt;</span><br><span class="line">&lt;/data&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-3-Null-Coalescing-运算符"><a href="#5-3-Null-Coalescing-运算符" class="headerlink" title="5.3. Null Coalescing 运算符"></a>5.3. Null Coalescing 运算符</h4><p>这个和java中的三木表达式一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;@&#123;user.uage ??user.uage&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>它等价于：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;@&#123;user.uage!=null?user.uage:0&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-4-属性值"><a href="#5-4-属性值" class="headerlink" title="5.4. 属性值"></a>5.4. 属性值</h4><p>使用<code>@{}</code>在xml中使用java 中定义的一些属性值,如下给visibility 设置值，注意需要到如View类，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:visibility=&quot;@&#123;user.display? View.VISIBLE:View.GONE&#125;&quot;</span><br><span class="line">    android:text=&quot;@&#123;user.uage&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-5-使用资源数据"><a href="#5-5-使用资源数据" class="headerlink" title="5.5. 使用资源数据"></a>5.5. 使用资源数据</h4><p>设置<code>padding</code>的值，需要的dime文件中添加largePadding和smallPadding的item。对于引用 <code>String、drawable</code>等资源类似。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">   android:layout_width=&quot;match_parent&quot;</span><br><span class="line">   android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">   android:padding=&quot;@&#123;user.display?(int)@dimen/largePadding : (int)@dimen/smallPadding&#125;&quot;</span><br><span class="line">   android:text=&quot;@&#123;user.uage&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-6-使用include"><a href="#5-6-使用include" class="headerlink" title="5.6. 使用include"></a>5.6. 使用include</h4><p>使用命名空间来传递variable，将当前 variable 的值传递给 include 进来 的布局中。<br>为 layout 添加命名空间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>include</code>中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;include</span><br><span class="line">    layout=&quot;@layout/layout_user&quot;</span><br><span class="line">    bind:user=&quot;@&#123;user&#125;&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意在 <code>layout_user.xml</code>中也要在 variable 中 定义添加 user 变量。</p>
+<h4 id="5-7-使用表达式"><a href="#5-7-使用表达式" class="headerlink" title="5.7. 使用表达式"></a>5.7. 使用表达式</h4><p>java 中的表达式，在这里也是支持的，</p>
+<ul>
+<li>数学 + - / * %</li>
+<li>字符串连接 +</li>
+<li>逻辑 &amp;&amp; ||</li>
+<li>二进制 &amp; | ^</li>
+<li>一元运算 + - ! ~</li>
+<li>移位 &gt;&gt; &gt;&gt;&gt; &lt;&lt;</li>
+<li>比较 == &gt; &lt; &gt;= &lt;=</li>
+<li>instanceof<br>….<br>Data Binding代码生成时自动检查是否为null来避免出现<code>null pointer exceptions</code>错误,<code>String</code> 类型默认值是<code>null</code> ,<code>int</code>类型默认值是 <code>0</code>，<code>boolean</code> 类型默认值是 <code>false</code>。</li>
+</ul>
+<h4 id="5-8-集合"><a href="#5-8-集合" class="headerlink" title="5.8. 集合"></a>5.8. 集合</h4><p>常用的集合：arrays、lists、sparse，lists以及maps，为了简便都可以使用<code>[]</code>来访问。注意,在使用泛型时<code>&lt;</code>需要转义，用<code>&amp;lt;</code>代替，否则会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;data&gt;</span><br><span class="line">  &lt;import type=&quot;android.util.SparseArray&quot;/&gt;</span><br><span class="line">  &lt;import type=&quot;java.util.Map&quot;/&gt;</span><br><span class="line">  &lt;import type=&quot;java.util.List&quot;/&gt;</span><br><span class="line">  &lt;variable name=&quot;list&quot; type=&quot;List&amp;lt;String&gt;&quot;/&gt;</span><br><span class="line">  &lt;variable name=&quot;sparse&quot; type=&quot;SparseArray&amp;lt;String&gt;&quot;/&gt;</span><br><span class="line">  &lt;variable name=&quot;map&quot; type=&quot;Map&amp;lt;String, String&gt;&quot;/&gt;</span><br><span class="line">  &lt;variable name=&quot;index&quot; type=&quot;int&quot;/&gt;</span><br><span class="line">  &lt;variable name=&quot;key&quot; type=&quot;String&quot;/&gt;</span><br><span class="line">&lt;/data&gt;</span><br><span class="line">…</span><br><span class="line">android:text=&quot;@&#123;list[index]&#125;&quot;</span><br><span class="line">…</span><br><span class="line">android:text=&quot;@&#123;sparse[index]&#125;&quot;</span><br><span class="line">…</span><br><span class="line">android:text=&quot;@&#123;map[key]&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-9-Data对象（数据绑定）"><a href="#5-9-Data对象（数据绑定）" class="headerlink" title="5.9.Data对象（数据绑定）"></a>5.9.Data对象（数据绑定）</h4><p>Data Binding 的强大之处主要在于双向数据绑定，当POJO对象发生变化时，通知改变Data对象，已达到更新UI的效果。有三种不同的数据变化通知机制：<code>Observable</code>对象、<code>ObservableFields</code>以及<code>observable  collections</code>。<br>这里以 Observable 为例，更改User类。使其继承<code>BaseObservable</code>,在<code>getter</code>方法前添加<code>Bindable</code>注解，在<code>setter</code>方法中调用<code>notifyPropertyChanged</code>进行更新数据。如果只更新某一字段，只需将该字段设置为<code>ObservableFields</code>类型的，如boolean,可用ObservableBoolean代替，但对其的使用需要通过get和set方法。具体代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class User extends BaseObservable&#123;</span><br><span class="line">    private String uname;</span><br><span class="line">    private String usex;</span><br><span class="line">    private String uage;</span><br><span class="line">    private boolean isDisplay;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(String uname, String usex, String uage, boolean isDisplay) &#123;</span><br><span class="line">        this.uname = uname;</span><br><span class="line">        this.usex = usex;</span><br><span class="line">        this.uage = uage;</span><br><span class="line">        this.isDisplay = isDisplay;</span><br><span class="line">    &#125;</span><br><span class="line">    @Bindable</span><br><span class="line">    public String getUname() &#123;</span><br><span class="line">        return uname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUname(String uname) &#123;</span><br><span class="line">        this.uname = uname;</span><br><span class="line">        notifyPropertyChanged(BR.uname);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bindable</span><br><span class="line">    public String getUsex() &#123;</span><br><span class="line">        return usex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUsex(String usex) &#123;</span><br><span class="line">        this.usex = usex;</span><br><span class="line">        notifyPropertyChanged(BR.usex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bindable</span><br><span class="line">    public String getUage() &#123;</span><br><span class="line">        return uage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUage(String uage) &#123;</span><br><span class="line">        this.uage = uage;</span><br><span class="line">        notifyPropertyChanged(BR.uage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bindable</span><br><span class="line">    public boolean isDisplay() &#123;</span><br><span class="line">        return isDisplay;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDisplay(boolean display) &#123;</span><br><span class="line">        isDisplay = display;</span><br><span class="line">        notifyPropertyChanged(BR.display);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在编译期间，Bindable注解在BR(与R文件类似)类文件中生成一个Entry。BR类文件会在模块包内生成。如果用于Data类的基类不能改变，Observable接口通过方便的PropertyChangeRegistry来实现用于储存和有效地通知监听器。</p>
+<p>Data Binding的基本用法已经介绍完了，但它 的使用知识点较多，暂且写到这里,对于它在ListView/RecyclerView中的用法、事件处理等稍后再做介绍。<br><br></p>
+<p>文中部分资料来源于页底的参考资料。</p>
+<blockquote>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://github.com/LyndonChin/MasteringAndroidDataBinding" target="_blank" rel="external">https://github.com/LyndonChin/MasteringAndroidDataBinding</a></li>
+<li><a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="external">http://www.jianshu.com/p/b1df61a4df77</a></li>
+<li><a href="https://realm.io/cn/news/data-binding-android-boyar-mount/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">https://realm.io/cn/news/data-binding-android-boyar-mount/?utm_source=tuicool&amp;utm_medium=referral</a></li>
+</ol>
+</blockquote>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/09/10/using-DataBinding/" data-title="数据绑定库DataBinding的使用" data-url="http://imtianx.cn/2016/09/10/using-DataBinding/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large purple">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
+                
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                
+                    <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
+                
+                    <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016-2017  imtianx.cn, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

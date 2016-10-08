@@ -1,0 +1,664 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>属性动画详解（Animator） | Imtianx `s Blog</title>
+    <meta name="author" content="imtianx">
+    
+    <meta name="description" content="1、概述对于之前介绍的Animation，它属于视图动画（View Animation）(可参见：Animation 动画详解)，包括补间动画（Tween Animation）和逐帧动画（Tween Animation）；而在android中还有另一种动画，那就是属性动画（Property Animator），它包括ValueAnimator 和 ObjectAnimator。">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="属性动画详解（Animator）"/>
+    <meta property="og:site_name" content="Imtianx `s Blog"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Imtianx `s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Imtianx `s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="/img/head.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">imtianx</p>
+                        <p class="desc">java/android/移动开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/android/">
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/SQLit/">
+                    SQLit <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具软件/">
+                    工具软件 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/hexo/">
+                    hexo <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/PL-SQL/">
+                    PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/android/">android</a><a class="breadcrumb" href="/categories/android/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>属性动画详解（Animator）</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-04-25T11:00:38.000Z"><a href="/2016/04/25/Property-animatorValueAnimator_ObjectAnimation/">2016-04-25</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/Animator/" class="chip purple lighten-1">Animator</a>
+        
+            <a href="/tags/属性动画/" class="chip purple lighten-1">属性动画</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#1、概述"><span class="section table-of-contents-text">1、概述</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#2、ValueAnimator-的基本使用"><span class="section table-of-contents-text">2、ValueAnimator 的基本使用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#3、ValueAnimator-常用方法"><span class="section table-of-contents-text">3、ValueAnimator 常用方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#4、ObjectAnimator-的基本使用"><span class="section table-of-contents-text">4、ObjectAnimator 的基本使用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#5、ObjectAnimator-的常用方法"><span class="section table-of-contents-text">5、ObjectAnimator 的常用方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#6、AnimatorSet的使用"><span class="section table-of-contents-text">6、AnimatorSet的使用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#7、PropertyValuesHolder-的使用"><span class="section table-of-contents-text">7、PropertyValuesHolder 的使用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#8、在XML文件中实现属性动画"><span class="section table-of-contents-text">8、在XML文件中实现属性动画</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#8、View的animate方法"><span class="section table-of-contents-text">8、View的animate方法</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><p>对于之前介绍的Animation，它属于<strong>视图动画</strong>（View Animation）(可参见：<a href="http://imtianx.cn/2016/04/25/view-Animation/">Animation 动画详解</a>)，包括<strong>补间动画</strong>（Tween Animation）和<strong>逐帧动画</strong>（Tween Animation）；而在android中还有另一种动画，那就是<strong>属性动画</strong>（Property Animator），它包括<strong>ValueAnimator</strong> 和 <strong>ObjectAnimator</strong>。<br><a id="more"></a><br>两者的<strong>区别</strong>：</p>
+<ul>
+<li>引入时间不同<br>视图动画在API Level 1 引入的，而属性动画在API Level 11（即 android 3.0）引入的； </li>
+<li>所在包不同<br>视图动画在 <strong>android.view.animation.Animation</strong>包下，属性动画在：<strong>android.animation</strong>包下</li>
+<li>动画类的命名不同<br>视图动画中类的名字为：<strong>XXXAnimation</strong>，而在属性动画中是：<strong>XXXAnimator</strong></li>
+<li><strong>作用的对象不同</strong>（这个也是引入属性动画的原因）<br><strong>视图动画是对控件做动画，不能改变控件内部的属性，对所有的控件都可以；而属性动画是通过改变控件的属性来实现动画，但使用ObjectAnimator时要求作用的控件的属性要有get,set方法。如果控件的属性没有get/set方法，可以通过包装类间接的设置get/set方法，或者使用ValueAnimator 实现。</strong></li>
+</ul>
+<h1 id="2、ValueAnimator-的基本使用"><a href="#2、ValueAnimator-的基本使用" class="headerlink" title="2、ValueAnimator 的基本使用"></a>2、ValueAnimator 的基本使用</h1><p>ValueAnimator是动画的核心，但不提供任何动画效果，它更像一个数值发生器，产生具有一定规律的数字，然后让调用者来控制动画的实现过程。用法如下：</p>
+<ul>
+<li><strong>创建ValueAnimator实例</strong><br>例：创建0到500的动画，时间为1s:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator animator = ValueAnimator.ofInt(0,500);  </span><br><span class="line">animator.setDuration(1000);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码中可以看出，它不与任何控件关联，只对动画做运算。</p>
+<ul>
+<li><p><strong>添加它的监听事件</strong><br>下面是给它添加监听事件，实现动画的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">animator.addUpdateListener(new ValueAnimator.</span><br><span class="line">                       AnimatorUpdateListener() &#123;</span><br><span class="line">                   @Override</span><br><span class="line">                   public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                       //具体处理动画逻辑</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">               //开启动画</span><br><span class="line">               animator.start();</span><br></pre></td></tr></table></figure>
+<p>具体示例：<br>点击按钮使textView从(200,200)移动到（600，,600）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  btnStartAnim = (Button) findViewById(R.id.btn);</span><br><span class="line">tv = (TextView) findViewById(R.id.tv);</span><br><span class="line">btnStartAnim.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View v) &#123;</span><br><span class="line">        //设置数据</span><br><span class="line">        ValueAnimator animator = ValueAnimator.ofInt(200, 600);</span><br><span class="line">        animator.setDuration(1000);</span><br><span class="line">        //监听动画</span><br><span class="line">        animator.addUpdateListener(new ValueAnimator.</span><br><span class="line">                AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                //获取当前动画的值</span><br><span class="line">                int curValue = (int) animation.getAnimatedValue();</span><br><span class="line">                //设置tv的位置</span><br><span class="line">                tv.layout(curValue, curValue,</span><br><span class="line">                        curValue + tv.getWidth(),</span><br><span class="line">                        curValue + tv.getHeight());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        //开启动画</span><br><span class="line">        animator.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>示例效果：<br><img src="/img/article_img/ValueAnimator-simple-demo.gif" alt=""></p>
+<h1 id="3、ValueAnimator-常用方法"><a href="#3、ValueAnimator-常用方法" class="headerlink" title="3、ValueAnimator 常用方法"></a>3、ValueAnimator 常用方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 设置动画参数，参数类型为可变参数</span><br><span class="line">*/</span><br><span class="line">ValueAnimator ofInt(int... values);</span><br><span class="line">ValueAnimator ofFloat(int... values);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 设置动画时长，单位是毫秒</span><br><span class="line">*/</span><br><span class="line">ValueAnimator setDuration(long duration);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 获取 ValueAnimator 在运动时，当前运动点的值</span><br><span class="line">*/</span><br><span class="line">Object getAnimatedValue();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 开始动画</span><br><span class="line">*/</span><br><span class="line">void start();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 设置循环次数,设置为 INFINITE 表示无限循环</span><br><span class="line">*/</span><br><span class="line">void setRepeatCount(int value);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 设置循环模式</span><br><span class="line">* value 取值有 RESTART，REVERSE（分别为：重新开始，倒序重新开始）</span><br><span class="line">*/</span><br><span class="line">void setRepeatMode(int value);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* 取消动画</span><br><span class="line">*/</span><br><span class="line">void cancel();</span><br></pre></td></tr></table></figure>
+<p>通过源码，发现ofInt和ofFloat方法内部实现一样的，他们的区别在于传入的参数类型不同，需要注意的是在使用<strong>getAnimatedValue</strong>方法时，如果前面<strong>使用的是ofInt,要强转成int 类型</strong>，否则，转为float类型。<br>此外，如果不需要动画，可以调用移除动画监听方法，但需要先调用cancel方法取消动画。</p>
+<h1 id="4、ObjectAnimator-的基本使用"><a href="#4、ObjectAnimator-的基本使用" class="headerlink" title="4、ObjectAnimator 的基本使用"></a>4、ObjectAnimator 的基本使用</h1><p>ObjectAnimator 类继承自ValueAnimator，使用时通过静态工厂类直接返回一个对象，参数包括对象和对象的属性名，但该属性必须要有get和set函数，这样可以真实的控制一个view的属性值，因此它基本可以实现所有的动画效果。<br>使用示例：<br>使textView的translationX从0变化到200在变化到500，持续时间为1s,代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animator = ObjectAnimator.ofFloat(textView,</span><br><span class="line">            &quot;translationX&quot;,new float[]&#123;200,500&#125;);</span><br><span class="line">    animator.setDuration(1000);</span><br><span class="line">    animator.start();</span><br></pre></td></tr></table></figure></p>
+<p>ofFloat的参数：第一个是要操纵的View；第二个是要操纵的属性；第三个是参数，是一个可变数组。同样的，可以给它设置显示时长，插值器等。<br>在开始提到了，ObjectAnimator用于有get，set属性的控件，对于没有的可以通过一个包装类来实现，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 包装类，给width添加get，set方法</span><br><span class="line"> */</span><br><span class="line">public static class WrapperView &#123;</span><br><span class="line">    private View mTarget;</span><br><span class="line"></span><br><span class="line">    public WrapperView(View target) &#123;</span><br><span class="line">        mTarget = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getWidth() &#123;</span><br><span class="line">        return mTarget.getLayoutParams().width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setWidth(int width) &#123;</span><br><span class="line">        mTarget.getLayoutParams().width = width;</span><br><span class="line">        mTarget.requestLayout();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用时，直接操纵包装类，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WrapperView mWrapperView = new WrapperView(btnStartAnim);</span><br><span class="line">ObjectAnimator animator = ObjectAnimator.ofInt(</span><br><span class="line">        mWrapperView,&quot;width&quot;,500).setDuration(500);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<p>通过上面，可以知道，ObjectAnimator 实现动画主要是通过set方法来设置控件的对应的属性实现动画。</p>
+<h1 id="5、ObjectAnimator-的常用方法"><a href="#5、ObjectAnimator-的常用方法" class="headerlink" title="5、ObjectAnimator 的常用方法"></a>5、ObjectAnimator 的常用方法</h1><p>除了上面的ofInt,ofFloat方法，对于要改变背景色的，可以使用<strong>ArgbEvaluator</strong>，用法如下,给textView设置背景色在三种颜色间变化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animator = ObjectAnimator.ofInt(textView,</span><br><span class="line">        &quot;BackgroundColor&quot;,0xffff00ff, 0xffffff00, 0xffff00ff);</span><br><span class="line">animator.setDuration(2000);</span><br><span class="line">animator.setEvaluator(new ArgbEvaluator());</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<p>其他常用函数如下：<br>摘抄于：<a href="http://wiki.jikexueyuan.com/project/android-animation/7.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/android-animation/7.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * 设置动画时长，单位是毫秒 </span><br><span class="line"> */  </span><br><span class="line">ValueAnimator setDuration(long duration)  </span><br><span class="line">/** </span><br><span class="line"> * 获取 ValueAnimator 在运动时，当前运动点的值 </span><br><span class="line"> */  </span><br><span class="line">Object getAnimatedValue();  </span><br><span class="line">/** </span><br><span class="line"> * 开始动画 </span><br><span class="line"> */  </span><br><span class="line">void start()  </span><br><span class="line">/** </span><br><span class="line"> * 设置循环次数,设置为 INFINITE 表示无限循环 </span><br><span class="line"> */  </span><br><span class="line">void setRepeatCount(int value)  </span><br><span class="line">/** </span><br><span class="line"> * 设置循环模式 </span><br><span class="line"> * value 取值有 RESTART，REVERSE， </span><br><span class="line"> */  </span><br><span class="line">void setRepeatMode(int value)  </span><br><span class="line">/** </span><br><span class="line"> * 取消动画 </span><br><span class="line"> */  </span><br><span class="line">void cancel()</span><br></pre></td></tr></table></figure></p>
+<p>监听相关的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * 监听器一：监听动画变化时的实时值 </span><br><span class="line"> */  </span><br><span class="line">public static interface AnimatorUpdateListener &#123;  </span><br><span class="line">    void onAnimationUpdate(ValueAnimator animation);  </span><br><span class="line">&#125;  </span><br><span class="line">//添加方法为：public void addUpdateListener(AnimatorUpdateListener listener)  </span><br><span class="line">/** </span><br><span class="line"> * 监听器二：监听动画变化时四个状态 </span><br><span class="line"> */  </span><br><span class="line">public static interface AnimatorListener &#123;  </span><br><span class="line">    void onAnimationStart(Animator animation);  </span><br><span class="line">    void onAnimationEnd(Animator animation);  </span><br><span class="line">    void onAnimationCancel(Animator animation);  </span><br><span class="line">    void onAnimationRepeat(Animator animation);  </span><br><span class="line">&#125;  </span><br><span class="line">//添加方法为：public void addListener(AnimatorListener listener)</span><br></pre></td></tr></table></figure></p>
+<p>插值器与 Evaluator:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * 设置插值器 </span><br><span class="line"> */  </span><br><span class="line">public void setInterpolator(TimeInterpolator value)  </span><br><span class="line">/** </span><br><span class="line"> * 设置 Evaluator </span><br><span class="line"> */  </span><br><span class="line">public void setEvaluator(TypeEvaluator value)</span><br></pre></td></tr></table></figure></p>
+<p>更多方法可以查看api</p>
+<h1 id="6、AnimatorSet的使用"><a href="#6、AnimatorSet的使用" class="headerlink" title="6、AnimatorSet的使用"></a>6、AnimatorSet的使用</h1><p>在视图动画中  AnimationSet 来处理混合动画，同样的，这里的AnimatorSet来处理多个动画的。它出了实现多种动画，还可以精确的进行顺序控制。<br>示例代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animator1 = ObjectAnimator.ofFloat(textView, &quot;translationX&quot;, 300);</span><br><span class="line">ObjectAnimator animator2 = ObjectAnimator.ofFloat(textView, &quot;scaleX&quot;, 1, 0, 1);</span><br><span class="line">ObjectAnimator animator3 = ObjectAnimator.ofFloat(textView, &quot;scaleY&quot;, 1, 0, 1);</span><br><span class="line">AnimatorSet animatorSet = new AnimatorSet();</span><br><span class="line">animatorSet.setDuration(1000);</span><br><span class="line">animatorSet.playTogether(animator1, animator2, animator3);</span><br><span class="line">animatorSet.start();</span><br></pre></td></tr></table></figure></p>
+<p>示例效果：<br><img src="/img/article_img/AnimatorSet.gif" alt=""></p>
+<p>以上示例设置textView在x轴方向移动300，x和y方向先缩小到一倍再还原到一倍三种动画是同时执行。<br>若需要按顺序执行，可以调用Animator的<strong>playSequentially</strong>方法。</p>
+<h1 id="7、PropertyValuesHolder-的使用"><a href="#7、PropertyValuesHolder-的使用" class="headerlink" title="7、PropertyValuesHolder 的使用"></a>7、PropertyValuesHolder 的使用</h1><p>除了上面讲的AnimatorSet 实现多种动画，还可以通过PropertyValuesHolder来实现，比如上面的例子在平移的过程中实现x,y轴的缩放。如下代码;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PropertyValuesHolder valuesHolder1 = PropertyValuesHolder</span><br><span class="line">    .ofFloat(&quot;translationX&quot;, 300);</span><br><span class="line">PropertyValuesHolder valuesHolder2 = PropertyValuesHolder</span><br><span class="line">    .ofFloat(&quot;scaleX&quot;, 1, 0, 1);</span><br><span class="line">PropertyValuesHolder valuesHolder3 = PropertyValuesHolder</span><br><span class="line">    .ofFloat(&quot;scaleY&quot;, 1, 0, 1);</span><br><span class="line">ObjectAnimator.ofPropertyValuesHolder(tv, valuesHolder1,</span><br><span class="line">    valuesHolder2, valuesHolder3).setDuration(1000).start();</span><br></pre></td></tr></table></figure></p>
+<p>运行效果同AnimatorSet中的示例。<br>它的实现是先分别用PropertyValuesHolder的对象来控制不同的属性，最后调用ofPropertyValuesHolder方法实现多个属性动画的共同作用。</p>
+<h1 id="8、在XML文件中实现属性动画"><a href="#8、在XML文件中实现属性动画" class="headerlink" title="8、在XML文件中实现属性动画"></a>8、在XML文件中实现属性动画</h1><p>先在xml文件中定义属性，如下示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;objectAnimator xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    android:duration=1000&quot;</span><br><span class="line">    android:propertyName=&quot;scaleX&quot;</span><br><span class="line">    android:valueFrom=&quot;1.0&quot;</span><br><span class="line">    android:valueTo=&quot;2.0&quot;</span><br><span class="line">    android:valueType=&quot;floatType&quot;</span><br><span class="line">&lt;/objectAnimator&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在java代码代码中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Animator animator = AnimatorInflater.</span><br><span class="line">        loadAnimator(MainActivity.this,</span><br><span class="line">        R.animator.scalex);</span><br><span class="line">animator.setTarget(tv);</span><br><span class="line">animator.start();</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，xml文件的定义需要放在res/animator下，而且根节点只能是：set,objectAnimator,valueAnimator三者之一。如果使用的set，可以为其指定播放的方式，属性名为：ordering=[“together”]|[“sequentially”]，<br>默认值为：“together”，对于其他具体的属性这里不再赘述了，可以参见文档。<br>在实际开发中建议使用代码实现动画，比较简单，而且很多时候某些属性的起始值无法确定。</p>
+<h1 id="8、View的animate方法"><a href="#8、View的animate方法" class="headerlink" title="8、View的animate方法"></a>8、View的animate方法</h1><p>在android3.0之后，添加了animate方法来直接驱动属性动画，它其实是对属性动画的简写，如下示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">view.animate()</span><br><span class="line">       .alpha(0)</span><br><span class="line">       .y(300)</span><br><span class="line">       .setDuration(1000)</span><br><span class="line">       .withStartAction(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;)</span><br><span class="line">       .withEndAction(new Runnable() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void run() &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;).start();</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子很好理解，可以通过属性来确定他的含义。<br>总之，在实现动画时，可以根据自己的实际情况选择相应的方式实现动画，必要的时候还可以自定义实现动画，往往在使用时，不只是一种动画，我们要选择合适的方式实现多种动画。</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/04/25/Property-animatorValueAnimator_ObjectAnimation/" data-title="属性动画详解（Animator）" data-url="http://imtianx.cn/2016/04/25/Property-animatorValueAnimator_ObjectAnimation/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large purple">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
+                
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                
+                    <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
+                
+                    <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016-2017  imtianx.cn, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

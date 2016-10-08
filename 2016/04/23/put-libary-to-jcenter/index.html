@@ -7,7 +7,7 @@
 
     
 
-    <title>使用Gradle发布项目到JCenter仓库 | 田星个人博客</title>
+    <title>使用Gradle发布项目到JCenter仓库 | Imtianx `s Blog</title>
     <meta name="author" content="imtianx">
     
     <meta name="description" content="原文：使用Gradle发布项目到JCenter仓库这里介绍了使用gradle发布项目到jcenter的具体流程，方便项目的依赖。">
@@ -80,6 +80,14 @@
                     </li>
                 
                     <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
                         <a class="menu-about " href="/about" >
                             <i class="fa fa-user "></i>
                             
@@ -99,7 +107,7 @@
                 <div class="info col s8 valign-wrapper no-padding">
                     <div class="valign">
                         <p class="name">imtianx</p>
-                        <p class="desc">android/javaweb/移动开发</p>
+                        <p class="desc">java/android/移动开发</p>
                     </div>
                 </div>
             </div>
@@ -140,6 +148,14 @@
             </li>
         
             <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
                 <a class="waves-effect menu-about " href="/about" >
                     <i class="fa fa-user "></i>
                     
@@ -156,7 +172,15 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/android/">
-                    android <span class="right">19 篇</span></a>
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
                 </a>
             </li>
 
@@ -171,8 +195,8 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/android/学习笔记/">
-                    学习笔记 <span class="right">17 篇</span></a>
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -208,6 +232,20 @@
         </div>
     </div>
 </nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
 
     <main>
         <div class="container main-container">
@@ -245,9 +283,9 @@
             
     <div class="tags-row">
         
-            <a href="/tags/gradle/" class="chip pink lighten-1">gradle</a>
+            <a href="/tags/gradle/" class="chip purple lighten-1">gradle</a>
         
-            <a href="/tags/jcenter/" class="chip pink lighten-1">jcenter</a>
+            <a href="/tags/jcenter/" class="chip purple lighten-1">jcenter</a>
         
     </div>
 
@@ -259,7 +297,7 @@
 
             <div class="entry pink-link-context">
                 <p>原文：<a href="http://zhengxiaopeng.com/2015/02/02/%E4%BD%BF%E7%94%A8Gradle%E5%8F%91%E5%B8%83%E9%A1%B9%E7%9B%AE%E5%88%B0JCenter%E4%BB%93%E5%BA%93/" target="_blank" rel="external">使用Gradle发布项目到JCenter仓库</a><br>这里介绍了使用gradle发布项目到jcenter的具体流程，方便项目的依赖。<br><a id="more"></a></p>
-<h3 id="申请Bintray账号"><a href="#申请Bintray账号" class="headerlink" title="申请Bintray账号"></a>申请Bintray账号</h3><p>Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，Bintray传送门，注册完成后第一步算完成了。</p>
+<h3 id="申请Bintray账号"><a href="#申请Bintray账号" class="headerlink" title="申请Bintray账号"></a>申请Bintray账号</h3><p>Bintray的基本功能类似于Maven Central，一样的我们需要一个账号，<a href="https://bintray.com/" target="_blank" rel="external">Bintray传送门</a>，注册完成后第一步算完成了。</p>
 <h3 id="生成项目的JavaDoc和source-JARs"><a href="#生成项目的JavaDoc和source-JARs" class="headerlink" title="生成项目的JavaDoc和source JARs"></a>生成项目的JavaDoc和source JARs</h3><p>简单的说生成的这两样东西就是我们在下一步中上传到远程仓库JCenter上的文件了。这一步需要android-maven-plugin插件，所以我们需要在项目的build.gradle（Top-level build file，项目最外层的build.gradle文件）中添加这个构建依赖，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:1.0.0&apos;</span><br><span class="line">        classpath &apos;com.github.dcendents:android-maven-plugin:1.2&apos;</span><br><span class="line">        // NOTE: Do not place your application dependencies here; they belong</span><br><span class="line">        // in the individual module build.gradle files</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注：如果编译出现问题 ，可将maven 的依赖改为1.3，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">classpath &apos;com.github.dcendents:android-maven-plugin:1.3&apos;</span><br></pre></td></tr></table></figure></p>
 <p>然后在你需要发布的那个module（我这里的即是library）的build.gradle里配置如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;com.android.library&apos;</span><br><span class="line">apply plugin: &apos;com.github.dcendents.android-maven&apos;</span><br><span class="line">apply plugin: &apos;com.jfrog.bintray&apos;</span><br><span class="line">// This is the library version used when deploying the artifact</span><br><span class="line">version = &quot;1.0.0&quot;</span><br><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 21</span><br><span class="line">    buildToolsVersion &quot;21.1.2&quot;</span><br><span class="line">    resourcePrefix &quot;bounceprogressbar__&quot;    //这个随便填</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        minSdkVersion 9</span><br><span class="line">        targetSdkVersion 21</span><br><span class="line">        versionCode 1</span><br><span class="line">        versionName version</span><br><span class="line">    &#125;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            minifyEnabled false</span><br><span class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</span><br><span class="line">    compile &apos;com.nineoldandroids:library:2.4.0+&apos;</span><br><span class="line">&#125;</span><br><span class="line">def siteUrl = &apos;https://github.com/zhengxiaopeng/BounceProgressBar&apos; // 项目的主页</span><br><span class="line">def gitUrl = &apos;https://github.com/zhengxiaopeng/BounceProgressBar.git&apos; // Git仓库的url</span><br><span class="line">group = &quot;org.rocko.bpb&quot; // Maven Group ID for the artifact，一般填你唯一的包名</span><br><span class="line">install &#123;</span><br><span class="line">    repositories.mavenInstaller &#123;</span><br><span class="line">        // This generates POM.xml with proper parameters</span><br><span class="line">        pom &#123;</span><br><span class="line">        project &#123;</span><br><span class="line">        packaging &apos;aar&apos;</span><br><span class="line">        // Add your description here</span><br><span class="line">        name &apos;Android BounceProgressBar Widget&apos; //项目描述</span><br><span class="line">        url siteUrl</span><br><span class="line">        // Set your license</span><br><span class="line">        licenses &#123;</span><br><span class="line">            license &#123;</span><br><span class="line">            name &apos;The Apache Software License, Version 2.0&apos;</span><br><span class="line">            url &apos;http://www.apache.org/licenses/LICENSE-2.0.txt&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        developers &#123;</span><br><span class="line">        developer &#123;</span><br><span class="line">        id &apos;zhengxiaopeng&apos;    //填写的一些基本信息</span><br><span class="line">        name &apos;Rocko&apos;</span><br><span class="line">        email &apos;zhengxiaopeng.china@gmail.com&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scm &#123;</span><br><span class="line">        connection gitUrl</span><br><span class="line">        developerConnection gitUrl</span><br><span class="line">        url siteUrl</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">task sourcesJar(type: Jar) &#123;</span><br><span class="line">    from android.sourceSets.main.java.srcDirs</span><br><span class="line">    classifier = &apos;sources&apos;</span><br><span class="line">&#125;</span><br><span class="line">task javadoc(type: Javadoc) &#123;</span><br><span class="line">    source = android.sourceSets.main.java.srcDirs</span><br><span class="line">    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))</span><br><span class="line">&#125;</span><br><span class="line">task javadocJar(type: Jar, dependsOn: javadoc) &#123;</span><br><span class="line">    classifier = &apos;javadoc&apos;</span><br><span class="line">    from javadoc.destinationDir</span><br><span class="line">&#125;</span><br><span class="line">artifacts &#123;</span><br><span class="line">    archives javadocJar</span><br><span class="line">    archives sourcesJar</span><br><span class="line">&#125;</span><br><span class="line">Properties properties = new Properties()</span><br><span class="line">properties.load(project.rootProject.file(&apos;local.properties&apos;).newDataInputStream())</span><br><span class="line">bintray &#123;</span><br><span class="line">    user = properties.getProperty(&quot;bintray.user&quot;)</span><br><span class="line">    key = properties.getProperty(&quot;bintray.apikey&quot;)</span><br><span class="line">    configurations = [&apos;archives&apos;]</span><br><span class="line">    pkg &#123;</span><br><span class="line">        repo = &quot;maven&quot;    </span><br><span class="line">        name = &quot;BounceProgressBar&quot;    //发布到JCenter上的项目名字</span><br><span class="line">        websiteUrl = siteUrl</span><br><span class="line">        vcsUrl = gitUrl</span><br><span class="line">        licenses = [&quot;Apache-2.0&quot;]</span><br><span class="line">        publish = true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -267,7 +305,7 @@
 <p>Rebuild一下项目，顺利的话，就可以在module里的build文件夹里生成相关文件了。这一步为止，就可以把你项目生成到本地的仓库中了，Android Studio中默认即在Android\sdk\extras\android\m2repository这里，所以我们可以通过如下命令(Windows中，可能还需要下载一遍Gradle，之后就不需要了)执行生成:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew install</span><br></pre></td></tr></table></figure></p>
 <h3 id="上传到Bintray"><a href="#上传到Bintray" class="headerlink" title="上传到Bintray"></a>上传到Bintray</h3><p>上传到Bintray需要gradle-bintray-plugin的支持，所以在最外层的build.gradle里添加构建依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:1.0.0&apos;</span><br><span class="line">        classpath &apos;com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0&apos;</span><br><span class="line">        classpath &apos;com.github.dcendents:android-maven-plugin:1.2&apos;</span><br><span class="line">        // NOTE: Do not place your application dependencies here; they belong</span><br><span class="line">        // in the individual module build.gradle files</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>Rebuild一下，然后执行如下命令(Windows中)完成上传：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew bintrayUpload</span><br></pre></td></tr></table></figure></p>
-<p>上传完成即可在Bintray网站上找到你的Repo，我们需要完成最后一步工作，申请你的Repo添加到JCenter。可以进入这个页面,输入你的项目名字点击匹配到的项目，然后写一写Comments再send即可，然后就等管理员批准了，我是大概等了40分钟，然后网站上会给你一条通过信息，然后就OK了，大功告成。在bintray的maven厂库中即可查看。此外，如果添加其他版本的，可以按照上述步骤操作，注意改版本号。<br>如下bintray厂库详情：<br><img src="http://img.blog.csdn.net/20160404173839075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>上传完成即可在Bintray网站上找到你的Repo，我们需要完成最后一步工作，<strong>申请你的Repo添加到JCenter</strong>。可以进入这个页面,输入你的项目名字点击匹配到的项目，然后写一写Comments再send即可，然后就等管理员批准了，我是大概等了40分钟，然后网站上会给你一条通过信息，然后就OK了，大功告成。在bintray的maven厂库中即可查看。此外，如果添加其他版本的，可以按照上述步骤操作，注意改版本号。<br>如下bintray厂库详情：<br><img src="http://img.blog.csdn.net/20160404173839075?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>最后在其他项目中引用：</p>
 <p>1.使用Gradle：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.rocko.bpb:library:1.0.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2.使用maven：<br>按图中操作。</p>
@@ -312,7 +350,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large pink">
+    <a class="btn-floating btn-large purple">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -330,12 +368,12 @@
             <div class="social-group col m3 s12">
                 <h5 class="white-text">社交</h5>
                 
-                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
-                        <i class="fa fa-2x fa-weibo"></i>
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
                     </a>
                 
-                    <a class="social-link" href="https://github.com/txadf" target="_blank">
-                        <i class="fa fa-2x fa-github"></i>
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
             </div>
@@ -345,15 +383,19 @@
             <div class="col m9 s12">
                 <h5 class="white-text">友情链接</h5>
                 
-                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
                 
-                    <a class="social-link" href="http://www.kymjs.com/" target="_blank">开源实验室（张涛）</a>
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
                 
                     <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
                 
                     <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
-                
-                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">博客主题作者</a>
                 
             </div>
             
@@ -372,85 +414,192 @@
 
     <noscript>
     <div class="noscript">
-        <p class="center-align">当前浏览器不支持博客完整功能。如果要获得最佳体验，请点击右上角···，复制链接，并在其它浏览器打开</p>
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
     </div>
 </noscript>
 <div class="noscript">
-    <p class="center-align">当前浏览器不支持博客完整功能。如果要获得最佳体验，请点击右上角···，复制链接，并在其它浏览器打开</p>
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
 </div>
 
 
-<script src="/js/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
 
 <script>
-(function($) {
-    $(document).ready(function() {
-        // 隐藏禁用javascript（针对微信内置浏览器）的提示
-        $('.noscript').hide();
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
 
-        // 图片缩放效果
-        var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
 
-        // 给图片加上点击放大效果（materialbox插件）
-        $imgs.addClass('materialboxed')
-            .each(function(i, el) {
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
                 $(this).attr('data-caption', $(this).attr('alt') || ' ');
             }).materialbox();
 
-        // 优化表格的显示
-        $('table').addClass('responsive-table striped bordered');
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
 
-        // 首页幻灯片
-        $('.slider').slider({
-            indicators: true,
-            full_width: true,
-            interval: 8000
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
         });
 
-        $(".button-collapse").sideNav();
-        $(".category-menu").sideNav();
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
 
-        // 针对gallery post
-        $('.carousel').carousel({
-            full_width: true
-        });
-        $('.carousel-control.prev').click(function() {
-            $('.carousel').carousel('prev');
-        });
-        $('.carousel-control.next').click(function() {
-            $('.carousel').carousel('next');
-        });
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
 
-        // 文章目录
-        $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
-        // 修正文章目录的left-border颜色
-        var color = $('.table-of-contents-text').css('color');
-        $('.table-of-contents-link').css('border-left-color', color);
-
-        // 针对移动端做的优化：FAB按钮点击一下收回
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            $('.fixed-action-btn').addClass('click-to-toggle');
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
         }
-        // 回到顶部
-        $('.btn-return-top').click(function() {
-            $('body, html').animate({
-                scrollTop: 0
-            }, 500);
-        });
-
-        // 重置读书页面的Tab标签页的颜色
-        $('li.tab a').hover(function() {
-            $(this).toggleClass('text-lighten-4');
-        });
-        $('.indicator').addClass('pink lighten-2');
-
-        
-        // 添加new标签
-        $('.menu-about').append('<span class="new badge pink"></span>');
-        
-    });
-})(jQuery);
+    })(jQuery);
 </script>
 
 

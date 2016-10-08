@@ -1,0 +1,645 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Android Bluetooth 通信技术深入--聊天小应用 | Imtianx `s Blog</title>
+    <meta name="author" content="imtianx">
+    
+    <meta name="description" content="目前，市场上的大部分手机都带有蓝牙，尽管使用的不多，但作为开发者，我们还有必要了解其原理。最近的项目需要用到蓝牙技术，于是写了个 蓝牙的聊天小demo。
+1. 效果示意图这里需要两部手机进行测试。其中一部作为蓝牙服务器，另一部作为蓝牙客户端，进行通信。">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Android Bluetooth 通信技术深入--聊天小应用"/>
+    <meta property="og:site_name" content="Imtianx `s Blog"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Imtianx `s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Imtianx `s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="/img/head.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">imtianx</p>
+                        <p class="desc">java/android/移动开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/android/">
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/SQLit/">
+                    SQLit <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具软件/">
+                    工具软件 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/hexo/">
+                    hexo <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/PL-SQL/">
+                    PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/android/">android</a><a class="breadcrumb" href="/categories/android/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Android Bluetooth 通信技术深入--聊天小应用</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-09-24T08:06:25.000Z"><a href="/2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/">2016-09-24</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/蓝牙/" class="chip purple lighten-1">蓝牙</a>
+        
+            <a href="/tags/聊天/" class="chip purple lighten-1">聊天</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-效果示意图"><span class="section table-of-contents-text">1. 效果示意图</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-开发步骤"><span class="section table-of-contents-text">2.开发步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-具体的实现"><span class="section table-of-contents-text">3.具体的实现</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-1-开启蓝牙"><span class="section table-of-contents-text">3.1 开启蓝牙</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-2-搜索蓝牙"><span class="section table-of-contents-text">3.2 搜索蓝牙</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-3-连接蓝牙设备"><span class="section table-of-contents-text">3.3 连接蓝牙设备</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-4-创建蓝牙socket"><span class="section table-of-contents-text">3.4 创建蓝牙socket</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-5-读取和写入数据"><span class="section table-of-contents-text">3.5 读取和写入数据</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-6-关闭连接"><span class="section table-of-contents-text">3.6 关闭连接</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>目前，市场上的大部分手机都带有蓝牙，尽管使用的不多，但作为开发者，我们还有必要了解其原理。最近的项目需要用到蓝牙技术，于是写了个 蓝牙的聊天小demo。</p>
+<h3 id="1-效果示意图"><a href="#1-效果示意图" class="headerlink" title="1. 效果示意图"></a>1. 效果示意图</h3><p>这里需要两部手机进行测试。其中一部作为蓝牙服务器，另一部作为蓝牙客户端，进行通信。<a id="more"></a><br>客户端截图：<br><img src="/img/article_img/bluetooth/ble-client.gif" alt="client"><br>服务器截图：<br><img src="/img/article_img/bluetooth/ble-server.gif" alt="server"></p>
+<h3 id="2-开发步骤"><a href="#2-开发步骤" class="headerlink" title="2.开发步骤"></a>2.开发步骤</h3><ol>
+<li>开启蓝牙；</li>
+<li>搜索蓝牙设备；</li>
+<li>创建蓝牙socket，读取输出流；</li>
+<li>读取和写入数据；</li>
+<li>关闭连接和蓝牙。</li>
+</ol>
+<h3 id="3-具体的实现"><a href="#3-具体的实现" class="headerlink" title="3.具体的实现"></a>3.具体的实现</h3><h4 id="3-1-开启蓝牙"><a href="#3-1-开启蓝牙" class="headerlink" title="3.1 开启蓝牙"></a>3.1 开启蓝牙</h4><p>首先获取蓝牙适配器，若存在蓝牙未开则打开蓝牙，如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">        if (mBluetoothAdapter == null) &#123;</span><br><span class="line">            Toast.makeText(getActivity(), &quot;无蓝牙功能&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (!mBluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-2-搜索蓝牙"><a href="#3-2-搜索蓝牙" class="headerlink" title="3.2 搜索蓝牙"></a>3.2 搜索蓝牙</h4><p>首先开启蓝牙搜索功能，然后通过注册广播，搜索蓝牙设备，搜索完成后将其加入到蓝牙列表。<br>搜索蓝牙：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if (mBluetoothAdapter.isDiscovering()) &#123;</span><br><span class="line">    mBluetoothAdapter.cancelDiscovery();</span><br><span class="line">    mBtnStartSearch.setText(&quot;重新搜索&quot;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    mDatas.clear();</span><br><span class="line">    mAdapter.notifyDataSetChanged();</span><br><span class="line">    //添加设备信息到列表</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line">mBluetoothAdapter.startDiscovery();</span><br><span class="line">mBtnStartSearch.setText(&quot;ֹͣ停止搜索&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>注册蓝牙广播：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     * 搜索设备广播</span><br><span class="line">     */</span><br><span class="line">private final BroadcastReceiver mReceiver = new BroadcastReceiver() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">        String action = intent.getAction();</span><br><span class="line"></span><br><span class="line">        if (BluetoothDevice.ACTION_FOUND.equals(action)) &#123;</span><br><span class="line">            // 获得设备信息</span><br><span class="line">            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            // 绑定的状态不一样则进行添加</span><br><span class="line">            if (device.getBondState() != BluetoothDevice.BOND_BONDED) &#123;</span><br><span class="line">                mDatas.add(new BtInfo(device.getName(), device.getAddress(), false));</span><br><span class="line">                mAdapter.notifyDataSetChanged();</span><br><span class="line">                mListView.setSelection(mDatas.size() - 1);</span><br><span class="line">            &#125;</span><br><span class="line">            // 搜索完成</span><br><span class="line">        &#125; else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) &#123;</span><br><span class="line">            if (mListView.getCount() == 0) &#123;</span><br><span class="line">                Toast.makeText(context, &quot;没有发现设备！&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125;</span><br><span class="line">            mBtnStartSearch.setText(&quot;重新搜索&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"> * 注册广播</span><br><span class="line"> */</span><br><span class="line">private void registerBroadcast() &#123;</span><br><span class="line">    //设备被发现广播</span><br><span class="line">    IntentFilter discoveryFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);</span><br><span class="line">    getActivity().registerReceiver(mReceiver, discoveryFilter);</span><br><span class="line"></span><br><span class="line">    // 设备发现完成</span><br><span class="line">    IntentFilter foundFilter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);</span><br><span class="line">    getActivity().registerReceiver(mReceiver, foundFilter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-连接蓝牙设备"><a href="#3-3-连接蓝牙设备" class="headerlink" title="3.3 连接蓝牙设备"></a>3.3 连接蓝牙设备</h4><p>这里，使用listview展示蓝牙列表信息，item 的点击事件即为连接相应的蓝牙设备，点击某一项后跳转到会话页面，并通知他刷新信息，为方便，这里使用了EventBus来订阅事件，避免使用接口，如下listview 的item 的点击事件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//列表item设置监听，</span><br><span class="line">mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onItemClick(AdapterView&lt;?&gt; adapterView, View view, int i, long l) &#123;</span><br><span class="line">        BtInfo info = mDatas.get(i);</span><br><span class="line">        //好友mac地址</span><br><span class="line">        MainActivity.FRIEND_MAC_ADDRESS = info.getAddress();</span><br><span class="line">        //显示提示对话框</span><br><span class="line">        final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());</span><br><span class="line">        dialog.setTitle(&quot;连接&quot;);</span><br><span class="line">        dialog.setMessage(&quot;名称：&quot; + info.getName() + &quot;\n&quot; + &quot;地址：&quot; + info.getAddress());</span><br><span class="line">        dialog.setPositiveButton(&quot;连接&quot;, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">                mBluetoothAdapter.cancelDiscovery();</span><br><span class="line">                mBtnStartSearch.setText(&quot;重新搜索&quot;);</span><br><span class="line"></span><br><span class="line">                //连接后，跳转到会话页面</span><br><span class="line">                MainActivity.mType = MainActivity.Type.CILENT;</span><br><span class="line">                //viewPager 显示第二页</span><br><span class="line">                MainActivity.mViewPager.setCurrentItem(1);</span><br><span class="line">                //通知 ChatListFragment 刷新信息</span><br><span class="line">                EventBus.getDefault().post(new EventMsg(1));</span><br><span class="line"></span><br><span class="line">                dialogInterface.dismiss();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        dialog.setNegativeButton(&quot;取消&quot;, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">                MainActivity.FRIEND_MAC_ADDRESS = &quot;&quot;;</span><br><span class="line">                dialogInterface.dismiss();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        dialog.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-4-创建蓝牙socket"><a href="#3-4-创建蓝牙socket" class="headerlink" title="3.4 创建蓝牙socket"></a>3.4 创建蓝牙socket</h4><p>由于socketd的操作会阻塞线程，这里在子线程中进行创建。<br><code>BluetoothSocket</code> 客户端线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 客户端线程</span><br><span class="line">private class ClientThread extends Thread &#123;</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            mSocket = mDevice.createRfcommSocketToServiceRecord(UUID.fromString(&quot;00001101-0000-1000-8000-00805F9B34FB&quot;));</span><br><span class="line">            Message msg = new Message();</span><br><span class="line">            msg.obj = &quot;请稍候，正在连接服务器:&quot; + MainActivity.FRIEND_MAC_ADDRESS;</span><br><span class="line">            msg.what = STATUS_CONNECT;</span><br><span class="line">            mHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">            mSocket.connect();</span><br><span class="line"></span><br><span class="line">            msg = new Message();</span><br><span class="line">            msg.obj = &quot;已经连接上服务端！可以发送信息。&quot;;</span><br><span class="line">            msg.what = STATUS_CONNECT_SUCCESS;</span><br><span class="line">            mHandler.sendMessage(msg);</span><br><span class="line">            // 启动接受数据</span><br><span class="line">            mReadThread = new ReadThread();</span><br><span class="line">            mReadThread.start();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            Message msg = new Message();</span><br><span class="line">            msg.obj = &quot;连接服务端异常！断开连接重新试一试。&quot;;</span><br><span class="line">            msg.what = STATUS_CONNECT_SUCCESS;</span><br><span class="line">            mHandler.sendMessage(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建蓝牙连接时需要用到<code>UUID</code>,如需查看更多UUID，请点击<a href="http://blog.csdn.net/txadf/article/details/52235851" target="_blank" rel="external">这里</a>。<br><code>BluetoothServerSocket</code>蓝牙服务端socket线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> // 服务器端线程</span><br><span class="line">private class ServerThread extends Thread &#123;</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 创建一个蓝牙服务器 参数分别：服务器名称、UUID</span><br><span class="line">            mServerSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(&quot;btserver&quot;,</span><br><span class="line">                    UUID.fromString(&quot;00001101-0000-1000-8000-00805F9B34FB&quot;));</span><br><span class="line"></span><br><span class="line">            Message msg = new Message();</span><br><span class="line">            msg.obj = &quot;请稍候，正在等待客户端的连接...&quot;;</span><br><span class="line">            msg.what = STATUS_CONNECT;</span><br><span class="line">            mHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">			/* 接受客户端的连接请求 */</span><br><span class="line">            mSocket = mServerSocket.accept();</span><br><span class="line"></span><br><span class="line">            msg = new Message();</span><br><span class="line">            msg.obj = &quot;客户端已经连接上！可以发送信息。&quot;;</span><br><span class="line">            msg.what = STATUS_CONNECT;</span><br><span class="line">            mHandler.sendMessage(msg);</span><br><span class="line">            // 启动接受数据</span><br><span class="line">            mReadThread = new ReadThread();</span><br><span class="line">            mReadThread.start();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动蓝牙客户端和服务端线程方法如下(详情参见<a href="">类</a>的<code>onEventMainThread</code>方法)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">if (MainActivity.mType == MainActivity.Type.CILENT) &#123;</span><br><span class="line">    String address = MainActivity.FRIEND_MAC_ADDRESS;//蓝牙地址</span><br><span class="line">    if (!TextUtils.isEmpty(address)) &#123;</span><br><span class="line">        mDevice = mBluetoothAdapter.getRemoteDevice(address);</span><br><span class="line">        mClientThread = new ClientThread();</span><br><span class="line">        mClientThread.start();</span><br><span class="line">        MainActivity.isOpen = true;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        Toast.makeText(getActivity(), &quot;address is null !&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else if (MainActivity.mType == MainActivity.Type.SERVER) &#123;</span><br><span class="line">    mServerThread = new ServerThread();</span><br><span class="line">    mServerThread.start();</span><br><span class="line">    MainActivity.isOpen = true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-5-读取和写入数据"><a href="#3-5-读取和写入数据" class="headerlink" title="3.5 读取和写入数据"></a>3.5 读取和写入数据</h4><p>这里主要是通过获取输入输出流来读取和发送数据，以读取数据为例，如下现读取数据线程代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// 读取数据</span><br><span class="line">private class ReadThread extends Thread &#123;</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        byte[] buffer = new byte[1024];</span><br><span class="line">        int bytes;</span><br><span class="line">        InputStream is = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            is = mSocket.getInputStream();</span><br><span class="line">            while (true) &#123;</span><br><span class="line">                if ((bytes = is.read(buffer)) &gt; 0) &#123;</span><br><span class="line">                    byte[] buf_data = new byte[bytes];</span><br><span class="line">                    for (int i = 0; i &lt; bytes; i++) &#123;</span><br><span class="line">                        buf_data[i] = buffer[i];</span><br><span class="line">                    &#125;</span><br><span class="line">                    String s = new String(buf_data);</span><br><span class="line">                    Message msg = new Message();</span><br><span class="line">                    msg.obj = s;</span><br><span class="line">                    msg.what = 1;</span><br><span class="line">                    mHandler.sendMessage(msg);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e1) &#123;</span><br><span class="line">            e1.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                is.close();</span><br><span class="line">            &#125; catch (IOException e1) &#123;</span><br><span class="line">                e1.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发送消息与此类似，具体请参见 会话类 <a href=""></a>。</p>
+<h4 id="3-6-关闭连接"><a href="#3-6-关闭连接" class="headerlink" title="3.6 关闭连接"></a>3.6 关闭连接</h4><p>主要是关闭各个线程和关闭socket。</p>
+<p>至此，整个蓝牙同信已经完成，测试时需要两个手机，一个座位服务器，一个作为客户端，实现他们间的通信。</p>
+<p><a href="https://github.com/imtianx/StudyDemoForAndroid/blob/master/A05-bluetoothchatdemo" target="_blank" rel="external">示例demo下载</a></p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/" data-title="Android Bluetooth 通信技术深入--聊天小应用" data-url="http://imtianx.cn/2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large purple">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
+                
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                
+                    <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
+                
+                    <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016-2017  imtianx.cn, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

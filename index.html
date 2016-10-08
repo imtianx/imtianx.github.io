@@ -7,7 +7,7 @@
 
     
 
-    <title>田星个人博客</title>
+    <title>Imtianx `s Blog</title>
     <meta name="author" content="imtianx">
     
     
@@ -78,6 +78,14 @@
                     </li>
                 
                     <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
                         <a class="menu-about " href="/about" >
                             <i class="fa fa-user "></i>
                             
@@ -97,7 +105,7 @@
                 <div class="info col s8 valign-wrapper no-padding">
                     <div class="valign">
                         <p class="name">imtianx</p>
-                        <p class="desc">android/javaweb/移动开发</p>
+                        <p class="desc">java/android/移动开发</p>
                     </div>
                 </div>
             </div>
@@ -138,6 +146,14 @@
             </li>
         
             <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
                 <a class="waves-effect menu-about " href="/about" >
                     <i class="fa fa-user "></i>
                     
@@ -154,7 +170,15 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/android/">
-                    android <span class="right">19 篇</span></a>
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
                 </a>
             </li>
 
@@ -169,8 +193,8 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/android/学习笔记/">
-                    学习笔记 <span class="right">17 篇</span></a>
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -207,44 +231,22 @@
     </div>
 </nav>
 
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
     <main>
         
-
-<div class="slider">
-    <ul class="slides">
-    
-       <li>
-           <a href="http://www.huat.edu.cn/">
-               <img class="slider-image" src="/img/huatlib.jpg">
-               <div class="caption center-align">
-                 <h4>湖北汽车工业学院--逸夫图书馆</h3>
-                 <h5 class="light grey-text text-lighten-3"></h5>
-               </div>
-           </a>
-       </li>
-    
-       <li>
-           <a href="javascript:;">
-               <img class="slider-image" src="/img/wudangshan.jpg">
-               <div class="caption left-align">
-                 <h4>道教圣地，武当山</h3>
-                 <h5 class="light grey-text text-lighten-3"></h5>
-               </div>
-           </a>
-       </li>
-    
-       <li>
-           <a href="javascript:;">
-               <img class="slider-image" src="/img/danjiangkoushi.jpg">
-               <div class="caption right-align">
-                 <h4>中国水都，丹江口</h3>
-                 <h5 class="light grey-text text-lighten-3"></h5>
-               </div>
-           </a>
-       </li>
-    
-   </ul>
- </div>
 
 
 
@@ -256,22 +258,363 @@
                 <div class="article-title">
                     
     
-        <h1 class="indigo-link-context"><a href="/2016/04/23/test/">SwipeRefreshLayout+RecyclerView实现下拉刷新</a></h1>
+        <h1 class="indigo-link-context"><a href="/2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/">Android Bluetooth 通信技术深入--聊天小应用</a></h1>
     
 
 
                 </div>
 
-                <time class="pink-link-context" datetime="2016-04-23T08:36:25.000Z"><a href="/2016/04/23/test/">2016-04-23</a></time>
+                <time class="pink-link-context" datetime="2016-09-24T08:06:25.000Z"><a href="/2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/">2016-09-24</a></time>
 
                 
     <div class="tags-row">
         
-            <a href="/tags/5-X新特新/" class="chip pink lighten-1">5.X新特新</a>
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
         
-            <a href="/tags/RecyclerView/" class="chip pink lighten-1">RecyclerView</a>
+            <a href="/tags/蓝牙/" class="chip purple lighten-1">蓝牙</a>
         
-            <a href="/tags/CardView/" class="chip pink lighten-1">CardView</a>
+            <a href="/tags/聊天/" class="chip purple lighten-1">聊天</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>目前，市场上的大部分手机都带有蓝牙，尽管使用的不多，但作为开发者，我们还有必要了解其原理。最近的项目需要用到蓝牙技术，于是写了个 蓝牙的聊天小demo。</p>
+<h3 id="1-效果示意图"><a href="#1-效果示意图" class="headerlink" title="1. 效果示意图"></a>1. 效果示意图</h3><p>这里需要两部手机进行测试。其中一部作为蓝牙服务器，另一部作为蓝牙客户端，进行通信。
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/09/24/Android Bluetooth 通信技术深入--聊天小应用/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/09/20/Android Bluetooth 蓝牙技术初体验/">Android Bluetooth 蓝牙技术初体验</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-09-20T08:06:25.000Z"><a href="/2016/09/20/Android Bluetooth 蓝牙技术初体验/">2016-09-20</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/蓝牙/" class="chip purple lighten-1">蓝牙</a>
+        
+            <a href="/tags/通信/" class="chip purple lighten-1">通信</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>转自：<a href="http://www.jb51.net/article/79334.htm">http://www.jb51.net/article/79334.htm</a></p>
+<h3 id="1-Bluetooth包简介"><a href="#1-Bluetooth包简介" class="headerlink" title="1.Bluetooth包简介"></a>1.Bluetooth包简介</h3><p>Android平台提供了一个android.bluetooth的包，里面实现蓝牙设备之间通信的蓝牙API。总共有8个类，常用的四个类如下:<br><strong>BluetoothAdapter类</strong><br>代表了一个本地的蓝牙适配器。它是所有蓝牙交互的入口点。利用它你可以发现其他蓝牙设备，查询绑定了的设备，使用已知的MAC地址实例化一个蓝牙设备和建立一个BluetoothServerSocket（作为服务器端）来监听来自其他设备的连接。
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/09/20/Android Bluetooth 蓝牙技术初体验/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/09/10/using-DataBinding/">数据绑定库DataBinding的使用</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-09-10T08:06:25.000Z"><a href="/2016/09/10/using-DataBinding/">2016-09-10</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/DataBinding/" class="chip purple lighten-1">DataBinding</a>
+        
+            <a href="/tags/数据绑定/" class="chip purple lighten-1">数据绑定</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p><code>Data Binding</code> 是谷歌提供的 android 数据绑定库，为了而方便开发者实现 MVVM 的架构模式，使用它可以避免我们写大量的<code>findViewByID</code>，降低代码的耦合性。<br><a href="https://developer.android.com/topic/libraries/data-binding/index.html">官方介绍</a>(需翻墙)</p>
+<h3 id="一、使用环境要求"><a href="#一、使用环境要求" class="headerlink" title="一、使用环境要求"></a>一、使用环境要求</h3><p>通过查看官方文档，改数据绑定库的使用环境要求如下：</p>
+<ul>
+<li>下载 SDK Manager 中的支持库： Support repository；
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/09/10/using-DataBinding/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/07/10/android-exception-catch-UncaughtExceptionHandler/">android 异常捕获-UncaughtExceptionHandler</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-07-10T08:06:25.000Z"><a href="/2016/07/10/android-exception-catch-UncaughtExceptionHandler/">2016-07-10</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/异常捕获/" class="chip purple lighten-1">异常捕获</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>在android开发中，异常信息的捕获有多种方式，比如第三方的友盟、蒲公英等，这里主要使用 android 原生的 Thread.UncaughtExceptionHandler 来捕获出现的异常信息
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/07/10/android-exception-catch-UncaughtExceptionHandler/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/06/12/android-open-source-connected/">android 开源库（字体图标，MD控件等）</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-06-12T07:00:25.000Z"><a href="/2016/06/12/android-open-source-connected/">2016-06-12</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/开源框架/" class="chip purple lighten-1">开源框架</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>记录自己最近在开发中使用的开源库及部分使用方法，链接地址为个人fork后的地址，可以参见原作者仓库。本文将持续更新，大家有什么好用的可以留言，一起交流学习下。<br>
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/06/12/android-open-source-connected/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/05/28/TabLayout+ViewPager create tab/">TabLayout+ViewPager创建tab</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-05-28T04:00:25.000Z"><a href="/2016/05/28/TabLayout+ViewPager create tab/">2016-05-28</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/5-X新特性/" class="chip purple lighten-1">5.X新特性</a>
+        
+            <a href="/tags/TabLayout/" class="chip purple lighten-1">TabLayout</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>在degingn库中有TabLayout控件，可以方便的实现tab切换的效果，配合ViewPager.<br>
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/05/28/TabLayout+ViewPager create tab/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/04/25/Property-animatorValueAnimator_ObjectAnimation/">属性动画详解（Animator）</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-04-25T11:00:38.000Z"><a href="/2016/04/25/Property-animatorValueAnimator_ObjectAnimation/">2016-04-25</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/Animator/" class="chip purple lighten-1">Animator</a>
+        
+            <a href="/tags/属性动画/" class="chip purple lighten-1">属性动画</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><p>对于之前介绍的Animation，它属于<strong>视图动画</strong>（View Animation）(可参见：<a href="http://imtianx.cn/2016/04/25/view-Animation/">Animation 动画详解</a>)，包括<strong>补间动画</strong>（Tween Animation）和<strong>逐帧动画</strong>（Tween Animation）；而在android中还有另一种动画，那就是<strong>属性动画</strong>（Property Animator），它包括<strong>ValueAnimator</strong> 和 <strong>ObjectAnimator</strong>。<br>
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/04/25/Property-animatorValueAnimator_ObjectAnimation/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/04/25/view-Animation/">Animation 动画详解</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-04-25T03:00:38.000Z"><a href="/2016/04/25/view-Animation/">2016-04-25</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/Animation/" class="chip purple lighten-1">Animation</a>
+        
+            <a href="/tags/动画/" class="chip purple lighten-1">动画</a>
+        
+    </div>
+
+
+
+                
+                    <div class="entry pink-link-context">
+                        <p>在android 开发中，适当的添加动画可以使界面的交互变得更加的友好，特别是在提示，引导类的场景中，合理的使用动画可以带来更好的用户体验。这里，介绍<strong>Animation</strong> 框架的用法。
+                    </div>
+                
+            </div>
+
+            
+            <div class="card-action pink-link-context">
+                <a href="2016/04/25/view-Animation/">READ MORE</a>
+            </div>
+            
+        </div>
+</article>
+
+    
+        <article class="simple-article">
+        <div class="card">
+            <div class="card-content">
+                <div class="article-title">
+                    
+    
+        <h1 class="indigo-link-context"><a href="/2016/04/23/SwipeRefreshLayout-RecyclerView/">SwipeRefreshLayout+RecyclerView实现下拉刷新</a></h1>
+    
+
+
+                </div>
+
+                <time class="pink-link-context" datetime="2016-04-23T08:36:25.000Z"><a href="/2016/04/23/SwipeRefreshLayout-RecyclerView/">2016-04-23</a></time>
+
+                
+    <div class="tags-row">
+        
+            <a href="/tags/5-X新特新/" class="chip purple lighten-1">5.X新特新</a>
+        
+            <a href="/tags/RecyclerView/" class="chip purple lighten-1">RecyclerView</a>
+        
+            <a href="/tags/CardView/" class="chip purple lighten-1">CardView</a>
         
     </div>
 
@@ -286,7 +629,7 @@
 
             
             <div class="card-action pink-link-context">
-                <a href="2016/04/23/test/">READ MORE</a>
+                <a href="2016/04/23/SwipeRefreshLayout-RecyclerView/">READ MORE</a>
             </div>
             
         </div>
@@ -310,9 +653,9 @@
                 
     <div class="tags-row">
         
-            <a href="/tags/gradle/" class="chip pink lighten-1">gradle</a>
+            <a href="/tags/gradle/" class="chip purple lighten-1">gradle</a>
         
-            <a href="/tags/jcenter/" class="chip pink lighten-1">jcenter</a>
+            <a href="/tags/jcenter/" class="chip purple lighten-1">jcenter</a>
         
     </div>
 
@@ -334,252 +677,6 @@
 </article>
 
     
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/listview-optimize/">ListView的优化技巧</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:30:25.000Z"><a href="/2016/04/23/listview-optimize/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/Listview/" class="chip pink lighten-1">Listview</a>
-        
-            <a href="/tags/性能优化/" class="chip pink lighten-1">性能优化</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>在实际的应用开发时，往往有很多地方需要使用listview,当然我们得了解它的一些技巧。
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/listview-optimize/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/erroe-of-offline-or-unauthorized/">android真机测试之offline或unauthorized错误</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:30:25.000Z"><a href="/2016/04/23/erroe-of-offline-or-unauthorized/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/真机调试/" class="chip pink lighten-1">真机调试</a>
-        
-            <a href="/tags/offline/" class="chip pink lighten-1">offline</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>在开发中，使用真机测试较为方便，然而在ide连接手机时，adb device 提示 <strong>offline</strong> 或者 <strong>unauthorized</strong>(中文：未授权的)会令大家非常困扰。
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/erroe-of-offline-or-unauthorized/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/listView-in-scrollView/">ScrollView嵌套ListView的解决方案</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:29:25.000Z"><a href="/2016/04/23/listView-in-scrollView/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/ScrollView/" class="chip pink lighten-1">ScrollView</a>
-        
-            <a href="/tags/ListView/" class="chip pink lighten-1">ListView</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>在android开发中，有时会遇到ScrollView嵌套ListView的相关问题，然而直接使用ScrollView 嵌套ListView，会导致界面卡顿无法滚动，或者listview只希显示1行（设置lisview的高度为400dp课以解决）。
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/listView-in-scrollView/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/sum-up-2015/">2015年终总结及android学习路线</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:28:25.000Z"><a href="/2016/04/23/sum-up-2015/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/学习路线/" class="chip pink lighten-1">学习路线</a>
-        
-            <a href="/tags/总结/" class="chip pink lighten-1">总结</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>转眼间，一年又过去了，距离毕业也越来越近了。回想过去，感觉自己什么都还不会，顿时感到紧迫感。那么，在接下来的日子里，就要充分利用每分每秒，学习充实自己。我们搞it的就得时刻记着：活到老，学到老。
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/sum-up-2015/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/Eventbus-simple-use/">Eventbus 开源库的使用</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:26:25.000Z"><a href="/2016/04/23/Eventbus-simple-use/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/Eventbus/" class="chip pink lighten-1">Eventbus</a>
-        
-            <a href="/tags/开源框架/" class="chip pink lighten-1">开源框架</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>EventBus是一款用用于android上的事件分发/订阅的总线，包含发布者、订阅者、事件和总线。主要用于android中intent,handler等在activity，fragment等组件间传递消息。
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/Eventbus-simple-use/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
-        <article class="simple-article">
-        <div class="card">
-            <div class="card-content">
-                <div class="article-title">
-                    
-    
-        <h1 class="indigo-link-context"><a href="/2016/04/23/androidstudio-keaymap/">Android Studio 快捷键</a></h1>
-    
-
-
-                </div>
-
-                <time class="pink-link-context" datetime="2016-04-23T08:25:25.000Z"><a href="/2016/04/23/androidstudio-keaymap/">2016-04-23</a></time>
-
-                
-    <div class="tags-row">
-        
-            <a href="/tags/androidstudio/" class="chip pink lighten-1">androidstudio</a>
-        
-            <a href="/tags/快捷键/" class="chip pink lighten-1">快捷键</a>
-        
-    </div>
-
-
-
-                
-                    <div class="entry pink-link-context">
-                        <p>原官方快捷键：<a href="https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf">https://www.jetbrains.com/idea/docs/IntelliJIDEA_ReferenceCard.pdf</a><br>Alt+回车 导入包,自动修正<br>Ctrl+N   查找类<br>Ctrl+Shift+N 查找文件<br>Ctrl+Alt+L  格式化代码<br>Ctrl+Alt+O 优化导入的类和包<br>Alt+Insert 生成代码(如get,set方法,构造函数等
-                    </div>
-                
-            </div>
-
-            
-            <div class="card-action pink-link-context">
-                <a href="2016/04/23/androidstudio-keaymap/">READ MORE</a>
-            </div>
-            
-        </div>
-</article>
-
-    
 
     <ul class="pagination center-align">
     <li class="disabled">
@@ -587,7 +684,7 @@
     </li>
     
     
-        <li class="active pink"><a href="/">1</a></li>
+        <li class="active purple"><a href="/">1</a></li>
     
         <li class="waves-effect"><a href="/page/2">2</a></li>
     
@@ -602,7 +699,7 @@
 </div>
 
         <div class="fixed-action-btn float-sitemap">
-    <a class="btn-floating btn-large pink">
+    <a class="btn-floating btn-large purple">
       <i class="fa fa-caret-square-o-up"></i>
     </a>
     <ul>
@@ -620,12 +717,12 @@
             <div class="social-group col m3 s12">
                 <h5 class="white-text">社交</h5>
                 
-                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
-                        <i class="fa fa-2x fa-weibo"></i>
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
                     </a>
                 
-                    <a class="social-link" href="https://github.com/txadf" target="_blank">
-                        <i class="fa fa-2x fa-github"></i>
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
             </div>
@@ -635,15 +732,19 @@
             <div class="col m9 s12">
                 <h5 class="white-text">友情链接</h5>
                 
-                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
                 
-                    <a class="social-link" href="http://www.kymjs.com/" target="_blank">开源实验室（张涛）</a>
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
                 
                     <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
                 
                     <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
-                
-                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">博客主题作者</a>
                 
             </div>
             
@@ -662,85 +763,192 @@
 
     <noscript>
     <div class="noscript">
-        <p class="center-align">当前浏览器不支持博客完整功能。如果要获得最佳体验，请点击右上角···，复制链接，并在其它浏览器打开</p>
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
     </div>
 </noscript>
 <div class="noscript">
-    <p class="center-align">当前浏览器不支持博客完整功能。如果要获得最佳体验，请点击右上角···，复制链接，并在其它浏览器打开</p>
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
 </div>
 
 
-<script src="/js/jquery-2.1.1.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
 
 <script>
-(function($) {
-    $(document).ready(function() {
-        // 隐藏禁用javascript（针对微信内置浏览器）的提示
-        $('.noscript').hide();
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
 
-        // 图片缩放效果
-        var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
 
-        // 给图片加上点击放大效果（materialbox插件）
-        $imgs.addClass('materialboxed')
-            .each(function(i, el) {
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
                 $(this).attr('data-caption', $(this).attr('alt') || ' ');
             }).materialbox();
 
-        // 优化表格的显示
-        $('table').addClass('responsive-table striped bordered');
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
 
-        // 首页幻灯片
-        $('.slider').slider({
-            indicators: true,
-            full_width: true,
-            interval: 8000
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
         });
 
-        $(".button-collapse").sideNav();
-        $(".category-menu").sideNav();
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
 
-        // 针对gallery post
-        $('.carousel').carousel({
-            full_width: true
-        });
-        $('.carousel-control.prev').click(function() {
-            $('.carousel').carousel('prev');
-        });
-        $('.carousel-control.next').click(function() {
-            $('.carousel').carousel('next');
-        });
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
 
-        // 文章目录
-        $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
-        // 修正文章目录的left-border颜色
-        var color = $('.table-of-contents-text').css('color');
-        $('.table-of-contents-link').css('border-left-color', color);
-
-        // 针对移动端做的优化：FAB按钮点击一下收回
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            $('.fixed-action-btn').addClass('click-to-toggle');
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
         }
-        // 回到顶部
-        $('.btn-return-top').click(function() {
-            $('body, html').animate({
-                scrollTop: 0
-            }, 500);
-        });
-
-        // 重置读书页面的Tab标签页的颜色
-        $('li.tab a').hover(function() {
-            $(this).toggleClass('text-lighten-4');
-        });
-        $('.indicator').addClass('pink lighten-2');
-
-        
-        // 添加new标签
-        $('.menu-about').append('<span class="new badge pink"></span>');
-        
-    });
-})(jQuery);
+    })(jQuery);
 </script>
 
 

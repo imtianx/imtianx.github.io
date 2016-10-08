@@ -41,7 +41,7 @@ html {
   color: rgba(0,0,0,0.8);
 }
 .container {
-  width: 700px;
+  width: 900px;
 }
 @media (max-width: 767px) {
   .container {
@@ -68,6 +68,7 @@ ol.tabs {
 ul,
 ul li {
   list-style-type: disc;
+  word-break: break-word;
 }
 nav ul,
 .fixed-action-btn ul {
@@ -110,6 +111,10 @@ nav ul a:hover {
 }
 nav .brand-logo {
   font-size: 1.6rem;
+}
+.side-nav li,
+.side-nav a {
+  padding: 0 15px;
 }
 .card {
   margin-top: 0;
@@ -317,6 +322,22 @@ main {
   .nav-wrapper {
     padding: 0 10px;
   }
+}
+.search-modal {
+  padding: 30px 20px;
+  max-height: 80%;
+}
+.search-modal input[type=text]:focus {
+  border-bottom-color: #757575;
+  -webkit-box-shadow: 0 1px 0 0 #757575;
+  box-shadow: 0 1px 0 0 #757575;
+}
+.search-modal input[type=text]:focus+label {
+  color: #212121;
+}
+.search-modal .search-result {
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 .simple-article {
   margin-bottom: 30px;
@@ -586,11 +607,12 @@ a.social-link:hover {
 }
 #category-menu.side-nav li {
   line-height: 36px;
+  padding-right: 15px;
 }
 .toc {
   position: fixed;
   top: 15%;
-  left: calc(50% + 350px);
+  left: calc(50% + 450px);
 }
 .toc ol {
   list-style-type: none;

@@ -1,0 +1,628 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>android 异常捕获-UncaughtExceptionHandler | Imtianx `s Blog</title>
+    <meta name="author" content="imtianx">
+    
+    <meta name="description" content="在android开发中，异常信息的捕获有多种方式，比如第三方的友盟、蒲公英等，这里主要使用 android 原生的 Thread.UncaughtExceptionHandler 来捕获出现的异常信息">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="android 异常捕获-UncaughtExceptionHandler"/>
+    <meta property="og:site_name" content="Imtianx `s Blog"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Imtianx `s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Imtianx `s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="/img/head.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">imtianx</p>
+                        <p class="desc">java/android/移动开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/android/">
+                    android <span class="right">27 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/SQLit/">
+                    SQLit <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具软件/">
+                    工具软件 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/hexo/">
+                    hexo <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/PL-SQL/">
+                    PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/android/">android</a><a class="breadcrumb" href="/categories/android/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>android 异常捕获-UncaughtExceptionHandler</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-07-10T08:06:25.000Z"><a href="/2016/07/10/android-exception-catch-UncaughtExceptionHandler/">2016-07-10</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/异常捕获/" class="chip purple lighten-1">异常捕获</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-定义自己的异常处理类"><span class="section table-of-contents-text">1.定义自己的异常处理类</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-设置该异常类为系统默认的"><span class="section table-of-contents-text">2.设置该异常类为系统默认的</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-具体的实现"><span class="section table-of-contents-text">3.具体的实现</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#4-实际使用"><span class="section table-of-contents-text">4.实际使用</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>在android开发中，异常信息的捕获有多种方式，比如第三方的友盟、蒲公英等，这里主要使用 android 原生的 Thread.UncaughtExceptionHandler 来捕获出现的异常信息<a id="more"></a>,并给出友好的提示，避免出现停止运行，提高用户体验，下面是具体的实现过程。</p>
+<p><a href="http://blog.csdn.net/zly921112/article/details/51867079" target="_blank" rel="external">转自： Android 全局异常捕获</a></p>
+<h2 id="1-定义自己的异常处理类"><a href="#1-定义自己的异常处理类" class="headerlink" title="1.定义自己的异常处理类"></a>1.定义自己的异常处理类</h2><p>  新建类 <em>CrashHandler</em> 实现 <em>Thread.UncaughtExceptionHandler</em>接口，如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class CrashHandler implements Thread.UncaughtExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void uncaughtException(Thread thread, Throwable ex) &#123;</span><br><span class="line">    //回调函数，处理异常出现后的情况</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-设置该异常类为系统默认的"><a href="#2-设置该异常类为系统默认的" class="headerlink" title="2.设置该异常类为系统默认的"></a>2.设置该异常类为系统默认的</h2><p>将上面定义的异常处理类设置为系统默认的异常处理类，当出现异常时，有该类处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread.setDefaultUncaughtExceptionHandler(crashHandler);</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-具体的实现"><a href="#3-具体的实现" class="headerlink" title="3.具体的实现"></a>3.具体的实现</h2><p>为了方便查看和修复异常，这里将出现异常的手机信息和异常信息保存在文件，以便传给服务器，具体实现如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line">import android.content.Context;</span><br><span class="line">import android.content.pm.PackageInfo;</span><br><span class="line">import android.content.pm.PackageManager;</span><br><span class="line">import android.os.Build;</span><br><span class="line">import android.os.Environment;</span><br><span class="line">import android.os.Looper;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.widget.Toast;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.PrintWriter;</span><br><span class="line">import java.io.StringWriter;</span><br><span class="line">import java.io.Writer;</span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Date;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 异常管理类</span><br><span class="line"> * &lt;p/&gt;</span><br><span class="line"> * Created by imtianx on 2016-7-10.</span><br><span class="line"> */</span><br><span class="line">public class CrashHandler implements Thread.UncaughtExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 系统默认UncaughtExceptionHandler</span><br><span class="line">     */</span><br><span class="line">    private Thread.UncaughtExceptionHandler mDefaultHandler;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * context</span><br><span class="line">     */</span><br><span class="line">    private Context mContext;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 存储异常和参数信息</span><br><span class="line">     */</span><br><span class="line">    private Map&lt;String, String&gt; paramsMap = new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 格式化时间</span><br><span class="line">     */</span><br><span class="line">    private SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd-HH-mm-ss&quot;);</span><br><span class="line"></span><br><span class="line">    private String TAG = this.getClass().getSimpleName();</span><br><span class="line"></span><br><span class="line">    private static CrashHandler mInstance;</span><br><span class="line"></span><br><span class="line">    private CrashHandler() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取CrashHandler实例</span><br><span class="line">     */</span><br><span class="line">    public static synchronized CrashHandler getInstance() &#123;</span><br><span class="line">        if (null == mInstance) &#123;</span><br><span class="line">            mInstance = new CrashHandler();</span><br><span class="line">        &#125;</span><br><span class="line">        return mInstance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void init(Context context) &#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();</span><br><span class="line">        //设置该CrashHandler为系统默认的</span><br><span class="line">        Thread.setDefaultUncaughtExceptionHandler(this);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * uncaughtException 回调函数</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void uncaughtException(Thread thread, Throwable ex) &#123;</span><br><span class="line">        if (!handleException(ex) &amp;&amp; mDefaultHandler != null) &#123;</span><br><span class="line">            //如果自己没处理交给系统处理</span><br><span class="line">            mDefaultHandler.uncaughtException(thread, ex);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //自己处理</span><br><span class="line">            try &#123;//延迟3秒杀进程</span><br><span class="line">                Thread.sleep(2000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                Log.e(TAG, &quot;error : &quot;, e);</span><br><span class="line">            &#125;</span><br><span class="line">            //退出程序</span><br><span class="line">            AppManager.getAppManager().AppExit(mContext);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 收集错误信息.发送到服务器</span><br><span class="line">     *</span><br><span class="line">     * @return 处理了该异常返回true, 否则false</span><br><span class="line">     */</span><br><span class="line">    private boolean handleException(Throwable ex) &#123;</span><br><span class="line">        if (ex == null) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        //收集设备参数信息</span><br><span class="line">        collectDeviceInfo(mContext);</span><br><span class="line">        //添加自定义信息</span><br><span class="line">        addCustomInfo();</span><br><span class="line">        //使用Toast来显示异常信息</span><br><span class="line">        new Thread() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                Looper.prepare();</span><br><span class="line">                //在此处处理出现异常的情况</span><br><span class="line">                Toast.makeText(mContext, &quot;程序开小差了呢..&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                Looper.loop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">        //保存日志文件</span><br><span class="line">        saveCrashInfo2File(ex);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 收集设备参数信息</span><br><span class="line">     *</span><br><span class="line">     * @param ctx</span><br><span class="line">     */</span><br><span class="line">    public void collectDeviceInfo(Context ctx) &#123;</span><br><span class="line">        //获取versionName,versionCode</span><br><span class="line">        try &#123;</span><br><span class="line">            PackageManager pm = ctx.getPackageManager();</span><br><span class="line">            PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);</span><br><span class="line">            if (pi != null) &#123;</span><br><span class="line">                String versionName = pi.versionName == null ? &quot;null&quot; : pi.versionName;</span><br><span class="line">                String versionCode = pi.versionCode + &quot;&quot;;</span><br><span class="line">                paramsMap.put(&quot;versionName&quot;, versionName);</span><br><span class="line">                paramsMap.put(&quot;versionCode&quot;, versionCode);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (PackageManager.NameNotFoundException e) &#123;</span><br><span class="line">            Log.e(TAG, &quot;an error occured when collect package info&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">        //获取所有系统信息</span><br><span class="line">        Field[] fields = Build.class.getDeclaredFields();</span><br><span class="line">        for (Field field : fields) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                field.setAccessible(true);</span><br><span class="line">                paramsMap.put(field.getName(), field.get(null).toString());</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                Log.e(TAG, &quot;an error occured when collect crash info&quot;, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 添加自定义参数</span><br><span class="line">     */</span><br><span class="line">    private void addCustomInfo() &#123;</span><br><span class="line">        Log.i(TAG, &quot;addCustomInfo: 程序出错了...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 保存错误信息到文件中</span><br><span class="line">     *</span><br><span class="line">     * @param ex</span><br><span class="line">     * @return 返回文件名称, 便于将文件传送到服务器</span><br><span class="line">     */</span><br><span class="line">    private String saveCrashInfo2File(Throwable ex) &#123;</span><br><span class="line"></span><br><span class="line">        StringBuffer sb = new StringBuffer();</span><br><span class="line">        for (Map.Entry&lt;String, String&gt; entry : paramsMap.entrySet()) &#123;</span><br><span class="line">            String key = entry.getKey();</span><br><span class="line">            String value = entry.getValue();</span><br><span class="line">            sb.append(key + &quot;=&quot; + value + &quot;\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Writer writer = new StringWriter();</span><br><span class="line">        PrintWriter printWriter = new PrintWriter(writer);</span><br><span class="line">        ex.printStackTrace(printWriter);</span><br><span class="line">        Throwable cause = ex.getCause();</span><br><span class="line">        while (cause != null) &#123;</span><br><span class="line">            cause.printStackTrace(printWriter);</span><br><span class="line">            cause = cause.getCause();</span><br><span class="line">        &#125;</span><br><span class="line">        printWriter.close();</span><br><span class="line">        String result = writer.toString();</span><br><span class="line">        sb.append(result);</span><br><span class="line">        try &#123;</span><br><span class="line">            long timestamp = System.currentTimeMillis();</span><br><span class="line">            String time = format.format(new Date());</span><br><span class="line">            String fileName = &quot;crash-&quot; + time + &quot;-&quot; + timestamp + &quot;.log&quot;;</span><br><span class="line">            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) &#123;</span><br><span class="line">                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + &quot;/crash/&quot;;</span><br><span class="line">                File dir = new File(path);</span><br><span class="line">                if (!dir.exists()) &#123;</span><br><span class="line">                    dir.mkdirs();</span><br><span class="line">                &#125;</span><br><span class="line">                FileOutputStream fos = new FileOutputStream(path + fileName);</span><br><span class="line">                fos.write(sb.toString().getBytes());</span><br><span class="line">                Log.i(TAG, &quot;saveCrashInfo2File: &quot;+sb.toString());</span><br><span class="line">                fos.close();</span><br><span class="line">            &#125;</span><br><span class="line">            return fileName;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            Log.e(TAG, &quot;an error occured while writing file...&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：在上述代码中使用了 AppManager类，是常用的activity 管理类 <a href="https://github.com/txadf/Android_Study_Notes/tree/master/android-tools/AppManager.md" target="_blank" rel="external">点此查看</a></p>
+<h2 id="4-实际使用"><a href="#4-实际使用" class="headerlink" title="4.实际使用"></a>4.实际使用</h2><p>在application中初始化，并在配置文件中添加读写权限。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CrashHandler.getInstance().init(this);</span><br></pre></td></tr></table></figure></p>
+<p>到此，全局异常捕获已全部完成。</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/07/10/android-exception-catch-UncaughtExceptionHandler/" data-title="android 异常捕获-UncaughtExceptionHandler" data-url="http://imtianx.cn/2016/07/10/android-exception-catch-UncaughtExceptionHandler/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large purple">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
+                
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                
+                    <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
+                
+                    <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016-2017  imtianx.cn, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
