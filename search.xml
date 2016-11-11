@@ -4,6 +4,352 @@
   
     
     <entry>
+      <title><![CDATA[activity 生命周期及调用栈详解]]></title>
+      <url>http://imtianx.cn/2016/11/08/activity%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E8%B0%83%E7%94%A8%E6%A0%88%E8%AF%A6%E8%A7%A3/</url>
+      <content type="html"><![CDATA[<p><code>Activity</code>作为android四大组件之首，是我们是使用最频繁的组件，只有熟练的掌握其生命周期和启动模式，才能使我们在编程中进行合理的控制，在合适的生命周期处理相关的业务，开发出高质量的应用。下面具体的介绍下他的生命周期及启动模式。(<a href="https://developer.android.com/guide/components/activities.html" target="_blank" rel="external">android 官方文档-activity</a>)<br><a id="more"></a></p>
+<h3 id="一、activity-的四种状态"><a href="#一、activity-的四种状态" class="headerlink" title="一、activity 的四种状态"></a>一、activity 的四种状态</h3><ol>
+<li><strong>Active/Running</strong>（活动）<br>此时，activity 处于栈顶，可见，与用户进行交互。系统会不惜一切代价保护她的活跃性的，如果需要，会取消栈中靠下的activity来保证它所需要的资源。</li>
+<li><strong>Paused</strong>（暂停）<br>当activity 失去焦点，被一个新的非全屏的activity 或者透明的activity放置在栈顶时，它会进入该状态。此时，它失去了与用户交互的能力，但所有的状态信息、成员变量都还保持着，只有在系统内存极低的情况下会被回收。</li>
+<li><strong>Stopped</strong>（停止）<br>当一个activity 被完全覆盖，完全不可见时会进入此状态。但在系统内存中仍然保存着所有的状态和成员信息。当需要内存时，将直接回收。</li>
+<li><strong>Kill</strong>（销毁）<br>当activity 被回收或者从来没有创建过，处于此状态。改状态的activity 会从activity栈中移除。<h3 id="二、activity-的生命周期"><a href="#二、activity-的生命周期" class="headerlink" title="二、activity 的生命周期"></a>二、activity 的生命周期</h3>如下如，展示activity的整个生命周期及其切换过程。<br><img src="/img/article_img/2016/activity生命周期.png" alt=""></li>
+</ol>
+<blockquote>
+<p>说明：</p>
+<ol>
+<li>当一个activity 第一次启动，回调方法如下：<strong>onCreate</strong>-&gt;<strong>onStart</strong>-&gt;<strong>onResum</strong>.</li>
+<li>用户打开新的activity或者切换到桌面，回调方法如下：<strong>onPause</strong>-&gt;<strong>onStop</strong>,如果新打开的activity 主题为<strong>透明的</strong>，则不会回调<strong>onStop</strong>。</li>
+<li>用户再次回到原activity，毁掉过程如下：<strong>onRestart</strong>-&gt;<strong>onStart</strong>-&gt;<strong>onResume</strong>。</li>
+<li>对于整个生命周期，onCreatehe onDestroy是配对的，他们标志着activity 的创建和销毁，并且只会调用一次；对于activity 是否可见，onStart和onStop是配对的，随着用户的操作或者屏幕的电量和熄灭，会被调用多次，但是该状态下不能与用户进行交互；从activity 是否在前台来说，onResume 和onPause 是配对的，他们也会被回调多次。</li>
+<li>当前activity 页面打开新的activity，先执行原activity 的 onPause 方法，然后才会启动新activity 。</li>
+</ol>
+</blockquote>
+<h3 id="三、异常情况下的生命周期"><a href="#三、异常情况下的生命周期" class="headerlink" title="三、异常情况下的生命周期"></a>三、异常情况下的生命周期</h3><ol>
+<li><p>资源相关配置改变导致activity销毁并重建<br>对于横竖屏切换导致的activity异常销毁并重建，其创建过程如下图：<br><img src="/img/article_img/2016/activity异常重建.png" alt=""></p>
+</li>
+<li><p>资源内存不足导致低优先级activity 被杀死<br>优先级从搞到低课分为如下三种情况：</p>
+</li>
+</ol>
+<ul>
+<li>处于前台与用户交互的activity 的优先级最高；</li>
+<li>可见但非前台activity，如弹出的对话框，导致activity可见但无法与用户进行交互；</li>
+<li>后台activity（已被暂停的），如执行了onStop方法，优先级最低。</li>
+</ul>
+<p>当系统内存不足时，按照上面的优先级杀掉activity所在的进程。</p>
+<h3 id="四、activity-启动模式"><a href="#四、activity-启动模式" class="headerlink" title="四、activity 启动模式"></a>四、activity 启动模式</h3><p>在AndroidManifest中可以给声明的activity通过<strong>launchMode</strong>属性指定设置如下四种启动的模式：<br><strong>standard</strong><br>默认的启动方式，每次都会创建新的实例，覆盖在原来的activity之上，可以被同时添加到多个任务栈中，并且每一个任务中可以有多个实例。<br><strong>singleTop</strong><br>若设置为该模式，在启动activity时，系统会判断当前栈顶的activity是否是要启动的activity，如果是则直接引用这个实例不创建新的，否则创建新的实例。<br><strong>singleTask</strong><br>与singleTop 类似，它是检测整个activity栈中是否存在当前需要启动的activity。如果存在，则将该activity置于栈顶，并销毁在它之上的activity（注：这是在一个app中）。<br>如果其他程序以singleTask模式来启动这个activity，将创建一个新的任务栈，该模式有<strong>clearTop</strong>效果。<br><strong>singleInstance</strong><br>该模式的使用和浏览器的工作原理类似。在多个程序访问浏览器时，如果浏览器没有打开，则打开，否则再当前打开的浏览器中访问。声明为这种模式的activity，会出现在一个新的任务栈中，而且该任务栈只有这一个activity。</p>
+<blockquote>
+<p>参考文献：<br>《Android 开发艺术探索》<br>《Android 群英传》<br>《深入解析 Android虚拟机》</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【转】国内一线互联网公司内部面试题库(二)——android 篇]]></title>
+      <url>http://imtianx.cn/2016/11/06/%E5%9B%BD%E5%86%85%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E5%86%85%E9%83%A8%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BA%93(%E4%BA%8C)-android/</url>
+      <content type="html"><![CDATA[<p>本文转自：<a href="https://github.com/imtianx/AndroidInterview-Q-A/blob/master/README-CN.md" target="_blank" rel="external">国内一线互联网公司内部面试题库</a><br>国内一线互联网公司内部面试题库,以下面试题来自于百度、小米、乐视、美团、58、猎豹、360、新浪、搜狐内部题库</p>
+<p>熟悉本文中列出的知识点会大大增加通过前两轮技术面试的几率。<br>下面是 android 部分<br><a id="more"></a></p>
+<h4 id="1-数据库的操作类型有哪些，如何导入外部数据库？"><a href="#1-数据库的操作类型有哪些，如何导入外部数据库？" class="headerlink" title="1.数据库的操作类型有哪些，如何导入外部数据库？"></a><strong>1.数据库的操作类型有哪些，如何导入外部数据库？</strong></h4><p>把原数据库包括在项目源码的 res/raw </p>
+<p>android系统下数据库应该存放在 /data/data/com.<em>.</em>（package name）/ 目录下，所以我们需要做的是把已有的数据库传入那个目录下.操作方法是用FileInputStream读取原数据库，再用FileOutputStream把读取到的东西写入到那个目录.</p>
+<h4 id="2-是否使用过本地广播，和全局广播有什么差别？"><a href="#2-是否使用过本地广播，和全局广播有什么差别？" class="headerlink" title="2.是否使用过本地广播，和全局广播有什么差别？"></a><strong>2.是否使用过本地广播，和全局广播有什么差别？</strong></h4><p>因广播数据在本应用范围内传播，不用担心隐私数据泄露的问题。<br>不用担心别的应用伪造广播，造成安全隐患。<br>相比在系统内发送全局广播，它更高效。</p>
+<h4 id="3-是否使用过intentService，作用是什么，AIDL解决了什么问题？-小米"><a href="#3-是否使用过intentService，作用是什么，AIDL解决了什么问题？-小米" class="headerlink" title="3.是否使用过intentService，作用是什么，AIDL解决了什么问题？(小米)"></a><strong>3.是否使用过intentService，作用是什么，AIDL解决了什么问题？</strong>(小米)</h4><p>生成一个默认的且与主线程互相独立的工作者线程来执行所有传送至onStartCommand() 方法的Intetnt。</p>
+<p>生成一个工作队列来传送Intent对象给你的onHandleIntent()方法，同一时刻只传送一个Intent对象，这样一来，你就不必担心多线程的问题。在所有的请求(Intent)都被执行完以后会自动停止服务，所以，你不需要自己去调用stopSelf()方法来停止。</p>
+<p>该服务提供了一个onBind()方法的默认实现，它返回null</p>
+<p>提供了一个onStartCommand()方法的默认实现，它将Intent先传送至工作队列，然后从工作队列中每次取出一个传送至onHandleIntent()方法，在该方法中对Intent对相应的处理。</p>
+<p>AIDL (Android Interface Definition Language) 是一种IDL 语言，用于生成可以在Android设备上两个进程之间进行进程间通信(interprocess communication, IPC)的代码。如果在一个进程中（例如Activity）要调用另一个进程中（例如Service）对象的操作，就可以使用AIDL生成可序列化的参数。<br>AIDL IPC机制是面向接口的，像COM或Corba一样，但是更加轻量级。它是使用代理类在客户端和实现端传递数据。</p>
+<h4 id="4-Activity、Window、View三者的差别，fragment的特点？（360）"><a href="#4-Activity、Window、View三者的差别，fragment的特点？（360）" class="headerlink" title="4.Activity、Window、View三者的差别，fragment的特点？（360）"></a><strong>4.Activity、Window、View三者的差别，fragment的特点？</strong>（360）</h4><p>Activity像一个工匠（控制单元），Window像窗户（承载模型），View像窗花（显示视图）<br>LayoutInflater像剪刀，Xml配置像窗花图纸。</p>
+<ol>
+<li>在Activity中调用attach，创建了一个Window</li>
+<li>创建的window是其子类PhoneWindow，在attach中创建PhoneWindow</li>
+<li>在Activity中调用setContentView(R.layout.xxx)</li>
+<li>其中实际上是调用的getWindow().setContentView()</li>
+<li>调用PhoneWindow中的setContentView方法</li>
+<li>创建ParentView：作为ViewGroup的子类，实际是创建的DecorView(作为FramLayout的子类）</li>
+<li>将指定的R.layout.xxx进行填充通过布局填充器进行填充【其中的parent指的就是DecorView】</li>
+<li>调用到ViewGroup</li>
+<li>调用ViewGroup的removeAllView()，先将所有的view移除掉</li>
+<li>添加新的view：addView()</li>
+</ol>
+<p><strong>fragment 特点</strong></p>
+<ul>
+<li>Fragment可以作为Activity界面的一部分组成出现；</li>
+<li>可以在一个Activity中同时出现多个Fragment，并且一个Fragment也可以在多个Activity中使用；</li>
+<li>在Activity运行过程中，可以添加、移除或者替换Fragment；</li>
+<li>Fragment可以响应自己的输入事件，并且有自己的生命周期，它们的生命周期会受宿主Activity的生命周期影响。</li>
+</ul>
+<h4 id="5-描述一次网络请求的流程（新浪）"><a href="#5-描述一次网络请求的流程（新浪）" class="headerlink" title="5.描述一次网络请求的流程（新浪）"></a><strong>5.描述一次网络请求的流程</strong>（新浪）</h4><p><img src="/img/article_img/2016/http.png" alt=""></p>
+<h4 id="6-Handler、Thread和HandlerThread的差别（小米）"><a href="#6-Handler、Thread和HandlerThread的差别（小米）" class="headerlink" title="6.Handler、Thread和HandlerThread的差别（小米）"></a><strong>6.Handler、Thread和HandlerThread的差别</strong>（小米）</h4><p><a href="http://blog.csdn.net/guolin_blog/article/details/9991569" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/9991569</a></p>
+<p><a href="http://droidyue.com/blog/2015/11/08/make-use-of-handlerthread/" target="_blank" rel="external">http://droidyue.com/blog/2015/11/08/make-use-of-handlerthread/</a></p>
+<p>从Android中Thread（java.lang.Thread -&gt; java.lang.Object）描述可以看出，Android的Thread没有对Java的Thread做任何封装，但是Android提供了一个继承自Thread的类HandlerThread（android.os.HandlerThread -&gt; java.lang.Thread），这个类对Java的Thread做了很多便利Android系统的封装。</p>
+<p>android.os.Handler可以通过Looper对象实例化，并运行于另外的线程中，Android提供了让Handler运行于其它线程的线程实现，也是就HandlerThread。HandlerThread对象start后可以获得其Looper对象，并且使用这个Looper对象实例Handler。</p>
+<h4 id="7-低版本SDK实现高版本api（小米）"><a href="#7-低版本SDK实现高版本api（小米）" class="headerlink" title="7.低版本SDK实现高版本api（小米）"></a><strong>7.低版本SDK实现高版本api</strong>（小米）</h4><p>自己实现或@TargetApi annotation</p>
+<h4 id="8-Ubuntu编译安卓系统（百度）"><a href="#8-Ubuntu编译安卓系统（百度）" class="headerlink" title="8.Ubuntu编译安卓系统（百度）"></a><strong>8.Ubuntu编译安卓系统</strong>（百度）</h4><ol>
+<li>进入源码根目录</li>
+<li>. build/envsetup.sh</li>
+<li>lunch</li>
+<li>full(编译全部)</li>
+<li>userdebug(选择编译版本)</li>
+<li>make -j8(开启8个线程编译)</li>
+</ol>
+<h4 id="9-launch-mode应用场景（百度、小米、乐视）"><a href="#9-launch-mode应用场景（百度、小米、乐视）" class="headerlink" title="9.launch mode应用场景（百度、小米、乐视）"></a><strong>9.launch mode应用场景</strong>（百度、小米、乐视）</h4><p>standard，创建一个新的Activity。</p>
+<p>singleTop，栈顶不是该类型的Activity，创建一个新的Activity。否则，onNewIntent。</p>
+<p>singleTask，回退栈中没有该类型的Activity，创建Activity，否则，onNewIntent+ClearTop。</p>
+<p>注意:</p>
+<ol>
+<li>设置了”singleTask”启动模式的Activity，它在启动的时候，会先在系统中查找属性值affinity等于它的属性值taskAffinity的Task存在； 如果存在这样的Task，它就会在这个Task中启动，否则就会在新的任务栈中启动。因此， 如果我们想要设置了”singleTask”启动模式的Activity在新的任务中启动，就要为它设置一个独立的taskAffinity属性值。</li>
+<li>如果设置了”singleTask”启动模式的Activity不是在新的任务中启动时，它会在已有的任务中查看是否已经存在相应的Activity实例， 如果存在，就会把位于这个Activity实例上面的Activity全部结束掉，即最终这个Activity 实例会位于任务的Stack顶端中。</li>
+<li>在一个任务栈中只有一个”singleTask”启动模式的Activity存在。他的上面可以有其他的Activity。这点与singleInstance是有区别的。</li>
+</ol>
+<p>singleInstance，回退栈中，只有这一个Activity，没有其他Activity。</p>
+<p>singleTop适合接收通知启动的内容显示页面。</p>
+<p>例如，某个新闻客户端的新闻内容页面，如果收到10个新闻推送，每次都打开一个新闻内容页面是很烦人的。</p>
+<p>singleTask适合作为程序入口点。</p>
+<p>例如浏览器的主界面。不管从多少个应用启动浏览器，只会启动主界面一次，其余情况都会走onNewIntent，并且会清空主界面上面的其他页面。</p>
+<p>singleInstance应用场景：</p>
+<p>闹铃的响铃界面。 你以前设置了一个闹铃：上午6点。在上午5点58分，你启动了闹铃设置界面，并按 Home 键回桌面；在上午5点59分时，你在微信和朋友聊天；在6点时，闹铃响了，并且弹出了一个对话框形式的 Activity(名为 AlarmAlertActivity) 提示你到6点了(这个 Activity 就是以 SingleInstance 加载模式打开的)，你按返回键，回到的是微信的聊天界面，这是因为 AlarmAlertActivity 所在的 Task 的栈只有他一个元素， 因此退出之后这个 Task 的栈空了。如果是以 SingleTask 打开 AlarmAlertActivity，那么当闹铃响了的时候，按返回键应该进入闹铃设置界面。</p>
+<h4 id="10-touch-事件传递流程（小米）"><a href="#10-touch-事件传递流程（小米）" class="headerlink" title="10.touch 事件传递流程（小米）"></a><strong>10.touch 事件传递流程</strong>（小米）</h4><p><a href="http://hanhailong.com/2015/09/24/Android-%E4%B8%89%E5%BC%A0%E5%9B%BE%E6%90%9E%E5%AE%9ATouch%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/" target="_blank" rel="external">http://hanhailong.com/2015/09/24/Android-%E4%B8%89%E5%BC%A0%E5%9B%BE%E6%90%9E%E5%AE%9ATouch%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/</a></p>
+<h4 id="11-view绘制流程（百度）"><a href="#11-view绘制流程（百度）" class="headerlink" title="11.view绘制流程（百度）"></a><strong>11.view绘制流程</strong>（百度）</h4><p><a href="http://www.codekk.com/blogs/detail/54cfab086c4761e5001b253f" target="_blank" rel="external">http://www.codekk.com/blogs/detail/54cfab086c4761e5001b253f</a></p>
+<h4 id="12-多线程（360）"><a href="#12-多线程（360）" class="headerlink" title="12.多线程（360）"></a><strong>12.多线程</strong>（360）</h4><ul>
+<li>Activity.runOnUiThread(Runnable)</li>
+<li>View.post(Runnable),View.postDelay(Runnable,long)</li>
+<li>Handler</li>
+<li>AsyncTask</li>
+</ul>
+<h4 id="13-线程同步（百度）"><a href="#13-线程同步（百度）" class="headerlink" title="13.线程同步（百度）"></a><strong>13.线程同步</strong>（百度）</h4><p><a href="http://www.itzhai.com/java-based-notebook-thread-synchronization-problem-solving-synchronization-problems-synchronized-block-synchronized-methods.html#read-more" target="_blank" rel="external">http://www.itzhai.com/java-based-notebook-thread-synchronization-problem-solving-synchronization-problems-synchronized-block-synchronized-methods.html#read-more</a></p>
+<p><a href="http://www.juwends.com/tech/android/android-inter-thread-comm.html" target="_blank" rel="external">http://www.juwends.com/tech/android/android-inter-thread-comm.html</a></p>
+<p>单例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton&#123;</span><br><span class="line">private volatile static Singleton mSingleton;</span><br><span class="line">private Singleton()&#123;</span><br><span class="line">&#125;</span><br><span class="line">public static Singleton getInstance()&#123;</span><br><span class="line">  if(mSingleton == null)&#123;\\A</span><br><span class="line">    synchronized(Singleton.class)&#123;\\C</span><br><span class="line">     if(mSingleton == null)</span><br><span class="line">      mSingleton = new Singleton();\\B</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return mSingleton;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="14-什么情况导致内存泄漏（美团）"><a href="#14-什么情况导致内存泄漏（美团）" class="headerlink" title="14.什么情况导致内存泄漏（美团）"></a><strong>14.什么情况导致内存泄漏</strong>（美团）</h4><p>1.资源对象没关闭造成的内存泄漏</p>
+<p>描述：<br>资源性对象比如(Cursor，File文件等)往往都用了一些缓冲，我们在不使用的时候，应该及时关闭它们，以便它们的缓冲及时回收内存。它们的缓冲不仅存在于 java虚拟机内，还存在于java虚拟机外。如果我们仅仅是把它的引用设置为null,而不关闭它们，往往会造成内存泄漏。因为有些资源性对象，比如 SQLiteCursor(在析构函数finalize(),如果我们没有关闭它，它自己会调close()关闭)，如果我们没有关闭它，系统在回收它时也会关闭它，但是这样的效率太低了。因此对于资源性对象在不使用的时候，应该调用它的close()函数，将其关闭掉，然后才置为null.在我们的程序退出时一定要确保我们的资源性对象已经关闭。<br>程序中经常会进行查询数据库的操作，但是经常会有使用完毕Cursor后没有关闭的情况。如果我们的查询结果集比较小，对内存的消耗不容易被发现，只有在常时间大量操作的情况下才会复现内存问题，这样就会给以后的测试和问题排查带来困难和风险。</p>
+<p>2.构造Adapter时，没有使用缓存的convertView</p>
+<p>描述：<br>以构造ListView的BaseAdapter为例，在BaseAdapter中提供了方法：<br>public View getView(int position, ViewconvertView, ViewGroup parent)<br>来向ListView提供每一个item所需要的view对象。初始时ListView会从BaseAdapter中根据当前的屏幕布局实例化一定数量的 view对象，同时ListView会将这些view对象缓存起来。当向上滚动ListView时，原先位于最上面的list item的view对象会被回收，然后被用来构造新出现的最下面的list item。这个构造过程就是由getView()方法完成的，getView()的第二个形参View convertView就是被缓存起来的list item的view对象(初始化时缓存中没有view对象则convertView是null)。由此可以看出，如果我们不去使用 convertView，而是每次都在getView()中重新实例化一个View对象的话，即浪费资源也浪费时间，也会使得内存占用越来越大。 ListView回收list item的view对象的过程可以查看:<br>android.widget.AbsListView.java –&gt; voidaddScrapView(View scrap) 方法。<br>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public View getView(int position, ViewconvertView, ViewGroup parent) &#123;</span><br><span class="line">View view = new Xxx(...); </span><br><span class="line">... ... </span><br><span class="line">return view; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修正示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public View getView(int position, ViewconvertView, ViewGroup parent) &#123;</span><br><span class="line">View view = null; </span><br><span class="line">if (convertView != null) &#123; </span><br><span class="line">view = convertView; </span><br><span class="line">populate(view, getItem(position)); </span><br><span class="line">... </span><br><span class="line">&#125; else &#123; </span><br><span class="line">view = new Xxx(...); </span><br><span class="line">... </span><br><span class="line">&#125; </span><br><span class="line">return view; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.Bitmap对象不在使用时调用recycle()释放内存</p>
+<p>描述：<br>有时我们会手工的操作Bitmap对象，如果一个Bitmap对象比较占内存，当它不在被使用的时候，可以调用Bitmap.recycle()方法回收此对象的像素所占用的内存，但这不是必须的，视情况而定。可以看一下代码中的注释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line">Free up the memory associated with thisbitmap&apos;s pixels, and mark the bitmap as &quot;dead&quot;, meaning itwill throw an exception if getPixels() or setPixels() is called, and will drawnothing. This operation cannot be reversed, so it should only be called ifyou are sure there are no further uses for the bitmap. This is anadvanced call, and normally need not be called, since the normal GCprocess will free up this memory when there are no more references to thisbitmap. </span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+<p>4.试着使用关于application的context来替代和activity相关的context</p>
+<p>这是一个很隐晦的内存泄漏的情况。有一种简单的方法来避免context相关的内存泄漏。最显著地一个是避免context逃出他自己的范围之外。使用Application context。这个context的生存周期和你的应用的生存周期一样长，而不是取决于activity的生存周期。如果你想保持一个长期生存的对象，并且这个对象需要一个context,记得使用application对象。你可以通过调用 Context.getApplicationContext() or Activity.getApplication()来获得。更多的请看这篇文章如何避免<br>Android内存泄漏。</p>
+<p>5.注册没取消造成的内存泄漏</p>
+<p>一些Android程序可能引用我们的Anroid程序的对象(比如注册机制)。即使我们的Android程序已经结束了，但是别的引用程序仍然还有对我们的Android程序的某个对象的引用，泄漏的内存依然不能被垃圾回收。调用registerReceiver后未调用unregisterReceiver。<br>比如:假设我们希望在锁屏界面(LockScreen)中，监听系统中的电话服务以获取一些信息(如信号强度等)，则可以在LockScreen中定义一个 PhoneStateListener的对象，同时将它注册到TelephonyManager服务中。对于LockScreen对象，当需要显示锁屏界面的时候就会创建一个LockScreen对象，而当锁屏界面消失的时候LockScreen对象就会被释放掉。<br>但是如果在释放 LockScreen对象的时候忘记取消我们之前注册的PhoneStateListener对象，则会导致LockScreen无法被垃圾回收。如果不断的使锁屏界面显示和消失，则最终会由于大量的LockScreen对象没有办法被回收而引起OutOfMemory,使得system_process 进程挂掉。<br>虽然有些系统程序，它本身好像是可以自动取消注册的(当然不及时)，但是我们还是应该在我们的程序中明确的取消注册，程序结束时应该把所有的注册都取消掉。</p>
+<p>6.集合中对象没清理造成的内存泄漏</p>
+<p>我们通常把一些对象的引用加入到了集合中，当我们不需要该对象时，并没有把它的引用从集合中清理掉，这样这个集合就会越来越大。如果这个集合是static的话，那情况就更严重了。</p>
+<h4 id="15-ANR定位和修正"><a href="#15-ANR定位和修正" class="headerlink" title="15.ANR定位和修正"></a><strong>15.ANR定位和修正</strong></h4><p>如果开发机器上出现问题，我们可以通过查看/data/anr/traces.txt即可，最新的ANR信息在最开始部分。</p>
+<ul>
+<li>主线程被IO操作（从4.0之后网络IO不允许在主线程中）阻塞。</li>
+<li>主线程中存在耗时的计算</li>
+<li>主线程中错误的操作，比如Thread.wait或者Thread.sleep等<br>Android系统会监控程序的响应状况，一旦出现下面两种情况，则弹出ANR对话框</li>
+<li>应用在5秒内未响应用户的输入事件（如按键或者触摸）</li>
+<li>BroadcastReceiver未在10秒内完成相关的处理</li>
+<li><p>Service在特定的时间内无法处理完成 20秒</p>
+</li>
+<li><p>使用AsyncTask处理耗时IO操作。</p>
+</li>
+<li>使用Thread或者HandlerThread时，调用Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。</li>
+<li>使用Handler处理工作线程结果，而不是使用Thread.wait()或者Thread.sleep()来阻塞主线程。</li>
+<li>Activity的onCreate和onResume回调中尽量避免耗时的代码</li>
+<li>BroadcastReceiver中onReceive代码也要尽量减少耗时，建议使用IntentService处理。</li>
+</ul>
+<h4 id="16-什么情况导致oom（乐视、美团）"><a href="#16-什么情况导致oom（乐视、美团）" class="headerlink" title="16.什么情况导致oom（乐视、美团）"></a><strong>16.什么情况导致oom</strong>（乐视、美团）</h4><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0920/3478.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0920/3478.html</a></p>
+<p>1）使用更加轻量的数据结构<br>2）Android里面使用Enum<br>3）Bitmap对象的内存占用<br>4）更大的图片<br>5）onDraw方法里面执行对象的创建<br>6）StringBuilder</p>
+<h4 id="17-Android-Service与Activity之间通信的几种方式"><a href="#17-Android-Service与Activity之间通信的几种方式" class="headerlink" title="17.Android Service与Activity之间通信的几种方式"></a><strong>17.Android Service与Activity之间通信的几种方式</strong></h4><ul>
+<li>通过Binder对象</li>
+<li>通过broadcast(广播)的形式</li>
+</ul>
+<h4 id="18-Android各个版本API的区别"><a href="#18-Android各个版本API的区别" class="headerlink" title="18.Android各个版本API的区别"></a><strong>18.Android各个版本API的区别</strong></h4><p><a href="http://blog.csdn.net/lijun952048910/article/details/7980562" target="_blank" rel="external">http://blog.csdn.net/lijun952048910/article/details/7980562</a></p>
+<h4 id="19-Android代码中实现WAP方式联网（360）"><a href="#19-Android代码中实现WAP方式联网（360）" class="headerlink" title="19. Android代码中实现WAP方式联网（360）"></a><strong>19. Android代码中实现WAP方式联网</strong>（360）</h4><p><a href="http://blog.csdn.net/asce1885/article/details/7844159" target="_blank" rel="external">http://blog.csdn.net/asce1885/article/details/7844159</a></p>
+<h4 id="20-如何保证service在后台不被kill"><a href="#20-如何保证service在后台不被kill" class="headerlink" title="20.如何保证service在后台不被kill"></a><strong>20.如何保证service在后台不被kill</strong></h4><p>一、onStartCommand方法，返回START_STICKY</p>
+<ol>
+<li><p>START_STICKY<br>在运行onStartCommand后service进程被kill后，那将保留在开始状态，但是不保留那些传入的intent。不久后service就会再次尝试重新创建，因为保留在开始状态，在创建     service后将保证调用onstartCommand。如果没有传递任何开始命令给service，那将获取到null的intent。</p>
+</li>
+<li><p>START_NOT_STICKY<br>在运行onStartCommand后service进程被kill后，并且没有新的intent传递给它。Service将移出开始状态，并且直到新的明显的方法（startService）调用才重新创建。因为如果没有传递任何未决定的intent那么service是不会启动，也就是期间onstartCommand不会接收到任何null的intent。</p>
+</li>
+<li><p>START_REDELIVER_INTENT<br>在运行onStartCommand后service进程被kill后，系统将会再次启动service，并传入最后一个intent给onstartCommand。直到调用stopSelf(int)才停止传递intent。如果在被kill后还有未处理好的intent，那被kill后服务还是会自动启动。因此onstartCommand不会接收到任何null的intent。</p>
+</li>
+</ol>
+<p>二、提升service优先级</p>
+<p>在AndroidManifest.xml文件中对于intent-filter可以通过android:priority = “1000”这个属性设置最高优先级，1000是最高值，如果数字越小则优先级越低，同时适用于广播。</p>
+<p>三、提升service进程优先级</p>
+<p>Android中的进程是托管的，当系统进程空间紧张的时候，会依照优先级自动进行进程的回收。Android将进程分为6个等级,它们按优先级顺序由高到低依次是:</p>
+<ol>
+<li>前台进程( FOREGROUND_APP)</li>
+<li>可视进程(VISIBLE_APP )</li>
+<li>次要服务进程(SECONDARY_SERVER )</li>
+<li>后台进程 (HIDDEN_APP)</li>
+<li>内容供应节点(CONTENT_PROVIDER)</li>
+<li>空进程(EMPTY_APP)</li>
+</ol>
+<p>当service运行在低内存的环境时，将会kill掉一些存在的进程。因此进程的优先级将会很重要，可以使用startForeground 将service放到前台状态。这样在低内存时被kill的几率会低一些。</p>
+<p>四、onDestroy方法里重启service</p>
+<p>service +broadcast  方式，就是当service走ondestory的时候，发送一个自定义的广播，当收到广播的时候，重新启动service；</p>
+<p>五、Application加上Persistent属性</p>
+<p>六、监听系统广播判断Service状态</p>
+<p>通过系统的一些广播，比如：手机重启、界面唤醒、应用状态改变等等监听并捕获到，然后判断我们的Service是否还存活，别忘记加权限啊。</p>
+<h4 id="21-Requestlayout，onlayout，onDraw，DrawChild区别与联系（猎豹）"><a href="#21-Requestlayout，onlayout，onDraw，DrawChild区别与联系（猎豹）" class="headerlink" title="21.Requestlayout，onlayout，onDraw，DrawChild区别与联系（猎豹）"></a><strong>21.Requestlayout，onlayout，onDraw，DrawChild区别与联系</strong>（猎豹）</h4><p>requestLayout()方法 ：会导致调用measure()过程 和 layout()过程 。<br>说明：只是对View树重新布局layout过程包括measure()和layout()过程，不会调用draw()过程，但不会重新绘制<br>任何视图包括该调用者本身。</p>
+<p>onLayout()方法(如果该View是ViewGroup对象，需要实现该方法，对每个子视图进行布局)</p>
+<p>调用onDraw()方法绘制视图本身   (每个View都需要重载该方法，ViewGroup不需要实现该方法)</p>
+<p>drawChild()去重新回调每个子视图的draw()方法</p>
+<h4 id="22-invalidate-和postInvalidate-的区别及使用（百度）"><a href="#22-invalidate-和postInvalidate-的区别及使用（百度）" class="headerlink" title="22.invalidate()和postInvalidate() 的区别及使用（百度）"></a><strong>22.invalidate()和postInvalidate() 的区别及使用</strong>（百度）</h4><p><a href="http://blog.csdn.net/mars2639/article/details/6650876" target="_blank" rel="external">http://blog.csdn.net/mars2639/article/details/6650876</a></p>
+<h4 id="23-Android动画框架实现原理"><a href="#23-Android动画框架实现原理" class="headerlink" title="23.Android动画框架实现原理"></a><strong>23.Android动画框架实现原理</strong></h4><p>Animation框架定义了透明度，旋转，缩放和位移几种常见的动画，而且控制的是整个View，实现原理是每次绘制视图时View所在的ViewGroup中的drawChild函数获取该View的Animation的Transformation值，然后调用canvas.concat(transformToApply.getMatrix())，通过矩阵运算完成动画帧，如果动画没有完成，继续调用invalidate()函数，启动下次绘制来驱动动画，动画过程中的帧之间间隙时间是绘制函数所消耗的时间，可能会导致动画消耗比较多的CPU资源，最重要的是，动画改变的只是显示，并不能相应事件。</p>
+<h4 id="24-Android为每个应用程序分配的内存大小是多少？（美团）"><a href="#24-Android为每个应用程序分配的内存大小是多少？（美团）" class="headerlink" title="24.Android为每个应用程序分配的内存大小是多少？（美团）"></a><strong>24.Android为每个应用程序分配的内存大小是多少？</strong>（美团）</h4><p>android程序内存一般限制在16M，也有的是24M</p>
+<h4 id="25-Android-View刷新机制（百度、美团）"><a href="#25-Android-View刷新机制（百度、美团）" class="headerlink" title="25.Android View刷新机制（百度、美团）"></a><strong>25.Android View刷新机制</strong>（百度、美团）</h4><p>由ViewRoot对象的performTraversals()方法调用draw()方法发起绘制该View树，值得注意的是每次发起绘图时，并不会重新绘制每个View树的视图，而只会重新绘制那些“需要重绘”的视图，View类内部变量包含了一个标志位DRAWN，当该视图需要重绘时，就会为该View添加该标志位。</p>
+<p>调用流程 ：</p>
+<p>mView.draw()开始绘制，draw()方法实现的功能如下：</p>
+<ol>
+<li>绘制该View的背景</li>
+<li>为显示渐变框做一些准备操作(见5，大多数情况下，不需要改渐变框)          </li>
+<li>调用onDraw()方法绘制视图本身   (每个View都需要重载该方法，ViewGroup不需要实现该方法)</li>
+<li>调用dispatchDraw ()方法绘制子视图(如果该View类型不为ViewGroup，即不包含子视图，不需要重载该方法)值得说明的是，ViewGroup类已经为我们重写了dispatchDraw ()的功能实现，应用程序一般不需要重写该方法，但可以重载父类函数实现具体的功能。</li>
+</ol>
+<h4 id="26-LinearLayout对比RelativeLayout（百度）"><a href="#26-LinearLayout对比RelativeLayout（百度）" class="headerlink" title="26.LinearLayout对比RelativeLayout（百度）"></a><strong>26.LinearLayout对比RelativeLayout</strong>（百度）</h4><ol>
+<li>RelativeLayout会让子View调用2次onMeasure，LinearLayout 在有weight时，也会调用子View2次onMeasure</li>
+<li>RelativeLayout的子View如果高度和RelativeLayout不同，则会引发效率问题，当子View很复杂时，这个问题会更加严重。如果可以，尽量使用padding代替margin。</li>
+<li>在不影响层级深度的情况下,使用LinearLayout和FrameLayout而不是RelativeLayout。</li>
+</ol>
+<p>最后再思考一下文章开头那个矛盾的问题，为什么Google给开发者默认新建了个RelativeLayout，而自己却在DecorView中用了个LinearLayout。因为DecorView的层级深度是已知而且固定的，上面一个标题栏，下面一个内容栏。采用RelativeLayout并不会降低层级深度，所以此时在根节点上用LinearLayout是效率最高的。而之所以给开发者默认新建了个RelativeLayout是希望开发者能采用尽量少的View层级来表达布局以实现性能最优，因为复杂的View嵌套对性能的影响会更大一些。</p>
+<h4 id="27-优化自定义view（百度、乐视、小米）"><a href="#27-优化自定义view（百度、乐视、小米）" class="headerlink" title="27.优化自定义view（百度、乐视、小米）"></a><strong>27.优化自定义view</strong>（百度、乐视、小米）</h4><p>为了加速你的view，对于频繁调用的方法，需要尽量减少不必要的代码。先从onDraw开始，需要特别注意不应该在这里做内存分配的事情，因为它会导致GC，从而导致卡顿。在初始化或者动画间隙期间做分配内存的动作。不要在动画正在执行的时候做内存分配的事情。</p>
+<p>你还需要尽可能的减少onDraw被调用的次数，大多数时候导致onDraw都是因为调用了invalidate().因此请尽量减少调用invaildate()的次数。如果可能的话，尽量调用含有4个参数的invalidate()方法而不是没有参数的invalidate()。没有参数的invalidate会强制重绘整个view。</p>
+<p>另外一个非常耗时的操作是请求layout。任何时候执行requestLayout()，会使得Android UI系统去遍历整个View的层级来计算出每一个view的大小。如果找到有冲突的值，它会需要重新计算好几次。另外需要尽量保持View的层级是扁平化的，这样对提高效率很有帮助。</p>
+<p>如果你有一个复杂的UI，你应该考虑写一个自定义的ViewGroup来执行他的layout操作。与内置的view不同，自定义的view可以使得程序仅仅测量这一部分，这避免了遍历整个view的层级结构来计算大小。这个PieChart 例子展示了如何继承ViewGroup作为自定义view的一部分。PieChart 有子views，但是它从来不测量它们。而是根据他自身的layout法则，直接设置它们的大小。</p>
+<h4 id="28-ContentProvider（乐视）"><a href="#28-ContentProvider（乐视）" class="headerlink" title="28.ContentProvider（乐视）"></a><strong>28.ContentProvider</strong>（乐视）</h4><p><a href="http://blog.csdn.net/coder_pig/article/details/47858489" target="_blank" rel="external">http://blog.csdn.net/coder_pig/article/details/47858489</a></p>
+<h4 id="29-fragment生命周期"><a href="#29-fragment生命周期" class="headerlink" title="29.fragment生命周期"></a><strong>29.fragment生命周期</strong></h4><p><img src="/img/article_img/2016/fragment-life.png" alt=""></p>
+<h4 id="30-volley解析（美团、乐视）"><a href="#30-volley解析（美团、乐视）" class="headerlink" title="30.volley解析（美团、乐视）"></a><strong>30.volley解析</strong>（美团、乐视）</h4><p><a href="http://a.codekk.com/detail/Android/grumoon/Volley%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" target="_blank" rel="external">http://a.codekk.com/detail/Android/grumoon/Volley%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90</a></p>
+<h4 id="31-Android-Glide源码解析"><a href="#31-Android-Glide源码解析" class="headerlink" title="31.Android Glide源码解析"></a><strong>31.Android Glide源码解析</strong></h4><p><a href="http://www.lightskystreet.com/2015/10/12/glide_source_analysis/" target="_blank" rel="external">http://www.lightskystreet.com/2015/10/12/glide_source_analysis/</a><br><a href="http://frodoking.github.io/2015/10/10/android-glide/" target="_blank" rel="external">http://frodoking.github.io/2015/10/10/android-glide/</a></p>
+<h4 id="32-Android-设计模式"><a href="#32-Android-设计模式" class="headerlink" title="32.Android 设计模式"></a><strong>32.Android 设计模式</strong></h4><p><a href="http://blog.csdn.net/bboyfeiyu/article/details/44563871" target="_blank" rel="external">http://blog.csdn.net/bboyfeiyu/article/details/44563871</a></p>
+<h4 id="33-架构设计（搜狐）"><a href="#33-架构设计（搜狐）" class="headerlink" title="33.架构设计（搜狐）"></a><strong>33.架构设计</strong>（搜狐）</h4><p><img src="/img/article_img/2016/architucture.png" alt=""></p>
+<p><a href="http://www.tianmaying.com/tutorial/AndroidMVC" target="_blank" rel="external">http://www.tianmaying.com/tutorial/AndroidMVC</a></p>
+<h4 id="34-Android属性动画特性（乐视、小米）"><a href="#34-Android属性动画特性（乐视、小米）" class="headerlink" title="34.Android属性动画特性（乐视、小米）"></a><strong>34.Android属性动画特性</strong>（乐视、小米）</h4><p>如果你的需求中只需要对View进行移动、缩放、旋转和淡入淡出操作，那么补间动画确实已经足够健全了。但是很显然，这些功能是不足以覆盖所有的场景的，一旦我们的需求超出了移动、缩放、旋转和淡入淡出这四种对View的操作，那么补间动画就不能再帮我们忙了，也就是说它在功能和可扩展方面都有相当大的局限性，那么下面我们就来看看补间动画所不能胜任的场景。</p>
+<p>注意上面我在介绍补间动画的时候都有使用“对View进行操作”这样的描述，没错，补间动画是只能够作用在View上的。也就是说，我们可以对一个Button、TextView、甚至是LinearLayout、或者其它任何继承自View的组件进行动画操作，但是如果我们想要对一个非View的对象进行动画操作，抱歉，补间动画就帮不上忙了。可能有的朋友会感到不能理解，我怎么会需要对一个非View的对象进行动画操作呢？这里我举一个简单的例子，比如说我们有一个自定义的View，在这个View当中有一个Point对象用于管理坐标，然后在onDraw()方法当中就是根据这个Point对象的坐标值来进行绘制的。也就是说，如果我们可以对Point对象进行动画操作，那么整个自定义View的动画效果就有了。显然，补间动画是不具备这个功能的，这是它的第一个缺陷。</p>
+<p>然后补间动画还有一个缺陷，就是它只能够实现移动、缩放、旋转和淡入淡出这四种动画操作，那如果我们希望可以对View的背景色进行动态地改变呢？很遗憾，我们只能靠自己去实现了。说白了，之前的补间动画机制就是使用硬编码的方式来完成的，功能限定死就是这些，基本上没有任何扩展性可言。</p>
+<p>最后，补间动画还有一个致命的缺陷，就是它只是改变了View的显示效果而已，而不会真正去改变View的属性。什么意思呢？比如说，现在屏幕的左上角有一个按钮，然后我们通过补间动画将它移动到了屏幕的右下角，现在你可以去尝试点击一下这个按钮，点击事件是绝对不会触发的，因为实际上这个按钮还是停留在屏幕的左上角，只不过补间动画将这个按钮绘制到了屏幕的右下角而已。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[【转】国内一线互联网公司内部面试题库(一)——java篇]]></title>
+      <url>http://imtianx.cn/2016/11/05/%E5%9B%BD%E5%86%85%E4%B8%80%E7%BA%BF%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E5%86%85%E9%83%A8%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BA%93(%E4%B8%80)-java/</url>
+      <content type="html"><![CDATA[<p>本文转自：<a href="https://github.com/imtianx/AndroidInterview-Q-A/blob/master/README-CN.md" target="_blank" rel="external">国内一线互联网公司内部面试题库</a><br>国内一线互联网公司内部面试题库,以下面试题来自于百度、小米、乐视、美团、58、猎豹、360、新浪、搜狐内部题库</p>
+<p>熟悉本文中列出的知识点会大大增加通过前两轮技术面试的几率。<br>下面是java 部分<br><a id="more"></a></p>
+<h4 id="1-接口的意义（百度）"><a href="#1-接口的意义（百度）" class="headerlink" title="1.接口的意义（百度）"></a><strong>1.接口的意义</strong>（百度）</h4><p>规范、扩展、回调</p>
+<h4 id="2-抽象类的意义（乐视）"><a href="#2-抽象类的意义（乐视）" class="headerlink" title="2.抽象类的意义（乐视）"></a><strong>2.抽象类的意义</strong>（乐视）</h4><p>为其子类提供一个公共的类型<br>封装子类中得重复内容<br>定义抽象方法，子类虽然有不同的实现 但是定义是一致的</p>
+<h4 id="3-内部类的作用-百度，乐视"><a href="#3-内部类的作用-百度，乐视" class="headerlink" title="3.内部类的作用(百度，乐视)"></a><strong>3.内部类的作用</strong>(百度，乐视)</h4><ol>
+<li>内部类可以用多个实例，每个实例都有自己的状态信息，并且与其他外围对象的信息相互独立。</li>
+<li>在单个外围类中，可以让多个内部类以不同的方式实现同一个接口，或者继承同一个类。</li>
+<li>创建内部类对象的时刻并不依赖于外围类对象的创建。</li>
+<li>内部类并没有令人迷惑的“is-a”关系，他就是一个独立的实体。</li>
+<li>内部类提供了更好的封装，除了该外围类，其他类都不能访问</li>
+</ol>
+<h4 id="4-父类的静态方法能否被子类重写，为什么？（猎豹）"><a href="#4-父类的静态方法能否被子类重写，为什么？（猎豹）" class="headerlink" title="4.父类的静态方法能否被子类重写，为什么？（猎豹）"></a><strong>4.父类的静态方法能否被子类重写，为什么？</strong>（猎豹）</h4><p>不能</p>
+<p>子类继承父类后，用相同的静态方法和非静态方法，这时非静态方法覆盖父类中的方法（即方法重写），父类的该静态方法被隐藏（如果对象是父类则调用该隐藏的方法），另外子类可继承父类的静态与非静态方法，至于方法重载我觉得它其中一要素就是在同一类中，不能说父类中的什么方法与子类里的什么方法是方法重载的体现.</p>
+<h4 id="5-举1-2个排序算法，并使用java代码实现（美团）"><a href="#5-举1-2个排序算法，并使用java代码实现（美团）" class="headerlink" title="5.举1-2个排序算法，并使用java代码实现（美团）"></a><strong>5.举1-2个排序算法，并使用java代码实现</strong>（美团）</h4><p><a href="http://blog.csdn.net/qy1387/article/details/7752973" target="_blank" rel="external">http://blog.csdn.net/qy1387/article/details/7752973</a></p>
+<h4 id="6-列举java的集合和继承关系（百度、美团）"><a href="#6-列举java的集合和继承关系（百度、美团）" class="headerlink" title="6.列举java的集合和继承关系（百度、美团）"></a><strong>6.列举java的集合和继承关系</strong>（百度、美团）</h4><p><img src="/img/article_img/2016/collection.png" alt=""></p>
+<h4 id="7-java虚拟机的特性（百度、乐视）"><a href="#7-java虚拟机的特性（百度、乐视）" class="headerlink" title="7.java虚拟机的特性（百度、乐视）"></a><strong>7.java虚拟机的特性</strong>（百度、乐视）</h4><p>Java语言的一个非常重要的特点就是与平台的无关性。而使用Java虚拟机是实现这一特点的关键。一般的高级语言如果要在不同的平台上运行，至少需要编译成不同的目标代码。而引入Java语言虚拟机后，Java语言在不同平台上运行时不需要重新编译。Java语言使用模式Java虚拟机屏蔽了与具体平台相关的信息，使得Java语言编译程序只需生成在Java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。Java虚拟机在执行字节码时，把字节码解释成具体平台上的机器指令执行。</p>
+<h4 id="8-哪些情况下的对象会被垃圾回收机制处理掉（乐视、美团、小米）"><a href="#8-哪些情况下的对象会被垃圾回收机制处理掉（乐视、美团、小米）" class="headerlink" title="8.哪些情况下的对象会被垃圾回收机制处理掉（乐视、美团、小米）"></a><strong>8.哪些情况下的对象会被垃圾回收机制处理掉</strong>（乐视、美团、小米）</h4><p>Java 垃圾回收机制最基本的做法是分代回收。内存中的区域被划分成不同的世代，对象根据其存活的时间被保存在对应世代的区域中。一般的实现是划分成3个世代：年轻、年老和永久。内存的分配是发生在年轻世代中的。当一个对象存活时间足够长的时候，它就会被复制到年老世代中。对于不同的世代可以使用不同的垃圾回收算法。进行世代划分的出发点是对应用中对象存活时间进行研究之后得出的统计规律。一般来说，一个应用中的大部分对象的存活时间都很短。比如局部变量的存活时间就只在方法的执行过程中。基于这一点，对于年轻世代的垃圾回收算法就可以很有针对性。</p>
+<h4 id="9-进程和线程的区别（猎豹）"><a href="#9-进程和线程的区别（猎豹）" class="headerlink" title="9.进程和线程的区别（猎豹）"></a><strong>9.进程和线程的区别</strong>（猎豹）</h4><p>简而言之,一个程序至少有一个进程,一个进程至少有一个线程。</p>
+<p>线程的划分尺度小于进程，使得多线程程序的并发性高。</p>
+<p>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。</p>
+<p>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+<p>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
+<p>进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动,进程是系统进行资源分配和调度的一个独立单位.</p>
+<p>线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.</p>
+<p>一个线程可以创建和撤销另一个线程;同一个进程中的多个线程之间可以并发执行.</p>
+<p>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。如果有兴趣深入的话，我建议你们看看《现代操作系统》或者《操作系统的设计与实现》。对就个问题说得比较清楚。</p>
+<h4 id="10-Java中-和equals的区别，equals和hashCode的区别（乐视）"><a href="#10-Java中-和equals的区别，equals和hashCode的区别（乐视）" class="headerlink" title="10.Java中==和equals的区别，equals和hashCode的区别（乐视）"></a><strong>10.Java中==和equals的区别，equals和hashCode的区别</strong>（乐视）</h4><p><a href="http://blog.csdn.net/tiantiandjava/article/details/46988461" target="_blank" rel="external">http://blog.csdn.net/tiantiandjava/article/details/46988461</a></p>
+<h4 id="11-常见的排序算法时间复杂度（小米）"><a href="#11-常见的排序算法时间复杂度（小米）" class="headerlink" title="11.常见的排序算法时间复杂度（小米）"></a><strong>11.常见的排序算法时间复杂度</strong>（小米）</h4><p><img src="/img/article_img/2016/algorithm.png" alt=""></p>
+<h4 id="12-HashMap的实现原理（美团）"><a href="#12-HashMap的实现原理（美团）" class="headerlink" title="12.HashMap的实现原理（美团）"></a><strong>12.HashMap的实现原理</strong>（美团）</h4><ol>
+<li>HashMap概述：<br>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。 </li>
+<li>HashMap的数据结构：<br> 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。</li>
+</ol>
+<p><img src="/img/article_img/2016/hashmap.jpg" alt=""></p>
+<p>从上图中可以看出，HashMap底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个HashMap的时候，就会初始化一个数组。</p>
+<h4 id="13-java-状态机"><a href="#13-java-状态机" class="headerlink" title="13.java 状态机"></a><strong>13.java 状态机</strong></h4><p><a href="http://www.jdon.com/designpatterns/designpattern_State.htm" target="_blank" rel="external">http://www.jdon.com/designpatterns/designpattern_State.htm</a></p>
+<h4 id="14-java中int-char-long各占多少字节数"><a href="#14-java中int-char-long各占多少字节数" class="headerlink" title="14.java中int char long各占多少字节数"></a><strong>14.java中int char long各占多少字节数</strong></h4><p>byte 位数 8 字节数 1</p>
+<p>short 16 2</p>
+<p>int 32 4</p>
+<p>long 64 8</p>
+<p>float 32 4</p>
+<p>double 64 8</p>
+<p>char 16 2</p>
+<h4 id="15-java-int与integer的区别"><a href="#15-java-int与integer的区别" class="headerlink" title="15.java int与integer的区别"></a><strong>15.java int与integer的区别</strong></h4><p><a href="http://www.cnblogs.com/shenliang123/archive/2011/10/27/2226903.html" target="_blank" rel="external">http://www.cnblogs.com/shenliang123/archive/2011/10/27/2226903.html</a></p>
+<h4 id="16-string-stringbuffer-stringbuilder-区别（小米、乐视、百度）"><a href="#16-string-stringbuffer-stringbuilder-区别（小米、乐视、百度）" class="headerlink" title="16.string stringbuffer stringbuilder 区别（小米、乐视、百度）"></a><strong>16.string stringbuffer stringbuilder 区别</strong>（小米、乐视、百度）</h4><p>String 字符串常量</p>
+<p>StringBuffer 字符串变量（线程安全）</p>
+<p>StringBuilder 字符串变量（非线程安全）</p>
+<p>简要的说， String 类型和 StringBuffer 类型的主要性能区别其实在于 String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用String ，因为每次生成对象都会对系统性能产生影响，特别当内存中无引用对象多了以后,JVM 的 GC 就会开始工作，那速度是一定会相当慢的。</p>
+<p>而如果是使用 StringBuffer 类则结果就不一样了，每次结果都会对 StringBuffer 对象本身进行操作，而不是生成新的对象，再改变对象引用。所以在一般情况下我们推荐使用 StringBuffer ，特别是字符串对象经常改变的情况下。而在某些特别情况下， String 对象的字符串拼接其实是被 JVM 解释成了 StringBuffer 对象的拼接，所以这些时候 String 对象的速度并不会比 StringBuffer 对象慢，而特别是以下的字符串对象生成中， String 效率是远要比 StringBuffer 快的：</p>
+<p>String S1 = “This is only a” + “ simple” + “ test”;</p>
+<p>StringBuffer Sb = new StringBuilder(“This is only a”).append(“ simple”).append(“ test”);<br>你会很惊讶的发现，生成 String S1 对象的速度简直太快了，而这个时候 StringBuffer 居然速度上根本一点都不占优势。其实这是 JVM 的一个把戏，在 JVM 眼里，这个<br> String S1 = “This is only a” + “ simple” + “test”; 其实就是：<br> String S1 = “This is only a simple test”; 所以当然不需要太多的时间了。但大家这里要注意的是，如果你的字符串是来自另外的 String 对象的话，速度就没那么快了，譬如：<br> String S2 = “This is only a”;<br>String S3 = “ simple”;<br>String S4 = “ test”;<br>String S1 = S2 +S3 + S4;<br>这时候 JVM 会规规矩矩的按照原来的方式去做</p>
+<p>在大部分情况下 StringBuffer &gt; String</p>
+<p>StringBuffer</p>
+<p>Java.lang.StringBuffer线程安全的可变字符序列。一个类似于 String 的字符串缓冲区，但不能修改。虽然在任意时间点上它都包含某种特定的字符序列，但通过某些方法调用可以改变该序列的长度和内容。</p>
+<p>可将字符串缓冲区安全地用于多个线程。可以在必要时对这些方法进行同步，因此任意特定实例上的所有操作就好像是以串行顺序发生的，该顺序与所涉及的每个线程进行的方法调用顺序一致。</p>
+<p>StringBuffer 上的主要操作是 append 和 insert 方法，可重载这些方法，以接受任意类型的数据。每个方法都能有效地将给定的数据转换成字符串，然后将该字符串的字符追加或插入到字符串缓冲区中。append 方法始终将这些字符添加到缓冲区的末端；而 insert 方法则在指定的点添加字符。</p>
+<p>例如，如果 z 引用一个当前内容是“start”的字符串缓冲区对象，则此方法调用 z.append(“le”) 会使字符串缓冲区包含“startle”，而 z.insert(4, “le”) 将更改字符串缓冲区，使之包含“starlet”。</p>
+<p>在大部分情况下 StringBuilder &gt; StringBuffer</p>
+<p>java.lang.StringBuilder</p>
+<p>java.lang.StringBuilder一个可变的字符序列是5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）。如果可能，建议优先采用该类，因为在大多数实现中，它比 StringBuffer 要快。两者的方法基本相同</p>
+<h4 id="17-Java多态（乐视）"><a href="#17-Java多态（乐视）" class="headerlink" title="17.Java多态（乐视）"></a><strong>17.Java多态</strong>（乐视）</h4><p>Java多态性理解</p>
+<p>Java中多态性的实现</p>
+<p>什么是多态</p>
+<p>面向对象的三大特性：封装、继承、多态。从一定角度来看，封装和继承几乎都是为多态而准备的。这是我们最后一个概念，也是最重要的知识点。</p>
+<p>多态的定义：指允许不同类的对象对同一消息做出响应。即同一消息可以根据发送对象的不同而采用多种不同的行为方式。（发送消息就是函数调用）</p>
+<p>实现多态的技术称为：动态绑定（dynamic binding），是指在执行期间判断所引用对象的实<br>际类型，根据其实际的类型调用其相应的方法。</p>
+<p>多态的作用：消除类型之间的耦合关系。</p>
+<p>现实中，关于多态的例子不胜枚举。比方说按下 F1 键这个动作，如果当前在 Flash 界面下弹出的就是 AS 3 的帮助文档；如果当前在 Word 下弹出的就是 Word 帮助；在 Windows 下弹出的就是 Windows 帮助和支持。同一个事件发生在不同的对象上会产生不同的结果。<br>下面是多态存在的三个必要条件，要求大家做梦时都能背出来！</p>
+<p>多态存在的三个必要条件<br>一、要有继承；<br>二、要有重写；<br>三、父类引用指向子类对象。</p>
+<p> 多态的好处：</p>
+<p>1.可替换性（substitutability）。多态对已存在代码具有可替换性。例如，多态对圆Circle类工作，对其他任何圆形几何体，如圆环，也同样工作。</p>
+<p>2.可扩充性（extensibility）。多态对代码具有可扩充性。增加新的子类不影响已存在类的多态性、继承性，以及其他特性的运行和操作。实际上新加子类更容易获得多态功能。例如，在实现了圆锥、半圆锥以及半球体的多态基础上，很容易增添球体类的多态性。</p>
+<p>3.接口性（interface-ability）。多态是超类通过方法签名，向子类提供了一个共同接口，由子类来完善或者覆盖它而实现的。如图8.3 所示。图中超类Shape规定了两个实现多态的接口方法，computeArea()以及computeVolume()。子类，如Circle和Sphere为了实现多态，完善或者覆盖这两个接口方法。</p>
+<p>4.灵活性（flexibility）。它在应用中体现了灵活多样的操作，提高了使用效率。</p>
+<p>5.简化性（simplicity）。多态简化对应用软件的代码编写和修改过程，尤其在处理大量对象的运算和操作时，这个特点尤为突出和重要。</p>
+<p>Java中多态的实现方式：接口实现，继承父类进行方法重写，同一个类中进行方法重载。</p>
+<h4 id="18-什么导致线程阻塞（58、美团）"><a href="#18-什么导致线程阻塞（58、美团）" class="headerlink" title="18.什么导致线程阻塞（58、美团）"></a><strong>18.什么导致线程阻塞</strong>（58、美团）</h4><p>线程的阻塞</p>
+<p>为了解决对共享存储区的访问冲突，Java 引入了同步机制，现在让我们来考察多个线程对共享资源的访问，显然同步机制已经不够了，因为在任意时刻所要求的资源不一定已经准备好了被访问，反过来，同一时刻准备好了的资源也可能不止一个。为了解决这种情况下的访问控制问题，Java 引入了对阻塞机制的支持.</p>
+<p>阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。</p>
+<ol>
+<li>sleep() 方法：sleep() 允许 指定以毫秒为单位的一段时间作为参数，它使得线程在指定的时间内进入阻塞状态，不能得到CPU 时间，指定的时间一过，线程重新进入可执行状态。<br>典型地，sleep() 被用在等待某个资源就绪的情形：测试发现条件不满足后，让线程阻塞一段时间后重新测试，直到条件满足为止。</li>
+<li>suspend() 和 resume() 方法：两个方法配套使用，suspend()使得线程进入阻塞状态，并且不会自动恢复，必须其对应的resume() 被调用，才能使得线程重新进入可执行状态。典型地，suspend() 和 resume() 被用在等待另一个线程产生的结果的情形：测试发现结果还没有产生后，让线程阻塞，另一个线程产生了结果后，调用 resume() 使其恢复。</li>
+<li>yield() 方法：yield() 使得线程放弃当前分得的 CPU 时间，但是不使线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程.</li>
+<li>wait() 和 notify() 方法：两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用.</li>
+</ol>
+<p>初看起来它们与 suspend() 和 resume() 方法对没有什么分别，但是事实上它们是截然不同的。区别的核心在于，前面叙述的所有方法，阻塞时都不会释放占用的锁（如果占用了的话），而这一对方法则相反。</p>
+<p>上述的核心区别导致了一系列的细节上的区别。</p>
+<p>首先，前面叙述的所有方法都隶属于 Thread 类，但是这一对却直接隶属于 Object 类，也就是说，所有对象都拥有这一对方法。初看起来这十分不可思议，但是实际上却是很自然的，因为这一对方法阻塞时要释放占用的锁，而锁是任何对象都具有的，调用任意对象的 wait() 方法导致线程阻塞，并且该对象上的锁被释放。而调用 任意对象的notify()方法则导致因调用该对象的 wait() 方法而阻塞的线程中随机选择的一个解除阻塞（但要等到获得锁后才真正可执行）。</p>
+<p>其次，前面叙述的所有方法都可在任何位置调用，但是这一对方法却必须在 synchronized 方法或块中调用，理由也很简单，只有在synchronized 方法或块中当前线程才占有锁，才有锁可以释放。同样的道理，调用这一对方法的对象上的锁必须为当前线程所拥有，这样才有锁可以释放。因此，这一对方法调用必须放置在这样的 synchronized 方法或块中，该方法或块的上锁对象就是调用这一对方法的对象。若不满足这一条件，则程序虽然仍能编译，但在运行时会出现IllegalMonitorStateException 异常。</p>
+<p>wait() 和 notify() 方法的上述特性决定了它们经常和synchronized 方法或块一起使用，将它们和操作系统的进程间通信机制作一个比较就会发现它们的相似性：synchronized方法或块提供了类似于操作系统原语的功能，它们的执行不会受到多线程机制的干扰，而这一对方法则相当于 block 和wakeup 原语（这一对方法均声明为 synchronized）。它们的结合使得我们可以实现操作系统上一系列精妙的进程间通信的算法（如信号量算法），并用于解决各种复杂的线程间通信问题。</p>
+<p>关于 wait() 和 notify() 方法最后再说明两点：</p>
+<p>第一：调用 notify() 方法导致解除阻塞的线程是从因调用该对象的 wait() 方法而阻塞的线程中随机选取的，我们无法预料哪一个线程将会被选择，所以编程时要特别小心，避免因这种不确定性而产生问题。</p>
+<p>第二：除了 notify()，还有一个方法 notifyAll() 也可起到类似作用，唯一的区别在于，调用 notifyAll() 方法将把因调用该对象的 wait() 方法而阻塞的所有线程一次性全部解除阻塞。当然，只有获得锁的那一个线程才能进入可执行状态。</p>
+<p>谈到阻塞，就不能不谈一谈死锁，略一分析就能发现，suspend() 方法和不指定超时期限的 wait() 方法的调用都可能产生死锁。遗憾的是，Java 并不在语言级别上支持死锁的避免，我们在编程中必须小心地避免死锁。</p>
+<p>以上我们对 Java 中实现线程阻塞的各种方法作了一番分析，我们重点分析了 wait() 和 notify() 方法，因为它们的功能最强大，使用也最灵活，但是这也导致了它们的效率较低，较容易出错。实际使用中我们应该灵活使用各种方法，以便更好地达到我们的目的。</p>
+<h4 id="19-抽象类接口区别（360）"><a href="#19-抽象类接口区别（360）" class="headerlink" title="19.抽象类接口区别（360）"></a><strong>19.抽象类接口区别</strong>（360）</h4><ol>
+<li><p>默认的方法实现<br>抽象类可以有默认的方法实现完全是抽象的。接口根本不存在方法的实现</p>
+</li>
+<li><p>实现<br>子类使用extends关键字来继承抽象类。如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现。<br>子类使用关键字implements来实现接口。它需要提供接口中所有声明的方法的实现</p>
+</li>
+<li><p>构造器<br>抽象类可以有构造器<br>接口不能有构造器</p>
+</li>
+<li><p>与正常Java类的区别<br>除了你不能实例化抽象类之外，它和普通Java类没有任何区<br>接口是完全不同的类型</p>
+</li>
+<li><p>访问修饰符<br>抽象方法可以有public、protected和default这些修饰符<br>接口方法默认修饰符是public。你不可以使用其它修饰符。</p>
+</li>
+<li><p>main方法<br>抽象方法可以有main方法并且我们可以运行它<br>接口没有main方法，因此我们不能运行它。</p>
+</li>
+<li><p>多继承<br>抽象类在java语言中所表示的是一种继承关系，一个子类只能存在一个父类，但是可以存在多个接口。</p>
+</li>
+<li><p>速度<br>它比接口速度要快<br>接口是稍微有点慢的，因为它需要时间去寻找在类中实现的方法。</p>
+</li>
+<li><p>添加新方法<br>如果你往抽象类中添加新的方法，你可以给它提供默认的实现。因此你不需要改变你现在的代码。<br>如果你往接口中添加方法，那么你必须改变实现该接口的类。</p>
+</li>
+</ol>
+<h4 id="20-容器类之间的区别（乐视、美团）"><a href="#20-容器类之间的区别（乐视、美团）" class="headerlink" title="20.容器类之间的区别（乐视、美团）"></a><strong>20.容器类之间的区别</strong>（乐视、美团）</h4><p><a href="http://www.cnblogs.com/yuanermen/archive/2009/08/05/1539917.html" target="_blank" rel="external">http://www.cnblogs.com/yuanermen/archive/2009/08/05/1539917.html</a><br><a href="http://alexyyek.github.io/2015/04/06/Collection/" target="_blank" rel="external">http://alexyyek.github.io/2015/04/06/Collection/</a><br><a href="http://tianmaying.com/tutorial/java_collection" target="_blank" rel="external">http://tianmaying.com/tutorial/java_collection</a></p>
+<h4 id="21-java-内部类（小米）"><a href="#21-java-内部类（小米）" class="headerlink" title="21.java 内部类（小米）"></a><strong>21.java 内部类</strong>（小米）</h4><p><a href="http://www.cnblogs.com/chenssy/p/3388487.html" target="_blank" rel="external">http://www.cnblogs.com/chenssy/p/3388487.html</a></p>
+<p><strong>22.Java中hashmap和hashtable的区别</strong>（乐视、小米）</p>
+<p><a href="http://www.233.com/ncre2/JAVA/jichu/20100717/084230917.html" target="_blank" rel="external">http://www.233.com/ncre2/JAVA/jichu/20100717/084230917.html</a></p>
+<p><strong>23.ArrayMap VS HashMap</strong></p>
+<p><a href="http://lvable.com/?p=217" target="_blank" rel="external">http://lvable.com/?p=217</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[天盾app项目总结]]></title>
       <url>http://imtianx.cn/2016/10/23/%E5%A4%A9%E7%9B%BEapp%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/</url>
       <content type="html"><![CDATA[<p>经过几个星期的努力，天盾app2.0版正式发布。再次记录下自己在开发中遇到的问题：</p>
@@ -35,6 +381,75 @@
 </ul>
 <p>在配置文件中<strong>增加版本号，在 setDbUpgradeListener 中的 onUpgrade 方法中添加或删除列，最后在实体中添加相应的字段即可</strong>。</p>
 <p>项目比较小，遇到的问题也就这些，需要查看该app的，请访问<a href="https://www.pgyer.com/ygjexpress" target="_blank" rel="external">内测平台</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[android studio 生成aar和jar]]></title>
+      <url>http://imtianx.cn/2016/10/20/android%20studio%20%E7%94%9F%E6%88%90aar%E5%92%8Cjar/</url>
+      <content type="html"><![CDATA[<h3 id="1-aar包"><a href="#1-aar包" class="headerlink" title="1. aar包"></a>1. aar包</h3><p><strong>aar</strong>包是android studio 下打包android 工程中的src、res、lib后生成的aar文件，以便导入到其他的as工程中使用。<br>在as中它的生成方式较为简单，主要步骤如下：</p>
+<blockquote>
+<p>1.新建model，选择 android Library；<br>2.编写好自己的代码后，将gradle中的 <strong>minifyEnabled</strong>属性 设置成<strong>true</strong><a id="more"></a>，重新build下项目（<strong>Build-&gt;Rebuild Project</strong>,或者使用gradle中的build 命令）<br>3.将as的项目调节为project,进入model下，在<strong>build/outputs/aar/</strong>文件夹下会生成相应的aar文件，如下图：</p>
+</blockquote>
+<p><img src="/img/article_img/2016/show_aar.png" alt=""></p>
+<h3 id="2-jar包"><a href="#2-jar包" class="headerlink" title="2. jar包"></a>2. jar包</h3><p>在as中，不像ec那样可以直接导出jar,需要在gradle 中编写task,主要步骤：</p>
+<blockquote>
+<p>1.新建model 选择 Java Library，<br>2.先写自己的代码<br>3.在当前model 的gradle 中添写如下代码，<strong>rebuid后便会在build/libs下生成相应的jar</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Copy类型</span><br><span class="line">task makeJar(type: Copy) &#123;</span><br><span class="line">    //删除存在的</span><br><span class="line">    delete &apos;build/libs/javajarlib.jar&apos;</span><br><span class="line">    //设置拷贝的文件</span><br><span class="line">    from(&apos;build/intermediates/bundles/release/&apos;)</span><br><span class="line">    //打进jar包后的文件目录</span><br><span class="line">    into(&apos;build/libs/&apos;)</span><br><span class="line">    //include ,exclude参数来设置过滤</span><br><span class="line">    include(&apos;classes.jar&apos;)</span><br><span class="line">    //重命名</span><br><span class="line">    rename(&apos;classes.jar&apos;, &apos;javajarlib.jar&apos;)</span><br><span class="line">&#125;</span><br><span class="line">makeJar.dependsOn(build)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>但是这种方法，生成的jar是和改model 的名字一样的，即使在上面指定了名字。</p>
+<h3 id="3-具体使用"><a href="#3-具体使用" class="headerlink" title="3. 具体使用"></a>3. 具体使用</h3><p>在具体的model中使用时，将生成的相应的包拷贝到libs文件夹中，对于jar可以右键 添加到library中，或者手动在 gradle 中添加。而，对于aar,则只能在gradle中手动添加，如下配置代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">repositories&#123;</span><br><span class="line">    flatDir&#123;</span><br><span class="line">        dirs &apos;libs&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//在dependencies 中添加，androidlibrary-release值aar包的名字</span><br><span class="line">compile(name:&apos;androidlibrary-release&apos;, ext:&apos;aar&apos;)</span><br></pre></td></tr></table></figure>
+<p>通过上面的配置就可以直接在代码中使用了。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[java 三大特性：封装、继承和多态]]></title>
+      <url>http://imtianx.cn/2016/10/15/java%20%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7%EF%BC%9A%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/</url>
+      <content type="html"><![CDATA[<p>最近项目上线，暂时稍微闲一点，来回顾下java的一些基础。回想下，也是大二上学的java，已经过去两年了，老师教的基本都是那些最基础的，如数据类型、运算符之类的，加上自己又没有好好学，基本算没学，也就后来转向android 的时候，用啥学啥，如集合、多线程和网络通信等等。下面整理下java面向对象的三大特性。</p>
+<h3 id="一、封装"><a href="#一、封装" class="headerlink" title="一、封装"></a>一、封装</h3><p><strong>封装</strong>是把过程和数据包围起来，对数据的访问只能通过已定义的界面。<a id="more"></a><br>一般是把属性私有，对其的访问只提供<code>getter</code> 和 <code>setter</code> 方法。</p>
+<h3 id="二、继承"><a href="#二、继承" class="headerlink" title="二、继承"></a>二、继承</h3><p><strong>继承</strong>可以理解为一个对象从另一个对象获取方法和属性的过程。常用的两个关键字为：<code>extends</code> 和 <code>implements</code>,他们决定了一个对象和另一个对象间是否是<strong>IS-A</strong>(是一个)的关系。<br>在Java中，类的继承是<strong>单一继承</strong>，也就是说，一个子类只能拥有一个父类。<br>注：java的类均是由 <code>java.lang.Object</code> 类继承而来的，上面说的一个父类并不包含Object,它并不需要显示的声明。<br><strong>extends</strong>关键字是用于 类直接的继承而<strong> implements</strong>是针对接口的。<br>类只能是单继承的，但是接口可以同时实现多个，也可以同时使用。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class A extends B implements  C,D &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注：在Java中，类的多重继承是不合法，但接口允许多重继承。</p>
+<h3 id="三、多态"><a href="#三、多态" class="headerlink" title="三、多态"></a>三、多态</h3><p><strong>多态</strong>：同一个行为具有多个不同表现形式或形态的能力。它的必要条件：继承、重写、父类引用指向子类对象。<br>多态性具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。</p>
+<h3 id="四、重写-Override-与重载-Overload"><a href="#四、重写-Override-与重载-Overload" class="headerlink" title="四、重写(Override)与重载(Overload)"></a>四、重写(Override)与重载(Overload)</h3><p><strong>重写</strong> ：是子类对父类的允许访问的方法的实现过程进行重新编写。返回值和形参都不能改变。他的好处在于子类可以根据需要，定义特定于自己的行为。</p>
+<p><strong>方法的重写规则</strong></p>
+<ol>
+<li>参数列表必须完全与被重写方法的相同；</li>
+<li>返回类型必须完全与被重写方法的返回类型相同；</li>
+<li>访问权限不能比父类中被重写的方法的访问权限更低。例如：如果父类的一个方法被声明为public，那么在子类中重写该方法就不能声明为protected。</li>
+<li>父类的成员方法只能被它的子类重写。</li>
+<li>声明为final的方法不能被重写。</li>
+<li>声明为static的方法不能被重写，但是能够被再次声明。</li>
+<li>子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法。</li>
+<li>子类和父类不在同一个包中，那么子类只能够重写父类的声明为public和protected的非final方法。</li>
+<li>重写的方法能够抛出任何非强制异常，无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以。</li>
+<li>构造方法不能被重写。</li>
+<li>如果不能继承一个方法，则不能重写这个方法。</li>
+</ol>
+<p><strong>Super</strong>：当需要在子类中调用父类的被重写方法时，要使用super关键字。</p>
+<p><strong>重载</strong>：是在一个类里面，方法名字相同，而参数不同。返回类型可以相同也可以不同。<br>每个重载的方法（或者构造函数）都必须有一个独一无二的参数类型列表。</p>
+<p><strong>重载的重写规则</strong></p>
+<ol>
+<li>被重载的方法必须改变参数列表；</li>
+<li>被重载的方法可以改变返回类型；</li>
+<li>被重载的方法可以改变访问修饰符；</li>
+<li>被重载的方法可以声明新的或更广的检查异常；</li>
+<li>方法能够在同一个类中或者在一个子类中被重载。</li>
+</ol>
+<p><strong>重写与重载之间的区别</strong><br>| 区别点        | 方法重载   |  方法重写  |<br>| ——–   | :—–:  | :—-:  |<br>| 参数列表     |     必须修改 |   不能修改     |<br>| 返回类型        |   可以修改   |   不能修改   |<br>| 异常        |    可以修改    |  可减少或删除，不能抛出新的或者更广的异常  |<br>| 访问 | 可以修改|可以降低访问限制|</p>
+<h3 id="五、接口（interface）"><a href="#五、接口（interface）" class="headerlink" title="五、接口（interface）"></a>五、接口（interface）</h3><p><strong>接口：</strong>是抽象方法的集合。它并不是类，编写接口的方式和类很相似，但是它们属于不同的概念。类描述对象的属性和方法。接口则包含类要实现的方法。<br>接口无法被实例化，但是可以被实现。一个实现接口的类，必须实现接口内所描述的所有方法，否则就必须声明为抽象类。另外，在Java中，接口类型可用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象。</p>
+<p><strong>接口的特性：</strong></p>
+<ol>
+<li>接口是隐式抽象的，当声明一个接口的时候，不必使用abstract关键字。</li>
+<li>接口中每一个方法也是隐式抽象的，声明时同样不需要abstract关键子。</li>
+<li>接口中的方法都是公有的。</li>
+</ol>
+<p>一个接口能继承另一个接口，和类之间的继承方式比较相似。接口的继承使用extends关键，与类不同的是他可以多重继承其他接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public  interface A  extends InterfaceB,InterfaceC&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>标记接口</strong>:没有任何方法和属性。起作用如下：</p>
+<ul>
+<li>建立一个公共的父接口；</li>
+<li>向一个类添加数据类型。</li>
+</ul>
 ]]></content>
     </entry>
     
@@ -341,6 +756,21 @@
     </entry>
     
     <entry>
+      <title><![CDATA[ListView的优化技巧]]></title>
+      <url>http://imtianx.cn/2016/04/23/listview-optimize/</url>
+      <content type="html"><![CDATA[<p>在实际的应用开发时，往往有很多地方需要使用listview,当然我们得了解它的一些技巧。<a id="more"></a></p>
+<h3 id="1-ListView的优化技巧"><a href="#1-ListView的优化技巧" class="headerlink" title="1.ListView的优化技巧"></a>1.ListView的优化技巧</h3><p>主要使用ViewHolder来提高效率，利用它的视图缓存机制，避免每次在调用方getView()方法时通过findViewById()实例化控件。使用时，只需在自定义的adapter中定义内部类ViewHolder，将ListView的item中的控件作为其成员变量。</p>
+<p>如下getView()方法：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public View getView(int position, View convertView, ViewGroup parent) &#123;</span><br><span class="line">     ViewHolder holder = null;</span><br><span class="line">       // 判断是否缓存</span><br><span class="line">       if (convertView == null) &#123;</span><br><span class="line">           holder = new ViewHolder();</span><br><span class="line">           // 通过LayoutInflater实例化布局</span><br><span class="line">           convertView = mInflater.inflate(R.layout.notify_item, null);</span><br><span class="line">           holder.img = (ImageView) convertView.findViewById(R.id.imageView);</span><br><span class="line">           holder.title = (TextView) convertView.findViewById(R.id.textView);</span><br><span class="line">           convertView.setTag(holder);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           // 通过tag找到缓存的布局</span><br><span class="line">           holder = (ViewHolder) convertView.getTag();</span><br><span class="line">       &#125;</span><br><span class="line">       // 设置布局中控件要显示的视图</span><br><span class="line">       holder.img.setBackgroundResource(R.drawable.ic_launcher);</span><br><span class="line">       holder.title.setText(mData.get(position));</span><br><span class="line">       return convertView;</span><br><span class="line">   &#125;</span><br><span class="line">//定义内部类</span><br><span class="line">   public final class ViewHolder &#123;</span><br><span class="line">       public ImageView img;</span><br><span class="line">       public TextView title;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-ListView的常用属性"><a href="#2-ListView的常用属性" class="headerlink" title="2.ListView的常用属性"></a>2.ListView的常用属性</h3><p>设置分割线<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:divider=&quot;@null&quot;</span><br></pre></td></tr></table></figure></p>
+<p>隐藏滚动条<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:scrollbars=&quot;none&quot;</span><br></pre></td></tr></table></figure></p>
+<p>设置要显示在第N项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//瞬间完成</span><br><span class="line">listView.setSelection(N);</span><br><span class="line">//平滑完成</span><br><span class="line">listView.smoothScrollBy(distance,duration);</span><br><span class="line">listView.smoothScrollByOffset(offset);</span><br><span class="line">listView.smoothScrollToPosition(n);</span><br></pre></td></tr></table></figure></p>
+<p>动态修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//改变llist后调用</span><br><span class="line">mAdapter.notifyDataSetChanged();</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-动态改变ListView的布局"><a href="#3-动态改变ListView的布局" class="headerlink" title="3.动态改变ListView的布局"></a>3.动态改变ListView的布局</h3><p>如：实现聊天界面，加载连个布局的。<br>主要是比普通的adapter多实现getItemViewType()和getViewType()两个方法，然后再getView()中作出相应的处理。<br>如下部分主要代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//返回第position个item是何种类型</span><br><span class="line">    @Override</span><br><span class="line">    public int getItemViewType(int position) &#123;</span><br><span class="line">        ChatItemListViewBean bean = mData.get(position);</span><br><span class="line">        return bean.getType();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//返回不同布局的总数</span><br><span class="line">    @Override</span><br><span class="line">    public int getViewTypeCount() &#123;</span><br><span class="line">        return 2;</span><br><span class="line">    &#125;&lt;/span&gt;</span><br><span class="line">	</span><br><span class="line">    @Override</span><br><span class="line">    public View getView(int position, View convertView, ViewGroup parent) &#123;</span><br><span class="line">        ViewHolder holder;</span><br><span class="line">        if (convertView == null) &#123;</span><br><span class="line">			//判断布局类型</span><br><span class="line">            if (getItemViewType(position) == 0) &#123;</span><br><span class="line">                holder = new ViewHolder();</span><br><span class="line">                convertView = mInflater.inflate(</span><br><span class="line">                        R.layout.chat_item_itemin, null);</span><br><span class="line">                holder.icon = (ImageView) convertView.findViewById(</span><br><span class="line">                        R.id.icon_in);</span><br><span class="line">                holder.text = (TextView) convertView.findViewById(</span><br><span class="line">                        R.id.text_in);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                holder = new ViewHolder();</span><br><span class="line">                convertView = mInflater.inflate(</span><br><span class="line">                        R.layout.chat_item_itemout, null);</span><br><span class="line">                holder.icon = (ImageView) convertView.findViewById(</span><br><span class="line">                        R.id.icon_out);</span><br><span class="line">                holder.text = (TextView) convertView.findViewById(</span><br><span class="line">                        R.id.text_out);</span><br><span class="line">            &#125;</span><br><span class="line">            convertView.setTag(holder);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            holder = (ViewHolder) convertView.getTag();</span><br><span class="line">        &#125;</span><br><span class="line">        holder.icon.setImageBitmap(mData.get(position).getIcon());</span><br><span class="line">        holder.text.setText(mData.get(position).getText());</span><br><span class="line">        return convertView;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>此外，ListView还能设置滑动监听，有OnTouchListener和OnScrollListener监听事件。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[android真机测试之offline或unauthorized错误]]></title>
       <url>http://imtianx.cn/2016/04/23/erroe-of-offline-or-unauthorized/</url>
       <content type="html"><![CDATA[<p>在开发中，使用真机测试较为方便，然而在ide连接手机时，adb device 提示 <strong>offline</strong> 或者 <strong>unauthorized</strong>(中文：未授权的)会令大家非常困扰。<a id="more"></a>我也同样为此而浪费了很多时间。这里，介绍一种较为方便的解决方法（亲测有效）：<br>先删除.android 文件夹下的adbkey文件夹,再连接数据线，让其重新授权。<br>对于.android 文件夹，一般在电脑c盘的用户/用户名 下，它是用于存放android虚拟机的。如果将sdk配置到了环境变量中，则.android文件夹在相应的sdk目录下。<br>此外，网上还有其他的方法，不过都没有解决：</p>
@@ -353,21 +783,6 @@
 <ol>
 <li>使用第三方的软件，如豌豆荚（曾经用过，可用）<br>总之，不同的人有不同的方法，选择一种自己可以接受的，能够有效解决问题就行。</li>
 </ol>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[ListView的优化技巧]]></title>
-      <url>http://imtianx.cn/2016/04/23/listview-optimize/</url>
-      <content type="html"><![CDATA[<p>在实际的应用开发时，往往有很多地方需要使用listview,当然我们得了解它的一些技巧。<a id="more"></a></p>
-<h3 id="1-ListView的优化技巧"><a href="#1-ListView的优化技巧" class="headerlink" title="1.ListView的优化技巧"></a>1.ListView的优化技巧</h3><p>主要使用ViewHolder来提高效率，利用它的视图缓存机制，避免每次在调用方getView()方法时通过findViewById()实例化控件。使用时，只需在自定义的adapter中定义内部类ViewHolder，将ListView的item中的控件作为其成员变量。</p>
-<p>如下getView()方法：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public View getView(int position, View convertView, ViewGroup parent) &#123;</span><br><span class="line">     ViewHolder holder = null;</span><br><span class="line">       // 判断是否缓存</span><br><span class="line">       if (convertView == null) &#123;</span><br><span class="line">           holder = new ViewHolder();</span><br><span class="line">           // 通过LayoutInflater实例化布局</span><br><span class="line">           convertView = mInflater.inflate(R.layout.notify_item, null);</span><br><span class="line">           holder.img = (ImageView) convertView.findViewById(R.id.imageView);</span><br><span class="line">           holder.title = (TextView) convertView.findViewById(R.id.textView);</span><br><span class="line">           convertView.setTag(holder);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           // 通过tag找到缓存的布局</span><br><span class="line">           holder = (ViewHolder) convertView.getTag();</span><br><span class="line">       &#125;</span><br><span class="line">       // 设置布局中控件要显示的视图</span><br><span class="line">       holder.img.setBackgroundResource(R.drawable.ic_launcher);</span><br><span class="line">       holder.title.setText(mData.get(position));</span><br><span class="line">       return convertView;</span><br><span class="line">   &#125;</span><br><span class="line">//定义内部类</span><br><span class="line">   public final class ViewHolder &#123;</span><br><span class="line">       public ImageView img;</span><br><span class="line">       public TextView title;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-ListView的常用属性"><a href="#2-ListView的常用属性" class="headerlink" title="2.ListView的常用属性"></a>2.ListView的常用属性</h3><p>设置分割线<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:divider=&quot;@null&quot;</span><br></pre></td></tr></table></figure></p>
-<p>隐藏滚动条<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:scrollbars=&quot;none&quot;</span><br></pre></td></tr></table></figure></p>
-<p>设置要显示在第N项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//瞬间完成</span><br><span class="line">listView.setSelection(N);</span><br><span class="line">//平滑完成</span><br><span class="line">listView.smoothScrollBy(distance,duration);</span><br><span class="line">listView.smoothScrollByOffset(offset);</span><br><span class="line">listView.smoothScrollToPosition(n);</span><br></pre></td></tr></table></figure></p>
-<p>动态修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//改变llist后调用</span><br><span class="line">mAdapter.notifyDataSetChanged();</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-动态改变ListView的布局"><a href="#3-动态改变ListView的布局" class="headerlink" title="3.动态改变ListView的布局"></a>3.动态改变ListView的布局</h3><p>如：实现聊天界面，加载连个布局的。<br>主要是比普通的adapter多实现getItemViewType()和getViewType()两个方法，然后再getView()中作出相应的处理。<br>如下部分主要代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//返回第position个item是何种类型</span><br><span class="line">    @Override</span><br><span class="line">    public int getItemViewType(int position) &#123;</span><br><span class="line">        ChatItemListViewBean bean = mData.get(position);</span><br><span class="line">        return bean.getType();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	//返回不同布局的总数</span><br><span class="line">    @Override</span><br><span class="line">    public int getViewTypeCount() &#123;</span><br><span class="line">        return 2;</span><br><span class="line">    &#125;&lt;/span&gt;</span><br><span class="line">	</span><br><span class="line">    @Override</span><br><span class="line">    public View getView(int position, View convertView, ViewGroup parent) &#123;</span><br><span class="line">        ViewHolder holder;</span><br><span class="line">        if (convertView == null) &#123;</span><br><span class="line">			//判断布局类型</span><br><span class="line">            if (getItemViewType(position) == 0) &#123;</span><br><span class="line">                holder = new ViewHolder();</span><br><span class="line">                convertView = mInflater.inflate(</span><br><span class="line">                        R.layout.chat_item_itemin, null);</span><br><span class="line">                holder.icon = (ImageView) convertView.findViewById(</span><br><span class="line">                        R.id.icon_in);</span><br><span class="line">                holder.text = (TextView) convertView.findViewById(</span><br><span class="line">                        R.id.text_in);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                holder = new ViewHolder();</span><br><span class="line">                convertView = mInflater.inflate(</span><br><span class="line">                        R.layout.chat_item_itemout, null);</span><br><span class="line">                holder.icon = (ImageView) convertView.findViewById(</span><br><span class="line">                        R.id.icon_out);</span><br><span class="line">                holder.text = (TextView) convertView.findViewById(</span><br><span class="line">                        R.id.text_out);</span><br><span class="line">            &#125;</span><br><span class="line">            convertView.setTag(holder);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            holder = (ViewHolder) convertView.getTag();</span><br><span class="line">        &#125;</span><br><span class="line">        holder.icon.setImageBitmap(mData.get(position).getIcon());</span><br><span class="line">        holder.text.setText(mData.get(position).getText());</span><br><span class="line">        return convertView;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>此外，ListView还能设置滑动监听，有OnTouchListener和OnScrollListener监听事件。</p>
 ]]></content>
     </entry>
     
