@@ -4,8 +4,8 @@
   
     
     <entry>
-      <title><![CDATA[java必懂知识 之 对象及其内存管理]]></title>
-      <url>http://imtianx.cn/2016/11/19/java%20%E5%9F%BA%E7%A1%80%20%E4%B9%8B%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      <title><![CDATA[java知识 之 对象及其内存管理]]></title>
+      <url>http://imtianx.cn/2016/11/19/java%20%E7%9F%A5%E8%AF%86%E4%B9%8B%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>读书笔记：《疯狂java 程序员的基本修养》第二章——对象及其内存管理</p>
 </blockquote>
@@ -87,8 +87,8 @@
     </entry>
     
     <entry>
-      <title><![CDATA[java必懂知识 之 数组及其内存管理]]></title>
-      <url>http://imtianx.cn/2016/11/17/java%20%E5%9F%BA%E7%A1%80%20%E4%B9%8B%20%E6%95%B0%E7%BB%84%E5%8F%8A%E5%85%B6%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      <title><![CDATA[java知识 之 数组及其内存管理]]></title>
+      <url>http://imtianx.cn/2016/11/17/java%20%E7%9F%A5%E8%AF%86%E4%B9%8B%20%E6%95%B0%E7%BB%84%E5%8F%8A%E5%85%B6%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
       <content type="html"><![CDATA[<blockquote>
 <p>读书笔记：《疯狂java 程序员的基本修养》第一章——数组及其内存管理</p>
 </blockquote>
