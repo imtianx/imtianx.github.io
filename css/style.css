@@ -41,7 +41,7 @@ html {
   color: rgba(0,0,0,0.8);
 }
 .container {
-  width: 900px;
+  width: 700px;
 }
 @media (max-width: 767px) {
   .container {
@@ -612,7 +612,7 @@ a.social-link:hover {
 .toc {
   position: fixed;
   top: 15%;
-  left: calc(50% + 450px);
+  left: calc(50% + 350px);
 }
 .toc ol {
   list-style-type: none;
@@ -778,6 +778,10 @@ article .gallery .next:before {
 }
 article pre {
   padding: 10px 16px;
+}
+article .line:after {
+  content: '';
+  display: inline-block;
 }
 article code,
 article pre {

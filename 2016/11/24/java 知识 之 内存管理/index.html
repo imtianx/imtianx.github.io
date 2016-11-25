@@ -7,13 +7,17 @@
 
     
 
-    <title>集合 | Imtianx `s Blog</title>
+    <title>java 知识 之 内存管理 | Imtianx `s Blog</title>
     <meta name="author" content="imtianx">
+    
+    <meta name="description" content="读书笔记：《疯狂java 程序员的基本修养》第四章——java内存管理
+
+java 中的内存管理包括内存分配和内存回收，这些都是由 JVM 帮我们完成的。当创建对象时为其分配内存空间；当失去引用时，GC会自动清除并回收他们所占用的空间。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="java 知识 之 内存管理"/>
     <meta property="og:site_name" content="Imtianx `s Blog"/>
 
     
@@ -287,30 +291,147 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/java/">java</a><a class="breadcrumb" href="/categories/java/高级知识/">高级知识</a>
+
 
         
-            <a class="breadcrumb" href="/tags/集合/">集合</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>java 知识 之 内存管理</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2016-11-24T08:06:25.000Z"><a href="/2016/11/24/java 知识 之 内存管理/">2016-11-24</a></time>
+
+            
+    <div class="tags-row">
         
-            <a href="/2016/11/22/java 知识 之 常见java集合的实现细节/" class="collection-item grey-text text-darken-1">
-                <time datetime="2016-11-22T08:06:25.000Z">2016-11-22</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                java 知识 之 常见java集合的实现细节
-            </a>
+            <a href="/tags/java/" class="chip purple lighten-1">java</a>
+        
+            <a href="/tags/内存回收/" class="chip purple lighten-1">内存回收</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#一、java-引用的种类"><span class="section table-of-contents-text">一、java 引用的种类</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#a-强引用"><span class="section table-of-contents-text">a. 强引用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#b-软引用"><span class="section table-of-contents-text">b. 软引用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#c-弱引用"><span class="section table-of-contents-text">c. 弱引用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#d-虚引用"><span class="section table-of-contents-text">d. 虚引用</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#二、java-的内存泄露"><span class="section table-of-contents-text">二、java 的内存泄露</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#三、垃圾回收机制"><span class="section table-of-contents-text">三、垃圾回收机制</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#四、内存管理技巧"><span class="section table-of-contents-text">四、内存管理技巧</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>读书笔记：《疯狂java 程序员的基本修养》第四章——java内存管理</p>
+</blockquote>
+<p>java 中的内存管理包括内存分配和内存回收，这些都是由 JVM 帮我们完成的。当创建对象时为其分配内存空间；当失去引用时，GC会自动清除并回收他们所占用的空间。<br><a id="more"></a></p>
+<h2 id="一、java-引用的种类"><a href="#一、java-引用的种类" class="headerlink" title="一、java 引用的种类"></a>一、java 引用的种类</h2><p>当java对象创建完后，垃圾回收机制会实时的监测每个对象的状态，包括对象的申请、引用、被引用。赋值等。当它不存在引用时，对其进行回收。</p>
+<p>当一个对象在堆内存中运行时，根据它对应的有向图的状态，有如下三种状态：</p>
+<ul>
+<li>可达状态<br>当一个对象被创建后，有一个以上的引用变量引用他，在有向图中可以从起点导航到该点，此时可以通过引用变量调用它的属性和方法。</li>
+<li>可恢复状态<br>程序中不再有任何对象引用变量引用它，此时不能从有向图的起点到达它。系统准备回收，再回收之前系统会调用该对象的<code>finalize()</code>方法进行资源清理，如果在finalize 中重新让一个及以上的引用变量引用该对象，则它会再次变为可达状态，否则，进入不可达状态。</li>
+<li>不可达状态<br>所有的关联都被切断，永久性的失去引用，只有在该状态下系统才会真正的回收对象所占用的资源。</li>
+</ul>
+<p>三张状态转换图如下：</p>
+<p><img src="/img/article_img/2016/object_state.png" alt=""></p>
+<h3 id="a-强引用"><a href="#a-强引用" class="headerlink" title="a. 强引用"></a><strong>a. 强引用</strong></h3><p>在java  中，创建一个对象，并把它赋值给一个引用变量，就是强引用。<strong>被强引用所引用的对象时绝对不会被垃圾回收机制回收的，即使系统非常紧张</strong>，因此它是造成内存泄露的主要原因之一。</p>
+<h3 id="b-软引用"><a href="#b-软引用" class="headerlink" title="b. 软引用"></a><strong>b. 软引用</strong></h3><p>软引用需要用<code>SoftReference</code>类来实现，当一个对象只有软引用时，它有可能被回收。对于软引用，<strong>当系统内存空间足够时，不会被回收，否则会被系统回收，该对象不可再被使用</strong>。<br>软引用是强引用很好的替代，他能避免系统内存不足的异常。具体的使用如下（其中Person类有两个属性和一个tostring方法）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class SoftReferenceTest &#123;</span><br><span class="line">    public static void main(String[] args)</span><br><span class="line">            throws Exception &#123;</span><br><span class="line">        SoftReference&lt;Person&gt;[] people =</span><br><span class="line">                new SoftReference[100000];</span><br><span class="line">        for (int i = 0; i &lt; people.length; i++) &#123;</span><br><span class="line">            people[i] = new SoftReference&lt;Person&gt;(new Person(</span><br><span class="line">                    &quot;名字&quot; + i, (i + 1) * 4 % 100));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(people[2].get());</span><br><span class="line">        System.out.println(people[4].get());</span><br><span class="line">        // 通知系统进行垃圾回收</span><br><span class="line">        System.gc();</span><br><span class="line">        System.runFinalization();</span><br><span class="line">        // 垃圾回收机制运行之后，SoftReference数组里的元素保持不变</span><br><span class="line">        System.out.println(people[2].get());</span><br><span class="line">        System.out.println(people[4].get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person[name=名字2, age=12]</span><br><span class="line">Person[name=名字4, age=20]</span><br><span class="line">Person[name=名字2, age=12]</span><br><span class="line">Person[name=名字4, age=20]</span><br></pre></td></tr></table></figure></p>
+<p>系统内存足够，在垃圾回收前后结果一样，和强引用并无区别。若指定jvm的内存大小，则软引用所引用的对象会被系统回收，可使用如下命令指定堆内存只有2M，则创建长度为100000的数组可使内存紧张，则会被回收，最终输出均为<br>null：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx2m -Xms2m SoftReferenceTest</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Xmx：设置java虚拟机堆内存最大容量；<br>Xms：设置java虚拟机初始容量。 </p>
+</blockquote>
+<p>如果将前面初始化people的方式改为下面的强引用方式，依然指定2M内存，则会抛出<code>java.lang.OutOfMemoryError</code>的内存溢出异常,因而终止程序,此处也体现了前面所说的强引用对象不会回收其所占用的内存，尽管内存不足。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = new Person[100000];</span><br></pre></td></tr></table></figure></p>
+<h3 id="c-弱引用"><a href="#c-弱引用" class="headerlink" title="c. 弱引用"></a><strong>c. 弱引用</strong></h3><p>弱引用于软引用类似，但他的生存期更短，通过<code>WeakReference</code>类实现。对于只有弱引用的对象，当垃圾机制运行时，<strong>不管内存是否足够，总会回收该对象占用的内存</strong>。<br>如下示例代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class WeakReferenceTest &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        // 创建一个字符串对象</span><br><span class="line">        String str = new String(&quot;疯狂Java讲义&quot;);</span><br><span class="line">        // 创建一个弱引用，让此弱引用引用到&quot;疯狂Java讲义&quot;字符串</span><br><span class="line">        WeakReference&lt;String&gt; wr = new WeakReference&lt;String&gt;(str);</span><br><span class="line">        // 切断str引用和&quot;疯狂Java讲义&quot;字符串之间的引用</span><br><span class="line">        str = null;      //②</span><br><span class="line">        // 取出弱引用所引用的对象</span><br><span class="line">        System.out.println(wr.get()); //输出：疯狂Java讲义</span><br><span class="line">        // 强制垃圾回收</span><br><span class="line">        System.gc();</span><br><span class="line">        System.runFinalization();</span><br><span class="line">        // 再次取出弱引用所引用的对象</span><br><span class="line">        System.out.println(wr.get());  //输出：null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：上面代码中创建字符串对象不可采用 “String str = “疯狂Java讲义”;” 这种方式,因为这样的定义系统会把它缓存为常量，使用强引用来引用它，则不会被回收。</p>
+</blockquote>
+<p>上述代码中的内存分配示意图：</p>
+<p><img src="/img/article_img/2016/weakreference.png" alt=""></p>
+<p>在实际使用时，可以使用<code>WeakHashMap</code>来保存弱引用对象。</p>
+<h3 id="d-虚引用"><a href="#d-虚引用" class="headerlink" title="d. 虚引用"></a><strong>d. 虚引用</strong></h3><p>虚引用主要是跟踪对象被垃圾回收的状态，可以通过检查与虚引用关联的队列中是否包含指定的引用，了解对象是否被回收。<br>与软引用和弱引用不同，虚引用不能单独使用。<br>虚引用对象在被释放前会将它添加到他关联的引用队列中。通过<code>PhantomReference</code>类实现，结合引用队列<code>ReferenceQuence</code>使用。如下使用示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class PhantomReferenceTest &#123;</span><br><span class="line">    public static void main(String[] args)</span><br><span class="line">            throws Exception &#123;</span><br><span class="line">        // 创建一个字符串对象</span><br><span class="line">        String str = new String(&quot;疯狂Java讲义&quot;);</span><br><span class="line">        // 创建一个引用队列</span><br><span class="line">        ReferenceQueue&lt;String&gt; rq = new ReferenceQueue&lt;String&gt;();</span><br><span class="line">        // 创建一个虚引用，让此虚引用引用到&quot;疯狂Java讲义&quot;字符串</span><br><span class="line">        PhantomReference&lt;String&gt; pr =</span><br><span class="line">                new PhantomReference&lt;String&gt;(str, rq);</span><br><span class="line">        // 切断str引用和&quot;Struts2权威指南&quot;字符串之间的引用</span><br><span class="line">        str = null;</span><br><span class="line">        // 试图取出虚引用所引用的对象，</span><br><span class="line">        // 程序并不能通过虚引用访问被引用的对象</span><br><span class="line">        System.out.println(pr.get());  //输出null</span><br><span class="line">        // 强制垃圾回收</span><br><span class="line">        System.gc();</span><br><span class="line">        System.runFinalization();</span><br><span class="line">        // 取出引用队列中最先进入队列中引用与pr进行比较</span><br><span class="line">        System.out.println(rq.poll() == pr);  //输出：true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、java-的内存泄露"><a href="#二、java-的内存泄露" class="headerlink" title="二、java 的内存泄露"></a>二、java 的内存泄露</h2><p>与C++程序员不同，java 程序员无需关注内存释放的问题，这些由JVM帮我们完成。然而如果使用不当，一样会出现内存泄露。如果是可达状态的对象，但程序不访问，他们做占用的空间不会被回收，就会产生内存泄露。<br>yi ArrayList中的remove方法为例，每当删除一个元素时，就会让最后一个元素的引用置为null:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elementData[--size] = null;</span><br></pre></td></tr></table></figure>
+<p>在ArrayList中采用数组来保存每个元素的。由于集合中每个元素实际上存的是引用，如果不使用上述的代码，则ArrayList中被删除的元素一直被引用着，处于可达状态，导致无法被回收，因而会产生内存泄露。</p>
+<h2 id="三、垃圾回收机制"><a href="#三、垃圾回收机制" class="headerlink" title="三、垃圾回收机制"></a>三、垃圾回收机制</h2><p>垃圾回收主要完成两件事：</p>
+<ul>
+<li>跟踪监控java对象，当它处于不可达时，回收他所占用的内存；</li>
+<li>清理内存分配和回收过程中产生的内存是碎片。</li>
+</ul>
+<p>垃圾回收的基本算法有：</p>
+<ul>
+<li>串行回收和并行回收</li>
+<li>并发执行和应用程序停止</li>
+<li>压缩/不压缩和复制</li>
+</ul>
+<p>现在的垃圾回收机制用分代的方式采用不同的回收机制，根据<strong>对象生存时间的长短</strong>，把堆内存分为三代：<strong>Yong(新生代)、Old(老年代)、Permanent(永生代)</strong>。</p>
+<p>在java中，绝大多数对象不会被长时间引用，他们在Yong期间被回收，很老的对象和很新的对象之间很少存在相互引用的情况。</p>
+<p>当Yong代的内存快要用完时，垃圾回收机制会对其进行回收，此时回收的系统性能开销小。为次要回收；当Old代快要用完时，垃圾回收机制会进行全面的回收，包括Yong和Old，此时回收成本大，为主要回收。</p>
+<p>Permanent时代主要用于装在Class、方法等信息，默认是64MB，通常不会被回收。</p>
+<h2 id="四、内存管理技巧"><a href="#四、内存管理技巧" class="headerlink" title="四、内存管理技巧"></a>四、内存管理技巧</h2><p>只有很好的掌握了垃圾回收及其机制，才能更好的管理java虚拟机，使我们写出更高性能的java代码。避免内存泄露的主要技巧如下：</p>
+<ul>
+<li>使用直接量<br>如使用 <code>String str = &quot;hello;&quot;</code> 代替 <code>String str = new String(&quot;hello&quot;);</code>，前者会在缓存池缓存这个常量</li>
+<li>使用StringBuilder和StringBuffer进行字符串的连接<br>使用String时会生成大量的临时字符串存在内存中。</li>
+<li>及时释放无用对象的引用</li>
+<li>减少静态变量</li>
+<li>避免在经常调用的方法、循环中创建java对象</li>
+<li>缓存经常使用的对象<br>缓存技术是牺牲空间换时间的，主要使用容器保存已使用的对象，其关键在于如何控制缓存容器的空间使其不至于过大并且能够保留大部分已用过的对象。</li>
+<li>尽量不要使用finalize方法</li>
+<li>考虑使用SoftReference<br>当创建长度很大的对象时，可以使用软引用包装数组，便于在内存不足的情况下被回收释放。</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/11/24/java 知识 之 内存管理/" data-title="java 知识 之 内存管理" data-url="http://imtianx.cn/2016/11/24/java 知识 之 内存管理/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>
