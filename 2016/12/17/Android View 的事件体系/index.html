@@ -1,0 +1,804 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Android View 的事件体系 | Imtianx `s Blog</title>
+    <meta name="author" content="imtianx">
+    
+    <meta name="description" content="本文为读书笔记： 《Android 开发艺术探索 》——第三章 View 的事件体系     
+
+android 系统虽然提供了很多基本的控件，如Button、TextView等，但是很多时候系统提供的view不能满足我们的需求，此时就需要我们根据自己的需求进行自定义控件。这些控件都是继承自View的。">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Android View 的事件体系"/>
+    <meta property="og:site_name" content="Imtianx `s Blog"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Imtianx `s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Imtianx `s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="/img/head.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">imtianx</p>
+                        <p class="desc">java/android/移动开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/android/">
+                    android <span class="right">33 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/学习笔记/">
+                    学习笔记 <span class="right">29 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/开源库/">
+                    开源库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/SQLit/">
+                    SQLit <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/android/项目总结/">
+                    项目总结 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/java/">
+                    java <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/基础知识/">
+                    基础知识 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/高级知识/">
+                    高级知识 <span class="right">7 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具软件/">
+                    工具软件 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/hexo/">
+                    hexo <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/工具软件/PL-SQL/">
+                    PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/面试/">
+                    面试 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/android/">android</a><a class="breadcrumb" href="/categories/android/学习笔记/">学习笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Android View 的事件体系</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-12-17T08:06:25.000Z"><a href="/2016/12/17/Android View 的事件体系/">2016-12-17</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/View/" class="chip purple lighten-1">View</a>
+        
+            <a href="/tags/事件分发/" class="chip purple lighten-1">事件分发</a>
+        
+            <a href="/tags/滑动冲突/" class="chip purple lighten-1">滑动冲突</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#一、android-控件架构"><span class="section table-of-contents-text">一、android 控件架构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#二、View-的基本知识"><span class="section table-of-contents-text">二、View 的基本知识</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-1、View-的位置参数"><span class="section table-of-contents-text">2.1、View 的位置参数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-2、MotionEvent和TouchSlop"><span class="section table-of-contents-text">2.2、MotionEvent和TouchSlop</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-3、VelocityTracker、GestureDetector和Scroller"><span class="section table-of-contents-text">2.3、VelocityTracker、GestureDetector和Scroller</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#三、View-的滑动"><span class="section table-of-contents-text">三、View 的滑动</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-1-通过View-的-ScrollTo-ScrollBy-方法"><span class="section table-of-contents-text">3.1. 通过View 的 ScrollTo/ScrollBy 方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-2-使用动画"><span class="section table-of-contents-text">3.2. 使用动画</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-3-改变布局参数"><span class="section table-of-contents-text">3.3. 改变布局参数</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#四、弹性滑动"><span class="section table-of-contents-text">四、弹性滑动</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#五、View-的事件分发机制"><span class="section table-of-contents-text">五、View 的事件分发机制</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#六、View-的滑动冲突"><span class="section table-of-contents-text">六、View 的滑动冲突</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>本文为读书笔记： 《Android 开发艺术探索 》——第三章 View 的事件体系     </p>
+</blockquote>
+<p>android 系统虽然提供了很多基本的控件，如Button、TextView等，但是很多时候系统提供的view不能满足我们的需求，此时就需要我们根据自己的需求进行自定义控件。这些控件都是继承自View的。<br><a id="more"></a></p>
+<h2 id="一、android-控件架构"><a href="#一、android-控件架构" class="headerlink" title="一、android 控件架构"></a>一、android 控件架构</h2><p>android 中的控件在界面上都会占一块巨型区域，主要分为两类：ViewGroup和View控件。ViewGroup作为父控件可以包含多个View控件，并管理他们，但其也是继承自View。通过Viewgroup，整个控件界面形成了View的控件树，如图1所示。</p>
+<p>上层控件负责字控件的测量与绘制，并传递交互事件。在Activity 中 通过<code>findViewById()</code>方法，就是以树的 <em>深度优先遍历</em>  查找对应的控件。控件树的顶部都有一个ViewParent 对象，对整个视图进行控制。<br><img src="/img/article_img/2016/view.png" alt=""></p>
+<p>如上面图2 所示，是android 界面的架构图，在activity 中 通过 <code>setContentView()</code> 方法设置为根布局。在每一个Activity 中 都包含一个Window 对象，它由 PhoneWindow来实现，PhoneWindow 讲一个 DecorView 设置为整个应用窗口的根View。DecorView 作为窗口界面的顶层视图，封装了一些窗口操作的通用方法，所有View 的监听事件，都通过<code>WindowManagerService</code> 进行接收，并通过Activity 对象来回调相应的onClickListener。对于DecorView，他由TitleView 和ContentView 组成，<br>前者承载的是一个<code>Actionbar</code>，后者承载的是一个<code>FrameLayout</code>。</p>
+<h2 id="二、View-的基本知识"><a href="#二、View-的基本知识" class="headerlink" title="二、View 的基本知识"></a>二、View 的基本知识</h2><h3 id="2-1、View-的位置参数"><a href="#2-1、View-的位置参数" class="headerlink" title="2.1、View 的位置参数"></a>2.1、View 的位置参数</h3><p>view 的位置由两个顶点坐标来决定，主要是左上（left,top）和右下(right,bottom)坐标。他们是相对于View 的父容器来说的，是相对坐标。如下图他们的关系：<br><img src="/img/article_img/2016/view_zuobiao.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width = right - left;</span><br><span class="line">height = bottom - top;</span><br></pre></td></tr></table></figure>
+<p>在View 中都有相应的方法来获取他们的值。从android 3.0开始，View增加了几个参数：x,y,translationX和translationY，其中x、y表示View 左上角的坐标，而translationX和translationY是View左上角相对于父容器的偏移量。同样的，他们也有相应的get/set方法，translationX和translationY的默认值均为0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = left = translationX;</span><br><span class="line">y = right + translationY;</span><br></pre></td></tr></table></figure></p>
+<p>在View 的移动过程中top和left 表示原始左上角坐标，并不会改变。</p>
+<h3 id="2-2、MotionEvent和TouchSlop"><a href="#2-2、MotionEvent和TouchSlop" class="headerlink" title="2.2、MotionEvent和TouchSlop"></a>2.2、MotionEvent和TouchSlop</h3><p><strong>（1）、MotionEvent</strong><br>在手指触摸屏幕后，会有一系列的事件，主要事件类型有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ACTION_DOWN // 收支接触</span><br><span class="line">ACTION_MOVE // 手指在屏幕上移动</span><br><span class="line">ACTION_UP //手指从屏幕松开</span><br><span class="line">ACTION_CANCEL //取消</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>使用 <code>MotionEvent</code> 对象获取的 点击的 x 和 y ,使用 <code>getX / getY</code> 获取的是相对于当前View左上角的x和y,而 <code>getRawX / getRawY</code> 获取的是相对于手机屏幕左上角的坐标。</p>
+<p><strong>（2）、TouchSlop</strong><br>TouchSlop 是系统所能识别的最小滑动距离，小于它则视未发生滑动，他和设备相关，在不同的设备上获取的值不同。通过 <code>ViewConfiguration.get(getContext()).getScaledTouchSlop();</code> 获取。</p>
+<h3 id="2-3、VelocityTracker、GestureDetector和Scroller"><a href="#2-3、VelocityTracker、GestureDetector和Scroller" class="headerlink" title="2.3、VelocityTracker、GestureDetector和Scroller"></a>2.3、VelocityTracker、GestureDetector和Scroller</h3><p><strong>（1）、VelocityTracker</strong><br>速度追踪，用于追踪滑动过程中的速度，包括水平和竖直速度。如下具体使用步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//1.在 onTouchEvent 方法中追踪当前事件的速度</span><br><span class="line">VelocityTracker  tracker = VelocityTracker.obtain();</span><br><span class="line">tracker.addMovement(event);</span><br><span class="line">//2.获取当前速度</span><br><span class="line">tracker.computeCurrentVelocity(1000);//计算速度</span><br><span class="line">int xVelocity = (int) tracker.getXVelocity();</span><br><span class="line">int yVelocity = (int) tracker.getYVelocity();</span><br><span class="line">//3.在不需要的时候重置回收内存</span><br><span class="line">tracker.recycle();</span><br></pre></td></tr></table></figure>
+<p><strong>（2）、GestureDetector</strong><br>手势检测，用于检测单击、滑动、长按、双击等手势。<br>在使用时，首先要实现 <code>GestureDetector.OnGestureListener</code>接口，如果需要双击，则需实现 <code>GestureDetector.OnDoubleTapListener</code> 接口；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//设置监听</span><br><span class="line">mGestureDetector = new GestureDetector(this);</span><br><span class="line">//避免长按后无法拖动，自己测试时发现不设置，长按后也可以拖动</span><br><span class="line">mGestureDetector.setIsLongpressEnabled(false);</span><br></pre></td></tr></table></figure>
+<p>然后在 onTouchEvent 添加如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">boolean consume = mGestureDetector.onTouchEvent(event);</span><br><span class="line">return consume;</span><br></pre></td></tr></table></figure>
+<p>GestureDetector 类中的 OnGestureListener 接口和 OnDoubleTapListener 接口相关实现方法说明：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">所属接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onDown</td>
+<td style="text-align:center">手指轻触，一个ACTION_DOWN 触发</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td>onShowPress</td>
+<td style="text-align:center">手指轻触，尚未松开或者拖动</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td>onSingleTapUp</td>
+<td style="text-align:center">单击：手指（轻触后）松开，伴随一个ACTION_UP触发</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td>onScroll</td>
+<td style="text-align:center">拖动：手指按下并拖动，一个ACTION_DOWN，多个ACTION_MOVE</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td>onLongPress</td>
+<td style="text-align:center">长按</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td>onFling</td>
+<td style="text-align:center">快速滑动：按下快速滑动并松开</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td>onSingleTapConfirmed</td>
+<td style="text-align:center">严格单击：这个只可能是单击，不会是双击中的一次单击</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td>onDoubleTap</td>
+<td style="text-align:center">双击 :与onSingleTapConfirmed 不共存</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td>onDoubleTapEvent</td>
+<td style="text-align:center">表示发生了双击行为</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）、Scroller</strong><br>弹性滑动，可是实现有过度效果的滑动，View 的 ScrollTo/ScrollBy 都是瞬间滑动完成的。</p>
+<h2 id="三、View-的滑动"><a href="#三、View-的滑动" class="headerlink" title="三、View 的滑动"></a>三、View 的滑动</h2><p>实现View的滑动主要有如下三种方式:</p>
+<ol>
+<li><strong>scrollTo /scrollBy</strong> :适合对view 的内容改变；</li>
+<li><strong>动画</strong>： 主要用于没有交互的View 和实现复杂的动画效果；</li>
+<li><strong>改变布局参数</strong>：操作稍微复杂，适合有交互的View 。</li>
+</ol>
+<h3 id="3-1-通过View-的-ScrollTo-ScrollBy-方法"><a href="#3-1-通过View-的-ScrollTo-ScrollBy-方法" class="headerlink" title="3.1. 通过View 的 ScrollTo/ScrollBy 方法"></a>3.1. 通过View 的 ScrollTo/ScrollBy 方法</h3><p>View 源码中的相关实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * Set the scrolled position of your view. This will cause a call to</span><br><span class="line">   * &#123;@link #onScrollChanged(int, int, int, int)&#125; and the view will be</span><br><span class="line">   * invalidated.</span><br><span class="line">   * @param x the x position to scroll to</span><br><span class="line">   * @param y the y position to scroll to</span><br><span class="line">   */</span><br><span class="line">  public void scrollTo(int x, int y) &#123;</span><br><span class="line">      if (mScrollX != x || mScrollY != y) &#123;</span><br><span class="line">          int oldX = mScrollX;</span><br><span class="line">          int oldY = mScrollY;</span><br><span class="line">          mScrollX = x;</span><br><span class="line">          mScrollY = y;</span><br><span class="line">          invalidateParentCaches();</span><br><span class="line">          onScrollChanged(mScrollX, mScrollY, oldX, oldY);</span><br><span class="line">          if (!awakenScrollBars()) &#123;</span><br><span class="line">              postInvalidateOnAnimation();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">    /**</span><br><span class="line">   * Move the scrolled position of your view. This will cause a call to</span><br><span class="line">   * &#123;@link #onScrollChanged(int, int, int, int)&#125; and the view will be</span><br><span class="line">   * invalidated.</span><br><span class="line">   * @param x the amount of pixels to scroll by horizontally</span><br><span class="line">   * @param y the amount of pixels to scroll by vertically</span><br><span class="line">   */</span><br><span class="line">  public void scrollBy(int x, int y) &#123;</span><br><span class="line">      scrollTo(mScrollX + x, mScrollY + y);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>scrollBy</code> 调用的是 <code>scrollTo</code>，它实现了使用当前位置的相对滑动，而 <code>scrollTo</code> 是基于所传参数的绝对滑动。<strong>在滑动过程中，mScrollX 的值等于 View 左边缘 和 View 内容左边缘在水平方向的距离，而 mScrollY 则是View 上边缘和 View 内容上边缘在竖直方向的距离。他们都是以像素单位。如果从 左往右/从上往下 滑动，mScrollX/mScrollY 为正。</strong></p>
+<p>scrollBy 和 scrollTo 只能改变 View 内容的位置而不能改变View 在布局中的位置。</p>
+<p>如下滑动过程中，mScrollX/mScrollY 取值情况：</p>
+<p><img src="/img/article_img/2016/View 中的scrollTo和scrollBy.png" alt=""></p>
+<h3 id="3-2-使用动画"><a href="#3-2-使用动画" class="headerlink" title="3.2. 使用动画"></a>3.2. 使用动画</h3><p>通过动画为View 添加平移效果，View 的 tanslationX 和 tanslationY 属性，可以采用传统的动画和属性动画。<br>动画不能真正的改变 View 的位置，只是移动的是他的影像，如果在新位置有点击事件，则无效。但是在android 3.0以后属性动画解决了该问题。</p>
+<h3 id="3-3-改变布局参数"><a href="#3-3-改变布局参数" class="headerlink" title="3.3. 改变布局参数"></a>3.3. 改变布局参数</h3><p>通过改变View 的LayoutParams 使得 View 重新布局实现滑动。<br>这里以 把 Button 水平移动 100px 为例。可以改变 Button 的 <code>marginLeft</code> ,或者在其左边放一个宽度为0 的view,当要平移时改变他的宽度，使其被挤到右边（加入Button的父布局为LinearLayout），实现滑动。</p>
+<p>如下是改变 <code>LayoutParams</code>的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)</span><br><span class="line">                mButton.getLayoutParams();</span><br><span class="line">params.width += 100;</span><br><span class="line">params.leftMargin += 100;</span><br><span class="line">mButton.setLayoutParams(params);  // 或者  mButton.requestLayout();</span><br></pre></td></tr></table></figure>
+<h2 id="四、弹性滑动"><a href="#四、弹性滑动" class="headerlink" title="四、弹性滑动"></a>四、弹性滑动</h2><p>为了避免 滑动的生硬，可以采用弹性滑动，提高用户体验。这里主要有 ：Scroller、动画、延时三种方式。</p>
+<p>如下是 <code>Scroller</code> 的典型使用，主要是 <strong>invalidate</strong>方法起的作用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Scroller mScroller = new Scroller(context);</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 滑动到指定位置</span><br><span class="line"> *</span><br><span class="line"> * @param destX  X 滑动距离</span><br><span class="line"> * @param destY  Y 滑动距离</span><br><span class="line"> */</span><br><span class="line">private void smoothScrollTo(int destX, int destY) &#123;</span><br><span class="line">    //滑动起点X</span><br><span class="line">    int scrollX = getScrollX();</span><br><span class="line">    //滑动起点Y</span><br><span class="line">    int scrollY = getScrollY();</span><br><span class="line">    //1000 ms内慢慢滑向 （destX，destY）</span><br><span class="line">    mScroller.startScroll(scrollX, scrollY, destX, destY, 1000);</span><br><span class="line">    //重绘</span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br><span class="line"> /**</span><br><span class="line"> * 使View 不断重绘</span><br><span class="line"> */</span><br><span class="line">@Override</span><br><span class="line">public void computeScroll() &#123;</span><br><span class="line">    /**</span><br><span class="line">     *  computeScrollOffset 方法通过时间流逝百分比计算 scrollX和scrollY </span><br><span class="line">     *  返回true 表示滑动未结束</span><br><span class="line">     */</span><br><span class="line">    if (mScroller.computeScrollOffset()) &#123;</span><br><span class="line">        //滑动到当前位置，通过小幅度滑动实现弹性滑动</span><br><span class="line">        scrollTo(mScroller.getCurrX(), mScroller.getCurrY());</span><br><span class="line">        //再次重绘</span><br><span class="line">        postInvalidate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如下 <strong>Scroller 的滑动原理（相关方法的调用过程）</strong>：</p>
+<p><img src="/img/article_img/2016/Scroller滑动机制.png" alt=""></p>
+<p>对于延时达到弹性滑动，主要是利用 了Handler 或者 View 的 postDelayed 方法，或者线程的 sleep方法。</p>
+<h2 id="五、View-的事件分发机制"><a href="#五、View-的事件分发机制" class="headerlink" title="五、View 的事件分发机制"></a>五、View 的事件分发机制</h2><p>在 view 中事件分发十分重要，了解他的原理，对我们理解View 和解决滑动冲突都十分重要。</p>
+<blockquote>
+<ol>
+<li>所有的Touch事件都封装到 <code>MotionEvent</code> 里面；</li>
+<li>事件处理包括三种情况，分别为：<strong>传递—-dispatchTouchEvent()函数、拦截——onInterceptTouchEvent()函数、消费—-onTouchEvent()函数和OnTouchListener</strong>；</li>
+<li>事件类型分为 ACTION_DOWN, ACTION_UP, ACTION_MOVE , ACTION_POINTER_DOWN, ACTION_POINTER_UP , ACTION_CANCEL 等，每个事件都是以 ACTION_DOWN 开始 ACTION_UP 结束。</li>
+</ol>
+</blockquote>
+<p>用下面伪代码表示事件分发过程及其关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//事件分发</span><br><span class="line">public boolean dispatchTouchEvent(MotionEvent event) &#123;</span><br><span class="line">    boolean consume = false;</span><br><span class="line">    //是否被拦截</span><br><span class="line">    if (onInterceptTouchEvent(event))</span><br><span class="line">    &#123;</span><br><span class="line">        //被拦截，处理事件</span><br><span class="line">        consume = onTouchEvent(event);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //未被拦截，向下分发</span><br><span class="line">        consume = childView.dispatchTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line">    return consume;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>事件传递的基本流程</strong>：</p>
+<ul>
+<li>事件都是从Activity.dispatchTouchEvent()开始传递；</li>
+<li>事件由父View传递给子View，ViewGroup可以通过onInterceptTouchEvent()方法对事件拦截，停止其向子view传递；</li>
+<li>如果事件从上往下传递过程中一直没有被停止，且最底层子View没有消费事件，事件会反向往上传递，这时父View(ViewGroup)可以进行消费，如果还是没有被消费的话，最后会到Activity的onTouchEvent()函数；</li>
+<li>如果View没有对ACTION_DOWN进行消费，之后的其他事件不会传递过来，也就是说ACTION_DOWN必须返回true，之后的事件才会传递进来；</li>
+<li>OnTouchListener优先于onTouchEvent()对事件进行消费。</li>
+</ul>
+<h2 id="六、View-的滑动冲突"><a href="#六、View-的滑动冲突" class="headerlink" title="六、View 的滑动冲突"></a>六、View 的滑动冲突</h2><p>滑动冲突的出现是由于内外两个view都是可以滑动的，如 ScrollView 中嵌套 ListView 。常见的滑动冲突场景有：</p>
+<ul>
+<li>场景一：内外滑动方向不一致；</li>
+<li>场景二：内外滑动方向一致；</li>
+<li>场景三：上述两种场景的嵌套。</li>
+</ul>
+<p>对于场景一，可以根据水平竖直方向的滑动距离差判断是哪种滑动，进行相应的拦截；场景二，可以通过自己的业务制定相应的处理规则，然后进行处理；场景三则结合前两种进行。</p>
+<p>有些滑动冲突是采用了不合理的布局导致，可以更换布局，而有些则必须通过自定义控件重写拦截和分发事件处理。</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/12/17/Android View 的事件体系/" data-title="Android View 的事件体系" data-url="http://imtianx.cn/2016/12/17/Android View 的事件体系/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'imtianx'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large purple">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://github.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://weibo.com/imtianx" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+            </div>
+            
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
+                
+                    <a class="social-link" href="http://developer.android.com/index.html" target="_blank">android官网</a>
+                
+                    <a class="social-link" href="http://gold.xitu.io/" target="_blank">掘金</a>
+                
+                    <a class="social-link" href="http://androidcat.com/" target="_blank">androidcat</a>
+                
+                    <a class="social-link" href="http://www.jianshu.com/" target="_blank">简书</a>
+                
+                    <a class="social-link" href="http://www.csdn.net/" target="_blank">CSDN</a>
+                
+                    <a class="social-link" href="http://www.jcodecraeer.com/" target="_blank">泡在网上的日子</a>
+                
+                    <a class="social-link" href="http://suo.im/3HbX5t" target="_blank">翻墙利器(ss)</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+	
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016-2017  imtianx.cn, All rights reserved.
+			<span style="font-size:16px;padding-left:100px;" class="center" id="busuanzi_container_site_pv"  >
+				本站访客数: <span id="busuanzi_value_site_pv"></span>
+			</span>
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+	
+	
+		
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+</footer>
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
