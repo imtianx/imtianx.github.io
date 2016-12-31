@@ -213,30 +213,6 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/java/">
-                    java <span class="right">8 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/基础知识/">
-                    基础知识 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/高级知识/">
-                    高级知识 <span class="right">7 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具软件/">
                     工具软件 <span class="right">3 篇</span></a>
                 </a>
@@ -255,6 +231,30 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/工具软件/PL-SQL/">
                     PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/java/">
+                    java <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/基础知识/">
+                    基础知识 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/高级知识/">
+                    高级知识 <span class="right">7 篇</span></a>
                 </a>
             </li>
 
@@ -321,6 +321,11 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
 
             </div>
             <time class="pink-link-context" datetime="2016-12-14T08:06:25.000Z"><a href="/2016/12/14/android IPC 机制及进程通信/">2016-12-14</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
 
             
     <div class="tags-row">
@@ -442,7 +447,24 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">package cn.imtianx.ipcdemo;</span><br><span class="line">public interface IAddAidlInterface extends android.os.IInterface</span><br><span class="line">&#123;</span><br><span class="line">    public static abstract class Stub extends android.os.Binder implements cn.imtianx.ipcdemo.IAddAidlInterface</span><br><span class="line">    &#123;</span><br><span class="line">        //binder 的唯一标示，一般是binder的类名</span><br><span class="line">        private static final java.lang.String DESCRIPTOR = &quot;cn.imtianx.ipcdemo.IAddAidlInterface&quot;;</span><br><span class="line">        /** Construct the stub at attach it to the interface. */</span><br><span class="line">        public Stub()</span><br><span class="line">        &#123;</span><br><span class="line">            this.attachInterface (this, DESCRIPTOR);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 用于将服务器端的binder 转换成客户端所需要的AIDL 的接口类型</span><br><span class="line">         * @param obj</span><br><span class="line">         * @return 如果客户端和服务器端在同一进程，则返回服务端的stub对象，否则返回 Stub.proxy对象</span><br><span class="line">        */</span><br><span class="line">        public static cn.imtianx.ipcdemo.IAddAidlInterface asInterface (android.os.IBinder obj)</span><br><span class="line">        &#123;</span><br><span class="line">            if ( (obj == null) )</span><br><span class="line">            &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">            android.os.IInterface iin = obj.queryLocalInterface (DESCRIPTOR);</span><br><span class="line">            if ( ( (iin != null) &amp;&amp; (iin instanceof cn.imtianx.ipcdemo.IAddAidlInterface) ) )</span><br><span class="line">            &#123;</span><br><span class="line">                return ( (cn.imtianx.ipcdemo.IAddAidlInterface) iin);</span><br><span class="line">            &#125;</span><br><span class="line">            return new cn.imtianx.ipcdemo.IAddAidlInterface.Stub.Proxy (obj);</span><br><span class="line">        &#125;</span><br><span class="line">        /**</span><br><span class="line">         * 返回当前binder对象</span><br><span class="line">         * @return</span><br><span class="line">         */</span><br><span class="line">        @Override public android.os.IBinder asBinder()</span><br><span class="line">        &#123;</span><br><span class="line">            return this;</span><br><span class="line">        &#125;</span><br><span class="line">        /**</span><br><span class="line">        * 运行在服务端的Binder线程池中</span><br><span class="line">        * @param code 确定请求的方法</span><br><span class="line">        * @param data 获取目标方法所需参数</span><br><span class="line">        * @param reply 写入返回值</span><br><span class="line">        * @param flags</span><br><span class="line">        * @return 若返回false，则为失败，可以此做权限验证</span><br><span class="line">        * @throws android.os.RemoteException</span><br><span class="line">        */</span><br><span class="line">        @Override public boolean onTransact (int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException</span><br><span class="line">        &#123;</span><br><span class="line">            switch (code)</span><br><span class="line">            &#123;</span><br><span class="line">            case INTERFACE_TRANSACTION:</span><br><span class="line">            &#123;</span><br><span class="line">                reply.writeString (DESCRIPTOR);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            case TRANSACTION_add:</span><br><span class="line">            &#123;</span><br><span class="line">                data.enforceInterface (DESCRIPTOR);</span><br><span class="line">                int _arg0;</span><br><span class="line">                _arg0 = data.readInt();</span><br><span class="line">                int _arg1;</span><br><span class="line">                _arg1 = data.readInt();</span><br><span class="line">                int _result = this.add (_arg0, _arg1);</span><br><span class="line">                reply.writeNoException();</span><br><span class="line">                reply.writeInt (_result);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return super.onTransact (code, data, reply, flags);</span><br><span class="line">        &#125;</span><br><span class="line">        //代理对象</span><br><span class="line">        private static class Proxy implements cn.imtianx.ipcdemo.IAddAidlInterface</span><br><span class="line">        &#123;</span><br><span class="line">            private android.os.IBinder mRemote;</span><br><span class="line">            Proxy (android.os.IBinder remote)</span><br><span class="line">            &#123;</span><br><span class="line">                mRemote = remote;</span><br><span class="line">            &#125;</span><br><span class="line">            @Override public android.os.IBinder asBinder()</span><br><span class="line">            &#123;</span><br><span class="line">                return mRemote;</span><br><span class="line">            &#125;</span><br><span class="line">            public java.lang.String getInterfaceDescriptor()</span><br><span class="line">            &#123;</span><br><span class="line">                return DESCRIPTOR;</span><br><span class="line">            &#125;</span><br><span class="line">            @Override public int add (int num1, int num2) throws android.os.RemoteException</span><br><span class="line">            &#123;</span><br><span class="line">                android.os.Parcel _data = android.os.Parcel.obtain();</span><br><span class="line">                android.os.Parcel _reply = android.os.Parcel.obtain();</span><br><span class="line">                int _result;</span><br><span class="line">                try &#123;</span><br><span class="line">                    _data.writeInterfaceToken (DESCRIPTOR);</span><br><span class="line">                    _data.writeInt (num1);</span><br><span class="line">                    _data.writeInt (num2);</span><br><span class="line">                    mRemote.transact (Stub.TRANSACTION_add, _data, _reply, 0);</span><br><span class="line">                    _reply.readException();</span><br><span class="line">                    _result = _reply.readInt();</span><br><span class="line">                &#125;</span><br><span class="line">                finally &#123;</span><br><span class="line">                    _reply.recycle();</span><br><span class="line">                    _data.recycle();</span><br><span class="line">                &#125;</span><br><span class="line">                return _result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">        * 方法标示符</span><br><span class="line">        * 格式：TRANSACTION_方法名 = (android.os.IBinder.FIRST_CALL_TRANSACTION + </span><br><span class="line">        *       i);其中i按方法数自增</span><br><span class="line">        */</span><br><span class="line">        static final int TRANSACTION_add = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public int add (int num1, int num2) throws android.os.RemoteException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>更多AIDL 的资料，可参见<a href="https://developer.android.google.cn/guide/components/aidl.html#Defining" target="_blank" rel="external">官方文档</a>，对于Socket、ContentProvider等方式，之前接触过，这里不做介绍。</p>
 
+                
+<p class="pink-link-context">
+    <a href="/2016/12/17/Android View 的事件体系/" rel="next" title="Android View 的事件体系">
+    上一篇：Android View 的事件体系
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/12/12/android  多渠道打包/" rel="next" title="android  多渠道打包">
+    下一篇：android  多渠道打包
+  </a>
+</p>
+
+
             </div>
+			
         </div>
     </div>
 </article>
@@ -497,7 +519,7 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
     <div class="container">
         <div class="row">
             
-            <div class="social-group col m3 s12">
+            <div class="social-group col m4 s12">
                 <h5 class="white-text">社交</h5>
                 
                     <a class="social-link" href="https://github.com/imtianx" target="_blank">
@@ -508,10 +530,22 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
                         <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
             </div>
             
+
             
-            <div class="col m9 s12">
+            <div class="col m8 s12">
                 <h5 class="white-text">友情链接</h5>
                 
                     <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
@@ -535,22 +569,15 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
         </div>
     </div>
     
-	
+
     <div class="footer-copyright pink-link-context">
         <div class="container">
             © 2016-2017  imtianx.cn, All rights reserved.
-			<span style="font-size:16px;padding-left:100px;" class="center" id="busuanzi_container_site_pv"  >
-				本站访客数: <span id="busuanzi_value_site_pv"></span>
-			</span>
             <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
         </div>
     </div>
-	
-	
-		
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
 </footer>
+
 
     <noscript>
     <div class="noscript">
@@ -564,6 +591,8 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
 <script>
     (function($) {
@@ -605,6 +634,22 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);

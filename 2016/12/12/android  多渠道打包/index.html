@@ -213,30 +213,6 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/java/">
-                    java <span class="right">8 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/基础知识/">
-                    基础知识 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/高级知识/">
-                    高级知识 <span class="right">7 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具软件/">
                     工具软件 <span class="right">3 篇</span></a>
                 </a>
@@ -255,6 +231,30 @@
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/工具软件/PL-SQL/">
                     PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/java/">
+                    java <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/基础知识/">
+                    基础知识 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/高级知识/">
+                    高级知识 <span class="right">7 篇</span></a>
                 </a>
             </li>
 
@@ -322,6 +322,11 @@
             </div>
             <time class="pink-link-context" datetime="2016-12-12T08:06:25.000Z"><a href="/2016/12/12/android  多渠道打包/">2016-12-12</a></time>
 
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
             
     <div class="tags-row">
         
@@ -357,7 +362,24 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">        //...</span><br><span class="line">         //指定release包名 为市场名</span><br><span class="line">         applicationVariants.all &#123;</span><br><span class="line">            variant -&gt;</span><br><span class="line">                variant.outputs.each &#123;</span><br><span class="line">                    output -&gt;</span><br><span class="line">                        def outputFile = output.outputFile</span><br><span class="line">                        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&quot;.apk&quot;)) &#123;</span><br><span class="line">                            def fileName = &quot;$&#123;variant.productFlavors[0].name&#125;&quot; + &quot;.apk&quot;</span><br><span class="line">                            output.outputFile = new File(outputFile.parent, fileName);</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 terminal 中进行执行命令打包。</p>
 
+                
+<p class="pink-link-context">
+    <a href="/2016/12/14/android IPC 机制及进程通信/" rel="next" title="android IPC 机制及进程通信">
+    上一篇：android IPC 机制及进程通信
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/11/27/java知识 之 Integer自动拆装箱与缓存/" rel="next" title="java知识 之 Integer自动拆装箱与缓存">
+    下一篇：java知识 之 Integer自动拆装箱与缓存
+  </a>
+</p>
+
+
             </div>
+			
         </div>
     </div>
 </article>
@@ -412,7 +434,7 @@
     <div class="container">
         <div class="row">
             
-            <div class="social-group col m3 s12">
+            <div class="social-group col m4 s12">
                 <h5 class="white-text">社交</h5>
                 
                     <a class="social-link" href="https://github.com/imtianx" target="_blank">
@@ -423,10 +445,22 @@
                         <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
             </div>
             
+
             
-            <div class="col m9 s12">
+            <div class="col m8 s12">
                 <h5 class="white-text">友情链接</h5>
                 
                     <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
@@ -450,22 +484,15 @@
         </div>
     </div>
     
-	
+
     <div class="footer-copyright pink-link-context">
         <div class="container">
             © 2016-2017  imtianx.cn, All rights reserved.
-			<span style="font-size:16px;padding-left:100px;" class="center" id="busuanzi_container_site_pv"  >
-				本站访客数: <span id="busuanzi_value_site_pv"></span>
-			</span>
             <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
         </div>
     </div>
-	
-	
-		
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
 </footer>
+
 
     <noscript>
     <div class="noscript">
@@ -479,6 +506,8 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
 <script>
     (function($) {
@@ -520,6 +549,22 @@
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);

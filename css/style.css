@@ -165,6 +165,9 @@ nav .brand-logo {
 .collection a.collection-item:not(.active):hover {
   background-color: #f5f5f5;
 }
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+  text-transform: initial;
+}
 .breadcrumb:before {
   content: "\f105";
   font-family: FontAwesome;
@@ -611,7 +614,8 @@ a.social-link:hover {
 }
 .toc {
   position: fixed;
-  top: 15%;
+  top: 0px;
+  margin-top: 15%;
   left: calc(50% + 350px);
 }
 .toc ol {
@@ -731,6 +735,15 @@ article .gallery .next:before {
   margin: 0;
   padding: 0 30px;
   color: #fff;
+}
+.read-times-container {
+  margin-left: 15px;
+}
+.read-times-container .fa {
+  margin-right: 0;
+}
+.site-visitors-container {
+  margin-top: 10px;
 }
 @-moz-keyframes noscript-slide {
   0% {

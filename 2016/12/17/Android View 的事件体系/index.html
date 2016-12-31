@@ -213,30 +213,6 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/java/">
-                    java <span class="right">8 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/基础知识/">
-                    基础知识 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/高级知识/">
-                    高级知识 <span class="right">7 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具软件/">
                     工具软件 <span class="right">3 篇</span></a>
                 </a>
@@ -255,6 +231,30 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/工具软件/PL-SQL/">
                     PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/java/">
+                    java <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/基础知识/">
+                    基础知识 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/高级知识/">
+                    高级知识 <span class="right">7 篇</span></a>
                 </a>
             </li>
 
@@ -322,6 +322,11 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
             </div>
             <time class="pink-link-context" datetime="2016-12-17T08:06:25.000Z"><a href="/2016/12/17/Android View 的事件体系/">2016-12-17</a></time>
 
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
             
     <div class="tags-row">
         
@@ -349,7 +354,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 <p>如上面图2 所示，是android 界面的架构图，在activity 中 通过 <code>setContentView()</code> 方法设置为根布局。在每一个Activity 中 都包含一个Window 对象，它由 PhoneWindow来实现，PhoneWindow 讲一个 DecorView 设置为整个应用窗口的根View。DecorView 作为窗口界面的顶层视图，封装了一些窗口操作的通用方法，所有View 的监听事件，都通过<code>WindowManagerService</code> 进行接收，并通过Activity 对象来回调相应的onClickListener。对于DecorView，他由TitleView 和ContentView 组成，<br>前者承载的是一个<code>Actionbar</code>，后者承载的是一个<code>FrameLayout</code>。</p>
 <h2 id="二、View-的基本知识"><a href="#二、View-的基本知识" class="headerlink" title="二、View 的基本知识"></a>二、View 的基本知识</h2><h3 id="2-1、View-的位置参数"><a href="#2-1、View-的位置参数" class="headerlink" title="2.1、View 的位置参数"></a>2.1、View 的位置参数</h3><p>view 的位置由两个顶点坐标来决定，主要是左上（left,top）和右下(right,bottom)坐标。他们是相对于View 的父容器来说的，是相对坐标。如下图他们的关系：<br><img src="/img/article_img/2016/view_zuobiao.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width = right - left;</span><br><span class="line">height = bottom - top;</span><br></pre></td></tr></table></figure>
-<p>在View 中都有相应的方法来获取他们的值。从android 3.0开始，View增加了几个参数：x,y,translationX和translationY，其中x、y表示View 左上角的坐标，而translationX和translationY是View左上角相对于父容器的偏移量。同样的，他们也有相应的get/set方法，translationX和translationY的默认值均为0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = left = translationX;</span><br><span class="line">y = right + translationY;</span><br></pre></td></tr></table></figure></p>
+<p>在View 中都有相应的方法来获取他们的值。从android 3.0开始，View增加了几个参数：x,y,translationX和translationY，其中x、y表示View 左上角的坐标，而translationX和translationY是View左上角相对于父容器的偏移量。同样的，他们也有相应的get/set方法，translationX和translationY的默认值均为0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = left + translationX;</span><br><span class="line">y = right + translationY;</span><br></pre></td></tr></table></figure></p>
 <p>在View 的移动过程中top和left 表示原始左上角坐标，并不会改变。</p>
 <h3 id="2-2、MotionEvent和TouchSlop"><a href="#2-2、MotionEvent和TouchSlop" class="headerlink" title="2.2、MotionEvent和TouchSlop"></a>2.2、MotionEvent和TouchSlop</h3><p><strong>（1）、MotionEvent</strong><br>在手指触摸屏幕后，会有一系列的事件，主要事件类型有：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ACTION_DOWN // 收支接触</span><br><span class="line">ACTION_MOVE // 手指在屏幕上移动</span><br><span class="line">ACTION_UP //手指从屏幕松开</span><br><span class="line">ACTION_CANCEL //取消</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
@@ -473,7 +478,24 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 <p>对于场景一，可以根据水平竖直方向的滑动距离差判断是哪种滑动，进行相应的拦截；场景二，可以通过自己的业务制定相应的处理规则，然后进行处理；场景三则结合前两种进行。</p>
 <p>有些滑动冲突是采用了不合理的布局导致，可以更换布局，而有些则必须通过自定义控件重写拦截和分发事件处理。</p>
 
+                
+<p class="pink-link-context">
+    <a href="/2016/12/19/android 自定义View 详解/" rel="next" title="android 自定义View 详解">
+    上一篇：android 自定义View 详解
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/12/14/android IPC 机制及进程通信/" rel="next" title="android IPC 机制及进程通信">
+    下一篇：android IPC 机制及进程通信
+  </a>
+</p>
+
+
             </div>
+			
         </div>
     </div>
 </article>
@@ -528,7 +550,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
     <div class="container">
         <div class="row">
             
-            <div class="social-group col m3 s12">
+            <div class="social-group col m4 s12">
                 <h5 class="white-text">社交</h5>
                 
                     <a class="social-link" href="https://github.com/imtianx" target="_blank">
@@ -539,10 +561,22 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
                         <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
             </div>
             
+
             
-            <div class="col m9 s12">
+            <div class="col m8 s12">
                 <h5 class="white-text">友情链接</h5>
                 
                     <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
@@ -566,22 +600,15 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
         </div>
     </div>
     
-	
+
     <div class="footer-copyright pink-link-context">
         <div class="container">
             © 2016-2017  imtianx.cn, All rights reserved.
-			<span style="font-size:16px;padding-left:100px;" class="center" id="busuanzi_container_site_pv"  >
-				本站访客数: <span id="busuanzi_value_site_pv"></span>
-			</span>
             <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
         </div>
     </div>
-	
-	
-		
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
 </footer>
+
 
     <noscript>
     <div class="noscript">
@@ -595,6 +622,8 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
 <script>
     (function($) {
@@ -636,6 +665,22 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);

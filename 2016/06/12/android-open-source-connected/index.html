@@ -211,30 +211,6 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/java/">
-                    java <span class="right">8 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/基础知识/">
-                    基础知识 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/java/高级知识/">
-                    高级知识 <span class="right">7 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具软件/">
                     工具软件 <span class="right">3 篇</span></a>
                 </a>
@@ -253,6 +229,30 @@
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/工具软件/PL-SQL/">
                     PL-SQL <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/java/">
+                    java <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/基础知识/">
+                    基础知识 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/java/高级知识/">
+                    高级知识 <span class="right">7 篇</span></a>
                 </a>
             </li>
 
@@ -320,12 +320,17 @@
             </div>
             <time class="pink-link-context" datetime="2016-06-12T07:00:25.000Z"><a href="/2016/06/12/android-open-source-connected/">2016-06-12</a></time>
 
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
             
     <div class="tags-row">
         
-            <a href="/tags/开源框架/" class="chip purple lighten-1">开源框架</a>
-        
             <a href="/tags/android/" class="chip purple lighten-1">android</a>
+        
+            <a href="/tags/开源框架/" class="chip purple lighten-1">开源框架</a>
         
     </div>
 
@@ -348,7 +353,24 @@
 <h3 id="6-对话框"><a href="#6-对话框" class="headerlink" title="6.对话框"></a>6.对话框</h3><p>地址:<a href="https://github.com/txadf/sweet-alert-dialog" target="_blank" rel="external">https://github.com/txadf/sweet-alert-dialog</a><br>示例效果：<br><img src="https://github.com/pedant/sweet-alert-dialog/raw/master/change_type.gif" alt=""></p>
 <h3 id="7-EventBus"><a href="#7-EventBus" class="headerlink" title="7. EventBus"></a>7. EventBus</h3><p>地址：<a href="https://github.com/txadf/EventBus" target="_blank" rel="external">https://github.com/txadf/EventBus</a><br>注意：在使用，进行注册订阅时，使用下面的方式，其中“XXX”表示需要订阅的Activity或者Fragment名，避免直接使用“this”：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().register(XXX.this);</span><br></pre></td></tr></table></figure></p>
 
+                
+<p class="pink-link-context">
+    <a href="/2016/07/10/android-exception-catch-UncaughtExceptionHandler/" rel="next" title="android 异常捕获-UncaughtExceptionHandler">
+    上一篇：android 异常捕获-UncaughtExceptionHandler
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/05/28/TabLayout+ViewPager create tab/" rel="next" title="TabLayout+ViewPager创建tab">
+    下一篇：TabLayout+ViewPager创建tab
+  </a>
+</p>
+
+
             </div>
+			
         </div>
     </div>
 </article>
@@ -403,7 +425,7 @@
     <div class="container">
         <div class="row">
             
-            <div class="social-group col m3 s12">
+            <div class="social-group col m4 s12">
                 <h5 class="white-text">社交</h5>
                 
                     <a class="social-link" href="https://github.com/imtianx" target="_blank">
@@ -414,10 +436,22 @@
                         <i class="fa fa-2x fa-weibo"></i>
                     </a>
                 
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
             </div>
             
+
             
-            <div class="col m9 s12">
+            <div class="col m8 s12">
                 <h5 class="white-text">友情链接</h5>
                 
                     <a class="social-link" href="http://androidweekly.cn/" target="_blank">android开发技术周报</a>
@@ -441,22 +475,15 @@
         </div>
     </div>
     
-	
+
     <div class="footer-copyright pink-link-context">
         <div class="container">
             © 2016-2017  imtianx.cn, All rights reserved.
-			<span style="font-size:16px;padding-left:100px;" class="center" id="busuanzi_container_site_pv"  >
-				本站访客数: <span id="busuanzi_value_site_pv"></span>
-			</span>
             <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
         </div>
     </div>
-	
-	
-		
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
 </footer>
+
 
     <noscript>
     <div class="noscript">
@@ -470,6 +497,8 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
 <script>
     (function($) {
@@ -511,6 +540,22 @@
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);
