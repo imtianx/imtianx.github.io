@@ -4,8 +4,8 @@
   
     
     <entry>
-      <title><![CDATA[Tomca中配置单IP多二级域名方法]]></title>
-      <url>http://imtianx.cn/2017/01/11/Tomca%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%8D%95IP%E5%A4%9A%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E6%96%B9%E6%B3%95/</url>
+      <title><![CDATA[Tomcat中配置单IP多二级域名方法]]></title>
+      <url>http://imtianx.cn/2017/01/11/Tomcat%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%8D%95IP%E5%A4%9A%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E6%96%B9%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>由于一级域名 <a href="http://imtianx.cn/">imtianx.cn</a> 作为博客主地址了，为了方便使用，通过二级域名来配置网站。这里简介二级域名的配置方式。<br><a id="more"></a><br>作为学生，为了便宜采用 腾讯云 服务器。在 windows server 2012 服务器上配置网站，使用 toncat。</p>
 <h1 id="一、设置域名解析"><a href="#一、设置域名解析" class="headerlink" title="一、设置域名解析"></a>一、设置域名解析</h1><p>我的域名 imtianx.cn 在阿里的万网购买的。登陆域名管理后台，添加域名解析。这里使用 <code>A 记录</code>，它是指向一个 IP 的。为了方便测试，这里有添加如下两条A记录的二级域名解析。</p>
 <p><img src="http://img.imtianx.cn/domain_jiexi.png" alt=""></p>
