@@ -1,4 +1,4 @@
-﻿---
+---
 title: android  多渠道打包
 date: 2016-12-12 16:06:25
 categories: [android,学习笔记]
