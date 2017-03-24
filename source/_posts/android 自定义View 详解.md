@@ -1,4 +1,4 @@
-﻿---
+---
 title: android 自定义View 详解
 date: 2016-12-19 16:06:25
 categories: [android,学习笔记]

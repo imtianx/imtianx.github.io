@@ -1,4 +1,4 @@
-﻿---
+---
 title: java 知识 之 内存管理
 date: 2016-11-24 16:06:25
 categories: [java,高级知识]

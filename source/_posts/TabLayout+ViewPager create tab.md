@@ -1,4 +1,4 @@
-﻿---
+---
 title: TabLayout+ViewPager创建tab
 date: 2016-05-28 12:00:25
 categories: [android,学习笔记]

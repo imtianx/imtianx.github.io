@@ -1,4 +1,4 @@
-﻿---
+---
 title: java知识 之 对象及其内存管理
 date: 2016-11-19 16:06:25
 categories: [java,高级知识]

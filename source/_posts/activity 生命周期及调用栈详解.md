@@ -1,4 +1,4 @@
-﻿---
+---
 title: activity 生命周期及调用栈详解
 date: 2016-11-08 16:06:25
 categories: [android,学习笔记]

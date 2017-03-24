@@ -1,5 +1,6 @@
 ---
 title: Hexo+github 搭建个人博客
+date: 2016-04-23 08:27:03
 categories: [工具软件,hexo]
 tags: [软件,gihub]
 ---

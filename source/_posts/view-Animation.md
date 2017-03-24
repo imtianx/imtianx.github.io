@@ -1,4 +1,4 @@
-﻿---
+---
 title: Animation 动画详解
 date: 2016-04-25 11:00:38
 categories: [android,学习笔记]

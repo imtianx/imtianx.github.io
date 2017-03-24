@@ -1,4 +1,4 @@
-﻿---
+---
 title: android studio 生成aar和jar
 date: 2016-10-20 16:06:25
 categories: [android,学习笔记]
