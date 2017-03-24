@@ -1,4 +1,4 @@
-﻿---
+---
 title: 属性动画详解（Animator）
 date: 2016-04-25 19:00:38
 categories: [android,学习笔记]
