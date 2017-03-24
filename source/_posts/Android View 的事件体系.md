@@ -1,4 +1,4 @@
-﻿---
+---
 title: Android View 的事件体系
 date: 2016-12-17 16:06:25
 categories: [android,学习笔记]
