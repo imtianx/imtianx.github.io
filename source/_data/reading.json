@@ -1,0 +1,69 @@
+{
+    "define": {
+	    "readed": "已读",
+        "reading": "在读",
+        "wanted": "想读"
+    },
+    "contents": {
+        "readed": [{
+            "title": "疯狂 android讲义 ",
+            "cover": "/img/fengkuangjiangyi.jpg",
+            "review": "书很厚，但内容很丰富，3.0版的是基于sdk5.0的，很适合初学者。",
+			"doubanLink":"/"
+            
+        }, {
+            "title": "第一行代码",
+            "cover": "/img/diyihangdaima.jpg",
+            "review": "内容很实用，讲的很详细，作者的博客也讲的很好",
+			"doubanLink":"/"
+            
+        }, {
+            "title": "android编程权威指南",
+            "cover": "/img/quanweizhilan.jpg",
+            "review": "一本翻译国外的书，内容丰富，正本书围绕几个小项目展开，便于学习。",
+			"doubanLink":"/"
+            
+        },{
+            "title": "android 群英传",
+            "cover": "/img/qunyingzhuan.jpg",
+            "review": "进阶类的书籍，需要一定的基础，",
+			"doubanLink":"/"			
+           
+        },{
+            "title": "大话重构",
+            "cover": "https://img1.doubanio.com/lpic/s27246379.jpg",
+            "review": "软件开发中重构的技巧",
+			"doubanLink":"https://book.douban.com/subject/25853677/"			
+           
+        }],
+		
+		"reading": [{
+			"title": "android 开发艺术探索",
+            "cover": "/img/yisutansuo.jpg",
+            "review": "进阶类书籍，就个人而言，很难懂，大都从源码角度讲解，很详细",           
+            "doubanLink":"/"
+		},{
+			"title": "疯狂Java程序员的基本修养",
+            "cover": "https://img3.doubanio.com/lpic/s24960574.jpg",
+            "review": "java进阶类书籍",           
+            "doubanLink":"https://book.douban.com/subject/20471013/"
+		},{
+            "title": "App研发录",
+            "cover": "/img/yafalu.jpg",
+            "review": "",
+			"doubanLink":"/"
+		}],
+
+        "wanted": [{
+           "title": "android 源码设计模式",
+           "cover": "/img/yuanmashejimoshi.jpg",
+           "review": "讲解设计模式在android源码中的应用",
+		   "doubanLink":"/"
+		},{
+           "title": "第二行代码",
+           "cover": "https://img3.doubanio.com/lpic/s29152261.jpg",
+           "review": "android开发书籍",
+		   "doubanLink":"https://book.douban.com/subject/26915433/"
+		}]
+    }
+}

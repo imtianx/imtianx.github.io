@@ -1,0 +1,68 @@
+# 菜单配置（若不需要某项可直接删除）
+menu:
+  - id: home
+    link: /
+    icon: home
+    class: menu-home
+  - id: archives
+    link: /archives
+    icon: archive
+    class: menu-archive
+  - id: category
+    link: javascript:;
+    category: true
+    icon: bookmark
+    class: menu-category
+  - id: reading
+    link: /reading
+    icon: book
+    class: menu-reading
+  - id: search
+    link: "#search"
+    icon: search
+    class: menu-search modal-trigger
+  - id: about
+    link: /about
+    icon: user
+    class: menu-about
+
+# 颜色配置
+color:
+  header: indigo 
+  footer: indigo
+  page_nav: indigo
+  side_nav: indigo darken-1
+  tag: purple lighten-1
+  article_title_link: indigo
+  link: pink
+  pagination: purple
+  tab: pink
+  archive_item: grey
+  fab: purple 
+  fab_2: green
+  fab_3: yellow darken-1
+  new: pink
+  about_header: indigo
+  about_title: indigo
+
+excerpt_link: Read More
+archive_yearly: true
+
+# 版权信息
+copyright: © 2016-2017  imtianx.cn,  鄂ICP备17001358号-1
+
+# Disqus评论shortname，若为空则不启用
+disqus_shortname:
+# 多说shortname，若为空则不启用
+duoshuo_shortname: imtianx
+
+# Google分析track id，若为空则不启用
+google_analytics:
+# 腾讯分析sId，若为空则不启用
+tencent_analytics: 55744224
+
+# 高亮的主题，若为空则使用默认主题
+google_code_prettify: prettify-tomorrow-night-eighties
+
+# 是否启用MathJax数学公式渲染。如果你确认整个站点的博文都不会用到Latex数学公式，可以将其该项设为false提高页面加载速度
+mathjax: true
