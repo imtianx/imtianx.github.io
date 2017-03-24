@@ -1,4 +1,4 @@
-﻿---
+---
 title: java 知识 之 常见java集合的实现细节
 date: 2016-11-22 16:06:25
 categories: [java,高级知识]
