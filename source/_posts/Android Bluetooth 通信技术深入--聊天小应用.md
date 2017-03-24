@@ -1,4 +1,4 @@
-﻿---
+---
 title: Android Bluetooth 通信技术深入--聊天小应用
 date: 2016-09-24 16:06:25
 categories: [android,学习笔记]
