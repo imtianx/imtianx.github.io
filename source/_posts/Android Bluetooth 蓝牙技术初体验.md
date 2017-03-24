@@ -1,5 +1,4 @@
-﻿
----
+﻿---
 title: Android Bluetooth 蓝牙技术初体验
 date: 2016-09-20 16:06:25
 categories: [android,学习笔记]
