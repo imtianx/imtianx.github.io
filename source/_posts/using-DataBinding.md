@@ -1,4 +1,4 @@
-﻿---
+---
 title: 数据绑定库DataBinding的使用
 date: 2016-09-10 16:06:25
 categories: [android,学习笔记]
