@@ -1,0 +1,30 @@
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "imtianx"
+  - git config user.email "2360633699@qq.com"
+  - git add .
+  - git commit -m "Update blog"
+  - git push --force --quiet "https://${GITHUB_BLOG_TOKEN}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - blog-resources
+env:
+ global:
+   - GH_REF: github.com/imtianx/imtianx.github.io.git
