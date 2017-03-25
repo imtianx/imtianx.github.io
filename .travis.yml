@@ -7,7 +7,7 @@ node_js: stable
 # S: Build Lifecycle
 
 before_install:
-  - npm install -g hexo
+  - npm install hexo-cli -g
   - npm install -g hexo-generator-search
 
 # 安装依赖
