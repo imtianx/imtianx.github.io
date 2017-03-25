@@ -15,6 +15,7 @@ install:
 
  # 部署命令
 script:
+  - hexo -v
   - hexo clean
   - hexo g
 
