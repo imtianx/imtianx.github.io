@@ -2,8 +2,8 @@
 # 配置语言
 language: node_js
 # 语言版本 stable
-node_js: 
-  - ’6.6.0‘
+node_js: stable
+
 
 # S: Build Lifecycle
 
