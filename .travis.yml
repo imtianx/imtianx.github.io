@@ -1,8 +1,9 @@
 #  .travis.yml 配置信息
 # 配置语言
 language: node_js
-# 语言版本
-node_js: stable
+# 语言版本 stable
+node_js: 
+  - ’6.6.0‘
 
 # S: Build Lifecycle
 
