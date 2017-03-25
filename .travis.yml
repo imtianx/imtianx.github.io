@@ -9,6 +9,7 @@ node_js: stable
 
 # 安装依赖
 install:
+  - npm install hexo-cli -g
   - npm install -g hexo-generator-search
   - npm install
 
