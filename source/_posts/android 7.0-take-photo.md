@@ -1,4 +1,4 @@
-﻿---
+---
 title: android 7.0相机拍照适配
 date: 2017-03-05 16:06:25
 categories: [android,学习笔记]
