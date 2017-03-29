@@ -1,4 +1,4 @@
-﻿---
+---
 title: Linux 常用命令
 date: 2017-03-18 16:06:25
 categories: [后端,linux]
