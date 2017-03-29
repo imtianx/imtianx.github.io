@@ -1,4 +1,4 @@
-﻿---
+---
 title: Centos 7 web 环境搭建
 date: 2017-03-25 16:06:25
 categories: [后端,linux]
