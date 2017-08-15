@@ -1,5 +1,6 @@
 ﻿---
 title: gradle 打包不同资源
+comments: true
 date: 2017-06-25 12:22:25
 categories: [android,学习笔记]
 tags: [android,gradle]
