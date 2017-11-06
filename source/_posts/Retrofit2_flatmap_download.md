@@ -14,7 +14,7 @@ Retrofit2+Rxjava 是当下较为流行的网络请求方式，这里将其结合
 
 ![](/img/article_img/2017/Retrofit2_flatmap_download_1.png)
 
-经过改造，采用预加载的方式，大致流程如下图所示，在首页中获取图片路径并下载到本地，下次打开时显示。图中未加入读写SD卡权限的判断。
+经过改造，采用预加载的方式，大致流程如下图所示，在首页中获取图片路径并下载到本地，下次打开时显示。
 
 ![](/img/article_img/2017/Retrofit2_flatmap_download_2.png)
 
@@ -100,7 +100,7 @@ private boolean writeResponseBodyToDisk(ResponseBody body, String dir, String fi
         if (splashAdModel.bizSucc)
         {
 
-            String fileName = getActivity().getExternalCacheDir().getAbsolutePath()
+            String fileName = getActivity().getCacheDir().getAbsolutePath()
                               + "/splash_ad_pic.png";
             File file = new File (fileName);
             if (file.exists() )
@@ -146,7 +146,7 @@ private boolean writeResponseBodyToDisk(ResponseBody body, String dir, String fi
     {
         /*写入文件*/
         writeResponseBodyToDisk ( (ResponseBody) responseBody,
-                                  getActivity().getExternalCacheDir().getAbsolutePath(),
+                                  getActivity().getCacheDir().getAbsolutePath(),
                                   "splash_ad_pic.png");
     }
 });
@@ -155,7 +155,7 @@ private boolean writeResponseBodyToDisk(ResponseBody body, String dir, String fi
 
 上述代码中，`SplashAdAPI` 是获取图片url接口，`DownloadPicAPI` 是步骤二中的下载文件的接口。
 
-> 上述代码中没有对读写SDk权限的判断,可自行处理。
+> 使用 `getCacheDir()` 而非 `getExternalCacheDir()` 可以避免SD卡权限的问题和部分手机无外部存储而出现的空指针异常。或者，判断SD卡是否可用来选择存放位置。此外，将文件放在该缓存目录下，便于app卸载后清除数据。
 
 使用 flatMap 操作符，轻松的将两次请求链接。这种开屏广告的设计仅是自己的看法，有更好做法的欢迎留言，交流。
 
