@@ -1,7 +1,9 @@
 {
     "social": {
 	    "github": "https://github.com/imtianx",
-        "weibo": "http://weibo.com/imtianx"
+        "weibo": "http://weibo.com/imtianx",
+        "thumbs-o-up": "https://github.com/imtianx",
+        "rss-square": ""
        		
 		},
     "extern": {
@@ -12,8 +14,6 @@
 		"简书": "http://www.jianshu.com/",
 	    "CSDN": "http://www.csdn.net/",
 		"泡在网上的日子":"http://www.jcodecraeer.com/",
-		"翻墙SSBetter":"http://t.cn/R950yGA",
 		"Kictto":"http://blog.kictto.tech/"
-				
     }
 }
