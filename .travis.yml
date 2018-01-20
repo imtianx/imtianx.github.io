@@ -21,7 +21,7 @@ script:
   - hexo g
 
 # 提交内容及git 用户信息
- after_script:
+after_script:
   - cd ./public
 # - git init
   - git config user.name "imtianx"
