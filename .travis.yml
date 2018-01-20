@@ -21,16 +21,30 @@ script:
   - hexo g
 
 # 提交内容及git 用户信息
-after_script:
-  - cd ./public
-  - git init
-  - git config user.name "imtianx"
-  - git config user.email "2360633699@qq.com"
-  - git add .
-  - git commit -m "Update blog"
-  - git push --force --quiet "https://${GITHUB_BLOG_TOKEN}@${GH_REF}" master:master
+# after_script:
+#  - cd ./public
+#  - git init
+#  - git config user.name "imtianx"
+#  - git config user.email "2360633699@qq.com"
+#  - git add .
+#  - git commit -m "Update blog"
+#  - git push --force --quiet "https://${GITHUB_BLOG_TOKEN}@${GH_REF}" master:master
 # E: Build LifeCycle
 
+deploy:
+  provider: pages
+  email: imtianx@gmail.com
+  name: 'imtianx'
+  skip-cleanup: true
+# fqdn: https://blog.wangxdog.cn
+  local-dir: public
+  keep-history: true
+  github-token: $GITHUB_BLOG_TOKEN
+  target-branch: master
+  project-name: imtianx.github.io
+  verbose: true
+  on:
+    all_branches: true
 
 # 项目所在分支
 branches:
