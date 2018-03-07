@@ -11,9 +11,10 @@
 		"android官网":"http://developer.android.com/index.html",
 		"掘金": "http://gold.xitu.io/",
 		"androidcat": "http://androidcat.com/",
-		"简书": "http://www.jianshu.com/",
-	    "CSDN": "http://www.csdn.net/",
-		"泡在网上的日子":"http://www.jcodecraeer.com/",
-		"玩android":"http://wanandroid.com"
+		"codekk": "http://p.codekk.com/",
+	        "AndroidXRef": "http://androidxref.com/",
+	        "mindorks":"https://blog.mindorks.com/",
+		"玩android":"http://wanandroid.com",
+	        "编程之乐":"https://coding-dream.github.io/"
     }
 }
