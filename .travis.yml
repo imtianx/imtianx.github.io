@@ -23,7 +23,7 @@ script:
 # 提交内容及git 用户信息
 after_script:
   - cd ./public
-# - git init
+  - git init
   - git config user.name "imtianx"
   - git config user.email "2360633699@qq.com"
   - git add .
