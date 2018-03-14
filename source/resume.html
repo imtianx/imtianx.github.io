@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>imtianx-resume-android</title>
+    <style type="text/css">
+
+        canvas {
+            border: 1px solid black;
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://unpkg.com/pdfjs-dist@1.9.426/build/pdf.min.js"></script>
+    <script type="text/javascript">
+        var url = "http://img.imtianx.cn/resume.pdf";
+
+        PDFJS.cMapUrl = 'https://unpkg.com/pdfjs-dist@1.9.426/cmaps/';
+        PDFJS.cMapPacked = true;
+
+        var pdfDoc = null;
+
+        function createPage() {
+            var canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+            return canvas;
+        }
+
+        function renderPage(num) {
+            pdfDoc.getPage(num).then(function (page) {
+                var viewport = page.getViewport(2.0);
+                var canvas = createPage();
+                var ctx = canvas.getContext('2d');
+
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+            });
+        }
+
+        PDFJS.getDocument(url).then(function (pdf) {
+            pdfDoc = pdf;
+            for (var i = 1; i <= pdfDoc.numPages; i++) {
+                renderPage(i)
+            }
+        });
+
+    </script>
+</head>
+<body style="text-align: center;"> 
+</body>
+</html>
