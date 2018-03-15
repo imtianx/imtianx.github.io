@@ -2,18 +2,27 @@
     "avatar": "/img/head.jpg",
     "name": "imtianx",
 	"tag": "java/android/移动开发",
-    "desc": "java，android，移动开发，技术宅",
+    "desc": "移动开发，技术宅,了解java，kotlin,python ,C++等语言s",
     "skills": {
         "Android": 7,
-		"Kotlin": 4,
 		"Java": 7,
 		"C/C++": 5,
+		"Kotlin": 4,
+		"C++": 3,
 		"Python": 3,
 		"Mysql": 4,
 		"Html/css": 5,
 		"Git": 4
     },
     "projects": [
+    {
+		"name": "开发项目7",
+		"image": "http://p15.qhimg.com/t01b9de5d3b53a61c14.png",
+		"description": "x6game 是一款电竞游戏平台，可以下载手游，直接在线玩 H5 游戏，有丰富的游戏分类及游戏， 此外还有发表图文混排帖子，游戏管理、礼包管理等功能",
+		"tags": ["2017.12 - 2018.03", "X6GAME"],
+		"link_text": "应用市场",
+		"link": "http://zhushou.360.cn/detail/index/soft_id/3949028?recrefer=SE_D_x6game"
+	},
     {
 		"name": "维护项目6",
 		"image": "http://i3.res.meizu.com/fileserver/app_icon/8685/79ce834471434bd4bc0d6e901b2ffecd.png",
