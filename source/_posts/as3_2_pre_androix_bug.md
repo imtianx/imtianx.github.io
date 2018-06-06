@@ -1,5 +1,5 @@
 ---
-title: 金丝雀 和 androidx 爬坑
+title: AS3.2 和 androidx 爬坑
 date: 2018-06-04 22:06:25
 categories: [android,学习笔记]
 tags: [android,androidx,kotlin]
