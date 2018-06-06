@@ -21,11 +21,11 @@
                 <% if not index { %>
                   <ul class="article_copyright">
                       <li class="<%= theme.color.link %>-link-context">
-                          <strong>本文作者：</strong><%- theme.author %>
+                          <strong>本文作者：</strong><%= theme.author %>
                       </li>
                        <li class="<%= theme.color.link %>-link-context">
                           <strong>本文链接：</strong>
-                           <a href="<%- url_for(item.path)%>" title="<%- item.title %>"><%- item.path %></a>
+                           <a href="<%= url_for(item.path)%>" title="<%= item.title %>"><%= item.path %></a>
 
                       </li>
                        <li class="<%= theme.color.link %>-link-context">
