@@ -16,27 +16,6 @@
 
             <div class="entry <%= theme.color.link %>-link-context">
                 <%- item.content %>
-
-                <div>
-                <% if not index { %>
-                  <ul class="article_copyright">
-                      <li class="<%= theme.color.link %>-link-context">
-                          <strong>本文作者：</strong><%= theme.author %>
-                      </li>
-                       <li class="<%= theme.color.link %>-link-context">
-                          <strong>本文链接：</strong>
-                           <a href="<%= url_for(item.path)%>" title="<%= item.title %>"><%= item.path %></a>
-
-                      </li>
-                       <li class="<%= theme.color.link %>-link-context">
-                           <strong>版权： </strong>
-                           本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载请注明出处！
-
-                       </li>
-                  </ul>
-                <% } %>
-                </div>
-
                 <%- partial('post/prevnext') %>
             </div>
 			

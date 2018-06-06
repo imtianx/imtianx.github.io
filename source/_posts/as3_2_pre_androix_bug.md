@@ -115,8 +115,8 @@ $\color{red}{所以： 玩 navigation 的不要用 androidx,或者等下个版�
 
 
 
-
-
-
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2018/06/04/as3_2_pre_androix_bug
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
