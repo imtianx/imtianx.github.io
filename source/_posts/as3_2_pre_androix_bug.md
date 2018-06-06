@@ -37,7 +37,7 @@ tags: [android,androidx,kotlin]
 
 以上内容来自 Google [官方jetpack文档](https://developer.android.com/jetpack/)，更多 jetpack 使用及介绍相关内容请参考官方文档。
 
-## 三、金丝雀 使用之坑
+## 三、AS 3.2 爬坑
 
 ### 3.1 转换过项目为 androidx
 
@@ -112,6 +112,27 @@ $\color{red}{所以： 玩 navigation 的不要用 androidx,或者等下个版�
 上述项目地址：[https://github.com/imtianx/JetpackLearning](https://github.com/imtianx/JetpackLearning)
 
 这里简记最近体验AS3.2经历的坑！
+
+> 版权所有，转债请注明出处
+> 
+> 
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+      <strong>本文作者：</strong>{{ theme.author }}
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="{{ url_for(page.path) }}" title="{{ page.title }}">{{ page.path }}</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权： </strong>
+    本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
+  </li>
+</ul>
+
+</div>
 
 
 
