@@ -155,6 +155,11 @@ System.out.println(isOpen);
 
 开启前打印为false，开启后打印为true 。
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**： http://imtianx.cn/2016/11/27/java%E7%9F%A5%E8%AF%86%20%E4%B9%8B%20Integer%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E4%B8%8E%E7%BC%93%E5%AD%98
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 
 
 

@@ -227,6 +227,12 @@ ActivityThread 的内部类 H 继承自 Handler ，其内部定义了一组消�
 **主线程消息循环模型**：ActivityThread 内部通过 ApplicationThread 和 AMS 进行进程间通信，AMS 以进程间通信的方式完成 ActivityThread 的请求后回调 ApplicationThread 中的 Binder 方法，然后 ApplicationThread 向 H 发送消息， H收到后将 ApplicationThread 中的逻辑切换到 ActivityThread 中去执行。
 
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**： http://imtianx.cn/2016/12/27/android%20%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
+
 
 
 

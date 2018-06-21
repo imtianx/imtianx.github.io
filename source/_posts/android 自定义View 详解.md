@@ -252,4 +252,9 @@ view 的大致工作流程就是这样的，自定义view涉及到View 的层次
 
 至此，View 的相关知识介绍完毕，接下来就是进行具体自定义操作了。
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**： http://imtianx.cn/2016/12/19/android%20%E8%87%AA%E5%AE%9A%E4%B9%89View%20%E8%AF%A6%E8%A7%A3
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 

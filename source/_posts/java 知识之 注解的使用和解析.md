@@ -177,6 +177,11 @@ public class TestDemo01 {
 
 当你了解了自定义注解和它的解析，再去看自己项目所用框架中的注解的实现，就十分简单，自己也能实现相同的效果。
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**： http://imtianx.cn/2016/11/26/java%20%E7%9F%A5%E8%AF%86%E4%B9%8B%20%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E8%A7%A3%E6%9E%90
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 
 
 

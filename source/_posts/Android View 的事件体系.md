@@ -278,6 +278,11 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 
 有些滑动冲突是采用了不合理的布局导致，可以更换布局，而有些则必须通过自定义控件重写拦截和分发事件处理。
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**： http://imtianx.cn/2016/12/17/Android%20View%20%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 
 
 

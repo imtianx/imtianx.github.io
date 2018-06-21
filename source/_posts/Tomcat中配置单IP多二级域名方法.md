@@ -80,3 +80,8 @@ tags: [tomcat,域名解析,二级域名]
 ![](http://img.imtianx.cn/domain_show.png)
 
 这个只是一种二级域名解析方法，设置完就可以方便的使用二级域名了。
+
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/01/11/Tomcat%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%8D%95IP%E5%A4%9A%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E6%96%B9%E6%B3%95
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+

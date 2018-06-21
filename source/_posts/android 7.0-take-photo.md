@@ -198,3 +198,7 @@ protected void onActivityResult (int requestCode, int resultCode, Intent data)
 ```
 自己开发 用nexus6 测试毫无问题，却被测试妹子发现了，国内的手机厂商对room的阉割，导致 android 的适配变得很难，最近在做权限的处理时，又一次遇到了各种坑。
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/03/05/android%207.0-take-photo
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
