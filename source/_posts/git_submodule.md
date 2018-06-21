@@ -131,6 +131,11 @@ git submodule update
 更多子模块的操作，请参考官方文档：[Git 工具 - 子模块](https://git-scm.com/book/zh/v2/Git-工具-子模块)
 
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2018/03/08/git_submodule
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 
 
 

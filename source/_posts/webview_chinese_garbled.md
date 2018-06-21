@@ -1,4 +1,4 @@
-﻿---
+---
 title: WebView 中文乱码
 date: 2017-06-17 15:18:40
 categories: [android,学习笔记]
@@ -167,6 +167,10 @@ mWebView .loadDataWithBaseURL("",data,"text/html","utf-8","");
 ```
 美团关于 webview 的文章：
 [WebView性能、体验分析与优化](http://tech.meituan.com/WebViewPerf.html)
+
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/06/17/webview_chinese_garbled
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
 

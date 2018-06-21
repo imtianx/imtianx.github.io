@@ -176,6 +176,11 @@ rz
 sz
 ```
 
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/03/25/Centos%207%20web%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
+
 
 
 

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Git常用命令及团队协作
 date: 2017-08-22 16:06:25
 categories: [版本控制,Git]
@@ -48,6 +48,11 @@ git checkout develop_自己分支名
 如果不习惯使用命令，可以使用 [SourceTree](https://www.sourcetreeapp.com/)——一个可视化的git管理软件，不过安装必须注册，注册需要翻墙。
 
 对于 AS，IDEA等都可以方便的在编辑器中使用使用Git，使用时，注意要commit 和 push 才能提交到远程仓库。如果不方便自己搭建 Gitlab服务，可以使用Github或者码云来为项目使用Git。
+
+
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/08/22/git_cmd_teamwork
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
 

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Tomcat 配置https证书
 date: 2017-09-22 16:06:25
 categories: [后端,linux]
@@ -171,6 +171,11 @@ keystoreFile="/home/apache-tomcat-8.0.46/cert/214248632560457.pfx"
 ```
 
 然后重启tomcat即可。至此，https 配置结束。
+
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/09/22/tomcat_set_https
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
 
 
 

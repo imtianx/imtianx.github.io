@@ -122,7 +122,9 @@ h(左移一个字符←)、j(下一行↓)、k(上一行↑)、l(右移一个字
 ```
 
 
-
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/03/18/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
 

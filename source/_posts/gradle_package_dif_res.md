@@ -1,4 +1,4 @@
-﻿---
+---
 title: gradle 打包不同资源
 comments: true
 date: 2017-06-25 12:22:25
@@ -136,4 +136,8 @@ keytool -printcert -file META-INF/CERT.RSA
 至此，改打包方式介绍完毕，但是如果用这种方式，则不能进行 [多渠道打包](http://imtianx.cn/2016/12/12/android%20%20%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/)，这里多的 one、two、three类似于三个渠道。
 
 项目源代码地址：[DifPackage](https://github.com/imtianx/DifPackage)
+
+> **本文作者**：[imtianx](http://imtianx.cn/about)
+> **本文链接**：http://imtianx.cn/2017/06/25/gradle_package_dif_res
+> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
