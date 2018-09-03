@@ -27,7 +27,7 @@ tags: [android,androidx,kotlin]
 
 其中包含组件如下图所示：
 
-![](http://img.imtianx.cn/2018/0602/0001.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/320/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/12/dy/12)
+![](http://img.imtianx.cn/2018/0602/0001.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/1200/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/20/dy/20)
 
 以下是官方博客中的图，更加直白：
 
@@ -48,11 +48,11 @@ tags: [android,androidx,kotlin]
  
 如下为转换前gradle文件：
 
-![](http://img.imtianx.cn/2018/0602/004.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/320/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/12/dy/12)
+![](http://img.imtianx.cn/2018/0602/004.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/1200/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/20/dy/20)
 
 如下为转换后gradle文件：
 
-![](http://img.imtianx.cn/2018/0602/005.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/320/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/12/dy/12)
+![](http://img.imtianx.cn/2018/0602/005.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/1200/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/20/dy/20)
 
 官方博客介绍：[Hello World, AndroidX](https://android-developers.googleblog.com/2018/05/hello-world-androidx.html)
 
@@ -96,7 +96,7 @@ $\color{red}{注意： 两者依赖的版本要一致，否者编译时就会抛
 
 最近在 看官方文档时，发现了 $\color{red}{androidx}$,而且在访问 [Google maven repo](https://dl.google.com/dl/android/maven2/index.html) 时 也看到了很多 `androidx` 的身影，如下图：
 
-![](http://img.imtianx.cn/2018/0602/002.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/320/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/12/dy/12)
+![](http://img.imtianx.cn/2018/0602/002.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/1200/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/20/dy/20)
 
 ### 3.3 navigation 使用
 
@@ -104,7 +104,7 @@ $\color{red}{注意： 两者依赖的版本要一致，否者编译时就会抛
 
 在 [stackoverflow](https://stackoverflow.com/search?q=androidx) 上有类似的问题，在 google 的 issuetracker 上有相关bug的反馈，[点击查看](https://issuetracker.google.com/issues/79667498)，官方回复下个版本修复，如下图：
 
-![](http://img.imtianx.cn/2018/0602/006.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/320/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/12/dy/12)
+![](http://img.imtianx.cn/2018/0602/006.png?imageView2/0/q/75|watermark/2/text/aHR0cDovL2ltdGlhbnguY24v/font/5b6u6L2v6ZuF6buR/fontsize/1200/fill/I0Y4MEIwQg==/dissolve/100/gravity/SouthEast/dx/20/dy/20)
 
 $\color{red}{所以： 玩 navigation 的不要用 androidx,或者等下个版本修复}$
 
