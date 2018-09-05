@@ -1,4 +1,3 @@
-# 底部导航-BottomNavigationView 的使用及源码分析
 ---
 title: 底部导航-BottomNavigationView 的使用及源码分析
 date: 2018-09-04 22:06:25
