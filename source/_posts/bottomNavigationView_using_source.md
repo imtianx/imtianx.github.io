@@ -5,8 +5,6 @@ categories: [android,学习笔记]
 tags: [android,BottomNavigationView,Design]
 ---
 
-[toc]
-
 目前市面上很多 APP 都有底部导航的功能，实现底部导航的方式也有很多种,如：
 
 - ① 、使用原生控件 ：`TabHost` 、`LinearLayout`  /` RelativeLayout`、`RadioButton` 等；
@@ -14,6 +12,7 @@ tags: [android,BottomNavigationView,Design]
 - ③、使用第三方库 ([FlycoTabLayout](https://github.com/H07000223/FlycoTabLayout)/...) 实现；
 - ④、自定义控件实现;
 - ...
+
 
 总之，根据自己的实际需求可以选择不同的实现方案。这里主要介绍 [BottomNavigationView](https://developer.android.com/reference/android/support/design/widget/BottomNavigationView)  的实现方式，以及 SDK28 前后的差异。
 
@@ -446,6 +445,7 @@ private void setViewValues(@NonNull View view, float scaleX, float scaleY, int v
 // ...
 
 ```
+
 由于 labelVisibilityMode 的多种取值(-1-2,设置其他值会导致切换时 label 无动画)，上面出现了多种情况，如下简要说明：
 
 <table>
@@ -455,40 +455,33 @@ private void setViewValues(@NonNull View view, float scaleX, float scaleY, int v
         <th>isShifting 值</th>
         <th>代码说明</th>
     </tr>
-    
     <tr>
         <td rowspan="2">auto,-1,默认</td>
         <td>4-5</td>
         <td>true</td>
         <td>选中时，显示 largeLabel，未选中时隐藏，smallLabel 一直隐藏</td>
-    </tr>
-    
+    </tr> 
     <tr>
         <td>1-3</td>
         <td>false</td>
         <td>选中时，显示 largeLabel，隐藏 smallLabel；未选中时相反</td>
     </tr>
-    
     <tr>
         <td>selected,0</td>
         <td rowspan="3">1-5</td>
         <td>true</td>
         <td>选中时，显示 largeLabel，未选中时隐藏，smallLabel 一直隐藏</td>
-    </tr>
-    
+    </tr> 
     <tr>
         <td>labeled,1</td>
         <td rowspan="2">false</td>
         <td>选中时，显示 largeLabel，隐藏 smallLabel；未选中时相反</td>
     </tr>
-    
     <tr>
         <td>unlabeled,2</td>
         <td>始终隐藏 largeLabel，和 largeLabel</td>
     </tr>
-
 </table>
-
 
 > 注意：(1)、由于没有源码，AS 自动生成的，代码中有些是具体的值。(2)、对于 View 的显示状态：VISIBLE 为 0、INVISIBLE 为 4、GONE 为 8 ；通过查看 `27.1.1` 中 BottomNavigationItemView 对应的源码，设置 gravity 参数分别为 : `Gravity.CENTER` , `Gravity.CENTER_HORIZONTAL | Gravity.TOP` , 值为 `17`、 `49` (通过相应的 `|` 、`<<` 运算而得，可在 [Gravity](http://androidxref.com/9.0.0_r3/xref/frameworks/base/core/java/android/view/Gravity.java) 源码中查看)。上述源码中调用 `setViewLayoutParams` 时传入的 17/49 的值应该与之前版本一致。
 
