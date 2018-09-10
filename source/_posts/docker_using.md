@@ -5,7 +5,6 @@ categories: [工具软件,docker]
 tags: [docker,dockerfile,gitlab-ci]
 ---
 
-[toc]
 
 随着容器技术的普及，越来越多的事情可以在 `Docker` 中完成。这里简要记录 docker 的常用命令以及镜像的构建与运用。结合gitlab-ci来构建 android apk。
 <!-- more -->
