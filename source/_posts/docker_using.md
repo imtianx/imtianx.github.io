@@ -1,5 +1,5 @@
 ---
-title: Docker 的使用及镜像构建
+title: Docker的使用及镜像编写
 date: 2018-07-30 22:06:25
 categories: [工具软件,docker]
 tags: [docker,dockerfile,gitlab-ci]
