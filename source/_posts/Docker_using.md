@@ -2,7 +2,7 @@
 title: Docker 的使用及镜像构建
 date: 2018-07-30 22:06:25
 categories: [工具软件,docker]
-tags: [docker,gitlab-ci]
+tags: [docker,dockerfile,gitlab-ci]
 ---
 
 [toc]
@@ -249,6 +249,10 @@ android_build:
 更多gitlab-ci 配置参考 : [TestCIAndroid](https://gitlab.com/imtianx/TestCIAndroid)
 
 > 这里使用 gitlab 官方的，如果是自己搭建的gitlab,需要安装 git-runner,并且对项目进行设置。对于 CI 平台，国外做的比较好还有 [Travis CI](https://www.travis-ci.org/) 和 [CircleCI](https://circleci.com/)，其中[我的博客](https://github.com/imtianx/imtianx.github.io) 是通过 `Travis CI` 来自动构建的。
+
+
+> 记录一个坑：
+> 最近使用 [rancher](https://www.cnrancher.com/) 来管理docker容器，折腾了一上午仍然无法启动 rancher 容器，最后发现 **rancher 容器默认只能用 8080 端口**。
 
 参考资料：
 
