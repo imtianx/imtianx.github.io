@@ -121,6 +121,9 @@ docker pull nginx:1.15.1
 // 运行一个容器,name 指定名字，d 表示后台运行，p 指定端口，其中前者为主端口，后者为容器端口，可以通过 主机ip:外部端口 访问 
 docker run --name nginx -d -p 8094:80 nginx
 
+// 查看容器 运行日志，-f 实时显示
+docker logs -f container_id
+
 // 通过容器 id 进入容器,i交互模式，t终端，进入bash，使用 exit 退出 
 docker exec -it container_id bash
 
