@@ -454,7 +454,7 @@ private void setViewValues(@NonNull View view, float scaleX, float scaleY, int v
 
 ## 四、总结
 
-对于 28以前，可以使用上面的工具类，来保证操作3个 tab 的显示不偏移；而 28 以后直接设置 ` app:labelVisibilityMode="labeled"` 即可。此外，对于项目中的依赖库的升级，需要了解其 api 的变更，然后作出相应的更换。另外，如果项目中自定义了 `CoordinatorLayout.Behavior`，在 28 以后，也需要注意，应为官方 删除了 `layoutDependsOn`、 `onDependentViewChanged`方法。
+对于 28以前，可以使用上面的工具类，来保证操作3个 tab 的显示不偏移；而 28 以后直接设置 ` app:labelVisibilityMode="labeled"` 即可。此外，对于项目中的依赖库的升级，需要了解其 api 的变更，然后作出相应的更换。另外，如果项目中自定义了 `CoordinatorLayout.Behavior`，在 28 以后，也需要注意，对于 `layoutDependsOn`、 `onDependentViewChanged`方法参数不能为空，有 `@NonNull` 注解。
 
 
 
