@@ -6,22 +6,10 @@ var pageTitle = page.title;
 <div id="cyReward" role="cylabs" data-use="reward" style="text-align:center;margin-top:20px;"></div>
 <% if (page.comments){ %>
     <section id="comment">
-       <div id="SOHUCS" sid="<%=pageTitle %>" style="padding: 0px 30px 0px 46px;"></div>
-        <script>
-            (function(){
-				var appid = 'cyt6teOD2',
-				conf = 'ad896cbb1c0c645238b31cb3c77388ea';
-				var doc = document,
-				s = doc.createElement('script'),
-				h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
-				s.type = 'text/javascript';
-				s.charset = 'utf-8';
-				s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
-				h.insertBefore(s,h.firstChild);
-				window.SCS_NO_IFRAME = true;
-			  })()
-	   </script>
+       <div id="gitment-container" sid="<%=pageTitle %>" style="padding: 0px 30px 0px 46px;"></div>
+        <link rel="stylesheet" href="default.css" />
+  	<script src="gitment.browser.js"></script>
+  	<script>var gitment = new Gitment({owner: 'imtianx', repo: 'imtianx.github.io', oauth: { client_id: '3c3e3f87d9ed9e3595d6', client_secret: '6d2355cc31f9618ceb213eb11a95be18c814d0e8', },})gitment.render('gitment-container')
+	</script>
      </section>
 <% } %>
-<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6teOD2"></script>
