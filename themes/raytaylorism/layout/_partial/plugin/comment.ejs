@@ -7,9 +7,18 @@ var pageTitle = page.title;
 <% if (page.comments){ %>
     <section id="comment">
        <div id="gitment-container" sid="<%=pageTitle %>" style="padding: 0px 30px 0px 46px;"></div>
-        <link rel="stylesheet" href="default.css" />
-  	<script src="gitment.browser.js"></script>
-  	<script>var gitment = new Gitment({owner: 'imtianx', repo: 'imtianx.github.io', oauth: { client_id: '3c3e3f87d9ed9e3595d6', client_secret: '6d2355cc31f9618ceb213eb11a95be18c814d0e8', },})gitment.render('gitment-container')
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css" />
+  	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  	<script>
+	var gitment = new Gitment({
+	  owner: 'imtianx',
+	  repo: 'imtianx.github.io',
+	  oauth: {
+	    client_id: '3c3e3f87d9ed9e3595d6',
+	    client_secret: '6d2355cc31f9618ceb213eb11a95be18c814d0e8',
+	    },
+	})
+	gitment.render('gitment-container')
 	</script>
-     </section>
+    </section>
 <% } %>
