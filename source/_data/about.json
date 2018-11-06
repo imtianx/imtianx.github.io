@@ -14,41 +14,6 @@
 		"Html/css": 5,
 		"Git": 4
     },
-    "projects": [
-    {
-		"name": "开发项目4",
-		"image": "http://p15.qhimg.com/t01b9de5d3b53a61c14.png",
-		"description": "x6game 是一款电竞游戏平台，可以下载手游，直接在线玩 H5 游戏，有丰富的游戏分类及游戏， 此外还有发表图文混排帖子，游戏管理、礼包管理等功能",
-		"tags": ["2017.12 - 2018.03", "X6GAME"],
-		"link_text": "应用市场",
-		"link": "http://zhushou.360.cn/detail/index/soft_id/3949028?recrefer=SE_D_x6game"
-	},
-    {
-		"name": "维护项目3",
-		"image": "http://i3.res.meizu.com/fileserver/app_icon/8685/79ce834471434bd4bc0d6e901b2ffecd.png",
-		"description": "该 APP 一款全新的低门槛投资理财平台软件，有 7 天、1 月、2月等期限的理财产品供用户选择，收益较高 21%。",
-		"tags": ["2017.06 - 2017.11", "鑫格理财"],
-		"link_text": "应用市场",
-		"link": "http://app.flyme.cn/apps/public/detail?package_name=com.puyue.www.xinge"
-	},
-	{
-		"name": "开发项目2",
-		"image": "http://i4.res.meizu.com/fileserver/app_icon/8215/87ab50bb35dc4bdab722a4631be06ab3.png",
-		"description": "免单购 APP 是一款在线商城，商品购买后，按照要求，每周进行签到，完成后可完全返还花费的钱。(免单购/免多多/欢乐易购 3个项目)",
-		"tags": ["2017.03 - 2017.10", "免单购/免多多"],
-		"link_text": "应用市场",
-		"link": "http://app.flyme.cn/apps/public/detail?package_name=com.puyue.www.freesinglepurchase"
-	},
-	{
-		"name": "参与项目1",
-		"image": "https://img2.hackhome.com/img2017/7/13/11/82972877_APP.png",
-		"description": "该 APP 一款集商城(商品、服务、车票机票)、即时通讯、网络电话、银联支付、理财等于一体的多功能 APP。",
-		"tags": ["2017.04 – 2017.05", "融惠宝"],
-		"link_text": "应用市场",
-		"link": "https://www.hackhome.com/XiaZai/SoftView_672483.html"
-	}
-	
-	],
 	"reward": [
 	    "/img/weixin.jpg",
 		"/img/zhifubao.jpg"
