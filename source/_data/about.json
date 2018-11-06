@@ -2,7 +2,7 @@
     "avatar": "/img/head.jpg",
     "name": "imtianx",
 	"tag": "java/android/移动开发",
-    "desc": "移动开发，技术宅,了解java，kotlin,python ,C++等语言s",
+    "desc": "移动开发，技术宅,了解java，kotlin,python ,C++等语言",
     "skills": {
         "Android": 7,
 		"Java": 7,
@@ -16,7 +16,7 @@
     },
     "projects": [
     {
-		"name": "开发项目7",
+		"name": "开发项目4",
 		"image": "http://p15.qhimg.com/t01b9de5d3b53a61c14.png",
 		"description": "x6game 是一款电竞游戏平台，可以下载手游，直接在线玩 H5 游戏，有丰富的游戏分类及游戏， 此外还有发表图文混排帖子，游戏管理、礼包管理等功能",
 		"tags": ["2017.12 - 2018.03", "X6GAME"],
@@ -24,7 +24,7 @@
 		"link": "http://zhushou.360.cn/detail/index/soft_id/3949028?recrefer=SE_D_x6game"
 	},
     {
-		"name": "维护项目6",
+		"name": "维护项目3",
 		"image": "http://i3.res.meizu.com/fileserver/app_icon/8685/79ce834471434bd4bc0d6e901b2ffecd.png",
 		"description": "该 APP 一款全新的低门槛投资理财平台软件，有 7 天、1 月、2月等期限的理财产品供用户选择，收益较高 21%。",
 		"tags": ["2017.06 - 2017.11", "鑫格理财"],
@@ -32,7 +32,7 @@
 		"link": "http://app.flyme.cn/apps/public/detail?package_name=com.puyue.www.xinge"
 	},
 	{
-		"name": "开发项目5",
+		"name": "开发项目2",
 		"image": "http://i4.res.meizu.com/fileserver/app_icon/8215/87ab50bb35dc4bdab722a4631be06ab3.png",
 		"description": "免单购 APP 是一款在线商城，商品购买后，按照要求，每周进行签到，完成后可完全返还花费的钱。(免单购/免多多/欢乐易购 3个项目)",
 		"tags": ["2017.03 - 2017.10", "免单购/免多多"],
@@ -40,36 +40,12 @@
 		"link": "http://app.flyme.cn/apps/public/detail?package_name=com.puyue.www.freesinglepurchase"
 	},
 	{
-		"name": "参与项目4",
+		"name": "参与项目1",
 		"image": "https://img2.hackhome.com/img2017/7/13/11/82972877_APP.png",
 		"description": "该 APP 一款集商城(商品、服务、车票机票)、即时通讯、网络电话、银联支付、理财等于一体的多功能 APP。",
 		"tags": ["2017.04 – 2017.05", "融惠宝"],
 		"link_text": "应用市场",
 		"link": "https://www.hackhome.com/XiaZai/SoftView_672483.html"
-	},
-	{
-		"name": "完成项目3",
-		"image": "https://o1wh05aeh.qnssl.com/image/view/app_icons/e00bf29ff55e131785dd8c1dab5b8cf5/120",
-		"description": "为市邮管局开发的快递实名app,该版本为快递员版，主要功能：省份证识别，快递单识别，拍照存储及数据上传。",
-		"tags": ["2016.08 - 2016.9", "天盾（快递实名）"],
-		"link_text": "内测平台",
-		"link": "https://www.pgyer.com/ygjexpress"
-	},
-	{
-		"name": "完成项目2",
-		"image": "https://o1wh05aeh.qnssl.com/image/view/app_icons/abe95244d7711b01c4e37c3592bf7e13/120",
-		"description": "十堰韵达物流公司同城配送app,司机端为app。主要功能：司机端对货主发布的货物进行竞标，选中的标书进行配送及相关状态的报告等，此外还可以参与客运等。",
-		"tags": ["2016.06 - 2016.07", "八匹马新版"],
-		"link_text": "内测平台",
-		"link": "https://www.pgyer.com/nT2B"
-	},
-	{
-		"name": "完成项目1",
-		"image": "https://o1wh05aeh.qnssl.com/image/view/app_icons/ff8557e5ab297f94eb2760a18a2f3c4e/120",
-		"tags": ["2016.04 - 2016.06", "车辆监管"],
-		"description": "为武汉南斗六星系统集成有限公司开发的一款app,主要是车辆信息查询、不在线车辆查询，在途和在库车辆信息的查询等",
-		"link_text": "内测平台",
-		"link": "https://www.pgyer.com/P0go"
 	}
 	
 	],
