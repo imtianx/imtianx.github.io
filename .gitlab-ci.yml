@@ -19,7 +19,7 @@ job_build:
     - hexo generate
 
   only:
-    - blog-resources
+    - master
 
   artifacts:
     when: on_success
@@ -41,7 +41,7 @@ job_deploy:
     - git push --force --quiet "https://${GITLAB_BLOG_TOKEN}@${GH_REF}" master:master
 
   only:
-    - blog-resources
+    - master
   variables:
     GH_REF: "github.com/imtianx/imtianx.github.io.git"
 
