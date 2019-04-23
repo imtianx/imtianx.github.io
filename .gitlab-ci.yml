@@ -1,0 +1,51 @@
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+stages:
+  - build
+  - deploy
+
+
+before_script:
+  - npm install hexo-cli -g
+  - npm install -g hexo-generator-search
+  - npm install
+
+job_build:
+  stage: build
+  script:
+    - hexo -v
+    - hexo clean
+    - hexo generate
+
+  only:
+    - blog-resources
+
+  artifacts:
+    when: on_success
+    name: "${CI_JOB_NAME}_${CI_COMMIT_REF_NAME}"
+    untracked: true
+    paths:
+      - public/
+
+job_deploy:
+  stage: deploy
+  script:
+    - cd public/
+    - msg=$(git log --pretty=format:"[gitlab-ci] %an;%h; [ %s ]" -1)
+    - git init 
+    - git config --global user.email "imtianx@gmail.com"
+    - git config --global user.name "imtianx"
+    - git add .
+    - git commit -m "${msg}"
+    - git push --force --quiet "https://${GITLAB_BLOG_TOKEN}@${GH_REF}" master:master
+
+  only:
+    - blog-resources
+  variables:
+    GH_REF: "github.com/imtianx/imtianx.github.io.git"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
