@@ -461,5 +461,5 @@ private void setViewValues(@NonNull View view, float scaleX, float scaleY, int v
 > **本文作者**：[imtianx](http://imtianx.cn/about)
 > **本文链接**：http://imtianx.cn/2018/09/04/bottomNavigationView_using_source
 > **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
-
+> **数字签名**: [PRESS.one](https://press.one/p/v?s=2453cffd1bd9ad1e6697ea1c67f22cf2037d618a278bff9517bb1f830e3cc54b73c6c9fe05c3d18c0d33fa43fe86cf5aed55bf06a9481d12b96d403bc0f07d9c0&h=8548d0f3d21f650ef236ad355fb57f74789cf7e778ba5c727b79acabcb3807dd&a=4dccad032c632b4cdeb0e17788c1ccbcf86c89b0&f=P1&v=3)
 
