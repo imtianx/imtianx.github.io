@@ -24,7 +24,7 @@ install:
 script:
   - hexo -v
   - hexo clean
-  - hexo g
+  - hexo generate
 
 # 提交内容及git 用户信息
 after_script:
