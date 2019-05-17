@@ -27,14 +27,14 @@ after_script:
   - git config user.name "imtianx"
   - git config user.email "2360633699@qq.com"
   - git add .
-  - git commit -m "Update blog"
+  - git commit -m "Auto deploy by Travis CI."
   - git push --force --quiet "https://${GITHUB_BLOG_TOKEN}@${GH_REF}" master:master
 # E: Build LifeCycle
 
 # 项目所在分支
 branches:
   only:
-    - blog-resources
+    - theme_matery
 
 # 缓存，加速构建
 cache:
