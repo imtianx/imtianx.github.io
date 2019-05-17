@@ -1,0 +1,37 @@
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            
+            <% let socialClass = '' %>
+            <% if (theme.busuanziStatistics && theme.busuanziStatistics.enable) { %>
+            <% socialClass = 'social-statis' %>
+            <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalTraffic) { %>
+            <span id="busuanzi_container_site_pv">
+                <i class="fa fa-heart-o"></i>
+                总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            <% } %>
+            <% if (theme.busuanziStatistics && theme.busuanziStatistics.totalNumberOfvisitors) { %>
+            <span id="busuanzi_container_site_uv">
+                <i class="fa fa-users"></i>
+                次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人,
+            </span>
+            <% } %>
+            <% } %>
+            
+            <% if (theme.wordCount.enable && theme.wordCount.totalCount) { %>
+            &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+            <span class="white-color"><%= totalcount(site) %></span>
+            <% } %>
+            
+            <br/>
+            © 2016-2019 <a href="http://imtianx.cn">imtianx.cn</a>, 鄂ICP备17001358号.&nbsp;
+            由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>.
+        </div>
+        
+        <div class="col s12 m4 l4 social-link <%- socialClass %>"><%- partial('_partial/social-link') %></div>
+    </div>
+    </footer>
+
+<div class="progress-bar"></div>
