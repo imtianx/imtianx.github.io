@@ -233,12 +233,12 @@ gitalk:
 # the Gitment config，default disabled
 # Gitment 评论模块的配置，默认为不激活
 gitment:
-  enable: false
-  owner:
-  repo:
+  enable: true
+  owner: imtianx
+  repo: imtianx.github.io
   oauth:
-    clientId:
-    clientSecret:
+    clientId: 3c3e3f87d9ed9e3595d6
+    clientSecret: 6d2355cc31f9618ceb213eb11a95be18c814d0e8
 
 # disqus config, default disabled
 # Disqus评论模块的配置，默认为不激活
