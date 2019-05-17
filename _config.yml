@@ -4,8 +4,8 @@
 
 # Site
 title: Imtianx`S Blog
-subtitle: 奚岩（imtianx）
-description: 从来没有真正的绝境，只有心灵的迷途
+subtitle: imtianx
+description: 有志者，事竟成
 keywords: imtianx
 author: imtianx
 language: zh-CN
@@ -46,8 +46,8 @@ highlight:
 
 prism_plugin:
   mode: 'preprocess'    # realtime/preprocess
-  theme: 'duotone-sea'
-  line_number: true    # default false
+  theme: 'tomorrow'
+  line_number: false    # default false
   custom_css:
 
 # Home page setting

@@ -2,6 +2,7 @@
 title: android 自定义View 详解
 date: 2016-12-19 16:06:25
 categories: [android,学习笔记]
+cover: true
 tags: [View,自定义,原理]
 ---
 > 读书笔记： 《Android 开发艺术探索》 ——第四章：View 的工作原理
