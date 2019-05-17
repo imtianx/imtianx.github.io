@@ -11,8 +11,14 @@ node_js: stable
 # 安装依赖
 install:
   - npm install hexo
+  - npm install hexo-generator-archive --save
+  - npm i -S hexo-prism-plugin
+  - npm install hexo-generator-search --save
+  - npm i hexo-permalink-pinyin --save
+  - npm i --save hexo-wordcount
+  - npm install hexo-generator-feed --save
   - npm install
-  - npm ls --depth 0
+  
 
  # 部署命令
 script:
