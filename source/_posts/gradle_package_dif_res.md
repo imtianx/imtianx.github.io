@@ -138,7 +138,5 @@ keytool -printcert -file META-INF/CERT.RSA
 
 项目源代码地址：[DifPackage](https://github.com/imtianx/DifPackage)
 
-> **本文作者**：[imtianx](http://imtianx.cn/about)
-> **本文链接**：http://imtianx.cn/2017/06/25/gradle_package_dif_res
-> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
 

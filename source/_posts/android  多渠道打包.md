@@ -124,9 +124,6 @@ gradle assemblemeizuRelease
 
 然后在 terminal 中进行执行命令打包。
 
-> **本文作者**：[imtianx](http://imtianx.cn/about)
-> **本文链接**： http://imtianx.cn/2016/12/12/android%20%20%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85
-> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
 

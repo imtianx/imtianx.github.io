@@ -359,8 +359,7 @@ public ScheduledThreadPoolExecutor (int corePoolSize)
 这是系统提供的四种常见的 线程池，此外还可以根据自己的实际需要灵活的配置线程池。
 
 > **本文作者**：[imtianx](http://imtianx.cn/about)
-> **本文链接**： http://imtianx.cn/2017/01/06/AsyncTask%20%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0
-> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
+
 
 
 

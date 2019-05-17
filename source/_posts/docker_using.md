@@ -261,9 +261,6 @@ android_build:
 **1.[《Docker 技术入门与实践》](https://github.com/yeasy/docker_practice)**
 **2. [Docker Docs](https://docs.docker.com/)**
 
-> **本文作者**：[imtianx](http://imtianx.cn/about)
-> **本文链接**：http://imtianx.cn/2018/07/30/docker_using
-> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
 
 

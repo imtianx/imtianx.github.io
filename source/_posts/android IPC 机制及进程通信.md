@@ -392,9 +392,6 @@ public interface IAddAidlInterface extends android.os.IInterface
 
 更多AIDL 的资料，可参见[官方文档](https://developer.android.google.cn/guide/components/aidl.html#Defining)，对于Socket、ContentProvider等方式，之前接触过，这里不做介绍。
 
-> **本文作者**：[imtianx](http://imtianx.cn/about)
-> **本文链接**： http://imtianx.cn/2016/12/14/android%20IPC%20%E6%9C%BA%E5%88%B6%E5%8F%8A%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1
-> **版权申明**:：本站文章均采用 [CC BY-NC-SA 3.0 CN](http://creativecommons.org/licenses/by-nc-sa/3.0/cn/) 许可协议，请勿用于商业，转载请注明出处！
 
  
 
