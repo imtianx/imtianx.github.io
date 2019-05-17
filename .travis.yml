@@ -12,6 +12,7 @@ node_js: stable
 install:
   - npm install hexo
   - npm install
+  - npm ls --depth 0
 
  # 部署命令
 script:
