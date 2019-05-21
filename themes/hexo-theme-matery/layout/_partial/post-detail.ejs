@@ -67,8 +67,11 @@
             <div id="articleContent">
                 <%- page.content %>
             </div>
+            <br/>
+            <div align="center">
+                <img src="<%- theme.reward.share_wechat %>" width="720">
+            </div>
             <hr/>
-
             <% if (theme.reward && theme.reward.enable) { %>
             <%- partial('_partial/reward') %>
             <% } %>
