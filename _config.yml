@@ -92,8 +92,9 @@ search:
   field: post
 
 permalink_pinyin:
-  enable: false
-  separator: '-' # default: '-'
+  enable: true
+  separator: '_' # default: '-'
+  exclude: /Android Bluetooth 通信技术深入--聊天小应用|Android Bluetooth 蓝牙技术初体验|Android View 的事件体系|AsyncTask 工作原理及线程池|Centos 7 web 环境搭建|Eventbus-simple-use|Linux 常用命|PhotoView_GifView|Property-animatorValueAnimator_ObjectAnimation|Retrofit2_flatmap_download|SwipeRefreshLayout-RecyclerView|TabLayout+ViewPager create tab|Tomcat中配置单IP多二级域名方法|activity 生命周期及调用栈详解|android  多渠道打包|android 7.0-take-photo|android IPC 机制及进程通信|android studio 生成aar和jar|android 自定义View 详解|android 消息机制及其原理|android-exception-catch-UncaughtExceptionHandler|android-open-source-connected|android-sqlite-notebook|android-sqlite-use|androidstudio-keaymap|as3_2_pre_androix_bug|auto-filin-smscode|bottomNavigationView_using_source|docker_using|erroe-of-offline-or-unauthorized|excellent-blog-author-of-android|first-use-widget|git_cmd_teamwork|git_submodule|gradle_package_dif_res|hexo+github -build-my-blog|hexo- write-blog|java 知识 之 常见java集合的实现细节|java 知识 之 内存管理|java 知识之 反射的使用|java 知识之 对象及其内存管理|java 知识之 数组及其内存管理|java 知识之 注解的使用和解析|java 三大特性：封装、继承和多态|java知识 之 Integer自动拆装箱与缓存|listView-in-scrollView|listview-optimize|open-other-app|open-source-frame|open-source|plsql-install-config|put-libary-to-jcenter|screen-adaptation-dp_sp|sum-up-2015|tiandun项目总结|tomcat_set_https|using-DataBinding|view-Animation|vim_command|webview-Screen-adaptation|webview_chinese_garbled|国内一线互联网公司内部面试题库(二)-android|国内一线互联网公司内部面试题库(一)-java/
 
 feed:
   type: atom
