@@ -37,7 +37,8 @@ summary: 开发过程中，往往需要阅读源码，挑选一个合适的源�
   docker run -d -v /home/source:/opengrok/src  --privileged=true -p 8080:8080 opengrok/docker
   ```
   
-  > 注意 **--privileged=true** 参数设置，否则挂载的目录在镜像内无法访问，导致索引失败。
+  > 注意 **--privileged=true** 参数设置，否则挂载的目录在镜像内无法访问，导致索引失败;
+  > **容器内部端口必须是: 8080**
 1. 通过浏览器访问：[http://ip:8080]() 进行访问，如下图：
 
  ![](http://img.imtianx.cn/2019/opengrok_home.png)
@@ -47,6 +48,8 @@ summary: 开发过程中，往往需要阅读源码，挑选一个合适的源�
  docker exec <container_id> /scripts/index.sh
  ```
  其中 `container_id` 为上面启动的容器 id 。
+ 
+ > 如果以 `ip:port` 形式访问不方便，可以通过 `nginx` 配置反向代理，设置域名。
  
  具体的代码查找结果如下图,可以访问 [code.imtianx.cn](code.imtianx.cn) 测试:
  ![](http://img.imtianx.cn/2019/opengrok_code.png)
