@@ -17,16 +17,34 @@
     "url": "http://blog.willhappy.cn/",
     "title": "前去学习"
 },{
-    "avatar": "https://avatars1.githubusercontent.com/u/15939160?s=400&v=4",
-    "name": "编程之乐",
-    "introduction": "android 高手",
-    "url": "https://coding-dream.github.io/",
+    "avatar": "https://android-developers.googleblog.com/favicon.ico",
+    "name": "Android Blog",
+    "introduction": "android 官方博客",
+    "url": "https://android-developers.googleblog.com/",
+    "title": "前去学习"
+},{
+    "avatar": "https://medium.com/favicon.ico",
+    "name": "Medium",
+    "introduction": "Medium",
+    "url": "https://medium.com/",
+    "title": "前去学习"
+}, {
+    "avatar": "https://blog.mindorks.com/favicon.ico",
+    "name": "MindOrks",
+    "introduction": "MindOrks Blog",
+    "url": "https://blog.mindorks.com",
     "title": "前去学习"
 },{
     "avatar": "https://www.wanandroid.com/resources/image/pc/logo.png",
     "name": "玩 android",
     "introduction": "技术社区",
     "url": "https://wanandroid.com/",
+    "title": "前去学习"
+},{
+    "avatar": "https://avatars1.githubusercontent.com/u/15939160?s=400&v=4",
+    "name": "编程之乐",
+    "introduction": "android 高手",
+    "url": "https://coding-dream.github.io/",
     "title": "前去学习"
 }, {
     "avatar": "http://image.luokangyuan.com/4027734.jpeg",
