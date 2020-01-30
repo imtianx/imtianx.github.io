@@ -2,7 +2,7 @@
 
 [![HitCount](http://hits.dwyl.io/blinkfox/hexo-theme-matery.svg)](http://hits.dwyl.io/blinkfox/hexo-theme-matery) [![Gitter](https://img.shields.io/gitter/room/blinkfox/hexo-theme-matery.svg)](https://gitter.im/hexo-theme-matery/Lobby?utm_source=badge) [![GitHub issues](https://img.shields.io/github/issues/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/issues) [![GitHub license](https://img.shields.io/github/license/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/blob/master/LICENSE) [![Download](https://img.shields.io/badge/downloads-master-green.svg)](https://codeload.github.com/blinkfox/hexo-theme-matery/zip/master) [![Hexo Version](https://img.shields.io/badge/hexo-%3E%3D%203.0-blue.svg)](http://hexo.io) [![GitHub forks](https://img.shields.io/github/forks/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/network) [![GitHub stars](https://img.shields.io/github/stars/blinkfox/hexo-theme-matery.svg)](https://github.com/blinkfox/hexo-theme-matery/stargazers)
 
-[中文说明](README_CN.md) | [DEMO](https://blinkfox.github.io/)
+[🇨🇳中文说明](README_CN.md) | [DEMO](https://blinkfox.github.io/)
 
 > This is a Hexo blog theme with 'Material Design' and responsive design.
 
@@ -25,12 +25,17 @@
 - Comment module of [Gitalk](https://gitalk.github.io/), [Gitment](https://imsun.github.io/gitment/), [Valine](https://valine.js.org/) and [Disqus](https://disqus.com/).(Gitalk is recommended)
 - Integrated [Busuanzi Statistics](http://busuanzi.ibruce.info/), `Google Analytics` and post word count statistics.
 - Support music playback and video playback on the homepage
+- Support the `emoji` emoticon and use the `markdown emoji` grammar to directly generate the corresponding emoticon.
+- Support [DaoVoice](http://www.daovoice.io/)、[Tidio](https://www.tidio.com/) online chat.
 
 ## Contributor
 
 Thanks to these contributors, without whom, hexo-theme-matery won't be this perfect.
 
 - [@HarborZeng](https://github.com/HarborZeng)
+- [@shw2018](https://github.com/shw2018)
+- [@L1cardo](https://github.com/L1cardo)
+- [@Five-great](https://github.com/Five-great)
 
 ## Download
 
@@ -111,6 +116,27 @@ layout: "about"
 ---
 ```
 
+### new contact page (Optional)
+
+`contact` page is to show contact information. If the `source` directory of your blog doesn't have `contact/index.md` file, you need to new one like this:
+
+```bash
+hexo new page "contact"
+```
+
+to edit your new page files`/source/contact/index.md`, you need somethings as follows:
+
+```yaml
+---
+title: contact
+date: 2018-09-30 17:25:30
+type: "contact"
+layout: "contact"
+---
+```
+
+> **Note**：The message board depends on a third-party comment system, please **activate** your comment system to be effective. And in the theme `_config.yml` file, the "**menu**" of the `19` to `21` line is configured, and the comment about the message board cloud be canceled.
+
 ### new friends link page (Optional)
 
 The `friends` page is a page for displaying **Friendly Links** information. If you don't have a `friends/index.md` file in your blog's `source` directory, then you need to create a new one. The command is as follows:
@@ -149,9 +175,84 @@ Also, create a new `_data` directory in your blog's `source` directory and a new
     "avatar": "http://image.luokangyuan.com/avatar.jpg",
     "name": "ja_rome",
     "introduction": "Ordinary steps can also go out of the great journey.",
-    "url": "ttps://me.csdn.net/jlh912008548",
+    "url": "https://me.csdn.net/jlh912008548",
     "title": "Read More"
 }]
+```
+
+### Menu navigation configuration
+
+#### Configure the name of the basic menu navigation, path url and icon icon.
+
+1. The menu navigation name can be Chinese or English (eg: `Index` or `Home`)
+2. Icon icon can be found in [Font Awesome](https://fontawesome.com/icons)
+
+```yaml
+menu:
+  Index:
+    url: /
+    icon: fas fa-home
+  Tags:
+    url: /tags
+    icon: fas fa-tags
+  Categories:
+    url: /categories
+    icon: fas fa-bookmark
+  Archives:
+    url: /archives
+    icon: fas fa-archive
+  About:
+    url: /about
+    icon: fas fa-user-circle
+  Friends:
+    url: /friends
+    icon: fas fa-address-book
+```
+
+#### Secondary menu configuration method
+
+If you need a secondary menu, you can do the following on the basis of the original basic menu navigation.
+
+1. Add the `children` keyword to the first level menu that needs to add a secondary menu (eg: add `children` under the `About` menu)
+2. Create a secondary menu name, path url and icon icon under `children`.
+3. Note that each secondary menu module must be preceded by `-`.
+4. Note the indentation format.
+
+```yaml
+menu:
+  Index:
+    url: /
+    icon: fas fa-home
+  Tags:
+    url: /tags
+    icon: fas fa-tags
+  Categories:
+    url: /categories
+    icon: fas fa-bookmark
+  Archives:
+    url: /archives
+    icon: fas fa-archive
+  About:
+    url: /about
+    icon: fas fa-user-circle
+  Friends:
+    url: /friends
+    icon: fas fa-address-book
+  Medias:
+    icon: fas fa-list
+    children:
+      - name: Musics
+        url: /musics
+        icon: fas fa-music
+      - name: Movies
+        url: /movies
+        icon: fas fa-film
+      - name: Books
+        url: /books
+        icon: fas fa-book
+      - name: Galleries
+        url: /galleries
+        icon: fas fa-image
 ```
 
 ### Code highlight
@@ -191,7 +292,7 @@ search:
   field: post
 ```
 
-### Translate Chinese Link to Pinyin (Optional)
+### Translate Chinese Link to Pinyin (Recommend)
 
 Defualt permalinks of Hexo will include Chinese if your atrticle's title is Chinese.But it's adverse to `SEO`,and `gitment` comments don't suport Chinese Link as well.We can use the [hexo-permalink-pinyin](https://github.com/viko16/hexo-permalink-pinyin) of Hexo plugin to generate permalinks of Chinese Pinyin  when generating posts.
 
@@ -211,7 +312,7 @@ permalink_pinyin:
 
 > **Note*:[hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink) can genarate non-Chinese link in addtion to this plugin.
 
-### Post word count statistics plugin（Optional）
+### Post word count statistics plugin (Recommend)
 
 If you want to display the post word count and reading time information in the post detail page, you can install the [hexo-wordcount](https://github.com/willin/hexo-wordcount) plugin.
 
@@ -224,12 +325,35 @@ npm i --save hexo-wordcount
 Then just activate the following configuration items in the theme `_config.yml` file:
 
 ```yaml
-wordCount:
-  enable: false # Set this value to true.
-  postWordCount: true
-  min2read: true
-  totalCount: true
+postInfo:
+  date: true
+  update: false
+  wordCount: false # set true.
+  totalCount: false # set true.
+  min2read: false # set true.
+  readCount: false # set true.
 ```
+
+### Add emoji support (Optional)
+
+This theme adds support for the `emoji` emoticon, using the Hexo plugin for [hexo-filter-github-emojis] (https://npm.taobao.org/package/hexo-filter-github-emojis) to support The generation of the `emoji` expression, the corresponding `markdown emoji` syntax (`::`, for example: `:smile:`) is converted into a `emoji` expression that jumps. The installation command is as follows:
+
+```bash
+npm install hexo-filter-github-emojis --save
+```
+
+Add configuration of `_config.yml` file in Hexo root folder as follows：
+
+```yaml
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
+```
+
+Execute `hexo clean && hexo g` to regenerate the blog file, and then  you can see the expression you wrote in the `emoji` grammar in the corresponding position in the article.
 
 ### Add RSS feed support (Optional)
 
@@ -255,34 +379,45 @@ feed:
 
 Execute `hexo clean && hexo g` to regenerate the blog file, and then you can see the `atom.xml` file in the `public` folder, indicating that you have successfully installed.
 
+### [DaoVoice](http://www.daovoice.io/) online chat (Optional)
+
+Go to the official website of [DaoVoice](http://www.daovoice.io/), register and get the `app_id`. Fill the `app_id` into the the theme `_config.yml` file.
+
+### [Tidio](https://www.tidio.com/) online chat (Optional)
+
+Go to the official website of [Tidio](https://www.tidio.com/), register and get the `Public Key`. Fill the `Public Key` into the the theme `_config.yml` file.
+
 ### Modify website footer
 
-Website footer may need to be customized, and it is not convenient to make configuration information, So need to modify and process it by yourself. The changes are in the `/layout/_partial/footer.ejs` file, including the site, the theme used, the amount of traffic, and so on.
+Website footer may need to be customized, and it is not convenient to make configuration information, So need to modify and process it by yourself. The changes are in the `/layout/_partial/footer.ejs` file, including the site, the theme used, the amount of traffic and so on.
 
 ### Modify social links
 
-In the theme `_config.yml` file, the configuration of `QQ`, `GitHub` and mailbox is supported by default. In the `/layout/_partial/social-link.ejs` file of the theme, you can add or modify the social link address as you need. To add a link, please refer to the following code:
+In the theme `_config.yml` file, the configurations of `QQ`, `GitHub` and mailbox and more are supported by default. In the `/layout/_partial/social-link.ejs` file of the theme, you can add or modify the social link address as you need. To add a link, please refer to the following code:
 
 ```html
-<a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-    <i class="fa fa-github"></i>
-</a>
+<% if (theme.socialLink.github) { %>
+    <a href="<%= theme.socialLink.github %>" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+<% } %>
 ```
 
-You can search social icon such as `fa-github` in [Font Awesome](https://fontawesome.com/icons).There are common social icons you can reference:
+You can search social icon such as `fab fa-github` in [Font Awesome](https://fontawesome.com/icons).There are common social icons you can reference:
 
-- Facebook: `fa-facebook`
-- Twitter: `fa-twitter`
-- Google-plus: `fa-google-plus`
-- Linkedin: `fa-linkedin`
-- Tumblr: `fa-tumblr`
-- Medium: `fa-medium`
-- Slack: `fa-slack`
-- Sina Weibo: `fa-weibo`
-- Wechat: `fa-wechat`
-- QQ: `fa-qq`
+- Facebook: `fab fa-facebook`
+- Twitter: `fab fa-twitter`
+- Google-plus: `fab fa-google-plus`
+- Linkedin: `fab fa-linkedin`
+- Tumblr: `fab fa-tumblr`
+- Medium: `fab fa-medium`
+- Slack: `fab fa-slack`
+- Sina Weibo: `fab fa-weibo`
+- Wechat: `fab fa-weixin`
+- QQ: `fab fa-qq`
+- Zhihu: `fab fa-zhihu`
 
-> **Note**: The version of `Font Awesome` is `4.7.0`.
+> **Note**: The version of `Font Awesome` is `5.11.0`.
 
 ### Configure music player (optional)
 
@@ -351,7 +486,8 @@ Everything in the Front-matter option is **not required**. But I still recommend
 | summary    | null                        | Post summary, custom post summary content, if the attribute has a value, the post card summary will display the text, otherwise the program will automatically intercept part of the article as a summary |
 | categories | null                        | Article classification, the classification of this topic represents a macroscopically large classification, only one article is recommended for one classification. |
 | tags       | null                        | Post label, a post can have multiple labels |
-| reprintPolicy       | cc_by                        | Post reprint policy, value could be one of cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint and pay |
+| keywords   | Post Title                  | Post key Words With SEO                               |
+| reprintPolicy       | cc_by              | Post reprint policy, value could be one of cc_by, cc_by_nd, cc_by_sa, cc_by_nc, cc_by_nc_nd, cc_by_nc_sa, cc0, noreprint and pay |
 
 > **Note**: 
 > 1. post's featured piature will take remainder if not writing the `img` property,and chose the featured picture of theme to let all of post's picture **have their own characteristics**.
@@ -462,6 +598,44 @@ There are 24 featured pictures in `/source/medias/featureimages`,you can add or 
 
 ## Changelog
 
+- v1.2.2
+  - Add the function of customizing post `keywords`;
+  - Add the function and configuration of static ribbon click switch;
+  - Set the word count, ribbon and site running time as `false` by default;
+  - Modify the meta attribute of the post's `description` to read the post's `summary` attribute first;
+  - Modified HTML tag of article title from `div` to` h1` title;
+  - Fixed the problem of incorrect footer `year` display;
+  - Removed redundant `setTimeout` js code from site runtime;
+- v1.2.1
+  - Added TOC's expand directory level settings and scroll bar function to prevent directory overflow when there are many directories;
+  - Modified the display mode of the homepage to the previous mode;
+  - Fixed the problem that the home button has no border;
+  - Fixed an issue where the homepage card was still generated when the music and bottom suction modes, videos, recommended articles, etc. were not activated;
+  - Fixed the problem that wordCount plugin is not installed, and modified some configurations;
+  - Fixed the issue that the page does not display music when there are single quotes in the JSON configuration of the music;
+  - Fixed the problem of tag cloud link failure under Hexo4.0;
+- v1.2.0
+  - Added online chat function of [DaoVoice](http://www.daovoice.io/) and [Tidio](https://www.tidio.com/);
+  - Added the ability to have two levels of menus;
+  - Added a subtitle for typing effects;
+  - Added the ability to preload web content;
+  - Added the configuration function of the home banner whether to switch daily;
+  - Added the ability to display ICP filing information, which is not enabled by default;
+  - Added configuration for Baidu analysis;
+  - Added language display, one-click copy, display line number and other functions of the code block;
+  - Added the ability to customize the configuration of the home page car map and recommended articles;
+  - Added article page to display update date;
+  - Added an icon for the reload rule;
+  - Modified the layout and display of the sharing;
+  - Upgraded and updated versions of some dependent libraries;
+  - other details to modify and optimize;
+- v1.1.0
+  - Added support for `emoji`;
+  - Added site run time statistics and configuration;
+  - Added the function of message board, it is not enabled by default;
+  - Added `Twitter`, `Facebook`, and `zhihu` social links;
+  - Updated the version of `Valine` to the latest version;
+  - modification of other minor details;
 - v1.0.4
   - Added the ability to customize the reprint rules for each post;
   - Fix the problem that the custom summary of the previous page and the next page does not display;
