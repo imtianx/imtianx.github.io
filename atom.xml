@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Imtianx`S Blog</title>
+  
+  <subtitle>imtianx</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://imtianx.github.io/"/>
+  <updated>2020-01-30T14:05:13.048Z</updated>
+  <id>https://imtianx.github.io/</id>
+  
+  <author>
+    <name>imtianx</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GPG 安装与使用</title>
+    <link href="https://imtianx.github.io/2019/05/29/gpg_an_zhuang_yu_shi_yong/"/>
+    <id>https://imtianx.github.io/2019/05/29/gpg_an_zhuang_yu_shi_yong/</id>
+    <published>2019-05-29T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h2&gt;&lt;p&gt;最近使用 &lt;code&gt;GitHub&lt;/code&gt; 时无意间看见 &lt;code&gt;commit&lt;/code&gt; 历史中有些带有 &lt;code&gt;Verified&lt;/code&gt; 的标识，而有些没有，如下图，&lt;br&gt;&lt;img src=&quot;http://img.imtianx.cn/2019/github_log_verify.png&quot; alt&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;经查看发现 &lt;code&gt;Github&lt;/code&gt; 默认使用了 &lt;strong&gt;GPG&lt;/strong&gt; 进行签名(用其自己的 key ),来保证提交信息来自可靠的来源。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/en/articles/managing-commit-signature-verification&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;官方说明&lt;/a&gt;：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You can sign your work locally using GPG or S/MIME. GitHub will verify these signatures so other people will know that your commits come from a trusted source. GitHub will automatically sign commits you make using the GitHub web interface.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;关于 GPG&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://gnupg.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GnuPG&lt;/a&gt;&lt;/strong&gt;（GNU Privacy Guard,GPG）是一种加密软件，它是 PGP 加密软件的满足GPL协议的替代物 。用于加密、数字签章及产生非对称匙对的软件
+    
+    </summary>
+    
+      <category term="工具软件" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/"/>
+    
+    
+      <category term="GPG" scheme="https://imtianx.github.io/tags/GPG/"/>
+    
+      <category term="Git" scheme="https://imtianx.github.io/tags/Git/"/>
+    
+      <category term="加密" scheme="https://imtianx.github.io/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenGrok 源码阅读环境搭建</title>
+    <link href="https://imtianx.github.io/2019/05/18/opengrok_yuan_ma_yue_du_huan_jing_da_jian/"/>
+    <id>https://imtianx.github.io/2019/05/18/opengrok_yuan_ma_yue_du_huan_jing_da_jian/</id>
+    <published>2019-05-18T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;开发过程中，往往需要阅读源码，挑选一个合适的源码阅读方式十分重要。这里简记使用 &lt;a href=&quot;https://oracle.github.io/opengrok/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;OpenGrok&lt;/a&gt;搭建源码阅读环境。
+    
+    </summary>
+    
+      <category term="工具软件" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="源码阅读" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="源码阅读" scheme="https://imtianx.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="OpenGrok" scheme="https://imtianx.github.io/tags/OpenGrok/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>底部导航-BottomNavigationView 的使用及源码分析</title>
+    <link href="https://imtianx.github.io/2018/09/04/bottomNavigationView_using_source/"/>
+    <id>https://imtianx.github.io/2018/09/04/bottomNavigationView_using_source/</id>
+    <published>2018-09-04T22:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;目前市面上很多 APP 都有底部导航的功能，实现底部导航的方式也有很多种,如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;① 、使用原生控件 ：&lt;code&gt;TabHost&lt;/code&gt; 、&lt;code&gt;LinearLayout&lt;/code&gt;  /&lt;code&gt;RelativeLayout&lt;/code&gt;、&lt;code&gt;RadioButton&lt;/code&gt; 等；&lt;/li&gt;
+&lt;li&gt;② 、使用 &lt;a href=&quot;https://developer.android.com/reference/android/support/design/package-summary&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Design&lt;/a&gt; 库中的 &lt;a href&gt;TabLayout&lt;/a&gt; 或 &lt;strong&gt;&lt;a href=&quot;https://developer.android.com/reference/android/support/design/widget/BottomNavigationView&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;BottomNavigationView&lt;/a&gt;&lt;/strong&gt; 实现；
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="android" scheme="https://imtianx.github.io/tags/android/"/>
+    
+      <category term="BottomNavigationView" scheme="https://imtianx.github.io/tags/BottomNavigationView/"/>
+    
+      <category term="Design" scheme="https://imtianx.github.io/tags/Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker的使用及镜像编写</title>
+    <link href="https://imtianx.github.io/2018/07/30/docker_using/"/>
+    <id>https://imtianx.github.io/2018/07/30/docker_using/</id>
+    <published>2018-07-30T22:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;随着容器技术的普及，越来越多的事情可以在 &lt;code&gt;Docker&lt;/code&gt; 中完成。这里简要记录 docker 的常用命令以及镜像的构建与运用。结合gitlab-ci来构建 android apk。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="工具软件" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="docker" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/docker/"/>
+    
+    
+      <category term="docker" scheme="https://imtianx.github.io/tags/docker/"/>
+    
+      <category term="dockerfile" scheme="https://imtianx.github.io/tags/dockerfile/"/>
+    
+      <category term="gitlab-ci" scheme="https://imtianx.github.io/tags/gitlab-ci/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AS3.2 和 androidx 爬坑</title>
+    <link href="https://imtianx.github.io/2018/06/04/as3_2_pre_androix_bug/"/>
+    <id>https://imtianx.github.io/2018/06/04/as3_2_pre_androix_bug/</id>
+    <published>2018-06-04T22:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一、背景&quot;&gt;&lt;a href=&quot;#一、背景&quot; class=&quot;headerlink&quot; title=&quot;一、背景&quot;&gt;&lt;/a&gt;一、背景&lt;/h2&gt;&lt;p&gt;前不久的 &lt;code&gt;Googel IO&lt;/code&gt; 大会上亮相的 &lt;a href=&quot;https://developer.android.com/jetpack/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;JetPack&lt;/a&gt; ,他为android 开发带来了极大地便利，于是开启了尝（爬）鲜（坑）之旅。
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="android" scheme="https://imtianx.github.io/tags/android/"/>
+    
+      <category term="androidx" scheme="https://imtianx.github.io/tags/androidx/"/>
+    
+      <category term="kotlin" scheme="https://imtianx.github.io/tags/kotlin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vim 常用命令</title>
+    <link href="https://imtianx.github.io/2018/05/14/vim_command/"/>
+    <id>https://imtianx.github.io/2018/05/14/vim_command/</id>
+    <published>2018-05-14T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;推荐几个好用的 &lt;code&gt;vim&lt;/code&gt; 软件插件：&lt;code&gt;MacVim&lt;/code&gt;客户端，&lt;code&gt;cVim&lt;/code&gt; chrome插件，&lt;code&gt;ideaVim&lt;/code&gt; idea插件，这里简记自己常用的命令。
+    
+    </summary>
+    
+      <category term="工具软件" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="vim" scheme="https://imtianx.github.io/categories/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/vim/"/>
+    
+    
+      <category term="vim" scheme="https://imtianx.github.io/tags/vim/"/>
+    
+      <category term="cvim" scheme="https://imtianx.github.io/tags/cvim/"/>
+    
+      <category term="ideaVim" scheme="https://imtianx.github.io/tags/ideaVim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git 子模块：git submodule</title>
+    <link href="https://imtianx.github.io/2018/03/08/git_submodule/"/>
+    <id>https://imtianx.github.io/2018/03/08/git_submodule/</id>
+    <published>2018-03-08T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;工作中，可能会遇到&lt;strong&gt;在一个Git仓库 中添加 其他 Git 仓库的场景&lt;/strong&gt;。比如，在项目中引用第三方库。或者在模块化开发中，某些公共的模块是需要单独维护的，使用单独的仓库比较方便，但是在项目中需要引用，就会出现这样的场景。这里使用 Git 的 &lt;code&gt;git submodule&lt;/code&gt; 命令为一个 &lt;code&gt;git 项目&lt;/code&gt; 添加 &lt;code&gt;子git项目&lt;/code&gt;。
+    
+    </summary>
+    
+      <category term="版本控制" scheme="https://imtianx.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+      <category term="Git" scheme="https://imtianx.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/"/>
+    
+    
+      <category term="Git" scheme="https://imtianx.github.io/tags/Git/"/>
+    
+      <category term="版本控制" scheme="https://imtianx.github.io/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Retrofit2链式调用及文件下载</title>
+    <link href="https://imtianx.github.io/2017/11/02/Retrofit2_flatmap_download/"/>
+    <id>https://imtianx.github.io/2017/11/02/Retrofit2_flatmap_download/</id>
+    <published>2017-11-02T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Retrofit2+Rxjava 是当下较为流行的网络请求方式，这里将其结合进行网络请求的链式调用以及文件下载，来解决项目中开屏广告页的设计。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="retrofit2" scheme="https://imtianx.github.io/tags/retrofit2/"/>
+    
+      <category term="flatMap" scheme="https://imtianx.github.io/tags/flatMap/"/>
+    
+      <category term="文件下载" scheme="https://imtianx.github.io/tags/%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tomcat 配置https证书</title>
+    <link href="https://imtianx.github.io/2017/09/22/tomcat_set_https/"/>
+    <id>https://imtianx.github.io/2017/09/22/tomcat_set_https/</id>
+    <published>2017-09-22T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;HTTPS 是安全套接字层超文本传输协议，在http 的基础上加入了 SSL协议，需要使用证书来校验身份。
+    
+    </summary>
+    
+      <category term="后端" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="linux" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/linux/"/>
+    
+    
+      <category term="linux" scheme="https://imtianx.github.io/tags/linux/"/>
+    
+      <category term="tomcat" scheme="https://imtianx.github.io/tags/tomcat/"/>
+    
+      <category term="https" scheme="https://imtianx.github.io/tags/https/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git常用命令及团队协作</title>
+    <link href="https://imtianx.github.io/2017/08/22/git_cmd_teamwork/"/>
+    <id>https://imtianx.github.io/2017/08/22/git_cmd_teamwork/</id>
+    <published>2017-08-22T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于版本控制，之前常用的基本都是SVN和CVS之类的，他们都是集中式的版本控制系统，而Git是分布式的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="版本控制" scheme="https://imtianx.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+      <category term="Git" scheme="https://imtianx.github.io/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/Git/"/>
+    
+    
+      <category term="Git" scheme="https://imtianx.github.io/tags/Git/"/>
+    
+      <category term="版本控制" scheme="https://imtianx.github.io/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gradle 打包不同资源</title>
+    <link href="https://imtianx.github.io/2017/06/25/gradle_package_dif_res/"/>
+    <id>https://imtianx.github.io/2017/06/25/gradle_package_dif_res/</id>
+    <published>2017-06-25T12:22:25.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于 android 中以 &lt;code&gt;applicationId&lt;/code&gt; 作为应用唯一标识，所以不能在手机上安装两个相同 &lt;code&gt;applicationId&lt;/code&gt; 的app。在 AS 中，默认创建的项目其 &lt;code&gt;applicationId&lt;/code&gt;就是项目的包名。可以在gradle 中配置更改 改 applicationid。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="android" scheme="https://imtianx.github.io/tags/android/"/>
+    
+      <category term="gradle" scheme="https://imtianx.github.io/tags/gradle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WebView 中文乱码</title>
+    <link href="https://imtianx.github.io/2017/06/17/webview_chinese_garbled/"/>
+    <id>https://imtianx.github.io/2017/06/17/webview_chinese_garbled/</id>
+    <published>2017-06-17T15:18:40.000Z</published>
+    <updated>2020-01-30T14:05:13.052Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里主要记录关于&lt;code&gt;WebView&lt;/code&gt;加载含中文的&lt;code&gt;url&lt;/code&gt;和&lt;code&gt;cookie&lt;/code&gt;中设置中文显示乱码的解决方法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="android" scheme="https://imtianx.github.io/tags/android/"/>
+    
+      <category term="webview" scheme="https://imtianx.github.io/tags/webview/"/>
+    
+      <category term="中文乱码" scheme="https://imtianx.github.io/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos 7 web 环境搭建</title>
+    <link href="https://imtianx.github.io/2017/03/25/Centos%207%20web%20%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https://imtianx.github.io/2017/03/25/Centos 7 web 环境搭建/</id>
+    <published>2017-03-25T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;方便配置网站和使用数据库，将服务器配置 web 运行环境。&lt;/p&gt;
+&lt;h3 id=&quot;1、Xshell-5&quot;&gt;&lt;a href=&quot;#1、Xshell-5&quot; class=&quot;headerlink&quot; title=&quot;1、Xshell 5&quot;&gt;&lt;/a&gt;1、Xshell 5&lt;/h3&gt;&lt;p&gt;为了方便管理操作服务器，这里采用 &lt;code&gt;xshell 5&lt;/code&gt; 来连接服务器，使用ssh证书，端口号 22，对于购买的与主机需要开放相应的端口。
+    
+    </summary>
+    
+      <category term="后端" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="linux" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/linux/"/>
+    
+    
+      <category term="服务器" scheme="https://imtianx.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="linux" scheme="https://imtianx.github.io/tags/linux/"/>
+    
+      <category term="web" scheme="https://imtianx.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux 常用命令</title>
+    <link href="https://imtianx.github.io/2017/03/18/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD/"/>
+    <id>https://imtianx.github.io/2017/03/18/Linux 常用命/</id>
+    <published>2017-03-18T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前，服务器 一直都是 window server 系统，主要是桌面的，方便操作，但是同样的配置 ，Centos要比他好很多，就把服务器换成了 &lt;code&gt;Centos 7&lt;/code&gt; ，开始学习使用 linux，并在简短记下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="后端" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="linux" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/linux/"/>
+    
+    
+      <category term="服务器" scheme="https://imtianx.github.io/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="linux" scheme="https://imtianx.github.io/tags/linux/"/>
+    
+      <category term="vim" scheme="https://imtianx.github.io/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android 7.0相机拍照适配</title>
+    <link href="https://imtianx.github.io/2017/03/05/android%207.0-take-photo/"/>
+    <id>https://imtianx.github.io/2017/03/05/android 7.0-take-photo/</id>
+    <published>2017-03-05T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近，之前一个项目的用户反馈APP拍照崩溃，查看了线上Crash日志，发现是  &lt;code&gt;EVA-AL10&lt;/code&gt; 和 &lt;code&gt;ZUK Z2131&lt;/code&gt; 两款手机，android 版本都是7.0的
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="android7.0" scheme="https://imtianx.github.io/tags/android7-0/"/>
+    
+      <category term="拍照适配" scheme="https://imtianx.github.io/tags/%E6%8B%8D%E7%85%A7%E9%80%82%E9%85%8D/"/>
+    
+      <category term="相册" scheme="https://imtianx.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tomcat中配置单IP多二级域名方法</title>
+    <link href="https://imtianx.github.io/2017/01/11/Tomcat%E4%B8%AD%E9%85%8D%E7%BD%AE%E5%8D%95IP%E5%A4%9A%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E6%96%B9%E6%B3%95/"/>
+    <id>https://imtianx.github.io/2017/01/11/Tomcat中配置单IP多二级域名方法/</id>
+    <published>2017-01-11T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于一级域名 &lt;a href=&quot;http://imtianx.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;imtianx.cn&lt;/a&gt; 作为博客主地址了，为了方便使用，通过二级域名来配置网站。这里简介二级域名的配置方式。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="后端" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+      <category term="域名配置" scheme="https://imtianx.github.io/categories/%E5%90%8E%E7%AB%AF/%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/"/>
+    
+    
+      <category term="tomcat" scheme="https://imtianx.github.io/tags/tomcat/"/>
+    
+      <category term="域名解析" scheme="https://imtianx.github.io/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
+    
+      <category term="二级域名" scheme="https://imtianx.github.io/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AsyncTask 工作原理及线程池</title>
+    <link href="https://imtianx.github.io/2017/01/06/AsyncTask%20%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    <id>https://imtianx.github.io/2017/01/06/AsyncTask 工作原理及线程池/</id>
+    <published>2017-01-06T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;读书笔记： 《Android 开发艺术探索》 ——第十一章：android 线程及线程池&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在 android 中，线程通常为主线程和子线程，前者主要处理和界面相关的事情，而后者主要用于耗时操作。&lt;br&gt;android 中的线程主要有 &lt;code&gt;Thread&lt;/code&gt;、&lt;code&gt;AsyncTask&lt;/code&gt;、&lt;code&gt;IntentService&lt;/code&gt; 和 &lt;code&gt;HandlerThread&lt;/code&gt; 。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="AsyncTask" scheme="https://imtianx.github.io/tags/AsyncTask/"/>
+    
+      <category term="线程池" scheme="https://imtianx.github.io/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android 消息机制及其原理</title>
+    <link href="https://imtianx.github.io/2016/12/27/android%20%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86/"/>
+    <id>https://imtianx.github.io/2016/12/27/android 消息机制及其原理/</id>
+    <published>2016-12-27T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;读书笔记： 《Android 开发艺术探索》 ——第十章：android 消息机制&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于 android 中的消息机制，主要是指 &lt;strong&gt;Handler&lt;/strong&gt; 的运行机制。在我们平时的开发中 ，对它并不陌生。由于android 是 单线程（UI线程）机制，对于一些耗时操作会在子线程中进行，如文件读取等.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="消息机制" scheme="https://imtianx.github.io/tags/%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6/"/>
+    
+      <category term="Handler" scheme="https://imtianx.github.io/tags/Handler/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>android 自定义View 详解</title>
+    <link href="https://imtianx.github.io/2016/12/19/android%20%E8%87%AA%E5%AE%9A%E4%B9%89View%20%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://imtianx.github.io/2016/12/19/android 自定义View 详解/</id>
+    <published>2016-12-19T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;读书笔记： 《Android 开发艺术探索》 ——第四章：View 的工作原理&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;经过上一节 &lt;a href=&quot;http://imtianx.cn/2016/12/17/Android%20View%20%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Android View 的事件体系&lt;/a&gt;的介绍，对 View 的架构及相关的事件分发有了解，本章主要介绍自定义 View 的相关知识。&lt;/p&gt;
+&lt;p&gt;对于自定义 View ，主要有： 直接继承View 和 ViewGroup，或者继承现有控件，如 ListView 等。不管使用哪种方式，都要先了解View 的工作原理 ，才能更好的进行自定义 View。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="View" scheme="https://imtianx.github.io/tags/View/"/>
+    
+      <category term="自定义" scheme="https://imtianx.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89/"/>
+    
+      <category term="原理" scheme="https://imtianx.github.io/tags/%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android View 的事件体系</title>
+    <link href="https://imtianx.github.io/2016/12/17/Android%20View%20%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB/"/>
+    <id>https://imtianx.github.io/2016/12/17/Android View 的事件体系/</id>
+    <published>2016-12-17T16:06:25.000Z</published>
+    <updated>2020-01-30T14:05:13.048Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文为读书笔记： 《Android 开发艺术探索 》——第三章 View 的事件体系     &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;android 系统虽然提供了很多基本的控件，如Button、TextView等，但是很多时候系统提供的view不能满足我们的需求，此时就需要我们根据自己的需求进行自定义控件。这些控件都是继承自View的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="https://imtianx.github.io/categories/android/"/>
+    
+      <category term="学习笔记" scheme="https://imtianx.github.io/categories/android/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="View" scheme="https://imtianx.github.io/tags/View/"/>
+    
+      <category term="事件分发" scheme="https://imtianx.github.io/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
+    
+      <category term="滑动冲突" scheme="https://imtianx.github.io/tags/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
+    
+  </entry>
+  
+</feed>

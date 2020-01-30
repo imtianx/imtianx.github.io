@@ -1,0 +1,1576 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="android IPC 机制及进程通信, imtianx">
+    <meta name="description" content="
+本文为读书笔记： 《Android 开发艺术探索 》——第二章 IPC 机制
+
+android  开发中有时候需要用到多进程，那么了解进程间通信对我们开发就尤为重要。往往多进程分为两种情况： 一是一个应用因某些原因需要多进程（如某些模块需">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>android IPC 机制及进程通信 | Imtianx`S Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Imtianx`S Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Imtianx`S Blog</div>
+        <div class="logo-desc">
+            
+            有志者，事竟成
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/imtianx" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/imtianx" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">android IPC 机制及进程通信</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/IPC/">
+                                <span class="chip bg-color">IPC</span>
+                            </a>
+                        
+                            <a href="/tags/AIDL/">
+                                <span class="chip bg-color">AIDL</span>
+                            </a>
+                        
+                            <a href="/tags/进程通信/">
+                                <span class="chip bg-color">进程通信</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/android/" class="post-category">
+                                android
+                            </a>
+                        
+                            <a href="/categories/android/学习笔记/" class="post-category">
+                                学习笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2016-12-14
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-01-30
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>本文为读书笔记： 《Android 开发艺术探索 》——第二章 IPC 机制</p>
+</blockquote>
+<p>android  开发中有时候需要用到多进程，那么了解进程间通信对我们开发就尤为重要。往往多进程分为两种情况： 一是一个应用因某些原因需要多进程（如某些模块需要在单独的进程中，或者是为了加大本应用所能使用的内存空间等）；二是当前应用需要想起他应用获取数据。<a id="more"></a></p>
+<h2 id="一、IPC简介"><a href="#一、IPC简介" class="headerlink" title="一、IPC简介"></a>一、IPC简介</h2><p><strong>IPC</strong> 是 <code>Inter-Process Communication</code> 的缩写，含义为进程间通信或者跨进程通信，指两个进程间进行数据交互的过程。<br><strong>进程</strong>:是cpu调度的最小单位，是一种有限的系统资源，一般只一个执行单元。在PC或者移动设备上指一个程序或者一个应用。而一个进程可以包含多个进程。</p>
+<p>IPC 不是android 中所独有的，任何操作系统都有。Windows上可以通过剪切板、管道和邮槽等来进行进程间通信；Linux 上可以通过命名管道、共享内存、信号量等进行通信;而android 他是一种基于linux 内核的移动操作系统，他的进程间通信方式并不完全继承自linux, 却有着自己独特的方式——<code>Binder</code>，此外，还可以使用Socket进行进程间通信。</p>
+<h2 id="二、android-中的多进程模式"><a href="#二、android-中的多进程模式" class="headerlink" title="二、android 中的多进程模式"></a>二、android 中的多进程模式</h2><p>在android 中如果使用多进程，通过给四大组件指定 <code>android:process</code> 属性即可开启多进程，此外还可以通过 JNI 在native 层 fork 一个新的进程。<br>如下activity 配置示例代码：</p>
+<pre><code> &lt;activity android:name=&quot;.activity.MainActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+            &lt;/intent-filter&gt;
+ &lt;/activity&gt;
+
+&lt;activity
+    android:name=&quot;.activity.SecondActivity&quot;
+    android:configChanges=&quot;screenLayout&quot;
+    android:label=&quot;@string/app_name&quot;
+    android:process=&quot;:remote&quot;/&gt;
+&lt;activity android:name=&quot;.activity.ThirdActivity&quot;
+    android:configChanges=&quot;screenLayout&quot;
+    android:label=&quot;@string/app_name&quot;
+    android:process=&quot;com.imtianx.ipcdemo.remote&quot;/&gt;
+
+</code></pre><p>通过 MainActivity 启动 SecondActivity ，SecondActivity 启动 ThirdActivity。<br>这三个activity 分别运行在三个不同的进程中：</p>
+<pre><code>//在as中打开terminal 输入下面命令
+adb shell
+//查看进程：ps|grep 包名
+ps|grep cn.imtianx.ipcdemo
+//三个进程如下
+USER      PID   PPID  VSIZE  RSS   WCHAN            PC  NAME
+u0_a106   3682  1680  1136428 57512 SyS_epoll_ 00000000 S cn.imtianx.ipcdemo
+u0_a106   3808  1680  1134324 57360 SyS_epoll_ 00000000 S cn.imtianx.ipcdemo:remote
+u0_a106   3918  1680  1166916 57920 SyS_epoll_ 00000000 S cn.imtianx.ipcdemo.remote
+</code></pre><p>或者在monitor界面也可以查看。MainActivity没有指定process属性，则他在应用的包名 <code>cn.imtianx.ipcdemo</code> 对应的进程中,其他两个分别 SecondActivity、ThirdActivity 所在的进程。对于SecondActivity ，他的进程是 以 <strong>：</strong> 申明的，是指在当前的进程名前加上包名，为 <strong>私有进程</strong>，其他应用不可与其在同一进程中；而不以 “ ：”开头的进程，属于 <strong>全局进程</strong> ，则可以。</p>
+<blockquote>
+<p>对于每个进程，都有一个独立的虚拟机，在内存中都有着不同的地址，这会导致不同虚拟机访问同一对象会产生多个副本，互不影响，若在一个进程中修改了数据，在另一个进程中不会变。即多进程下不能通过内存共享数据。</p>
+</blockquote>
+<p>一般多进程会造成如下几个问题：</p>
+<ul>
+<li>静态成员和单利失效</li>
+<li>多线程同步进制失效</li>
+<li>SharedPreference 的可靠性下降<br>底层是通过读写XML实现的，并发读写是会出问题的</li>
+<li>Application 会被多次重建<br>运行在同一进程中的组件属于同一个虚拟机和同一个Application的</li>
+</ul>
+<h2 id="三、IPC-基础概念"><a href="#三、IPC-基础概念" class="headerlink" title="三、IPC 基础概念"></a>三、IPC 基础概念</h2><p>只有明白了 IPC 中的 <strong>Serializable接口、 Parcelable接口 和 Binder</strong>相关的基础概念  ，才能更好的理解跨进程通信。  Serializable接口和 Parcelable接口 是实现序列化的两种方式。对于Intent 和 Binder 传输数据、对象持久化到本地或者网络传输，都需要使用。</p>
+<h3 id="3-1-Serializable接口"><a href="#3-1-Serializable接口" class="headerlink" title="3.1 Serializable接口"></a>3.1 Serializable接口</h3><p>Serializable接口 是java 中的，是一个空的接口，使用时直接实现，添加如下标识，即可自动实现序列化和反序列化操作。在使用过程中开销较大，需要大量操作io。</p>
+<pre><code>private static final long serialVersionUID = 1L;
+</code></pre><p>对于 <code>transient</code> 标识的属性和静态成员变量 ， 不参与序列化。</p>
+<h3 id="3-2-Parcelable接口"><a href="#3-2-Parcelable接口" class="headerlink" title="3.2 Parcelable接口"></a>3.2 Parcelable接口</h3><p>Parcelable接口 是android 特有的序列化方式，使用起来稍微麻烦，但是效率较高，主要用于内存序列化。如下使用示例：</p>
+<pre><code>public class User implements Parcelable{
+
+    private String id;
+    private String name;
+    private String sex;
+    private int age;
+
+    protected User(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        sex = in.readString();
+        age = in.readInt();
+    }
+
+    //用于反序列化
+    public static final Creator&lt;User&gt; CREATOR = new Creator&lt;User&gt;() {
+        /**
+         * 从序列化对象中创建原始对象
+         * @param in
+         * @return
+         */
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        /**
+         * 创建指定长度的原始对象数组
+         * @param size
+         * @return
+         */
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    /**
+     * 内容功能描述
+     * 大多数返回0，仅当当前对象中存在文件描述符时返回1
+     * @return
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * 当前对象写入序列化结构
+     * @param dest
+     * @param flags
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(sex);
+        dest.writeInt(age);
+    }
+}
+
+</code></pre><p>这里虽然看着很复杂，但这些方法全部可以自动生成，不用手动编写。android 中的 Intent 、Bundle、Bitmap等都实现了Parcelable接口，都是可以进行序列化的。</p>
+<h3 id="3-3-Binder"><a href="#3-3-Binder" class="headerlink" title="3.3 Binder"></a>3.3 Binder</h3><p>Binder 实现了 IBinder接口。从ipc角度，binder是一种跨进程通信方式，还可以理解为一种虚拟的物理设备，其驱动是 /dev/binder ;从 android Framework 角度说，Binder 是 ServiceManager 连接各种 Manager（ActivityManager、WindowManger，…）和相应 ManagerServices的桥梁；从 android 应用层来说，Binder是客户端与服务器端进行通信的媒介。</p>
+<p>android中 Binder 主要用在Services中，包括 AIDL 和 Messenger , Messenger 底层是 AIDL 实现的。</p>
+<p>如下是Binder的工作流程图：</p>
+<p><img src="/img/article_img/2016/Binder 工作机制.png" alt></p>
+<h2 id="四、android-中的IPC-方式"><a href="#四、android-中的IPC-方式" class="headerlink" title="四、android 中的IPC 方式"></a>四、android 中的IPC 方式</h2><p>如下各种 IPC 方式的优缺点对比：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+<th style="text-align:center">使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bundle</td>
+<td style="text-align:center">简单易用</td>
+<td style="text-align:center">只能传输Bundle支持的数据类型</td>
+<td style="text-align:center">四大组件间的进程通信</td>
+</tr>
+<tr>
+<td>文件共享</td>
+<td style="text-align:center">简单易用</td>
+<td style="text-align:center">不适合高并发场景，并且无法做到进程间的即时通讯</td>
+<td style="text-align:center">无并发访问情形，交换简单的数据，实时性不高</td>
+</tr>
+<tr>
+<td>AIDL</td>
+<td style="text-align:center">功能强大，支持一对多并发通信，实时通信</td>
+<td style="text-align:center">使用复杂，需要处理好线程同步</td>
+<td style="text-align:center">一对多通信且有RPC需求</td>
+</tr>
+<tr>
+<td>Messenger</td>
+<td style="text-align:center">功能一般，支持一对多串行通信，实时通信</td>
+<td style="text-align:center">不能很好处理高并发情形，不支持RPC，数据通过Message进行传输（只能传输Bundle支持的数据类型）</td>
+<td style="text-align:center">低并发的一对多即时通讯，无RPC需求，或者无需返回结果</td>
+</tr>
+<tr>
+<td>ContentProvider</td>
+<td style="text-align:center">在数据源访问方面功能强大，支持一对多并发数据共享，可以通过Call方法扩展其他操作</td>
+<td style="text-align:center">可以理解为受约束的AIDL，主要提供数据源的CRUD操作</td>
+<td style="text-align:center">一对多的进程数据共享</td>
+</tr>
+<tr>
+<td>Socket</td>
+<td style="text-align:center">功能强大，可以通过网络传输字节流，支持一对多实时通信</td>
+<td style="text-align:center">实现复杂，不支持直接的RPC</td>
+<td style="text-align:center">网络数据交换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五、AIDL-的简单使用"><a href="#五、AIDL-的简单使用" class="headerlink" title="五、AIDL 的简单使用"></a>五、AIDL 的简单使用</h2><p>只有允许不同应用的客户端用 IPC 方式访问服务，并且想要在服务中处理多线程时，才有必要使用 AIDL。 如果您不需要执行跨越不同应用的并发 IPC，就应该通过实现一个 Binder 创建接口；或者，如果您想执行 IPC，但根本不需要处理多线程，则使用 Messenger 类来实现接口。</p>
+<p>使用 AIDL 创建绑定服务的基本步骤如下：</p>
+<ol>
+<li>创建 .aidl 文件<br>在android studio 中 ，可以直接创建 AIDL ，自动创建相关的 aidl 包，这里创建 <code>IAddAidlInterface.aidl</code> 文件，具体内容如下：</li>
+</ol>
+<pre><code> // IAddAidlInterface.aidl
+ package cn.imtianx.ipcdemo;
+ interface IAddAidlInterface {
+ //计算两个数的和
+ int add(int num1 ,int num2);
+ }
+</code></pre><p> 编译后会自动生成相应的 java 类，这里是在 <code>build/generated/source/aidl/debug/包名/IAddAidlInterface.java</code> ,它包含一个内部类：Stub,继承自 <code>Binder</code>,实现了我们定义的 AIDL 接口，IAddAidlInterface，是用于定义服务的 RPC 接口。</p>
+<ol start="2">
+<li><p>实现接口</p>
+<pre><code>private IBinder mIBinder = new IAddAidlInterface.Stub(){
+    @Override
+    public int add(int num1, int num2) throws RemoteException {
+     return num1+num2;
+    }
+};
+</code></pre></li>
+<li><p>向客户端公开接口<br>自定义服务，便于客户端调用。</p>
+<pre><code>public class IAddService extends Service {
+     public IAddService() {
+     }
+
+     @Override
+     public IBinder onBind(Intent intent) {
+         // TODO: Return the communication channel to the service.
+         return mIBinder;
+     }
+     private IBinder mIBinder = new IAddAidlInterface.Stub(){
+         @Override
+         public int add(int num1, int num2) throws RemoteException {
+             return num1+num2;
+         }
+     };
+}
+</code></pre><p>具体的调用(部分代码)：</p>
+<pre><code>private IAddAidlInterface mIAddAidlInterface;
+ private ServiceConnection mConnection = new ServiceConnection() {
+     @Override
+     public void onServiceConnected(ComponentName name, IBinder service) {
+         //获取远程服务对象
+         mIAddAidlInterface = IAddAidlInterface.Stub.asInterface(service);
+     }
+
+     @Override
+     public void onServiceDisconnected(ComponentName name) {
+         mIAddAidlInterface = null;
+     }
+ };
+
+ //绑定服务
+ Intent intent = new Intent(AIDLActivity.this,IAddService.class);
+ intent.setAction(IAddService.class.getName());
+ bindService(intent,mConnection, Context.BIND_AUTO_CREATE);
+
+ //调用远程服务方法
+ int result  = mIAddAidlInterface.add(num1,num2);
+
+ //解绑服务
+ @Override
+ protected void onDestroy() {
+     super.onDestroy();
+     unbindService(mConnection);
+ }
+</code></pre><p>上述是一个简单的 AIDL 的使用，通过调用远程服务获取 计算结果。</p>
+</li>
+</ol>
+<p>接下来，分析下as 建立aidl文件编译后自动生成的java 类：</p>
+<pre><code>package cn.imtianx.ipcdemo;
+public interface IAddAidlInterface extends android.os.IInterface
+{
+    public static abstract class Stub extends android.os.Binder implements cn.imtianx.ipcdemo.IAddAidlInterface
+    {
+        //binder 的唯一标示，一般是binder的类名
+        private static final java.lang.String DESCRIPTOR = &quot;cn.imtianx.ipcdemo.IAddAidlInterface&quot;;
+        /** Construct the stub at attach it to the interface. */
+        public Stub()
+        {
+            this.attachInterface (this, DESCRIPTOR);
+        }
+
+        /**
+         * 用于将服务器端的binder 转换成客户端所需要的AIDL 的接口类型
+         * @param obj
+         * @return 如果客户端和服务器端在同一进程，则返回服务端的stub对象，否则返回 Stub.proxy对象
+        */
+        public static cn.imtianx.ipcdemo.IAddAidlInterface asInterface (android.os.IBinder obj)
+        {
+            if ( (obj == null) )
+            {
+                return null;
+            }
+            android.os.IInterface iin = obj.queryLocalInterface (DESCRIPTOR);
+            if ( ( (iin != null) &amp;&amp; (iin instanceof cn.imtianx.ipcdemo.IAddAidlInterface) ) )
+            {
+                return ( (cn.imtianx.ipcdemo.IAddAidlInterface) iin);
+            }
+            return new cn.imtianx.ipcdemo.IAddAidlInterface.Stub.Proxy (obj);
+        }
+        /**
+         * 返回当前binder对象
+         * @return
+         */
+        @Override public android.os.IBinder asBinder()
+        {
+            return this;
+        }
+        /**
+        * 运行在服务端的Binder线程池中
+        * @param code 确定请求的方法
+        * @param data 获取目标方法所需参数
+        * @param reply 写入返回值
+        * @param flags
+        * @return 若返回false，则为失败，可以此做权限验证
+        * @throws android.os.RemoteException
+        */
+        @Override public boolean onTransact (int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
+        {
+            switch (code)
+            {
+            case INTERFACE_TRANSACTION:
+            {
+                reply.writeString (DESCRIPTOR);
+                return true;
+            }
+
+            case TRANSACTION_add:
+            {
+                data.enforceInterface (DESCRIPTOR);
+                int _arg0;
+                _arg0 = data.readInt();
+                int _arg1;
+                _arg1 = data.readInt();
+                int _result = this.add (_arg0, _arg1);
+                reply.writeNoException();
+                reply.writeInt (_result);
+                return true;
+            }
+            }
+            return super.onTransact (code, data, reply, flags);
+        }
+        //代理对象
+        private static class Proxy implements cn.imtianx.ipcdemo.IAddAidlInterface
+        {
+            private android.os.IBinder mRemote;
+            Proxy (android.os.IBinder remote)
+            {
+                mRemote = remote;
+            }
+            @Override public android.os.IBinder asBinder()
+            {
+                return mRemote;
+            }
+            public java.lang.String getInterfaceDescriptor()
+            {
+                return DESCRIPTOR;
+            }
+            @Override public int add (int num1, int num2) throws android.os.RemoteException
+            {
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                int _result;
+                try {
+                    _data.writeInterfaceToken (DESCRIPTOR);
+                    _data.writeInt (num1);
+                    _data.writeInt (num2);
+                    mRemote.transact (Stub.TRANSACTION_add, _data, _reply, 0);
+                    _reply.readException();
+                    _result = _reply.readInt();
+                }
+                finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
+                return _result;
+            }
+        }
+
+        /**
+        * 方法标示符
+        * 格式：TRANSACTION_方法名 = (android.os.IBinder.FIRST_CALL_TRANSACTION + 
+        *       i);其中i按方法数自增
+        */
+        static final int TRANSACTION_add = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+
+    }
+    public int add (int num1, int num2) throws android.os.RemoteException;
+}
+
+</code></pre><p>更多AIDL 的资料，可参见<a href="https://developer.android.google.cn/guide/components/aidl.html#Defining" target="_blank" rel="noopener">官方文档</a>，对于Socket、ContentProvider等方式，之前接触过，这里不做介绍。</p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://imtianx.github.io" rel="external nofollow noreferrer">imtianx</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://imtianx.github.io/2016/12/14/android IPC 机制及进程通信/">https://imtianx.github.io/2016/12/14/android IPC 机制及进程通信/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://imtianx.github.io" target="_blank">imtianx</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/IPC/">
+                                    <span class="chip bg-color">IPC</span>
+                                </a>
+                            
+                                <a href="/tags/AIDL/">
+                                    <span class="chip bg-color">AIDL</span>
+                                </a>
+                            
+                                <a href="/tags/进程通信/">
+                                    <span class="chip bg-color">进程通信</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 56px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 56px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 56px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 56px;
+        line-height: 56px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+            
+            <div align="center">
+                <img src="/medias/reward/share_wechat.png" width="720">
+            </div>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '3c3e3f87d9ed9e3595d6',
+        clientSecret: '6d2355cc31f9618ceb213eb11a95be18c814d0e8',
+        repo: 'imtianx.github.io',
+        owner: 'imtianx',
+        admin: ["imtianx"],
+        id: '2016-12-14T16-06-25',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2016/12/17/Android View 的事件体系/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="Android View 的事件体系">
+                        
+                        <span class="card-title">Android View 的事件体系</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+本文为读书笔记： 《Android 开发艺术探索 》——第三章 View 的事件体系     
+
+android 系统虽然提供了很多基本的控件，如Button、TextView等，但是很多时候系统提供的view不能满足我们的需求，此时就需
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2016-12-17
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/android/" class="post-category">
+                                    android
+                                </a>
+                            
+                            <a href="/categories/android/学习笔记/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/View/">
+                        <span class="chip bg-color">View</span>
+                    </a>
+                    
+                    <a href="/tags/事件分发/">
+                        <span class="chip bg-color">事件分发</span>
+                    </a>
+                    
+                    <a href="/tags/滑动冲突/">
+                        <span class="chip bg-color">滑动冲突</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2016/12/12/android  多渠道打包/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="android  多渠道打包">
+                        
+                        <span class="card-title">android  多渠道打包</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            这里介绍使用友盟进行多渠道打包，参考慕课视屏
+一、 配置环境使用 gradle 添加依赖：
+//友盟统计
+compile &#39;com.umeng.analytics:analytics:latest.integration&#39;
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-12-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/android/" class="post-category">
+                                    android
+                                </a>
+                            
+                            <a href="/categories/android/学习笔记/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/android/">
+                        <span class="chip bg-color">android</span>
+                    </a>
+                    
+                    <a href="/tags/多渠道打包/">
+                        <span class="chip bg-color">多渠道打包</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Imtianx`S Blog<br />'
+            + '文章作者: imtianx<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;2016-
+            <span id="year">2020</span>
+            <a href="https://imtianx.github.io" target="_blank">imtianx</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">88.6k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            
+            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/imtianx" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:imtianx@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://mp.weixin.qq.com/s/6aMvLXcwwXrXyLWtKlL-2A" class="tooltipped" target="_blank" data-tooltip="关注我的wechat" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=764275613" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 764275613" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://twitter.com/imtianx" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/imtianx" data-position="top" data-delay="50">
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140423082-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-140423082-1');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?18357498";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/9b59717f.js", "daovoice")
+        daovoice('init', {
+            app_id: "9b59717f"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

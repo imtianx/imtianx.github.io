@@ -1,0 +1,1413 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="GPG 安装与使用, imtianx">
+    <meta name="description" content="GnuPG（GNU Privacy Guard,GPG）是一种加密软件，它是 PGP 加密软件的满足GPL协议的替代物 。用于加密、数字签章及产生非对称匙对的软件 。用于加密、签名通信内容及管理非对称密码学的密钥。ss">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>GPG 安装与使用 | Imtianx`S Blog</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Imtianx`S Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Imtianx`S Blog</div>
+        <div class="logo-desc">
+            
+            有志者，事竟成
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/imtianx" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/imtianx" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.iohttp://img.imtianx.cn/2019/logo-gnupg-light-purple-bg.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GPG 安装与使用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/GPG/">
+                                <span class="chip bg-color">GPG</span>
+                            </a>
+                        
+                            <a href="/tags/Git/">
+                                <span class="chip bg-color">Git</span>
+                            </a>
+                        
+                            <a href="/tags/加密/">
+                                <span class="chip bg-color">加密</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/工具软件/" class="post-category">
+                                工具软件
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-01-30
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    1.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>最近使用 <code>GitHub</code> 时无意间看见 <code>commit</code> 历史中有些带有 <code>Verified</code> 的标识，而有些没有，如下图，<br><img src="http://img.imtianx.cn/2019/github_log_verify.png" alt></p>
+<blockquote>
+<p>经查看发现 <code>Github</code> 默认使用了 <strong>GPG</strong> 进行签名(用其自己的 key ),来保证提交信息来自可靠的来源。</p>
+</blockquote>
+<p><a href="https://help.github.com/en/articles/managing-commit-signature-verification" target="_blank" rel="noopener">官方说明</a>：</p>
+<blockquote>
+<p>You can sign your work locally using GPG or S/MIME. GitHub will verify these signatures so other people will know that your commits come from a trusted source. GitHub will automatically sign commits you make using the GitHub web interface.</p>
+</blockquote>
+<p><strong>关于 GPG</strong></p>
+<blockquote>
+<p><strong><a href="https://gnupg.org/" target="_blank" rel="noopener">GnuPG</a></strong>（GNU Privacy Guard,GPG）是一种加密软件，它是 PGP 加密软件的满足GPL协议的替代物 。用于加密、数字签章及产生非对称匙对的软件 <a id="more"></a>^[1] 。<strong>用于加密、签名通信内容及管理非对称密码学的密钥</strong>。</p>
+</blockquote>
+<p>这里简记 <code>GPG</code> 安装配置到 <code>Git</code> 中遇到的相关问题及解决办法。</p>
+<h2 id="安装及生成密钥"><a href="#安装及生成密钥" class="headerlink" title="安装及生成密钥"></a>安装及生成密钥</h2><p>官网为：<a href="https://gnupg.org" target="_blank" rel="noopener">https://gnupg.org</a>，软件包有：</p>
+<ul>
+<li>win: <a href="http://www.gpg4win.org/" target="_blank" rel="noopener">Gpg4win</a>，或者 <a href="http://cygwin.org/" target="_blank" rel="noopener">Cygwin</a> 内置的 <code>Gnupg</code>;</li>
+<li>mac : <a href="https://gpgtools.org/" target="_blank" rel="noopener">GPGTools</a>(GUI 界面)；</li>
+<li>linux/unix: 包管理器安装或源码编译。</li>
+</ul>
+<blockquote>
+<p>这里以 <code>brew</code> 安装 <code>gnupg</code> 为例。</p>
+</blockquote>
+<p><strong>1、安装</strong><br>当前安装的软件包为目前最新的：<code>brew info gpg</code></p>
+<pre><code> &gt; brew info gpg
+gnupg: stable 2.2.15 (bottled)
+GNU Pretty Good Privacy (PGP) package
+https://gnupg.org/
+/usr/local/Cellar/gnupg/2.2.15 (135 files, 11MB) *
+  Poured from bottle on 2019-05-29 at 10:17:33
+From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/gnupg.rb
+==&gt; Dependencies
+Build: pkg-config ✔
+Required: adns ✔, gettext ✔, gnutls ✔, libassuan ✔, libgcrypt ✔, libgpg-error ✔, libksba ✔, libusb ✔, npth ✔, pinentry ✔
+==&gt; Analytics
+install: 30,935 (30 days), 134,827 (90 days), 517,582 (365 days)
+install_on_request: 25,763 (30 days), 108,154 (90 days), 407,474 (365 days)
+build_error: 0 (30 days)
+&gt; 
+</code></pre><p>由于依赖较多，可以给 <code>brew</code> 设置镜像源来加速，然后进行安装：</p>
+<pre><code>brew install gpg
+</code></pre><blockquote>
+<p>网上有说安装 <code>gpg2</code>,经测试安装的均是 <code>gnupg</code>。</p>
+</blockquote>
+<p><strong>2、生成密钥</strong><br>非新使用 <code>gpg</code> ,可以使用 <code>gpg -k</code> 查看是否有证书，如下为有证书的示例:</p>
+<pre><code> &gt; gpg -k
+/Users/imtianx/.gnupg/pubring.kbx
+---------------------------------
+pub   rsa4096 2019-05-28 [SC]
+      0A50E2B85C6E124AD0A1701FBFB191F8AFA7E860
+uid           [ultimate] imtianx (Signed-off-by imtianx on mbp.) &lt;imtianx@gmail.com&gt;
+sub   rsa4096 2019-05-28 [E]
+&gt; 
+</code></pre><p>如果没有，使用如下命令进行生成：</p>
+<pre><code>gpg --full-generate-key
+</code></pre><p>接着会有如下相关的提示，按照步骤设置信息：</p>
+<ol>
+<li>选择加密算法，<code>回车</code> 默认 <code>RSA</code> 和 <code>RSA</code>,或可输入对应的序号选择加密算法；</li>
+<li>输入密钥长度，默认 <code>2048</code>,最大 <code>4096</code>,推荐使用 <code>4096</code>,输入然后回车；</li>
+<li><p>密钥有效期，默认 <code>0</code> 永不过期；</p>
+<pre><code>0 = 密钥永不过期
+&lt;n&gt; = 密钥在 n 天后过期
+&lt;n&gt;w = 密钥在 n 周后过期
+&lt;n&gt;m = 密钥在 n 月后过期
+&lt;n&gt;y = 密钥在 n 年后过期 
+</code></pre></li>
+<li><p>确认是否正确；</p>
+</li>
+<li>设置个人信息：姓名、邮箱和注释（这个在以后可以进行添加删除等操作）；</li>
+<li>确认用户标识，若无需修改，确认后即可生成密钥。</li>
+</ol>
+<blockquote>
+<p>由于个人的 <code>gpg</code> 未使用过，这里未给出具体的创建信息。</p>
+</blockquote>
+<p>具体的步骤可参考：</p>
+<ul>
+<li><a href>Github-Generating a new GPG key</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2013/07/gpg.html" target="_blank" rel="noopener">阮一峰-GPG入门教程</a></li>
+</ul>
+<blockquote>
+<p>如果想要可视化页面操作，Mac 用户可以直接安装 <a href="https://gpgtools.org/" target="_blank" rel="noopener">GPGTools</a>。</p>
+</blockquote>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>查看密钥信息，ID 为  <code>BFB191F8AFA7E860</code>:</p>
+<pre><code> &gt; gpg --list-secret-keys --keyid-format LONG
+/Users/imtianx/.gnupg/pubring.kbx
+---------------------------------
+sec   rsa4096/BFB191F8AFA7E860 2019-05-28 [SC]
+      0A50E2B85C6E124AD0A1701FBFB191F8AFA7E860
+uid                 [ultimate] imtianx (Signed-off-by imtianx on mbp.) &lt;imtianx@gmail.com&gt;
+ssb   rsa4096/B331F00185D28960 2019-05-28 [E]
+</code></pre><p>显示公钥内容;</p>
+<pre><code>gpg --armor --export &lt;gpg_kek_id&gt;
+</code></pre><p>输出公钥到文件 <code>public-key.txt</code>：</p>
+<pre><code>gpg --armor --output public-key.txt --export &lt;gpg_kek_id&gt;
+</code></pre><p><code>gpg</code> 加密文件：</p>
+<pre><code>gpg --recipient &lt;gpg_key_id&gt; --output &lt;output_file_name&gt; --encrypt &lt;input_file_name&gt;
+</code></pre><p><code>gpg</code> 解密：</p>
+<pre><code>gpg --output &lt;output_file_name&gt; --decrypt &lt;input_file_name&gt;
+</code></pre><blockquote>
+<p>这里需要注意，–output 参数需要放前面。如果未将私钥的密码保存到钥匙串，这里会弹出输入密码窗口。</p>
+</blockquote>
+<p>此外，可以将自己的公钥上传到 GPG server,供他人使用。其他更多命令，可通过 <code>gpg --help</code> 查看。</p>
+<p><strong>添加用户标识信息：</strong></p>
+<pre><code>gpg --edit-key &lt;gpg_key——id&gt;/&lt;email&gt;
+</code></pre><p>进入 <code>gpg</code> 后可使用 <code>help</code> 查看所有的操作：</p>
+<pre><code>pg&gt; help
+quit        quit this menu
+save        save and quit
+help        show this help
+fpr         show key fingerprint
+grip        show the keygrip
+list        list key and user IDs
+uid         select user ID N
+key         select subkey N
+check       check signatures
+sign        sign selected user IDs [* see below for related commands]
+lsign       sign selected user IDs locally
+tsign       sign selected user IDs with a trust signature
+nrsign      sign selected user IDs with a non-revocable signature
+adduid      add a user ID
+addphoto    add a photo ID
+deluid      delete selected user IDs
+addkey      add a subkey
+addcardkey  add a key to a smartcard
+keytocard   move a key to a smartcard
+bkuptocard  move a backup key to a smartcard
+delkey      delete selected subkeys
+addrevoker  add a revocation key
+delsig      delete signatures from the selected user IDs
+expire      change the expiration date for the key or selected subkeys
+primary     flag the selected user ID as primary
+pref        list preferences (expert)
+showpref    list preferences (verbose)
+setpref     set preference list for the selected user IDs
+keyserver   set the preferred keyserver URL for the selected user IDs
+notation    set a notation for the selected user IDs
+passwd      change the passphrase
+trust       change the ownertrust
+revsig      revoke signatures on the selected user IDs
+revuid      revoke selected user IDs
+revkey      revoke key or selected subkeys
+enable      enable key
+disable     disable key
+showphoto   show selected photo IDs
+clean       compact unusable user IDs and remove unusable signatures from key
+minimize    compact unusable user IDs and remove all signatures from key
+
+* The &#39;sign&#39; command may be prefixed with an &#39;l&#39; for local signatures (lsign),
+  a &#39;t&#39; for trust signatures (tsign), an &#39;nr&#39; for non-revocable signatures
+  (nrsign), or any combination thereof (ltsign, tnrsign, etc.).
+</code></pre><blockquote>
+<p>修改标识比较麻烦，推荐新建，旧的标识如果未使用可以删除，若有使用可以是指撤销。</p>
+</blockquote>
+<h2 id="Git-配置"><a href="#Git-配置" class="headerlink" title="Git 配置"></a>Git 配置</h2><p>对于在 Git 中使用，需要开启签名，设置密钥Id：</p>
+<pre><code>git config --global user.signingkey &lt;key_id&gt;
+// 如果是 gpg2 ，需对应的更换
+git config --global gpg.program gpg
+// 开启提交签名，或者 commit 时添加 -s 参数
+git config --global commit.gpgsign true
+</code></pre><p><strong>未使用 GPGTools，添加到环境变量：</strong></p>
+<pre><code>export GPG_TTY=$(tty)
+</code></pre><blockquote>
+<p>注意需要在对应的 Git 服务网站（GitHub/Gitlab）添加 GPG 公钥；<br>还有用户信息呢需要对应。</p>
+</blockquote>
+<p>然后在使用的时候，commit 记录就会有校验通过的标识，如下:<br><img src="http://img.imtianx.cn/2019/git_verified.png" alt></p>
+<p>在查看 git log 时可以显示相关的签名信息：</p>
+<pre><code>git log --show-signature -1
+</code></pre><p>输出为：</p>
+<pre><code>commit 6b05e365de6a28b3054a5e6481c8e214552d2010
+gpg: Signature made Tue May 28 15:53:24 2019 CST
+gpg:                using RSA key 0A50E2B85C6E124AD0A1701FBFB191F8AFA7E860
+gpg: Good signature from &quot;imtianx (Signed-off-by imtianx on mbp.) &lt;imtianx@gmail.com&gt;&quot; [ultimate]
+Author: imtianx &lt;imtianx@gmail.com&gt;
+Date:   Tue May 28 15:53:24 2019 +0800
+
+    test gpg;
+</code></pre><p>可以参考 Gtihub 文档：<a href="https://help.github.com/en/articles/telling-git-about-your-signing-key" target="_blank" rel="noopener">Telling Git about your signing key</a></p>
+<blockquote>
+<p>如有问题可参见 <a href="#common_error">常见错误</a></p>
+</blockquote>
+<h2 id="Sourcetree-配置"><a href="#Sourcetree-配置" class="headerlink" title="Sourcetree 配置"></a>Sourcetree 配置</h2><p>与 Git 设置相比，这里较为麻烦。<br>首先，<code>Sourcetree</code> 默认支持 <code>gpg2</code>,这里需要设置 gpg2 的软连接否则 sourcetree 无法识别：</p>
+<pre><code>// 进入 gnupg 安装目录中的bin中
+cd /usr/local/Cellar/gnupg/2.2.15/bin
+ln -s gpg gpg2
+</code></pre><p>然后设置 gpg 目录，如下图：<br><img src="http://img.imtianx.cn/2019/sourcetree_gpg_folder.png" alt></p>
+<p>接着,开启仓库 gpg 设置：<br><img src="http://img.imtianx.cn/2019/sourcetree_pgp_repo.png" alt></p>
+<p>然后，开启签名设置：<br><img src="http://img.imtianx.cn/2019/sourcetree_commit_sign.png" alt></p>
+<p>在首次提交时，未保存私钥密码，会弹出如下弹框:<br><img src="http://img.imtianx.cn/2019/sourcetree_gpg_pwd.png" alt></p>
+<p>最后，开启签名后的提交信息如下：<br><img src="http://img.imtianx.cn/2019/sourcetree_commit_log.png" alt></p>
+<p>到此，整个 <code>Sourcetree</code> 的配置完成，遇到较多的问题可能就是 commit 加密失败。</p>
+<h2 id="common_error">常见错误</h2>
+
+
+<font color="red">1、commit 签名错误：</font>
+
+<pre><code>error: gpg failed to sign the data
+fatal: failed to write commit object
+</code></pre><p>可以在终端输入：</p>
+<pre><code>export GPG_TTY=$(tty)
+</code></pre><p>然后，测试 gpg ,弹出密码框并确认输入后可暂时解决，如下测试示例：</p>
+<pre><code>echo &quot;test&quot; | gpg --clearsign
+</code></pre><font color="red">可以使用下面方式彻底解决，会弹出输入密码弹框</font>
+
+<pre><code>brew install pinentry-mac
+echo &quot;pinentry-program /usr/local/bin/pinentry-mac&quot; &gt;&gt; ~/.gnupg/gpg-agent.conf
+killall gpg-agent
+</code></pre><font color="red">2、agent_genkey 错误</font>
+
+<pre><code>gpg: agent_genkey failed: No such file or directory
+</code></pre><p>查找该进程并kill 掉：</p>
+<pre><code>ps axu | grep gpg-agent
+kill -9 &lt;process_id&gt;
+</code></pre><blockquote>
+<p>如有问题，请留言交流。</p>
+</blockquote>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://imtianx.github.io" rel="external nofollow noreferrer">imtianx</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://imtianx.github.io/2019/05/29/gpg_an_zhuang_yu_shi_yong/">https://imtianx.github.io/2019/05/29/gpg_an_zhuang_yu_shi_yong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://imtianx.github.io" target="_blank">imtianx</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/GPG/">
+                                    <span class="chip bg-color">GPG</span>
+                                </a>
+                            
+                                <a href="/tags/Git/">
+                                    <span class="chip bg-color">Git</span>
+                                </a>
+                            
+                                <a href="/tags/加密/">
+                                    <span class="chip bg-color">加密</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 56px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 56px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 56px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 56px;
+        line-height: 56px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+            
+            <div align="center">
+                <img src="/medias/reward/share_wechat.png" width="720">
+            </div>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '3c3e3f87d9ed9e3595d6',
+        clientSecret: '6d2355cc31f9618ceb213eb11a95be18c814d0e8',
+        repo: 'imtianx.github.io',
+        owner: 'imtianx',
+        admin: ["imtianx"],
+        id: '2019-05-29T16-06-25',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/05/29/gpg_an_zhuang_yu_shi_yong/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.iohttp://img.imtianx.cn/2019/logo-gnupg-light-purple-bg.png" class="responsive-img" alt="GPG 安装与使用">
+                        
+                        <span class="card-title">GPG 安装与使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            GnuPG（GNU Privacy Guard,GPG）是一种加密软件，它是 PGP 加密软件的满足GPL协议的替代物 。用于加密、数字签章及产生非对称匙对的软件 。用于加密、签名通信内容及管理非对称密码学的密钥。ss
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/工具软件/" class="post-category">
+                                    工具软件
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GPG/">
+                        <span class="chip bg-color">GPG</span>
+                    </a>
+                    
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
+                    </a>
+                    
+                    <a href="/tags/加密/">
+                        <span class="chip bg-color">加密</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/05/18/opengrok_yuan_ma_yue_du_huan_jing_da_jian/">
+                    <div class="card-image">
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.iohttp://img.imtianx.cn/2019/opengrok_home.png" class="responsive-img" alt="OpenGrok 源码阅读环境搭建">
+                        
+                        <span class="card-title">OpenGrok 源码阅读环境搭建</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            开发过程中，往往需要阅读源码，挑选一个合适的源码阅读方式十分重要。这里简记使用 [OpenGrok](https://oracle.github.io/opengrok/)搭建源码阅读环境
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/工具软件/" class="post-category">
+                                    工具软件
+                                </a>
+                            
+                            <a href="/categories/工具软件/源码阅读/" class="post-category">
+                                    源码阅读
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/源码阅读/">
+                        <span class="chip bg-color">源码阅读</span>
+                    </a>
+                    
+                    <a href="/tags/OpenGrok/">
+                        <span class="chip bg-color">OpenGrok</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Imtianx`S Blog<br />'
+            + '文章作者: imtianx<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;2016-
+            <span id="year">2020</span>
+            <a href="https://imtianx.github.io" target="_blank">imtianx</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">88.6k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            
+            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/imtianx" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:imtianx@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="https://mp.weixin.qq.com/s/6aMvLXcwwXrXyLWtKlL-2A" class="tooltipped" target="_blank" data-tooltip="关注我的wechat" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=764275613" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 764275613" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="https://twitter.com/imtianx" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: https://twitter.com/imtianx" data-position="top" data-delay="50">
+        <i class="fab fa-twitter"></i>
+    </a>
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140423082-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-140423082-1');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?18357498";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/9b59717f.js", "daovoice")
+        daovoice('init', {
+            app_id: "9b59717f"
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
