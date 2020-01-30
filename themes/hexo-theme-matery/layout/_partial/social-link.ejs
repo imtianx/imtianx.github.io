@@ -10,15 +10,9 @@
     </a>
 <% } %>
 
-<% if (theme.socialLink.facebook) { %>
-    <a href="<%= theme.socialLink.facebook %>" class="tooltipped" target="_blank" data-tooltip="关注我的Facebook: <%= theme.socialLink.facebook %>" data-position="top" data-delay="50">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-<% } %>
-
-<% if (theme.socialLink.twitter) { %>
-    <a href="<%= theme.socialLink.twitter %>" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: <%= theme.socialLink.twitter %>" data-position="top" data-delay="50">
-        <i class="fab fa-twitter"></i>
+<% if (theme.socialLink.wechat) { %>
+    <a href="<%= theme.socialLink.wechat %>" class="tooltipped" target="_blank" data-tooltip="关注我的wechat" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
     </a>
 <% } %>
 
@@ -39,6 +33,19 @@
         <i class="fab fa-zhihu1">知</i>
     </a>
 <% } %>
+
+<% if (theme.socialLink.facebook) { %>
+    <a href="<%= theme.socialLink.facebook %>" class="tooltipped" target="_blank" data-tooltip="关注我的Facebook: <%= theme.socialLink.facebook %>" data-position="top" data-delay="50">
+        <i class="fab fa-facebook-f"></i>
+    </a>
+<% } %>
+
+<% if (theme.socialLink.twitter) { %>
+    <a href="<%= theme.socialLink.twitter %>" class="tooltipped" target="_blank" data-tooltip="关注我的Twitter: <%= theme.socialLink.twitter %>" data-position="top" data-delay="50">
+        <i class="fab fa-twitter"></i>
+    </a>
+<% } %>
+
 
 <% if (theme.socialLink.rss) { %>
     <a href="<%- url_for('/atom.xml') %>" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">

@@ -27,7 +27,7 @@ implementation "com.android.support:design:27.1.1"
 
 然后,在 `menu` 目录下定义 tab 的菜单,例如 `res/menu/menu_navigation_tab.xml`：
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
@@ -54,7 +54,7 @@ implementation "com.android.support:design:27.1.1"
 
 接着添加 `BottomNavigationView` 到布局中，如下主要代码：
 
-```
+```xml
 <android.support.design.widget.BottomNavigationView
     android:id="@+id/navigation_view"
     android:layout_width="match_parent"
@@ -85,7 +85,7 @@ implementation "com.android.support:design:27.1.1"
 
 对于上面所出现的3个以上tab 会出现偏移问题，通过查看源码，[BottomNavigationView](http://androidxref.com/8.1.0_r33/xref/frameworks/support/design/src/android/support/design/widget/BottomNavigationView.java) 的菜单是由 [BottomNavigationMenuView](http://androidxref.com/8.1.0_r33/xref/frameworks/support/design/src/android/support/design/internal/BottomNavigationMenuView.java) 控制的，如下构造方法中对 `BottomNavigationMenuView` 的初始化及相关属性设置的部分代码 ：
 
-```
+```java
  public BottomNavigationView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
@@ -142,7 +142,7 @@ implementation "com.android.support:design:27.1.1"
 ```
 而 `BottomNavigationMenuView` 中的 item 是一个包含图片文本的自定义控件-- [BottomNavigationItemView](http://androidxref.com/8.1.0_r33/xref/frameworks/support/design/src/android/support/design/internal/BottomNavigationItemView.java) 类型的数组保存的。在 `BottomNavigationItemView` 中对于不同的模式和选中状态，设置 item 的 icon 和 label 的显示，如下部分代码：
 
-```
+```java
 // 偏移模式，默认 false
  private boolean mShiftingMode;
  
@@ -234,7 +234,7 @@ public void setChecked(boolean checked) {
 
 接着回头查看 `BottomNavigationMenuView` 源码，`mShiftingMode` 的设置 如下：
 
-```
+```java
 // 偏移模式
 private boolean mShiftingMode = true;
 // 菜单 item
@@ -276,7 +276,7 @@ private BottomNavigationItemView getNewItem() {
 ```
 通过上面的代码，彻底知道了 tab 个数在3前后 菜单的偏移模式不同，所以可以修改 `mShiftingMode` 属性来保证 tab 操作3个后的显示模式，但是，`BottomNavigationMenuView` 并未开放相关方法，因此可以通过反射修改 `mShiftingMode` 的值，以及遍历菜单修改相关属性，如下：
 
-```
+```kotlin
 object NavigationViewHelper {
     @SuppressLint("RestrictedApi")
     fun disableShiftingMode(view: BottomNavigationView) {
@@ -322,7 +322,7 @@ object NavigationViewHelper {
 
 这里从 `BottomNavigationView` 源码看起，在 28 以后，新增的自定属性 `labelVisibilityMode` 取值为：
 
-```
+```xml
 <declare-styleable name="BottomNavigationView"><attr name="menu"/><attr name="labelVisibilityMode">
   <!-- 自动 ，和 menu 的 item 数目有关 -->
   <enum name="auto" value="-1"/>
@@ -336,7 +336,7 @@ object NavigationViewHelper {
 
 其中，默认为 `-1`,如下获取自定义属性和设置 menu 的 labelVisibilityMode 的源码：
 
-```
+```java
  private final BottomNavigationMenuView menuView;
  
 // 获取自定义属性值，默认 -1
@@ -353,7 +353,7 @@ public void setLabelVisibilityMode(int labelVisibilityMode) {
 
 接着，查看 `BottomNavigationMenuView` 的相关源码：
 
-```
+```java
 boolean shifting = this.isShifting(this.labelVisibilityMode, this.menu.getVisibleItems().size());
 for(int i = 0; i < menuSize; ++i) {
     this.presenter.setUpdateSuspended(true);
@@ -373,7 +373,7 @@ private boolean isShifting(int labelVisibilityMode, int childCount) {
 
 最后来看看 `BottomNavigationItemView` 中 item 偏移与 label 显示与否的相关设置：
 
-```
+```java
 // ...
 switch(this.labelVisibilityMode) {
     case -1:

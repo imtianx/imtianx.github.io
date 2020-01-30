@@ -1,7 +1,7 @@
 <footer class="page-footer bg-color">
     <div class="container row center-align" style="margin-bottom: <% if (theme.time.enable) { %>15<% } else { %>0<% } %>px !important;">
         <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
+            Copyright&nbsp;&copy;2016-
             <span id="year"><%- theme.time.year %></span>
             <a href="<%- config.url %>" target="_blank"><%- config.author %></a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -72,8 +72,8 @@
                 }
                 setInterval(siteTime, 1000);
             </script>
-            <% } %>
             <br>
+            <% } %>
             <% if (theme.icp.enable) { %>
             <span id="icp"><img src="<%- theme.jsDelivr.url %>/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="<%- theme.icp.url %>" target="_blank"><%- theme.icp.text %></a>
