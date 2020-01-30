@@ -4,41 +4,44 @@ language: node_js
 # 语言版本 stable
 node_js: stable
 
-
-# S: Build Lifecycle
-
-
-# 安装依赖
-install:
-  - npm install hexo
-
- # 部署命令
-script:
-  - hexo -v
-  - hexo clean
-  - hexo generate
-
-# 提交内容及git 用户信息
-after_script:
-  - cd ./public
-  - git init
-  - git config user.name "imtianx"
-  - git config user.email "2360633699@qq.com"
-  - git add .
-  - git commit -m "Auto deploy by Travis CI."
-  - git push --force --quiet "https://${GITHUB_BLOG_TOKEN}@${GH_REF}" master:master
-# E: Build LifeCycle
+# 缓存，加速构建
+cache:
+  directories:
+    - node_modules
 
 # 项目所在分支
 branches:
   only:
     - theme_matery
 
-# 缓存，加速构建
-cache:
-  directories:
-    - "node_modules"
+# 安装依赖
+before_install:
+  - npm i hexo --S
+  - npm i hexo-prism-plugin -S
+  - npm i hexo-permalink-pinyin -S
+  - npm i hexo-wordcount -S
+  - npm i hexo-generator-feed -S
+  - npm i hexo-generator-search -S
+  - npm i hexo-filter-github-emojis -S
+  - npm i
 
+
+before_script:
+- git config --global user.name 'Travis CI'
+- git config --global user.email 'bot@travis-ci.org'
+- sed -i'' "s~git@${GH_REF}~https://${GITHUB_BLOG_TOKEN}:x-oauth-basic@${GH_REF}~" _config.yml
+
+
+script:
+  - hexo generate
+
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: sh deploy.sh
+  on:
+    branch: theme_matery
 
 # 项目git地址	
 env:
