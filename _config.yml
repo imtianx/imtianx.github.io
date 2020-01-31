@@ -94,7 +94,8 @@ githubEmojis:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/imtianx/imtianx.github.io.git
+  repo: git@github.com:imtianx/imtianx.github.io.git
+  branch: master
 
 search:
   path: search.xml
