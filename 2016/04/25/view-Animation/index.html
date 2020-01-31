@@ -15,17 +15,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Animation 动画详解 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -38,7 +38,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -125,7 +125,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -283,7 +283,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -301,7 +301,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -449,7 +449,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
@@ -487,7 +487,7 @@
 <li>缩放    <a href="https://developer.android.com/reference/android/view/animation/ScaleAnimation.html" target="_blank" rel="noopener">ScaleAnimation</a></li>
 <li>平移   <a href="https://developer.android.com/reference/android/view/animation/TranslateAnimation.html" target="_blank" rel="noopener">TranslateAnimation</a><br>此外，还提供了<a href="https://developer.android.com/reference/android/view/animation/AnimationSet.html" target="_blank" rel="noopener">AnimationSet</a>动画集合，混合使用多种动画。<br>它们对应的 <strong>xml</strong>  的标签分别为：<strong>alpha,rotate,scale,translate和set。</strong><br><strong>Animation</strong>是他们的基类，有如下的标签和对应的函数：<br><strong>android:duration setDuration(long)</strong> 动画持续时间，以毫秒为单位<br><strong>android:fillAfter setFillAfter(boolean)</strong> 如果设置为 true，控件动画结束时，将保持动画最后时的状态<br><strong>android:fillBefore setFillBefore(boolean)</strong> 如果设置为 true,控件动画结束时，还原到开始动画前的状态<br><strong>android:fillEnabled setFillEnabled(boolean)</strong> 与 android:fillBefore 效果相同，都是在动画结束时，将控件还原到初始化状态<br><strong>android:repeatCount setRepeatCount(int)</strong> 重复次数<br><strong>android:repeatMode setRepeatMode(int)</strong> 重复类型，有 reverse 和 restart 两个值，取值为 RESTART 或 REVERSE，必须与 repeatCount 一起使用才能看到效果。因为这里的意义是重复的类型，即回放时的动作。<br><strong>android:interpolator setInterpolator(Interpolator)</strong> 设定插值器，其实就是指定的动作效果，比如弹跳效果等</li>
 </ul>
-<h2 id="2-Interpolator-插值器"><a href="#2-Interpolator-插值器" class="headerlink" title="2. Interpolator 插值器"></a>2. Interpolator 插值器</h2><p>对于动画，它的速率变化有快又慢，谷歌给出了<strong>插值器</strong>，来方便我们控制动画的变化。在不同的插值器的作用下，其变化也不一样。官方给的插值器有（谷歌官方）：<br><img src="/img/article_img/Interpolator.jpg" alt><br>部分资源id为(改图来自网络)：<br><img src="/img/article_img/Interpolator-resource-id.png" alt></p>
+<h2 id="2-Interpolator-插值器"><a href="#2-Interpolator-插值器" class="headerlink" title="2. Interpolator 插值器"></a>2. Interpolator 插值器</h2><p>对于动画，它的速率变化有快又慢，谷歌给出了<strong>插值器</strong>，来方便我们控制动画的变化。在不同的插值器的作用下，其变化也不一样。官方给的插值器有（谷歌官方）：<br><img src="/img/article_img/Interpolator.jpg" alt=""><br>部分资源id为(改图来自网络)：<br><img src="/img/article_img/Interpolator-resource-id.png" alt=""></p>
 <h2 id="3-xm实现动画"><a href="#3-xm实现动画" class="headerlink" title="3. xm实现动画"></a>3. xm实现动画</h2><p>以<strong>scale</strong>标签为例，其他类似。scale有以下几个属性：</p>
 <ul>
 <li><strong>android:fromXScale</strong> 起始的 X方向上相对自身的缩放比例，浮点值，比如 1.0 代表自身无变化，0.5 代表起始时缩小一倍，2.0 代表放大一倍；</li>
@@ -498,29 +498,29 @@
 <li><strong>android:pivotY</strong> 缩放起点 Y 轴坐标，取值及意义跟android:pivotX 一样。</li>
 <li><strong>android:interpolator</strong> 就是添加的插值器，通过不同的Resource ID引用不同的插值器类。</li>
 <li><strong>android：fillAfter</strong> 保持动画结束的状态，同样的可以保存初始化状态（<strong>fileBefore</strong>）</li>
-<li><strong>android:repeatMode</strong> 设定回放类型，重新开始/倒退（restart /reverse）<br>在res下新建anim 文件夹，新建scaleanim.xml文件，如下代码（宽高从0放大到1.5倍，开开始和结束速度慢，中间快，停留在结束状态，重复一次）：<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<li><strong>android:repeatMode</strong> 设定回放类型，重新开始/倒退（restart /reverse）<br>在res下新建anim 文件夹，新建scaleanim.xml文件，如下代码（宽高从0放大到1.5倍，开开始和结束速度慢，中间快，停留在结束状态，重复一次）：<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;scale
-  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-  android:interpolator=&quot;@android:anim/accelerate_decelerate_interpolator&quot;
-  android:fromXScale=&quot;0.0&quot;
-  android:fromYScale=&quot;0.0&quot;
-  android:pivotX=&quot;50&quot;
-  android:pivotY=&quot;50&quot;
-  android:toXScale=&quot;1.5&quot;
-  android:toYScale=&quot;1.5&quot;
-  android：fillAfter=&quot;true&quot;
-  android:repeatCount=&quot;1&quot;  
-  android:repeatMode=&quot;restart&quot;  &gt;
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+  android:fromXScale="0.0"
+  android:fromYScale="0.0"
+  android:pivotX="50"
+  android:pivotY="50"
+  android:toXScale="1.5"
+  android:toYScale="1.5"
+  android：fillAfter="true"
+  android:repeatCount="1"  
+  android:repeatMode="restart"  &gt;
 &lt;/scale&gt;
 </code></pre>上面定义好了动画，下面就是具体的使用，这里以给textView设置上面的scale动画为例，代码如下：<pre><code>Animation mAnimation = AnimationUtils.loadAnimation(this,R.anim.scaleanim);
   textView.startAnimation(mAnimation);
-</code></pre>注：对于其他的标签及其属性可以参见<a href="https://developer.android.com/reference/android/view/animation/Animation.html" target="_blank" rel="noopener">官方文档</a>,这些标签可以放在一个<strong>set标签</strong>中，来定义动画集合。<h2 id="4-java-代码实现动画"><a href="#4-java-代码实现动画" class="headerlink" title="4. java 代码实现动画"></a>4. java 代码实现动画</h2>这里以<strong>AlphaAnimation</strong>为例，若xml代码为：<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
-&lt;alpha xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
-  android:interpolator=&quot;@android:anim/bounce_interpolator&quot;
-  android:fromAlpha=&quot;1.0&quot;  
-  android:toAlpha=&quot;0.1&quot;  
-  android:duration=&quot;3000&quot;  
-  android:fillBefore=&quot;true&quot;&gt;  
+</code></pre>注：对于其他的标签及其属性可以参见<a href="https://developer.android.com/reference/android/view/animation/Animation.html" target="_blank" rel="noopener">官方文档</a>,这些标签可以放在一个<strong>set标签</strong>中，来定义动画集合。<h2 id="4-java-代码实现动画"><a href="#4-java-代码实现动画" class="headerlink" title="4. java 代码实现动画"></a>4. java 代码实现动画</h2>这里以<strong>AlphaAnimation</strong>为例，若xml代码为：<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;  
+&lt;alpha xmlns:android="http://schemas.android.com/apk/res/android"  
+  android:interpolator="@android:anim/bounce_interpolator"
+  android:fromAlpha="1.0"  
+  android:toAlpha="0.1"  
+  android:duration="3000"  
+  android:fillBefore="true"&gt;  
 &lt;/alpha&gt;
 </code></pre>与其有相同效果的java代码为：<pre><code>alphaAnim = new AlphaAnimation(1.0f,0.1f);  
 alphaAnim.setDuration(3000);  
@@ -545,7 +545,25 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
         }
     });
 </code></pre><p>更多：<a href="http://imtianx.cn/2016/04/25/Property-animatorValueAnimator_ObjectAnimation" target="_blank" rel="noopener">属性动画（ValueAnimator 和 ObjectAnimation）</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -624,13 +642,13 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -748,10 +766,10 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -775,8 +793,8 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -786,7 +804,7 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -823,7 +841,7 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="属性动画详解（Animator）">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="属性动画详解（Animator）">
                         
                         <span class="card-title">属性动画详解（Animator）</span>
                     </div>
@@ -884,7 +902,7 @@ alphaAnim.setInterpolator(new BounceInterpolator());//设置插值器
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="SwipeRefreshLayout+RecyclerView实现下拉刷新">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SwipeRefreshLayout+RecyclerView实现下拉刷新">
                         
                         <span class="card-title">SwipeRefreshLayout+RecyclerView实现下拉刷新</span>
                     </div>
@@ -983,21 +1001,21 @@ compile
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1019,7 +1037,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1077,7 +1095,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1098,7 +1116,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1164,10 +1182,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1178,12 +1196,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1230,10 +1248,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1263,17 +1281,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

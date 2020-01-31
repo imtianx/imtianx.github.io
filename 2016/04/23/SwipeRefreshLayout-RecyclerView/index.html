@@ -17,17 +17,17 @@ compile">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SwipeRefreshLayout+RecyclerView实现下拉刷新 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -40,7 +40,7 @@ compile">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -127,7 +127,7 @@ compile">
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -285,7 +285,7 @@ compile">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -303,7 +303,7 @@ compile">
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -451,14 +451,14 @@ compile">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    632
+                    656
                 </div>
                 
 
@@ -484,30 +484,30 @@ compile">
                 <p>SwipeRefreshLayout+RecyclerView实现下拉刷新<br>另外还使用了CardView（一个容器类布局，它继承自FrameLayout）。<br><a id="more"></a><br>效果图如下：<br><img src="http://img.blog.csdn.net/20160411115226554" alt="这里写图片描述"></p>
 <h2 id="具体的使用："><a href="#具体的使用：" class="headerlink" title="具体的使用："></a>具体的使用：</h2><h4 id="1-CardView"><a href="#1-CardView" class="headerlink" title="1.CardView"></a>1.CardView<br></h4><p>首先，引入依赖：<br></p>
 <pre><code>```
-compile &#39;com.android.support:cardview-v7:23.3.0&#39;
+compile 'com.android.support:cardview-v7:23.3.0'
 ```
 </code></pre><p> 接着，在布局中引用，需要添加新的名字空间<br></p>
 <pre><code>```
-xmlns:card_view=&quot;http://schemas.android.com/apk/res-auto&quot;
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
 ```
 </code></pre><p> 通过名字空间添加两个新的属性,通过名字很容易知道，第一个是设置背景颜色，第二个是设置圆角<br></p>
 <pre><code>```
-card_view:cardBackgroundColor=&quot;#b911e8&quot;
-card_view:cardCornerRadius=&quot;4dp&quot;
+card_view:cardBackgroundColor="#b911e8"
+card_view:cardCornerRadius="4dp"
 ```
 </code></pre><p>这里，RecyclerView 的每一个item都是一个CardView<br><br></p>
 <h4 id="2-SwipeRefreshLayout"><a href="#2-SwipeRefreshLayout" class="headerlink" title="2.SwipeRefreshLayout"></a>2.SwipeRefreshLayout</h4><p>它在V4 包下，使用代码如下：<a href="https://github.com/imtianx/StudyDemoForAndroid/blob/master/A02-swrvdemo%2Fsrc%2Fmain%2Fres%2Flayout%2Factivity_main.xml" target="_blank" rel="noopener">activity_main.xml</a></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;android.support.v4.widget.SwipeRefreshLayout
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-android:id=&quot;@+id/swipe_container&quot;
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;&gt;
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/swipe_container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"&gt;
 
 &lt;android.support.v7.widget.RecyclerView
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;wrap_content&quot;
-android:id=&quot;@+id/relv&quot;&gt;
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/relv"&gt;
 &lt;/android.support.v7.widget.RecyclerView&gt;
 
 &lt;/android.support.v4.widget.SwipeRefreshLayout&gt;
@@ -521,7 +521,7 @@ setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener);
 //设置刷新状态
 setRefreshing(Boolean refreshing);
 </code></pre><h4 id="3-RecyclerView"><a href="#3-RecyclerView" class="headerlink" title="3.RecyclerView"></a>3.RecyclerView</h4><p>它是谷歌对ListView的升级，效率更高，并对ViewHolder进行了封装。使用时，同样，需要依赖库:</p>
-<pre><code>compile &#39;com.android.support:recyclerview-v7:23.3.0&#39;
+<pre><code>compile 'com.android.support:recyclerview-v7:23.3.0'
 </code></pre><p>编写自己的adapter，继承自 RecyclerView.Adapter ，实现三个方法：(具体内容见：<a href="https://github.com/imtianx/StudyDemoForAndroid/blob/master/A02-swrvdemo%2Fsrc%2Fmain%2Fjava%2Fcn%2Fimtianx%2Fswrvdemo%2FRvAdapter.java" target="_blank" rel="noopener">RvAdapter.java</a>)</p>
 <pre><code>/**
  * 将布局转换成view 并传递给RecyclerView 封装好的 ViewHolder
@@ -608,7 +608,25 @@ public interface OnItemClickListener
 }
 </code></pre><p>最后在activity中设置监听，具体见：<a href="https://github.com/imtianx/StudyDemoForAndroid/blob/master/A02-swrvdemo/src/main/java/cn/imtianx/swrvdemo/MainActivity.java" target="_blank" rel="noopener">MainActivity.java</a></p>
 <p> <strong><a href="https://github.com/imtianx/StudyDemoForAndroid/tree/master/A02-swrvdemo" target="_blank" rel="noopener">demon地址</a></strong></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -687,13 +705,13 @@ public interface OnItemClickListener
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -811,10 +829,10 @@ public interface OnItemClickListener
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -838,8 +856,8 @@ public interface OnItemClickListener
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -849,7 +867,7 @@ public interface OnItemClickListener
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -886,7 +904,7 @@ public interface OnItemClickListener
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="Animation 动画详解">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Animation 动画详解">
                         
                         <span class="card-title">Animation 动画详解</span>
                     </div>
@@ -948,7 +966,7 @@ public interface OnItemClickListener
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="使用Gradle发布项目到JCenter仓库">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="使用Gradle发布项目到JCenter仓库">
                         
                         <span class="card-title">使用Gradle发布项目到JCenter仓库</span>
                     </div>
@@ -1041,21 +1059,21 @@ public interface OnItemClickListener
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1077,7 +1095,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1135,7 +1153,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1156,7 +1174,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1222,10 +1240,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1236,12 +1254,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1288,10 +1306,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1321,17 +1339,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

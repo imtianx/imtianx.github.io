@@ -17,17 +17,17 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Android View 的事件体系 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -40,7 +40,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -127,7 +127,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -285,7 +285,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -303,7 +303,7 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -451,21 +451,21 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    10 分
                 </div>
                 
 
@@ -486,9 +486,9 @@ android 系统虽然提供了很多基本的控件，如Button、TextView等，�
 </blockquote>
 <p>android 系统虽然提供了很多基本的控件，如Button、TextView等，但是很多时候系统提供的view不能满足我们的需求，此时就需要我们根据自己的需求进行自定义控件。这些控件都是继承自View的。<br><a id="more"></a></p>
 <h2 id="一、android-控件架构"><a href="#一、android-控件架构" class="headerlink" title="一、android 控件架构"></a>一、android 控件架构</h2><p>android 中的控件在界面上都会占一块巨型区域，主要分为两类：ViewGroup和View控件。ViewGroup作为父控件可以包含多个View控件，并管理他们，但其也是继承自View。通过Viewgroup，整个控件界面形成了View的控件树，如图1所示。</p>
-<p>上层控件负责字控件的测量与绘制，并传递交互事件。在Activity 中 通过<code>findViewById()</code>方法，就是以树的 <em>深度优先遍历</em>  查找对应的控件。控件树的顶部都有一个ViewParent 对象，对整个视图进行控制。<br><img src="/img/article_img/2016/view.png" alt></p>
+<p>上层控件负责字控件的测量与绘制，并传递交互事件。在Activity 中 通过<code>findViewById()</code>方法，就是以树的 <em>深度优先遍历</em>  查找对应的控件。控件树的顶部都有一个ViewParent 对象，对整个视图进行控制。<br><img src="/img/article_img/2016/view.png" alt=""></p>
 <p>如上面图2 所示，是android 界面的架构图，在activity 中 通过 <code>setContentView()</code> 方法设置为根布局。在每一个Activity 中 都包含一个Window 对象，它由 PhoneWindow来实现，PhoneWindow 讲一个 DecorView 设置为整个应用窗口的根View。DecorView 作为窗口界面的顶层视图，封装了一些窗口操作的通用方法，所有View 的监听事件，都通过<code>WindowManagerService</code> 进行接收，并通过Activity 对象来回调相应的onClickListener。对于DecorView，他由TitleView 和ContentView 组成，<br>前者承载的是一个<code>Actionbar</code>，后者承载的是一个<code>FrameLayout</code>。</p>
-<h2 id="二、View-的基本知识"><a href="#二、View-的基本知识" class="headerlink" title="二、View 的基本知识"></a>二、View 的基本知识</h2><h3 id="2-1、View-的位置参数"><a href="#2-1、View-的位置参数" class="headerlink" title="2.1、View 的位置参数"></a>2.1、View 的位置参数</h3><p>view 的位置由两个顶点坐标来决定，主要是左上（left,top）和右下(right,bottom)坐标。他们是相对于View 的父容器来说的，是相对坐标。如下图他们的关系：<br><img src="/img/article_img/2016/view_zuobiao.png" alt></p>
+<h2 id="二、View-的基本知识"><a href="#二、View-的基本知识" class="headerlink" title="二、View 的基本知识"></a>二、View 的基本知识</h2><h3 id="2-1、View-的位置参数"><a href="#2-1、View-的位置参数" class="headerlink" title="2.1、View 的位置参数"></a>2.1、View 的位置参数</h3><p>view 的位置由两个顶点坐标来决定，主要是左上（left,top）和右下(right,bottom)坐标。他们是相对于View 的父容器来说的，是相对坐标。如下图他们的关系：<br><img src="/img/article_img/2016/view_zuobiao.png" alt=""></p>
 <pre><code>width = right - left;
 height = bottom - top;
 
@@ -627,7 +627,7 @@ return consume;
 </code></pre><p>其中 <code>scrollBy</code> 调用的是 <code>scrollTo</code>，它实现了使用当前位置的相对滑动，而 <code>scrollTo</code> 是基于所传参数的绝对滑动。<strong>在滑动过程中，mScrollX 的值等于 View 左边缘 和 View 内容左边缘在水平方向的距离，而 mScrollY 则是View 上边缘和 View 内容上边缘在竖直方向的距离。他们都是以像素单位。如果从 左往右/从上往下 滑动，mScrollX/mScrollY 为正。</strong></p>
 <p>scrollBy 和 scrollTo 只能改变 View 内容的位置而不能改变View 在布局中的位置。</p>
 <p>如下滑动过程中，mScrollX/mScrollY 取值情况：</p>
-<p><img src="/img/article_img/2016/View 中的scrollTo和scrollBy.png" alt></p>
+<p><img src="/img/article_img/2016/View 中的scrollTo和scrollBy.png" alt=""></p>
 <h3 id="3-2-使用动画"><a href="#3-2-使用动画" class="headerlink" title="3.2. 使用动画"></a>3.2. 使用动画</h3><p>通过动画为View 添加平移效果，View 的 tanslationX 和 tanslationY 属性，可以采用传统的动画和属性动画。<br>动画不能真正的改变 View 的位置，只是移动的是他的影像，如果在新位置有点击事件，则无效。但是在android 3.0以后属性动画解决了该问题。</p>
 <h3 id="3-3-改变布局参数"><a href="#3-3-改变布局参数" class="headerlink" title="3.3. 改变布局参数"></a>3.3. 改变布局参数</h3><p>通过改变View 的LayoutParams 使得 View 重新布局实现滑动。<br>这里以 把 Button 水平移动 100px 为例。可以改变 Button 的 <code>marginLeft</code> ,或者在其左边放一个宽度为0 的view,当要平移时改变他的宽度，使其被挤到右边（加入Button的父布局为LinearLayout），实现滑动。</p>
 <p>如下是改变 <code>LayoutParams</code>的方式：</p>
@@ -673,7 +673,7 @@ public void computeScroll() {
     }
 }
 </code></pre><p>如下 <strong>Scroller 的滑动原理（相关方法的调用过程）</strong>：</p>
-<p><img src="/img/article_img/2016/Scroller滑动机制.png" alt></p>
+<p><img src="/img/article_img/2016/Scroller滑动机制.png" alt=""></p>
 <p>对于延时达到弹性滑动，主要是利用 了Handler 或者 View 的 postDelayed 方法，或者线程的 sleep方法。</p>
 <h2 id="五、View-的事件分发机制"><a href="#五、View-的事件分发机制" class="headerlink" title="五、View 的事件分发机制"></a>五、View 的事件分发机制</h2><p>在 view 中事件分发十分重要，了解他的原理，对我们理解View 和解决滑动冲突都十分重要。</p>
 <blockquote>
@@ -714,7 +714,25 @@ public boolean dispatchTouchEvent(MotionEvent event) {
 </ul>
 <p>对于场景一，可以根据水平竖直方向的滑动距离差判断是哪种滑动，进行相应的拦截；场景二，可以通过自己的业务制定相应的处理规则，然后进行处理；场景三则结合前两种进行。</p>
 <p>有些滑动冲突是采用了不合理的布局导致，可以更换布局，而有些则必须通过自定义控件重写拦截和分发事件处理。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -793,13 +811,13 @@ public boolean dispatchTouchEvent(MotionEvent event) {
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -917,10 +935,10 @@ public boolean dispatchTouchEvent(MotionEvent event) {
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -944,8 +962,8 @@ public boolean dispatchTouchEvent(MotionEvent event) {
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -955,7 +973,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -992,7 +1010,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="android 自定义View 详解">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="android 自定义View 详解">
                         
                         <span class="card-title">android 自定义View 详解</span>
                     </div>
@@ -1057,7 +1075,7 @@ public boolean dispatchTouchEvent(MotionEvent event) {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="android IPC 机制及进程通信">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="android IPC 机制及进程通信">
                         
                         <span class="card-title">android IPC 机制及进程通信</span>
                     </div>
@@ -1156,21 +1174,21 @@ android  开发中有时候需要用到多进程，那么了解进程间通信�
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1192,7 +1210,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1250,7 +1268,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1271,7 +1289,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1337,10 +1355,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1351,12 +1369,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1403,10 +1421,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1436,17 +1454,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

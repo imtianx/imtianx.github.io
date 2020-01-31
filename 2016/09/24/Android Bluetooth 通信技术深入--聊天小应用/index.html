@@ -15,17 +15,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Android Bluetooth 通信技术深入--聊天小应用 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -38,7 +38,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -125,7 +125,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -283,7 +283,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -301,7 +301,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -449,7 +449,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
@@ -491,7 +491,7 @@
 <h3 id="3-具体的实现"><a href="#3-具体的实现" class="headerlink" title="3.具体的实现"></a>3.具体的实现</h3><h4 id="3-1-开启蓝牙"><a href="#3-1-开启蓝牙" class="headerlink" title="3.1 开启蓝牙"></a>3.1 开启蓝牙</h4><p>首先获取蓝牙适配器，若存在蓝牙未开则打开蓝牙，如下代码：</p>
 <pre><code>BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null) {
-            Toast.makeText(getActivity(), &quot;无蓝牙功能&quot;, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "无蓝牙功能", Toast.LENGTH_SHORT).show();
         } else {
             if (!mBluetoothAdapter.isEnabled()) {
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -501,7 +501,7 @@
 </code></pre><h4 id="3-2-搜索蓝牙"><a href="#3-2-搜索蓝牙" class="headerlink" title="3.2 搜索蓝牙"></a>3.2 搜索蓝牙</h4><p>首先开启蓝牙搜索功能，然后通过注册广播，搜索蓝牙设备，搜索完成后将其加入到蓝牙列表。<br>搜索蓝牙：</p>
 <pre><code>if (mBluetoothAdapter.isDiscovering()) {
     mBluetoothAdapter.cancelDiscovery();
-    mBtnStartSearch.setText(&quot;重新搜索&quot;);
+    mBtnStartSearch.setText("重新搜索");
 } else {
     mDatas.clear();
     mAdapter.notifyDataSetChanged();
@@ -509,7 +509,7 @@
     init();
 }
 mBluetoothAdapter.startDiscovery();
-mBtnStartSearch.setText(&quot;ֹͣ停止搜索&quot;);
+mBtnStartSearch.setText("ֹͣ停止搜索");
 </code></pre><p>注册蓝牙广播：</p>
 <pre><code>/**
      * 搜索设备广播
@@ -531,9 +531,9 @@ private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
             // 搜索完成
         } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
             if (mListView.getCount() == 0) {
-                Toast.makeText(context, &quot;没有发现设备！&quot;, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "没有发现设备！", Toast.LENGTH_SHORT).show();
             }
-            mBtnStartSearch.setText(&quot;重新搜索&quot;);
+            mBtnStartSearch.setText("重新搜索");
         }
 
     }
@@ -561,13 +561,13 @@ mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         MainActivity.FRIEND_MAC_ADDRESS = info.getAddress();
         //显示提示对话框
         final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-        dialog.setTitle(&quot;连接&quot;);
-        dialog.setMessage(&quot;名称：&quot; + info.getName() + &quot;\n&quot; + &quot;地址：&quot; + info.getAddress());
-        dialog.setPositiveButton(&quot;连接&quot;, new DialogInterface.OnClickListener() {
+        dialog.setTitle("连接");
+        dialog.setMessage("名称：" + info.getName() + "\n" + "地址：" + info.getAddress());
+        dialog.setPositiveButton("连接", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mBluetoothAdapter.cancelDiscovery();
-                mBtnStartSearch.setText(&quot;重新搜索&quot;);
+                mBtnStartSearch.setText("重新搜索");
 
                 //连接后，跳转到会话页面
                 MainActivity.mType = MainActivity.Type.CILENT;
@@ -580,10 +580,10 @@ mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             }
         });
-        dialog.setNegativeButton(&quot;取消&quot;, new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.FRIEND_MAC_ADDRESS = &quot;&quot;;
+                MainActivity.FRIEND_MAC_ADDRESS = "";
                 dialogInterface.dismiss();
 
             }
@@ -596,16 +596,16 @@ mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 private class ClientThread extends Thread {
     public void run() {
         try {
-            mSocket = mDevice.createRfcommSocketToServiceRecord(UUID.fromString(&quot;00001101-0000-1000-8000-00805F9B34FB&quot;));
+            mSocket = mDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
             Message msg = new Message();
-            msg.obj = &quot;请稍候，正在连接服务器:&quot; + MainActivity.FRIEND_MAC_ADDRESS;
+            msg.obj = "请稍候，正在连接服务器:" + MainActivity.FRIEND_MAC_ADDRESS;
             msg.what = STATUS_CONNECT;
             mHandler.sendMessage(msg);
 
             mSocket.connect();
 
             msg = new Message();
-            msg.obj = &quot;已经连接上服务端！可以发送信息。&quot;;
+            msg.obj = "已经连接上服务端！可以发送信息。";
             msg.what = STATUS_CONNECT_SUCCESS;
             mHandler.sendMessage(msg);
             // 启动接受数据
@@ -613,7 +613,7 @@ private class ClientThread extends Thread {
             mReadThread.start();
         } catch (IOException e) {
             Message msg = new Message();
-            msg.obj = &quot;连接服务端异常！断开连接重新试一试。&quot;;
+            msg.obj = "连接服务端异常！断开连接重新试一试。";
             msg.what = STATUS_CONNECT_SUCCESS;
             mHandler.sendMessage(msg);
         }
@@ -625,11 +625,11 @@ private class ServerThread extends Thread {
     public void run() {
         try {
             // 创建一个蓝牙服务器 参数分别：服务器名称、UUID
-            mServerSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(&quot;btserver&quot;,
-                    UUID.fromString(&quot;00001101-0000-1000-8000-00805F9B34FB&quot;));
+            mServerSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord("btserver",
+                    UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
 
             Message msg = new Message();
-            msg.obj = &quot;请稍候，正在等待客户端的连接...&quot;;
+            msg.obj = "请稍候，正在等待客户端的连接...";
             msg.what = STATUS_CONNECT;
             mHandler.sendMessage(msg);
 
@@ -637,7 +637,7 @@ private class ServerThread extends Thread {
             mSocket = mServerSocket.accept();
 
             msg = new Message();
-            msg.obj = &quot;客户端已经连接上！可以发送信息。&quot;;
+            msg.obj = "客户端已经连接上！可以发送信息。";
             msg.what = STATUS_CONNECT;
             mHandler.sendMessage(msg);
             // 启动接受数据
@@ -649,7 +649,7 @@ private class ServerThread extends Thread {
     }
 }
 
-</code></pre><p>启动蓝牙客户端和服务端线程方法如下(详情参见<a href>类</a>的<code>onEventMainThread</code>方法)：</p>
+</code></pre><p>启动蓝牙客户端和服务端线程方法如下(详情参见<a href="">类</a>的<code>onEventMainThread</code>方法)：</p>
 <pre><code>if (MainActivity.mType == MainActivity.Type.CILENT) {
     String address = MainActivity.FRIEND_MAC_ADDRESS;//蓝牙地址
     if (!TextUtils.isEmpty(address)) {
@@ -658,7 +658,7 @@ private class ServerThread extends Thread {
         mClientThread.start();
         MainActivity.isOpen = true;
     } else {
-        Toast.makeText(getActivity(), &quot;address is null !&quot;, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "address is null !", Toast.LENGTH_SHORT).show();
     }
 } else if (MainActivity.mType == MainActivity.Type.SERVER) {
     mServerThread = new ServerThread();
@@ -698,11 +698,29 @@ private class ReadThread extends Thread {
         }
     }
 }
-</code></pre><p>发送消息与此类似，具体请参见 会话类 <a href></a>。</p>
+</code></pre><p>发送消息与此类似，具体请参见 会话类 <a href=""></a>。</p>
 <h4 id="3-6-关闭连接"><a href="#3-6-关闭连接" class="headerlink" title="3.6 关闭连接"></a>3.6 关闭连接</h4><p>主要是关闭各个线程和关闭socket。</p>
 <p>至此，整个蓝牙同信已经完成，测试时需要两个手机，一个座位服务器，一个作为客户端，实现他们间的通信。</p>
 <p><a href="https://github.com/imtianx/StudyDemoForAndroid/blob/master/A05-bluetoothchatdemo" target="_blank" rel="noopener">示例demo下载</a></p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -781,13 +799,13 @@ private class ReadThread extends Thread {
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -905,10 +923,10 @@ private class ReadThread extends Thread {
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -932,8 +950,8 @@ private class ReadThread extends Thread {
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -943,7 +961,7 @@ private class ReadThread extends Thread {
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -980,7 +998,7 @@ private class ReadThread extends Thread {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="java 三大特性：封装、继承和多态">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="java 三大特性：封装、继承和多态">
                         
                         <span class="card-title">java 三大特性：封装、继承和多态</span>
                     </div>
@@ -1041,7 +1059,7 @@ private class ReadThread extends Thread {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="Android Bluetooth 蓝牙技术初体验">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Android Bluetooth 蓝牙技术初体验">
                         
                         <span class="card-title">Android Bluetooth 蓝牙技术初体验</span>
                     </div>
@@ -1138,21 +1156,21 @@ private class ReadThread extends Thread {
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1174,7 +1192,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1232,7 +1250,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1253,7 +1271,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1319,10 +1337,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1333,12 +1351,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1385,10 +1403,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1418,17 +1436,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

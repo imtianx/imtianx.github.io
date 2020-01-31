@@ -21,17 +21,17 @@ java中的内存管理分为两个方面：
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>java知识 之 对象及其内存管理 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -44,7 +44,7 @@ java中的内存管理分为两个方面：
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -131,7 +131,7 @@ java中的内存管理分为两个方面：
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -289,7 +289,7 @@ java中的内存管理分为两个方面：
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -307,7 +307,7 @@ java中的内存管理分为两个方面：
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -455,14 +455,14 @@ java中的内存管理分为两个方面：
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    3.3k
                 </div>
                 
 
@@ -514,8 +514,8 @@ java中的内存管理分为两个方面：
     static int eyeNum;
     public void info()
     {
-        System.out.println(&quot;我的名字是：&quot; + name
-            + &quot;， 我的年龄是：&quot; + age);
+        System.out.println("我的名字是：" + name
+            + "， 我的年龄是：" + age);
     }
 }
 public class FieldTest
@@ -526,34 +526,34 @@ public class FieldTest
         // 程序即可使用类变量。
         Person.eyeNum = 2;           //①
         // 通过Person类访问eyeNum类变量
-        System.out.println(&quot;Person的eyeNum属性：&quot;
+        System.out.println("Person的eyeNum属性："
             + Person.eyeNum);
         // 创建第一个Person对象
         Person p = new Person();
-        p.name = &quot;猪八戒&quot;;
+        p.name = "猪八戒";
         p.age = 300;
         // 通过p访问Person类的eyeNum类变量
-        System.out.println(&quot;通过p变量访问eyeNum类变量：&quot;
+        System.out.println("通过p变量访问eyeNum类变量："
             + p.eyeNum);           //②
         p.info();
         // 创建第二个Person对象
         Person p2 = new Person();
-        p2.name = &quot;孙悟空&quot;;
+        p2.name = "孙悟空";
         p2.age = 500;
         p2.info();
         // 通过p2修改Person类的eyeNum类变量
         p2.eyeNum = 3;                //③
         // 分别通过p、p2和Person访问Person类的eyeNum类变量
-        System.out.println(&quot;通过p变量访问eyeNum类变量：&quot;
+        System.out.println("通过p变量访问eyeNum类变量："
             + p.eyeNum);
-        System.out.println(&quot;通过p2变量访问eyeNum类变量：&quot;
+        System.out.println("通过p2变量访问eyeNum类变量："
             + p2.eyeNum);
-        System.out.println(&quot;通过Person类访问eyeNum类变量：&quot;
+        System.out.println("通过Person类访问eyeNum类变量："
             + Person.eyeNum);
     }
 }
 </code></pre><p>上述代码中的内存分配如下：</p>
-<p><img src="/img/article_img/2016/对象内存分配1.png" alt></p>
+<p><img src="/img/article_img/2016/对象内存分配1.png" alt=""></p>
 <p>当Person类初始化完成，类变量也随之初始化完成，不管再创建多少个Person对象，系统都不再为 eyeNum 分配内存，但会为 name 和age 分配内存并初始化。当eyeNum值改变后，通过每个Person对象访问eyeNum的值都随之改变。</p>
 <h3 id="a-实例变量的初始化"><a href="#a-实例变量的初始化" class="headerlink" title="a.实例变量的初始化"></a><strong>a.实例变量的初始化</strong></h3><p>对于实例变量，它属于java对象本身，每次程序创建java对象时都会为其分配内存空间，并初始化。<br>实例变量初始化地方：</p>
 <ul>
@@ -617,7 +617,7 @@ public class PriceTest
 </code></pre><p>第一次使用Price 时，程序对其进行初始化，可分为两个阶段：<br>（1）系统为类变量分配内存空间；<br>（2）按初始化代码顺序对变量进行初始化。</p>
 <p>这里的运行结果为：-2.8,17.2<br><strong>说明</strong>：初始化第一阶段，系统先为 INSTANCE，initPrice两个类变量分配内存空间，他们的默认值为null和0.0，接着第二阶段依次为他们赋值。对 INSTANCE 赋值时要调用 Price(2.8),创建Price实例，为currentPrice赋值，此时，还未对 initPrice 赋值，就是用他的默认值0，则 currentPrice 值为-2.8，接着程序再次将 initPrice 赋值为20，但对于 currentPrice 实例变量已经不起作用了。</p>
 <p>以下为在ide中的debug结果截图：</p>
-<p><img src="/img/article_img/2016/对象内存分配-debug.png" alt></p>
+<p><img src="/img/article_img/2016/对象内存分配-debug.png" alt=""></p>
 <h2 id="2-父类构造器"><a href="#2-父类构造器" class="headerlink" title="2.父类构造器"></a>2.父类构造器</h2><p>java中，创建对象时，首先会依次调用每个父类的非静态初始化块、构造器（总是先从Object开始），然后再使用本类的非静态初始化块和构造器进行初始化。在调用父类时可以用<code>super</code>进行<strong>显示调用</strong>，也可以<strong>隐式调用</strong>。</p>
 <p>在子类调用父类构造器时，有以下几种场景：</p>
 <ul>
@@ -670,7 +670,7 @@ public class Test {
     }
     public String getDesc()
     {
-        return &quot;Animal&quot;;
+        return "Animal";
     }
     public String toString()
     {
@@ -690,12 +690,12 @@ public class Wolf extends Animal
     @Override
     public String getDesc()
     {
-        return &quot;Wolf[name=&quot; + name + &quot; , weight=&quot;
-            + weight + &quot;]&quot;;  //输出：Wolf[name=null , weight=0.0]
+        return "Wolf[name=" + name + " , weight="
+            + weight + "]";  //输出：Wolf[name=null , weight=0.0]
     }
     public static void main(String[] args)
     {
-        System.out.println(new Wolf(&quot;灰太狼&quot; , 32.3)); 
+        System.out.println(new Wolf("灰太狼" , 32.3)); 
     }
 }
 </code></pre><h2 id="3-父子实例的内存控制"><a href="#3-父子实例的内存控制" class="headerlink" title="3.父子实例的内存控制"></a>3.父子实例的内存控制</h2><p>java中的继承，在处理成员变量和方法时是不同的。如果之类重写了父类的方法，则完全覆盖父类的方法，并将其其移到子类中，但如果是完全同名的实例变量，则不会覆盖，不会从父类中移到子类中。所以，对于一个引用类型的变量，如果访问他所引用对象的实例变量时，该实例变量的值取决于申明该变量的类型，而调用方法时，则取决于它实际引用对象的类型。</p>
@@ -721,7 +721,7 @@ public class Sub extends Mid {
     }
 }
 </code></pre><p>内存中的示意图：</p>
-<p><img src="/img/article_img/2016/对象内存分配2.png" alt></p>
+<p><img src="/img/article_img/2016/对象内存分配2.png" alt=""></p>
 <p>在内存中只有一个Sub对象，并没有Mid和Base对象，但存在3个count的实例变量。</p>
 <p><strong>子类中会隐藏父类的变量可以通过super来获取,对于类变量，也可以通过super来访问。</strong></p>
 <h2 id="4-final-修饰符"><a href="#4-final-修饰符" class="headerlink" title="4.final 修饰符"></a>4.final 修饰符</h2><p>final 的修饰范围：</p>
@@ -735,7 +735,25 @@ public class Sub extends Mid {
 <p>当final类型的变量定义时就指定初始值，那么该该变量本质上是一个“宏变量”，编译器会把用到该变量的地方直接用其值替换。</p>
 </blockquote>
 <p>如果在内部内中使用局部变量，必须将其指定为final类型的。普通的变量作用域就是该方法，随着方法的执行结束，局部变量也随之消失，但内部类可能产生隐式的“闭包”，使局部变量脱离它所在的方法继续存在。内部内可能扩大局部变量的作用域，如果内部内中访问的局部变量没有适用final修饰，则可以随意修改它的值，这样将会引起混乱，所以编译器要求被内部访问的局部变量必须使用final 修饰。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -814,13 +832,13 @@ public class Sub extends Mid {
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -938,10 +956,10 @@ public class Sub extends Mid {
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -965,8 +983,8 @@ public class Sub extends Mid {
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -976,7 +994,7 @@ public class Sub extends Mid {
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -1013,7 +1031,7 @@ public class Sub extends Mid {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="java 知识 之 常见java集合的实现细节">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="java 知识 之 常见java集合的实现细节">
                         
                         <span class="card-title">java 知识 之 常见java集合的实现细节</span>
                     </div>
@@ -1081,7 +1099,7 @@ Map中常用的集合类类图如下：
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="java知识 之 数组及其内存管理">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java知识 之 数组及其内存管理">
                         
                         <span class="card-title">java知识 之 数组及其内存管理</span>
                     </div>
@@ -1180,21 +1198,21 @@ Map中常用的集合类类图如下：
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1216,7 +1234,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1274,7 +1292,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1295,7 +1313,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1361,10 +1379,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1375,12 +1393,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1427,10 +1445,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1460,17 +1478,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

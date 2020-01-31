@@ -15,17 +15,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>数据绑定库DataBinding的使用 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -38,7 +38,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -125,7 +125,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -283,7 +283,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -301,7 +301,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -445,21 +445,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    10 分
                 </div>
                 
 
@@ -489,7 +489,7 @@
 }
 </code></pre><h4 id="2-2、-建立数据对象"><a href="#2-2、-建立数据对象" class="headerlink" title="2.2、 建立数据对象"></a>2.2、 建立数据对象</h4><p>添加一个POJO类，这里定义的是 User类，添加3个变量（uname，usex，uage）及相应的get,set方法，方便接下来与布局文件惊醒绑定。</p>
 <h4 id="2-3、-修改布局文件"><a href="#2-3、-修改布局文件" class="headerlink" title="2.3、 修改布局文件"></a>2.3、 修改布局文件</h4><p>使用databinding后，布局文件根节点不在是简单的LinearLayout，RelativeLayout等ViewGroup,而是 <code>Layout</code>，同时还增加了 <code>data</code> 元素，来为ui控件提供数据。基本局如下：</p>
-<pre><code>&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+<pre><code>&lt;layout xmlns:android="http://schemas.android.com/apk/res/android"&gt;
     &lt;data&gt;
     &lt;/data&gt;
     &lt;!--原先的根节点--&gt;
@@ -498,39 +498,39 @@
     &lt;/LinearLayout&gt;
 &lt;/layout&gt;
 </code></pre><p>下面简单举例说明，显示用户信息，包括用户名，性别和年龄，布局文件名为<code>activity_main</code>，使用 databinding 的布局代码如下：</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;layout
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    xmlns:android="http://schemas.android.com/apk/res/android"&gt;
     &lt;data&gt;
         &lt;variable
-            name=&quot;user&quot;
-            type=&quot;cn.imtianx.databindingdemo.bean.User&quot;&gt;
+            name="user"
+            type="cn.imtianx.databindingdemo.bean.User"&gt;
         &lt;/variable&gt;
     &lt;/data&gt;
     &lt;LinearLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:orientation=&quot;vertical&quot;&gt;
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"&gt;
         &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{user.uname}&quot;/&gt;
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.uname}"/&gt;
         &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{user.usex}&quot;/&gt;
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.usex}"/&gt;
         &lt;TextView
-            android:layout_width=&quot;wrap_content&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:text=&quot;@{user.uage}&quot;/&gt;
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.uage}"/&gt;
     &lt;/LinearLayout&gt;
 &lt;/layout&gt;
 </code></pre><p>该布局主要是三个TextView，来显示信息，在<code>data</code>标签中添加了变量<code>variable</code>,其中<code>name</code>是变量名,<code>type</code>使我们定义的java类（注：需要写完整的包名），通过<code>@{}</code>来为 TextView设置显示的文本。<br>此外，这里的<code>data</code>也可以用<code>import</code>进行导入，如下：</p>
 <pre><code> &lt;data&gt;
-    &lt;import type=&quot;cn.imtianx.databindingdemo.bean.User&quot;/&gt;
+    &lt;import type="cn.imtianx.databindingdemo.bean.User"/&gt;
     &lt;variable
-        name=&quot;user&quot;
-        type=&quot;User&quot;/&gt;
+        name="user"
+        type="User"/&gt;
 &lt;/data&gt;
 </code></pre><p>如果要使用<code>String</code>等<code>java.lang.*</code>下的类，则可以直接使用。</p>
 <h4 id="2-4、绑定变量数据"><a href="#2-4、绑定变量数据" class="headerlink" title="2.4、绑定变量数据"></a>2.4、绑定变量数据</h4><p>编译项目即可根据布局文件名生成相关的Binding类，生成规则是按布局文件名，去掉’_‘，按驼峰法则，并在末尾添加<code>Binding</code>。如，这里的布局文件名为<code>activity_main</code>,则生成的数据绑定类为<code>ActivityMainBinding</code>，它存放在<code>包名.databinding</code>下，然后再 <strong>activity</strong>  的<strong>onCreate</strong>方法中设置变量，代码如如下：</p>
@@ -539,7 +539,7 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ActivityMainBinding mainBinding = DataBindingUtil
             .setContentView(this, R.layout.activity_main);
-    User user = new User(&quot;imtianx&quot;, &quot;男&quot;, &quot;20&quot;);
+    User user = new User("imtianx", "男", "20");
     mainBinding.setUser(user);
 
 }
@@ -553,7 +553,7 @@ protected void onCreate(Bundle savedInstanceState) {
     }
 
     public void onClick(View view) {
-        Toast.makeText(MainActivity.this, &quot;点击了名字&quot;, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "点击了名字", Toast.LENGTH_SHORT).show();
     }
 
     public void onClickListenerBinding(UserBean bean) {
@@ -563,13 +563,13 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 </code></pre><p>使用时首先在xml的data标签下添加变量</p>
 <pre><code>&lt;variable
-    name=&quot;presenter&quot;
-    type=&quot;cn.imtianx.databindingdemo.MainActivity.Presenter&quot;&gt;
+    name="presenter"
+    type="cn.imtianx.databindingdemo.MainActivity.Presenter"&gt;
 &lt;/variable&gt;
 </code></pre><h4 id="3-1-方法引用"><a href="#3-1-方法引用" class="headerlink" title="3.1 方法引用"></a>3.1 方法引用</h4><p>必须使用android 已有的监听的方法名及其参数，如上面的onTextChanged，onClick方法，具体的调用如下：</p>
-<pre><code> android:onClick=&quot;@{presenter.onClick}&quot;
+<pre><code> android:onClick="@{presenter.onClick}"
 </code></pre><h4 id="3-2-监听器引用"><a href="#3-2-监听器引用" class="headerlink" title="3.2 监听器引用"></a>3.2 监听器引用</h4><p>可以方便的丛xml中向java代码中传递数据，可使用lambda表达式,如onClickListenerBinding，具体调用如下：</p>
-<pre><code>android:onClick=&quot;@{()-&gt;presenter.onClickListenerBinding(user)}&quot;
+<pre><code>android:onClick="@{()-&gt;presenter.onClickListenerBinding(user)}"
 </code></pre><p>采用了lambda表达式的格式。</p>
 <h3 id="四、在Fragment中的用法"><a href="#四、在Fragment中的用法" class="headerlink" title="四、在Fragment中的用法"></a>四、在Fragment中的用法</h3><p>布局文件与上一个一样，在 Fragment 的 onCreateView 中设置相关的属性，具体代码如下：</p>
 <pre><code>private ActivityMainBinding mMainBinding;
@@ -599,7 +599,7 @@ protected void onCreate(Bundle savedInstanceState) {
         //方式6，某种情况无法生存默认Binding的情况下
 //        ViewDataBinding viewDataBinding = DataBindingUtil.bind(view);
 
-        user = new User(&quot;imtianx&quot;, &quot;男&quot;, &quot;20&quot;);
+        user = new User("imtianx", "男", "20");
         mMainBinding.setUser(user);
         return view;
     }
@@ -607,43 +607,43 @@ protected void onCreate(Bundle savedInstanceState) {
 <h3 id="五-、高级用法"><a href="#五-、高级用法" class="headerlink" title="五 、高级用法"></a>五 、高级用法</h3><h4 id="5-1-使用类方法"><a href="#5-1-使用类方法" class="headerlink" title="5.1. 使用类方法"></a>5.1. 使用类方法</h4><p>首先在布局文件的<code>data</code> 使用<code>import</code>导入方法所在的类的全路径，然后再选要的地方调用，具体使用和java一样。</p>
 <h4 id="5-2-类型别名"><a href="#5-2-类型别名" class="headerlink" title="5.2. 类型别名"></a>5.2. 类型别名</h4><p>在开发中可能会遇到两个用名的类，如果在<code>data</code>下同时导入他们，改如何解决？这里不用担心，可以在<code>import</code>节点下添加<code>alias</code>属性,来区别。如下示例：</p>
 <pre><code> &lt;data&gt;
-    &lt;import type=&quot;cn.imtianx.databindingdemo.bean.User&quot; alias=&quot;User1&quot;/&gt;
-    &lt;import type=&quot;cn.imtianx.databindingdemo.model.User&quot; /&gt;
+    &lt;import type="cn.imtianx.databindingdemo.bean.User" alias="User1"/&gt;
+    &lt;import type="cn.imtianx.databindingdemo.model.User" /&gt;
     &lt;variable
-        name=&quot;user&quot;
-        type=&quot;User1&quot;/&gt;
+        name="user"
+        type="User1"/&gt;
     &lt;variable
-        name=&quot;user2&quot;
-        type=&quot;User&quot;/&gt;
+        name="user2"
+        type="User"/&gt;
 &lt;/data&gt;
 </code></pre><h4 id="5-3-Null-Coalescing-运算符"><a href="#5-3-Null-Coalescing-运算符" class="headerlink" title="5.3. Null Coalescing 运算符"></a>5.3. Null Coalescing 运算符</h4><p>这个和java中的三木表达式一样</p>
 <pre><code>&lt;TextView
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;@{user.uage ??user.uage}&quot;/&gt;
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@{user.uage ??user.uage}"/&gt;
 </code></pre><p>它等价于：</p>
 <pre><code>&lt;TextView
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;@{user.uage!=null?user.uage:0}&quot;/&gt;
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@{user.uage!=null?user.uage:0}"/&gt;
 </code></pre><h4 id="5-4-属性值"><a href="#5-4-属性值" class="headerlink" title="5.4. 属性值"></a>5.4. 属性值</h4><p>使用<code>@{}</code>在xml中使用java 中定义的一些属性值,如下给visibility 设置值，注意需要到如View类，</p>
 <pre><code>&lt;TextView
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:visibility=&quot;@{user.display? View.VISIBLE:View.GONE}&quot;
-    android:text=&quot;@{user.uage&quot;/&gt;
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="@{user.display? View.VISIBLE:View.GONE}"
+    android:text="@{user.uage"/&gt;
 </code></pre><h4 id="5-5-使用资源数据"><a href="#5-5-使用资源数据" class="headerlink" title="5.5. 使用资源数据"></a>5.5. 使用资源数据</h4><p>设置<code>padding</code>的值，需要的dime文件中添加largePadding和smallPadding的item。对于引用 <code>String、drawable</code>等资源类似。</p>
 <pre><code> &lt;TextView
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:padding=&quot;@{user.display?(int)@dimen/largePadding : (int)@dimen/smallPadding}&quot;
-    android:text=&quot;@{user.uage}&quot;/&gt;
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@{user.display?(int)@dimen/largePadding : (int)@dimen/smallPadding}"
+    android:text="@{user.uage}"/&gt;
 </code></pre><h4 id="5-6-使用include"><a href="#5-6-使用include" class="headerlink" title="5.6. 使用include"></a>5.6. 使用include</h4><p>使用命名空间来传递variable，将当前 variable 的值传递给 include 进来 的布局中。<br>为 layout 添加命名空间：</p>
-<pre><code>xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;
+<pre><code>xmlns:bind="http://schemas.android.com/apk/res-auto"
 </code></pre><p>在<code>include</code>中使用：</p>
 <pre><code>&lt;include
-    layout=&quot;@layout/layout_user&quot;
-    bind:user=&quot;@{user}&quot;&gt;
+    layout="@layout/layout_user"
+    bind:user="@{user}"&gt;
 </code></pre><p>注意在 <code>layout_user.xml</code>中也要在 variable 中 定义添加 user 变量。</p>
 <h4 id="5-7-使用表达式"><a href="#5-7-使用表达式" class="headerlink" title="5.7. 使用表达式"></a>5.7. 使用表达式</h4><p>java 中的表达式，在这里也是支持的，</p>
 <ul>
@@ -658,21 +658,21 @@ protected void onCreate(Bundle savedInstanceState) {
 </ul>
 <h4 id="5-8-集合"><a href="#5-8-集合" class="headerlink" title="5.8. 集合"></a>5.8. 集合</h4><p>常用的集合：arrays、lists、sparse，lists以及maps，为了简便都可以使用<code>[]</code>来访问。注意,在使用泛型时<code>&lt;</code>需要转义，用<code>&amp;lt;</code>代替，否则会报错。</p>
 <pre><code>&lt;data&gt;
-  &lt;import type=&quot;android.util.SparseArray&quot;/&gt;
-  &lt;import type=&quot;java.util.Map&quot;/&gt;
-  &lt;import type=&quot;java.util.List&quot;/&gt;
-  &lt;variable name=&quot;list&quot; type=&quot;List&amp;lt;String&gt;&quot;/&gt;
-  &lt;variable name=&quot;sparse&quot; type=&quot;SparseArray&amp;lt;String&gt;&quot;/&gt;
-  &lt;variable name=&quot;map&quot; type=&quot;Map&amp;lt;String, String&gt;&quot;/&gt;
-  &lt;variable name=&quot;index&quot; type=&quot;int&quot;/&gt;
-  &lt;variable name=&quot;key&quot; type=&quot;String&quot;/&gt;
+  &lt;import type="android.util.SparseArray"/&gt;
+  &lt;import type="java.util.Map"/&gt;
+  &lt;import type="java.util.List"/&gt;
+  &lt;variable name="list" type="List&amp;lt;String&gt;"/&gt;
+  &lt;variable name="sparse" type="SparseArray&amp;lt;String&gt;"/&gt;
+  &lt;variable name="map" type="Map&amp;lt;String, String&gt;"/&gt;
+  &lt;variable name="index" type="int"/&gt;
+  &lt;variable name="key" type="String"/&gt;
 &lt;/data&gt;
 …
-android:text=&quot;@{list[index]}&quot;
+android:text="@{list[index]}"
 …
-android:text=&quot;@{sparse[index]}&quot;
+android:text="@{sparse[index]}"
 …
-android:text=&quot;@{map[key]}&quot;
+android:text="@{map[key]}"
 </code></pre><h4 id="5-9-Data对象（数据绑定）"><a href="#5-9-Data对象（数据绑定）" class="headerlink" title="5.9.Data对象（数据绑定）"></a>5.9.Data对象（数据绑定）</h4><p>Data Binding 的强大之处主要在于双向数据绑定，当POJO对象发生变化时，通知改变Data对象，已达到更新UI的效果。有三种不同的数据变化通知机制：<code>Observable</code>对象、<code>ObservableFields</code>以及<code>observable  collections</code>。<br>这里以 Observable 为例，更改User类。使其继承<code>BaseObservable</code>,在<code>getter</code>方法前添加<code>Bindable</code>注解，在<code>setter</code>方法中调用<code>notifyPropertyChanged</code>进行更新数据。如果只更新某一字段，只需将该字段设置为<code>ObservableFields</code>类型的，如boolean,可用ObservableBoolean代替，但对其的使用需要通过get和set方法。具体代码如下：</p>
 <pre><code>public class User extends BaseObservable{
     private String uname;
@@ -739,7 +739,25 @@ android:text=&quot;@{map[key]}&quot;
 <li><a href="https://realm.io/cn/news/data-binding-android-boyar-mount/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">https://realm.io/cn/news/data-binding-android-boyar-mount/?utm_source=tuicool&amp;utm_medium=referral</a></li>
 </ol>
 </blockquote>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -814,13 +832,13 @@ android:text=&quot;@{map[key]}&quot;
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -938,10 +956,10 @@ android:text=&quot;@{map[key]}&quot;
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -965,8 +983,8 @@ android:text=&quot;@{map[key]}&quot;
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -976,7 +994,7 @@ android:text=&quot;@{map[key]}&quot;
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -1013,7 +1031,7 @@ android:text=&quot;@{map[key]}&quot;
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="Android Bluetooth 蓝牙技术初体验">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Android Bluetooth 蓝牙技术初体验">
                         
                         <span class="card-title">Android Bluetooth 蓝牙技术初体验</span>
                     </div>
@@ -1075,7 +1093,7 @@ android:text=&quot;@{map[key]}&quot;
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="android 异常捕获-UncaughtExceptionHandler">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="android 异常捕获-UncaughtExceptionHandler">
                         
                         <span class="card-title">android 异常捕获-UncaughtExceptionHandler</span>
                     </div>
@@ -1167,21 +1185,21 @@ android:text=&quot;@{map[key]}&quot;
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1203,7 +1221,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1261,7 +1279,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1282,7 +1300,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1348,10 +1366,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1362,12 +1380,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1414,10 +1432,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1447,17 +1465,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

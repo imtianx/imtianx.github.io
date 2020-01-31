@@ -18,17 +18,17 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>java 知识 之 内存管理 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -41,7 +41,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -128,7 +128,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -286,7 +286,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -304,7 +304,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -448,7 +448,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
@@ -490,7 +490,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
 <li>不可达状态<br>所有的关联都被切断，永久性的失去引用，只有在该状态下系统才会真正的回收对象所占用的资源。</li>
 </ul>
 <p>三张状态转换图如下：</p>
-<p><img src="/img/article_img/2016/object_state.png" alt></p>
+<p><img src="/img/article_img/2016/object_state.png" alt=""></p>
 <h3 id="a-强引用"><a href="#a-强引用" class="headerlink" title="a. 强引用"></a><strong>a. 强引用</strong></h3><p>在java  中，创建一个对象，并把它赋值给一个引用变量，就是强引用。<strong>被强引用所引用的对象时绝对不会被垃圾回收机制回收的，即使系统非常紧张</strong>，因此它是造成内存泄露的主要原因之一。</p>
 <h3 id="b-软引用"><a href="#b-软引用" class="headerlink" title="b. 软引用"></a><strong>b. 软引用</strong></h3><p>软引用需要用<code>SoftReference</code>类来实现，当一个对象只有软引用时，它有可能被回收。对于软引用，<strong>当系统内存空间足够时，不会被回收，否则会被系统回收，该对象不可再被使用</strong>。<br>软引用是强引用很好的替代，他能避免系统内存不足的异常。具体的使用如下（其中Person类有两个属性和一个tostring方法）：</p>
 <pre><code>public class SoftReferenceTest {
@@ -500,7 +500,7 @@ java 中的内存管理包括内存分配和内存回收，这些都是由 JVM �
                 new SoftReference[100000];
         for (int i = 0; i &lt; people.length; i++) {
             people[i] = new SoftReference&lt;Person&gt;(new Person(
-                    &quot;名字&quot; + i, (i + 1) * 4 % 100));
+                    "名字" + i, (i + 1) * 4 % 100));
         }
         System.out.println(people[2].get());
         System.out.println(people[4].get());
@@ -528,10 +528,10 @@ Person[name=名字4, age=20]
 <pre><code>public class WeakReferenceTest {
     public static void main(String[] args) throws Exception {
         // 创建一个字符串对象
-        String str = new String(&quot;疯狂Java讲义&quot;);
-        // 创建一个弱引用，让此弱引用引用到&quot;疯狂Java讲义&quot;字符串
+        String str = new String("疯狂Java讲义");
+        // 创建一个弱引用，让此弱引用引用到"疯狂Java讲义"字符串
         WeakReference&lt;String&gt; wr = new WeakReference&lt;String&gt;(str);
-        // 切断str引用和&quot;疯狂Java讲义&quot;字符串之间的引用
+        // 切断str引用和"疯狂Java讲义"字符串之间的引用
         str = null;      //②
         // 取出弱引用所引用的对象
         System.out.println(wr.get()); //输出：疯狂Java讲义
@@ -547,20 +547,20 @@ Person[name=名字4, age=20]
 <p>注：上面代码中创建字符串对象不可采用 “String str = “疯狂Java讲义”;” 这种方式,因为这样的定义系统会把它缓存为常量，使用强引用来引用它，则不会被回收。</p>
 </blockquote>
 <p>上述代码中的内存分配示意图：</p>
-<p><img src="/img/article_img/2016/weakreference.png" alt></p>
+<p><img src="/img/article_img/2016/weakreference.png" alt=""></p>
 <p>在实际使用时，可以使用<code>WeakHashMap</code>来保存弱引用对象。</p>
 <h3 id="d-虚引用"><a href="#d-虚引用" class="headerlink" title="d. 虚引用"></a><strong>d. 虚引用</strong></h3><p>虚引用主要是跟踪对象被垃圾回收的状态，可以通过检查与虚引用关联的队列中是否包含指定的引用，了解对象是否被回收。<br>与软引用和弱引用不同，虚引用不能单独使用。<br>虚引用对象在被释放前会将它添加到他关联的引用队列中。通过<code>PhantomReference</code>类实现，结合引用队列<code>ReferenceQuence</code>使用。如下使用示例：</p>
 <pre><code>public class PhantomReferenceTest {
     public static void main(String[] args)
             throws Exception {
         // 创建一个字符串对象
-        String str = new String(&quot;疯狂Java讲义&quot;);
+        String str = new String("疯狂Java讲义");
         // 创建一个引用队列
         ReferenceQueue&lt;String&gt; rq = new ReferenceQueue&lt;String&gt;();
-        // 创建一个虚引用，让此虚引用引用到&quot;疯狂Java讲义&quot;字符串
+        // 创建一个虚引用，让此虚引用引用到"疯狂Java讲义"字符串
         PhantomReference&lt;String&gt; pr =
                 new PhantomReference&lt;String&gt;(str, rq);
-        // 切断str引用和&quot;Struts2权威指南&quot;字符串之间的引用
+        // 切断str引用和"Struts2权威指南"字符串之间的引用
         str = null;
         // 试图取出虚引用所引用的对象，
         // 程序并不能通过虚引用访问被引用的对象
@@ -592,7 +592,7 @@ Person[name=名字4, age=20]
 <p>Permanent时代主要用于装在Class、方法等信息，默认是64MB，通常不会被回收。</p>
 <h2 id="四、内存管理技巧"><a href="#四、内存管理技巧" class="headerlink" title="四、内存管理技巧"></a>四、内存管理技巧</h2><p>只有很好的掌握了垃圾回收及其机制，才能更好的管理java虚拟机，使我们写出更高性能的java代码。避免内存泄露的主要技巧如下：</p>
 <ul>
-<li>使用直接量<br>如使用 <code>String str = &quot;hello;&quot;</code> 代替 <code>String str = new String(&quot;hello&quot;);</code>，前者会在缓存池缓存这个常量</li>
+<li>使用直接量<br>如使用 <code>String str = "hello;"</code> 代替 <code>String str = new String("hello");</code>，前者会在缓存池缓存这个常量</li>
 <li>使用StringBuilder和StringBuffer进行字符串的连接<br>使用String时会生成大量的临时字符串存在内存中。</li>
 <li>及时释放无用对象的引用</li>
 <li>减少静态变量</li>
@@ -601,7 +601,25 @@ Person[name=名字4, age=20]
 <li>尽量不要使用finalize方法</li>
 <li>考虑使用SoftReference<br>当创建长度很大的对象时，可以使用软引用包装数组，便于在内存不足的情况下被回收释放。</li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -676,13 +694,13 @@ Person[name=名字4, age=20]
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -800,10 +818,10 @@ Person[name=名字4, age=20]
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -827,8 +845,8 @@ Person[name=名字4, age=20]
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -838,7 +856,7 @@ Person[name=名字4, age=20]
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -875,7 +893,7 @@ Person[name=名字4, age=20]
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="java 知识之 反射的使用">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="java 知识之 反射的使用">
                         
                         <span class="card-title">java 知识之 反射的使用</span>
                     </div>
@@ -935,7 +953,7 @@ Person[name=名字4, age=20]
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="java 知识 之 常见java集合的实现细节">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="java 知识 之 常见java集合的实现细节">
                         
                         <span class="card-title">java 知识 之 常见java集合的实现细节</span>
                     </div>
@@ -1038,21 +1056,21 @@ Map中常用的集合类类图如下：
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1074,7 +1092,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1132,7 +1150,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1153,7 +1171,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1219,10 +1237,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1233,12 +1251,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1285,10 +1303,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1318,17 +1336,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>

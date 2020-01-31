@@ -14,17 +14,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>activity 生命周期及调用栈详解 | Imtianx`S Blog</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery.min.js"></script>
     
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
@@ -37,7 +37,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Imtianx`S Blog</span>
                 </a>
@@ -124,7 +124,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Imtianx`S Blog</div>
         <div class="logo-desc">
@@ -282,7 +282,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -300,7 +300,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -448,14 +448,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-01-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.3k
                 </div>
                 
 
@@ -483,7 +483,7 @@
 <li><strong>Active/Running</strong>（活动）<br>此时，activity 处于栈顶，可见，与用户进行交互。系统会不惜一切代价保护她的活跃性的，如果需要，会取消栈中靠下的activity来保证它所需要的资源。</li>
 <li><strong>Paused</strong>（暂停）<br>当activity 失去焦点，被一个新的非全屏的activity 或者透明的activity放置在栈顶时，它会进入该状态。此时，它失去了与用户交互的能力，但所有的状态信息、成员变量都还保持着，只有在系统内存极低的情况下会被回收。</li>
 <li><strong>Stopped</strong>（停止）<br>当一个activity 被完全覆盖，完全不可见时会进入此状态。但在系统内存中仍然保存着所有的状态和成员信息。当需要内存时，将直接回收。</li>
-<li><strong>Kill</strong>（销毁）<br>当activity 被回收或者从来没有创建过，处于此状态。改状态的activity 会从activity栈中移除。<h3 id="二、activity-的生命周期"><a href="#二、activity-的生命周期" class="headerlink" title="二、activity 的生命周期"></a>二、activity 的生命周期</h3>如下如，展示activity的整个生命周期及其切换过程。<br><img src="/img/article_img/2016/activity生命周期.png" alt></li>
+<li><strong>Kill</strong>（销毁）<br>当activity 被回收或者从来没有创建过，处于此状态。改状态的activity 会从activity栈中移除。<h3 id="二、activity-的生命周期"><a href="#二、activity-的生命周期" class="headerlink" title="二、activity 的生命周期"></a>二、activity 的生命周期</h3>如下如，展示activity的整个生命周期及其切换过程。<br><img src="/img/article_img/2016/activity生命周期.png" alt=""></li>
 </ol>
 <blockquote>
 <p>说明：</p>
@@ -496,7 +496,7 @@
 </ol>
 </blockquote>
 <h3 id="三、异常情况下的生命周期"><a href="#三、异常情况下的生命周期" class="headerlink" title="三、异常情况下的生命周期"></a>三、异常情况下的生命周期</h3><ol>
-<li><p>资源相关配置改变导致activity销毁并重建<br>对于横竖屏切换导致的activity异常销毁并重建，其创建过程如下图：<br><img src="/img/article_img/2016/activity异常重建.png" alt></p>
+<li><p>资源相关配置改变导致activity销毁并重建<br>对于横竖屏切换导致的activity异常销毁并重建，其创建过程如下图：<br><img src="/img/article_img/2016/activity异常重建.png" alt=""></p>
 </li>
 <li><p>资源内存不足导致低优先级activity 被杀死<br>优先级从搞到低课分为如下三种情况：</p>
 </li>
@@ -525,10 +525,10 @@
 <p>另外，onRestoreInstanceState的bundle参数也会传递到onCreate方法中，你也可以选择在onCreate方法中做数据还原。 还有onRestoreInstanceState在onstart之后执行。 至于这两个函数的使用，给出示范代码（留意自定义代码在调用super的前或后）：</p>
 <pre><code>@Override
 public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean(&quot;MyBoolean&quot;, true);
-        savedInstanceState.putDouble(&quot;myDouble&quot;, 1.9);
-        savedInstanceState.putInt(&quot;MyInt&quot;, 1);
-        savedInstanceState.putString(&quot;MyString&quot;, &quot;Welcome back to Android&quot;);
+        savedInstanceState.putBoolean("MyBoolean", true);
+        savedInstanceState.putDouble("myDouble", 1.9);
+        savedInstanceState.putInt("MyInt", 1);
+        savedInstanceState.putString("MyString", "Welcome back to Android");
         // etc.
         super.onSaveInstanceState(savedInstanceState);
 }
@@ -537,21 +537,39 @@ public void onSaveInstanceState(Bundle savedInstanceState) {
 public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        boolean myBoolean = savedInstanceState.getBoolean(&quot;MyBoolean&quot;);
-        double myDouble = savedInstanceState.getDouble(&quot;myDouble&quot;);
-        int myInt = savedInstanceState.getInt(&quot;MyInt&quot;);
-        String myString = savedInstanceState.getString(&quot;MyString&quot;);
+        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
+        double myDouble = savedInstanceState.getDouble("myDouble");
+        int myInt = savedInstanceState.getInt("MyInt");
+        String myString = savedInstanceState.getString("MyString");
 }
 
 </code></pre><p><strong>onSaveInstanceState 方法只适用于保存保存一些临时性的状态，而 onPause 方法适用于数据的持久化保存。</strong></p>
 <h3 id="四、activity-启动模式"><a href="#四、activity-启动模式" class="headerlink" title="四、activity 启动模式"></a>四、activity 启动模式</h3><p><strong>任务栈</strong>是一种后进先出的结构。位于栈顶的Activity处于焦点状态,当按下back按钮的时候,栈内的Activity会一个一个的出栈,并且调用其onDestory()方法。如果栈内没有Activity,那么系统就会回收这个栈,每个APP默认只有一个栈,以APP的包名来命名。</p>
 <p>在AndroidManifest中可以给声明的activity通过<strong>android:launchMode=”standard|singleInstance|singleTask|singleTop”</strong>属性指定设置如下四种启动的模式：<br><strong>standard</strong><br>默认的启动方式，每次都会创建新的实例，覆盖在原来的activity之上，可以被同时添加到多个任务栈中，并且每一个任务中可以有多个实例。（只有在该模式的activity 才可以使用startActivityForResult方法）<br><strong>singleTop</strong><br>若设置为该模式，在启动activity时，系统会判断当前栈顶的activity是否是要启动的activity，如果是则直接引用这个实例不创建新的，否则创建新的实例。<br><strong>singleTask</strong><br>与singleTop 类似，它是检测整个activity栈中是否存在当前需要启动的activity。如果存在，则将该activity置于栈顶，并销毁在它之上的activity（注：这是在一个app中）。<br>如果其他程序以singleTask模式来启动这个activity，将创建一个新的任务栈，该模式有<strong>clearTop</strong>效果。<br><strong>singleInstance</strong><br>该模式的使用和浏览器的工作原理类似。在多个程序访问浏览器时，如果浏览器没有打开，则打开，否则再当前打开的浏览器中访问。声明为这种模式的activity，会出现在一个新的任务栈中，而且该任务栈只有这一个activity。</p>
-<h3 id="五、Fragment和activity的生命周期关系"><a href="#五、Fragment和activity的生命周期关系" class="headerlink" title="五、Fragment和activity的生命周期关系"></a>五、Fragment和activity的生命周期关系</h3><p>如下图：<br><img src="/img/article_img/2016/fragment_and_activity_lifecycle.jpg" alt></p>
-<p>谷歌官方 fragment 的生命周期如下图：<br><img src="/img/article_img/2016/fragment-life.png" alt></p>
+<h3 id="五、Fragment和activity的生命周期关系"><a href="#五、Fragment和activity的生命周期关系" class="headerlink" title="五、Fragment和activity的生命周期关系"></a>五、Fragment和activity的生命周期关系</h3><p>如下图：<br><img src="/img/article_img/2016/fragment_and_activity_lifecycle.jpg" alt=""></p>
+<p>谷歌官方 fragment 的生命周期如下图：<br><img src="/img/article_img/2016/fragment-life.png" alt=""></p>
 <blockquote>
 <p>参考文献：<br>《Android 开发艺术探索》<br>《Android 群英传》<br>《深入解析 Android虚拟机》</p>
 </blockquote>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -630,13 +648,13 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban,linkedin,twitter,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/share/js/social-share.min.js"></script>
+    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -754,10 +772,10 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -781,8 +799,8 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
     </div>
 
     
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/css/my-gitalk.css">
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
@@ -792,7 +810,7 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/gitalk/gitalk.min.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '3c3e3f87d9ed9e3595d6',
@@ -829,7 +847,7 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="java知识 之 数组及其内存管理">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java知识 之 数组及其内存管理">
                         
                         <span class="card-title">java知识 之 数组及其内存管理</span>
                     </div>
@@ -893,7 +911,7 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="【转】国内一线互联网公司内部面试题库(二)——android 篇">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="【转】国内一线互联网公司内部面试题库(二)——android 篇">
                         
                         <span class="card-title">【转】国内一线互联网公司内部面试题库(二)——android 篇</span>
                     </div>
@@ -983,21 +1001,21 @@ public void onRestoreInstanceState(Bundle savedInstanceState) {
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1019,7 +1037,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 <!-- TOC 悬浮按钮. -->
 
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/tocbot/tocbot.min.js"></script>
+<script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1077,7 +1095,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">88.6k</span>&nbsp;字
+                class="white-color">90.7k</span>&nbsp;字
             
             
             
@@ -1098,7 +1116,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             
-            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/medias/icp.png" style="vertical-align: text-bottom;" />
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
                 <a href="www.beian.miit.gov.cn" target="_blank">鄂ICP备17001358号</a>
             </span>
             
@@ -1164,10 +1182,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/search.js"></script>
+<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1178,12 +1196,12 @@ $(function () {
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/materialize/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/aos/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/js/matery.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=55744224" charset="UTF-8"></script>
 
 
@@ -1230,10 +1248,10 @@ $(function () {
 </script>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/clicklove.js" async="async"></script>
+    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1263,17 +1281,17 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/canvas-nest.js"></script>
+        src="/libs/background/canvas-nest.js"></script>
     
 
     
 
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="https://cdn.jsdelivr.net/gh/imtianx/imtianx.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>
