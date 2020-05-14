@@ -29,7 +29,7 @@ before_install:
 before_script:
 - git config --global user.name 'imtianx'
 - git config --global user.email 'imtianx@gmail.com'
-- sed -i'' "s~git@github.com:imtianx/imtianx.github.io.git~https://${GITHUB_BLOG_TOKEN}:x-oauth-basic@${GH_REF}~" _config.yml
+- sed -i'' "s~git@github.com:imtianx/imtianx.github.io.git~https://${GITHUB_BLOG_TOKEN}@${GH_REF}~" _config.yml
 
 
 script:
