@@ -69,7 +69,7 @@ dream:
 # Whether to display the musics.
 # 是否在首页显示音乐.
 music:
-  enable: true
+  enable: false
   showTitle: true
   title: 听听音乐
   fixed: false # 开启吸底模式
@@ -126,12 +126,12 @@ indexbtn:
 socialLink:
   github: https://github.com/imtianx
   email: imtianx@gmail.com
-  qq: 764275613
+  qq: 
   wechat: https://mp.weixin.qq.com/s/6aMvLXcwwXrXyLWtKlL-2A
   weibo: # https://weibo.com/imtianx
   zhihu: # https://www.zhihu.com/imtianx
   facebook: # https://www.facebook.com/xxx
-  twitter:  https://twitter.com/imtianx
+  twitter:  
   rss: true # true、false
 
 # Whether to activate the Post TOC, and Configure which title types are supported by TOC support.
@@ -511,7 +511,7 @@ banner:
 #ICP备案信息尾部显示
 icp:
   enable: true
-  url: http://www.beian.miit.gov.cn
+  url: https://beian.miit.gov.cn
   text: 鄂ICP备17001358号
 
 # CDN访问加速 
